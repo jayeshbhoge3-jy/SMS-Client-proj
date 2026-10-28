@@ -1,0 +1,1514 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.name }} | Settings</title>
+    <link rel="icon" type="image/png" href="{% static 'accounts/images/Tab Logo.png' %}">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .active-nav {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        /* --- Packing Loader Animation Styles --- */
+        .box-loader {
+            width: 80px;
+            height: 80px;
+            background: #4f46e5;
+            position: relative;
+            animation: box-bounce 1s infinite ease-in-out;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .box-loader::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #3730a3;
+            transform: translateY(-50%);
+        }
+
+        .box-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #3730a3;
+            transform: translateX(-50%);
+        }
+
+        @keyframes box-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-35px) rotate(8deg);
+            }
+        }
+
+        .conveyor-belt {
+            width: 140px;
+            height: 6px;
+            background: #e2e8f0;
+            margin-top: 15px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conveyor-belt::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            background: #4f46e5;
+            animation: conveyor-move 0.8s infinite linear;
+        }
+
+        @keyframes conveyor-move {
+            from {
+                left: -50px;
+            }
+
+            to {
+                left: 140px;
+            }
+        }
+        @media (max-width: 640px) {
+
+    /* Buttons container: force single row on mobile */
+    .p-6.bg-slate-50.border-t .flex.flex-col.sm\:flex-row {
+        flex-direction: row;          
+        width: 100%;
+        gap: 8px;
+    }
+
+    /* Buttons same size */
+    .p-6.bg-slate-50.border-t .flex.flex-col.sm\:flex-row > a,
+    .p-6.bg-slate-50.border-t .flex.flex-col.sm\:flex-row > button {
+        flex: 1;                      
+        height: 44px;                 
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;         
+    }
+}
+/* 23-3-26 */
+.field-error {
+    border: 1.5px solid #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.error-text {
+    color: #dc2626;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    font-weight: 500;
+}
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- PACKING LOADER OVERLAY -->
+    <div id="logout-loader" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center hidden">
+        <div class="box-loader"></div>
+        <div class="conveyor-belt"></div>
+        <h3 class="mt-10 text-2xl font-bold text-slate-800 tracking-tight">{% trans "Packing your workspace..." %}</h3>
+        <p class="text-slate-400 font-medium mt-2">{% trans "Saving progress and signing out safely." %}</p>
+    </div>
+
+    <!-- LOGOUT CONFIRMATION MODAL -->
+    <div id="logout-modal"
+        class="fixed inset-0 z-[90] bg-slate-900/40 backdrop-blur-md flex items-center justify-center hidden">
+        <div class="bg-white rounded-[2rem] p-10 max-w-sm w-full mx-4 shadow-2xl transform transition-all scale-95 opacity-0 duration-300 border border-slate-100"
+            id="modal-content">
+            <div class="w-20 h-20 bg-rose-50 text-rose-600 rounded-3xl flex items-center justify-center mb-8 mx-auto">
+                <i data-lucide="log-out" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-slate-900 text-center">{% trans "Ready to go?" %}</h3>
+            <p class="text-slate-500 mt-4 mb-10 text-center leading-relaxed">Confirm to sign out of your portal. We'll
+                make sure your session is closed securely.</p>
+            <div class="flex flex-col gap-3">
+                <form id="logout-form" action="{% url 'company_logout' %}" method="POST" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit"
+                        class="w-full px-6 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98]">
+                        Yes, Log me out
+                    </button>
+                </form>
+                <button onclick="closeLogoutModal()"
+                    class="w-full px-6 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-200 transition-all">
+                    Stay here
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex h-screen overflow-hidden">
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden xl:hidden"></div>
+
+        <!-- Sidebar (Matching Dashboard) -->
+        <!-- <aside id="sidebar"
+            class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col transition-all duration-300 shrink-0"> -->
+        <aside id="sidebar"
+       class="fixed xl:static top-0 left-0 h-full z-40 w-64 bg-white border-r border-slate-200 flex flex-col transform transition-all duration-300 xl:translate-x-0 -translate-x-full">
+
+            <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                </div>
+                <div class="overflow-hidden sidebar-text">
+                    <h1 class="font-bold text-lg leading-none truncate">{{ company.name }}</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-widest">{% trans "Enterprise" %}</p>
+                </div>
+            </div>
+
+                                    <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar w-full">
+                <a href="{% url 'company_dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_dashboard' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors group text-left">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Dashboard" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Business Ops" %}</p>
+                </div>
+
+                <a href="{% url 'product_list' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg {% if request.resolver_match.url_name in 'product_list add_product edit_product product_stock_breakdown inventory_history' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} transition-colors"
+                   data-title="My Inventory">
+                    <i data-lucide="package-search" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "My Inventory" %}</span>
+                </a>
+
+                <a href="{% url 'category_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'category_list edit_category' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg" data-title="Categories">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Categories" %}</span>
+                </a>
+
+                <a href="/inventory/batches/" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'batch_stock_list adjust_batch_stock' or request.path == '/inventory/batches/' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="boxes" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Batch Stock" %}</span>
+                </a>
+
+                <a href="{% url 'sales_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'sales_orders add_sales_order sales_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Sales Orders" %}</span>
+                </a>
+
+
+                <!-- PURCHASES -->
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {% trans "Purchases" %}
+                    </p>
+                </div>
+
+                <a href="{% url 'vendor_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'vendor_list add_vendor edit_vendor' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="truck" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Vendors" %}</span>
+                </a>
+
+                <a href="{% url 'purchase_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'purchase_orders add_purchase_order purchase_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Purchase Orders" %}</span>
+                </a>
+
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {% trans "Customers" %}
+                    </p>
+                </div>
+
+                <a href="{% url 'customer_list' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'customer_list customer_add customer_edit' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Customers" %}</span>
+                </a>
+
+                                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Inventory Analytics" %}</p>
+                </div>
+                
+                <!-- ABC Inventory Classification -->
+                <a href="{% url 'abc_inventory_classification' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'abc_inventory_classification' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="layers" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "ABC Classification" %}</span>
+                </a>
+
+                <!-- Stock Movement -->
+                <a href="{% url 'stock_movement_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_movement_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Stock Movement" %}</span>
+                </a>
+
+                <!-- Dead Stock -->
+                <a href="{% url 'dead_stock_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'dead_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Dead Stock" %}</span>
+                </a>
+
+                <!-- Fast / Slow Products -->
+                <a href="{% url 'fast_slow_products_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'fast_slow_products_report fast_slow_products_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="activity" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Fast / Slow Products" %}</span>
+                </a>
+
+                <a href="{% url 'stock_aging_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_aging_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="calendar" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Stock Aging" %}</span>
+                </a>
+
+                <a href="{% url 'reorder_suggestions' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reorder_suggestions' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Reorder Suggestions" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Report Analyst" %}</p>
+                </div>
+                
+                <a href="{% url 'reports' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reports' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="file-bar-chart" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "All Reports" %}</span>
+                </a>
+                
+                <a href="{% url 'near_expiry_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'near_expiry_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="alert-circle" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Near Expiry" %}</span>
+                </a>
+                
+                <a href="{% url 'expired_stock_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'expired_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Expired Stock" %}</span>
+                </a>
+                
+                <a href="{% url 'supplier_performance' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'supplier_performance' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trending-up" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Supplier Performance" %}</span>
+                </a>
+                
+                <a href="{% url 'profit_margin_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'profit_margin_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="dollar-sign" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Profit Margin" %}</span>
+                </a>
+                
+                <a href="{% url 'purchase_stock_report_view' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'purchase_stock_report_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="inbox" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Purchase Stock" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Training & Support" %}</p>
+                </div>
+                <a href="{% url 'training:dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.namespace == 'training' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Training & Support" %}</span>
+                </a>
+                
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Administration" %}</p>
+                </div>
+                <a href="{% url 'company_settings' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_settings' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Settings" %}</span>
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-slate-100">
+                <button onclick="openLogoutModal()"
+                    class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-rose-600 hover:bg-rose-50 rounded-lg transition-colors group">
+                    <i data-lucide="log-out" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                    <span class="sidebar-text">{% trans "Logout" %}</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Header (Responsive) -->
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-8 shrink-0">
+
+    <!-- LEFT: Sidebar Toggle + Breadcrumb -->
+    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+        <!-- Sidebar Toggle -->
+        <button id="toggle-sidebar" class="relative z-50 p-2 hover:bg-slate-100 rounded-lg text-slate-500 shrink-0">
+    <i data-lucide="menu" class="w-5 h-5"></i>
+</button>
+
+        <!-- Breadcrumb -->
+        <nav class="flex text-xs sm:text-sm text-slate-500 gap-1 sm:gap-2 items-center truncate">
+            <a href="{% url 'company_dashboard' %}" class="hover:text-indigo-600 transition-colors truncate">
+                Dashboard
+            </a>
+            <i data-lucide="chevron-right" class="w-3 h-3 sm:w-4 sm:h-4 shrink-0"></i>
+            <span class="font-semibold text-slate-800 truncate">
+                Settings
+            </span>
+        </nav>
+    </div>
+
+    <!-- RIGHT: Notification + User -->
+    <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        
+        <!-- Notification Bell -->
+<div class="relative group">
+    <a href="{% url 'inventory_alerts' %}"
+       class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors flex items-center">
+
+        <i data-lucide="bell" class="w-5 h-5"></i>
+
+        {% if unread_alerts_count > 0 %}
+        <span class="absolute top-1 right-1 h-2.5 w-2.5 bg-rose-500 rounded-full ring-2 ring-white"></span>
+        {% endif %}
+
+    </a>
+
+    <!-- Tooltip -->
+    <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2
+                opacity-0 group-hover:opacity-100
+                transition-all duration-200
+                bg-indigo-600 text-white
+                text-[11px] font-semibold
+                px-3 py-1.5 rounded-lg
+                shadow-lg shadow-indigo-200
+                whitespace-nowrap
+                z-50">
+        Inventory Alerts
+    </div>
+</div>
+
+        <!-- Divider (hide on mobile) -->
+        <div class="h-8 w-[1px] bg-slate-200 mx-1 hidden sm:block"></div>
+
+        <!-- User Info -->
+        <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Full Name + Role (hide on mobile) -->
+            <div class="text-right hidden sm:block max-w-[120px] truncate">
+                <p class="text-xs font-bold leading-tight truncate">{{ company.name|truncatechars:12 }}</p>
+                <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-wide">Company Owner</p>
+            </div>
+
+            <!-- User Initials Circle -->
+            <div class="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                {{ company.name|slice:":1"|upper }}
+            </div>
+        </div>
+    </div>
+
+</header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
+
+                <div class="max-w-4xl mx-auto space-y-6 px-2 sm:px-4">
+
+
+                    <!-- Title Section -->
+                    <div>
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">{% trans "Company Settings" %}</h2>
+                        <p class="text-slate-500 text-sm">Update your company profile information and security
+                            credentials.</p>
+                    </div>
+
+                    <!-- Messages -->
+                {% if messages %}
+                <div class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] space-y-3 w-full max-w-sm">
+                    {% for message in messages %}
+                    {% if message.tags != 'error' %}
+                    <div class="flash-message p-4 rounded-xl flex items-center gap-3 border shadow-lg
+                                                {% if message.tags == 'success' %}
+                                                    bg-emerald-50 text-emerald-700 border-emerald-100
+                                                {% else %}
+                                                    bg-slate-50 text-slate-700 border-slate-200
+                                                {% endif %}">
+                
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                
+                        <p class="text-sm font-medium">{{ message }}</p>
+                        <button type="button" class="ml-auto opacity-50 hover:opacity-100 transition-opacity"
+                                onclick="this.closest('.flash-message').remove()">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                    <!-- Settings Form Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                        <form method="post" id="settingsForm" novalidate enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <!-- Form Body -->
+                            <div class="p-8 space-y-8">
+
+                                <!-- Section 1: Identity -->
+                                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="md:col-span-1">
+                                        <h3 class="font-bold text-slate-800">{% trans "Business Identity" %}</h3>
+                                        <p class="text-xs text-slate-500 mt-1">This information will be displayed on
+                                            your generated reports and invoices.</p>
+                                    </div>
+                                    <div class="md:col-span-2 space-y-4">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                Company Name<span style="color: red;">*</span>
+                                            </label>
+                                        
+                                            <div class="relative group">
+                                                <i data-lucide="building" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+
+                                        
+   
+                                        
+                                                <input type="text" id="company_name" name="company_name" value="{{ company.name }}" maxlength="50"
+                                                    oninput="this.value=this.value.replace(/[^A-Za-z &.\-]/g,'')"
+                                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-xl {% if name_error %}field-error{% else %}border-slate-200{% endif %}" required>
+                                            </div>
+                                            {% if name_error %}<p class="error-text">{{ name_error }}</p>{% endif %}
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">Primary
+                                                Email<span style="color: red;">*</span></label>
+                                            <div class="relative group">
+                                                <i data-lucide="mail"
+                                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                                            <input type="email" id="company_email" name="company_email" value="{{ company.email }}"
+                                                pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" title="Please enter a valid email ending in .in or .com" maxlength="254"
+                                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-xl {% if email_error %}field-error{% else %}border-slate-200{% endif %}" required>
+                                           
+                                            </div>
+                                            {% if email_error %}<p class="error-text">{{ email_error }}</p>{% endif %}
+                                        </div>
+
+                                            <div>
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                Contact Number<span style="color: red;">*</span>
+                                            </label>
+
+                                            <div class="relative group">
+                                                <i data-lucide="phone"
+                                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+
+                                                <input
+                                                    type="tel"
+                                                    name="company_phone"
+                                                    id="company_phone"
+                                                    value="{{ company.phone }}"
+                                                    maxlength="10"
+                                                    inputmode="numeric"
+                                                    oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                                    required
+                                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-xl {% if phone_error %}field-error{% else %}border-slate-200{% endif %}">
+                                            </div>
+                                            {% if phone_error %}<p class="error-text">{{ phone_error }}</p>{% endif %}
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                Company Address
+                                            </label>
+
+                                            <textarea
+                                                name="company_address"
+                                                rows="3"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl resize-none">{{ company.address|default:'' }}</textarea>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                GST Number
+                                            </label>
+
+                                            <div class="relative group">
+                                                <i data-lucide="receipt"
+                                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+
+                                                <input
+                                                    type="text"
+                                                    name="gst_number"
+                                                    id="gst_number"
+                                                    value="{{ company.gst_number }}"
+                                                    placeholder="e.g. 22AAAAA0000A1Z5"
+                                                    style="text-transform: uppercase;"
+                                                    oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
+                                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-xl {% if gst_error %}field-error{% else %}border-slate-200{% endif %}">
+                                            </div>
+                                            {% if gst_error %}<p class="error-text">{{ gst_error }}</p>{% endif %}
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                Company Logo
+                                            </label>
+
+                                            {% if company.logo %}
+                                            <img src="{{ company.logo.url }}"
+                                                class="h-16 w-16 rounded-xl object-cover mb-3 border border-slate-200">
+                                            {% endif %}
+
+                                            <input
+                                                type="file"
+                                                name="company_logo"
+                                                accept="image/*"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                        </div>
+
+
+                                    </div>
+                                </section>
+                               
+
+                                <hr class="border-slate-100">
+
+                                <!-- Section 1.5: Localization -->
+                                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="md:col-span-1">
+                                        <h3 class="font-bold text-slate-800">{% trans "Localization" %}</h3>
+                                        <p class="text-xs text-slate-500 mt-1">Set your preferred display language and currency across the entire workspace.</p>
+                                    </div>
+                                    <div class="md:col-span-2 space-y-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                    Currency
+                                                </label>
+                                                <div class="relative group">
+                                                    <i data-lucide="coins" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                                                    <select name="company_currency" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl appearance-none cursor-pointer">
+                                                        {% for value, name in currency_choices %}
+                                                        <option value="{{ value }}" {% if company.display_currency == value %}selected{% endif %}>{{ name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                    Language
+                                                </label>
+                                                <div class="relative group">
+                                                    <i data-lucide="languages" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                                                    <select name="company_language" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl appearance-none cursor-pointer">
+                                                        {% for value, name in company.LANGUAGE_CHOICES %}
+                                                        <option value="{{ value }}" {% if company.language == value %}selected{% endif %}>{{ name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <hr class="border-slate-100">
+
+                                <!-- Section 2: Security -->
+                                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="md:col-span-1">
+                                        <h3 class="font-bold text-slate-800">{% trans "Security Credentials" %}</h3>
+                                        <p class="text-xs text-slate-500 mt-1">Leave the password field empty if you do
+                                            not wish to change it.</p>
+                                    </div>
+                                    <div class="md:col-span-2 space-y-4">
+                                        <!-- Old Password Field -->
+                                        <div id="old-password-section">
+                                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                Old Password
+                                            </label>
+                                            <div class="relative flex gap-2">
+                                                <div class="relative flex-1 group">
+                                                    <i data-lucide="lock" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                                                    <input type="password" id="old-password" class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl" placeholder="Enter old password">
+                                                    <button type="button" id="toggle-old-password" class="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600">
+                                                        <i data-lucide="eye" class="w-5 h-5"></i>
+                                                    </button>
+                                                </div>
+                                                <button type="button" id="verify-password-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all whitespace-nowrap shadow-md">
+                                                    Verify
+                                                </button>
+                                            </div>
+                                            <!-- Save Changes Button -->
+  <!-- Last Updated Info -->
+                                <p class="text-xs text-slate-400 font-medium mb-2 sm:mb-0">
+                                    Last updated: Just now
+                                </p>
+
+                                <!-- Buttons -->
+                                <div class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-7 w-full sm:w-auto">
+                                    <!-- Cancel Button -->
+                                    <a href="{% url 'company_dashboard' %}"
+                                    class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-white border border-slate-200
+                                            text-slate-700 font-bold text-sm hover:bg-slate-100 transition-all text-center">
+                                        Cancel
+                                    </a>
+
+                                    <!-- Save Changes Button -->
+                                    <button type="submit"
+                                    class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-indigo-600 text-white
+                                            font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all
+                                            flex items-center justify-center gap-2 text-center">
+                                        <i data-lucide="save" class="w-4 h-4"></i> Save Changes
+                                    </button>
+                                </div>
+
+                                            <p id="oldPasswordError" class="error-text hidden mt-1"></p>
+                                        </div>
+
+                                        <!-- New Password Fields (Hidden initially) -->
+                                        <div id="new-password-section" class="hidden space-y-4">
+                                            <div>
+                                                <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                    New Password
+                                                </label>
+                                                <div class="relative group">
+                                                    <i data-lucide="lock" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                                                    <input type="password" id="new-password" name="new_password" minlength="8" maxlength="16" class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                                    <button type="button" id="toggle-password" class="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600">
+                                                        <i data-lucide="eye" class="w-5 h-5"></i>
+                                                    </button>
+                                                </div>
+                                                <!-- Password Strength Meter -->
+                                                <div class="mt-2 hidden" id="passwordStrengthContainer">
+                                                    <div class="flex justify-between items-center mb-1">
+                                                        <span class="text-[11px] font-medium text-slate-500">Password Strength</span>
+                                                        <span id="strengthText" class="text-[11px] font-bold text-slate-400">None</span>
+                                                    </div>
+                                                    <div class="flex gap-1 h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                                        <div id="strengthBar1" class="h-full w-1/4 bg-slate-200 transition-colors duration-300"></div>
+                                                        <div id="strengthBar2" class="h-full w-1/4 bg-slate-200 transition-colors duration-300"></div>
+                                                        <div id="strengthBar3" class="h-full w-1/4 bg-slate-200 transition-colors duration-300"></div>
+                                                        <div id="strengthBar4" class="h-full w-1/4 bg-slate-200 transition-colors duration-300"></div>
+                                                    </div>
+                                                    <p class="text-[10px] text-slate-400 mt-1.5">Must be 8-16 characters with uppercase, lowercase, number & special character.</p>
+                                                </div>
+                                                <p id="passwordError" class="error-text hidden"></p>
+                                            </div>
+                                            
+                                            <div>
+                                                <label class="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">
+                                                    Confirm Password
+                                                </label>
+                                                <div class="relative group">
+                                                    <i data-lucide="lock" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                                                    <input type="password"id="confirm-password"name="confirm_password"minlength="8"maxlength="16"class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                                    <p id="confirmPasswordError" class="error-text hidden"></p>
+                                                    <button type="button" id="toggle-confirm-password" class="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600">
+                                                        <i data-lucide="eye" class="w-5 h-5"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                         <div class="flex flex-col xl:flex-row gap-3 items-start xl:items-end w-full">
+
+    <div class="w-full xl:flex-1">
+        <label class="block text-sm font-medium mb-2">
+            OTP Verification
+        </label>
+
+        <input
+    type="text"
+    id="otp"
+    name="otp"
+    placeholder="Enter OTP"
+    class="w-full px-4 py-3 border rounded-xl">
+
+<p id="otpMessage" class="hidden mt-2 text-sm font-medium"></p>
+        
+    </div>
+
+    <div class="flex flex-wrap gap-2 w-full xl:w-auto">
+        <button
+            type="button"
+            id="sendOtpBtn"
+            class="flex-1 sm:flex-none px-5 py-3 bg-blue-600 text-white rounded-xl whitespace-nowrap transition-colors hover:bg-blue-700">
+            Send OTP
+        </button>
+
+        <button
+        type="button"
+        id="verifyOtpBtn"
+        class="flex-1 sm:flex-none px-5 py-3 bg-blue-600 text-white rounded-xl whitespace-nowrap transition-colors hover:bg-blue-700">
+        Verify OTP
+        </button>
+
+        <button
+        type="button"
+        id="cancelOtpBtn"
+        onclick="history.back();"
+        class="flex-1 sm:flex-none px-5 py-3 bg-slate-500 text-white rounded-xl whitespace-nowrap transition-colors hover:bg-slate-600">
+        Cancel
+        </button>
+    </div>
+</div>
+
+                                    <!-- Save Changes Button -->
+                                    <button
+    type="submit"
+    id="saveChangesBtn"
+    disabled
+    class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-indigo-600 text-white
+           font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700
+           transition-all flex items-center justify-center gap-2 text-center
+           disabled:bg-gray-400 disabled:cursor-not-allowed">
+    <i data-lucide="save" class="w-4 h-4"></i>
+    Change Password
+</button>
+</div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Additional Help Area -->
+                    <div class="p-6 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-start gap-4">
+                        <div class="bg-indigo-100 p-3 rounded-xl text-indigo-600 shrink-0">
+                            <i data-lucide="help-circle" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-indigo-900 text-sm">{% trans "Need to transfer ownership?" %}</h4>
+                            <p class="text-indigo-700 text-xs mt-1">To transfer this business account to another user,
+                                please contact the system administrator through the support portal.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sidebar Toggle Logic
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if (sidebar && toggleBtn && overlay) {
+            toggleBtn.addEventListener('click', () => {
+                if (window.innerWidth >= 1280) {
+                    // Desktop behavior (collapse/expand)
+                    sidebar.classList.toggle('w-64');
+                    sidebar.classList.toggle('w-20');
+                    document.querySelectorAll('.sidebar-text').forEach(el => el.classList.toggle('hidden'));
+                } else {
+                    // Mobile behavior (slide in/out)
+                    const isOpening = sidebar.classList.contains('-translate-x-full');
+                    sidebar.classList.toggle('-translate-x-full');
+                    overlay.classList.toggle('hidden');
+
+                    if (isOpening) {
+                        toggleBtn.classList.add('hidden');
+                    } else {
+                        toggleBtn.classList.remove('hidden');
+                    }
+                }
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                toggleBtn.classList.remove('hidden');
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 1280) {
+                    overlay.classList.add('hidden'); 
+                    // ensure button is visible on desktop
+                    toggleBtn.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full'); 
+                    toggleBtn.classList.remove('hidden');
+                }
+            });
+        }
+
+        // Initialize Icons
+        window.onload = () => {
+            lucide.createIcons();
+        };
+
+        // --- Logout Flow ---
+        const logoutModal = document.getElementById('logout-modal');
+        const modalContent = document.getElementById('modal-content');
+        const logoutLoader = document.getElementById('logout-loader');
+        const logoutForm = document.getElementById('logout-form');
+
+        function openLogoutModal() {
+            logoutModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        function closeLogoutModal() {
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                logoutModal.classList.add('hidden');
+            }, 300);
+        }
+
+        logoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            closeLogoutModal();
+            setTimeout(() => {
+                logoutLoader.classList.remove('hidden');
+                // Packing animation duration before final redirect
+                setTimeout(() => {
+                    this.submit();
+                }, 1600);
+            }, 300);
+        });
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const messages = document.querySelectorAll(".flash-message");
+
+            messages.forEach((msg) => {
+                setTimeout(() => {
+                    msg.classList.add(
+                        "transition-opacity",
+                        "duration-500",
+                        "opacity-0"
+                    );
+
+                    setTimeout(() => {
+                        msg.remove();
+                    }, 500);
+                }, 4000); // ⏱️ 4 seconds
+            });
+        });
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById("new-password");
+    const toggleBtn = document.getElementById("toggle-password");
+
+    toggleBtn.addEventListener("click", function () {
+        const isPassword = passwordInput.type === "password";
+
+        // Toggle input type
+        passwordInput.type = isPassword ? "text" : "password";
+
+        // Replace icon manually (NO lucide.createIcons here)
+        toggleBtn.innerHTML = isPassword
+            ? '<i data-lucide="eye-off" class="w-5 h-5"></i>'
+            : '<i data-lucide="eye" class="w-5 h-5"></i>';
+
+        lucide.createIcons({
+            attrs: {
+                "stroke-width": 2
+            }
+        });
+    });
+
+    const toggleConfirmBtn = document.getElementById("toggle-confirm-password");
+    if(toggleConfirmBtn) {
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        toggleConfirmBtn.addEventListener("click", function () {
+            const isPassword = confirmPasswordInput.type === "password";
+            confirmPasswordInput.type = isPassword ? "text" : "password";
+            toggleConfirmBtn.innerHTML = isPassword
+                ? '<i data-lucide="eye-off" class="w-5 h-5"></i>'
+                : '<i data-lucide="eye" class="w-5 h-5"></i>';
+            lucide.createIcons({ attrs: { "stroke-width": 2 } });
+        });
+    }
+
+    const toggleOldBtn = document.getElementById("toggle-old-password");
+    if(toggleOldBtn) {
+        const oldPasswordInput = document.getElementById("old-password");
+        toggleOldBtn.addEventListener("click", function () {
+            const isPassword = oldPasswordInput.type === "password";
+            oldPasswordInput.type = isPassword ? "text" : "password";
+            toggleOldBtn.innerHTML = isPassword
+                ? '<i data-lucide="eye-off" class="w-5 h-5"></i>'
+                : '<i data-lucide="eye" class="w-5 h-5"></i>';
+            lucide.createIcons({ attrs: { "stroke-width": 2 } });
+        });
+    }
+
+    const verifyBtn = document.getElementById("verify-password-btn");
+    if(verifyBtn) {
+        verifyBtn.addEventListener("click", async function() {
+            const oldPassword = document.getElementById("old-password").value;
+            const errorMsg = document.getElementById("oldPasswordError");
+            
+            if(!oldPassword) {
+                errorMsg.textContent = "Please enter your old password";
+                errorMsg.classList.remove("hidden");
+                return;
+            }
+            
+            // Call API to verify
+            try {
+                const response = await fetch("{% url 'verify_old_password' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ old_password: oldPassword })
+                });
+                const data = await response.json();
+                
+                if(data.success) {
+                    errorMsg.classList.add("hidden");
+                    document.getElementById("old-password-section").classList.add("hidden");
+                    document.getElementById("new-password-section").classList.remove("hidden");
+                    document.getElementById(
+    "otp-section"
+).classList.remove(
+    "hidden"
+);
+                } else {
+                    errorMsg.textContent = data.message || "Incorrect password";
+                    errorMsg.classList.remove("hidden");
+                }
+            } catch(e) {
+                errorMsg.textContent = "Something went wrong. Try again.";
+                errorMsg.classList.remove("hidden");
+            }
+        });
+    }
+});
+
+    </script>
+   <script>
+    function blockInvalidChars(event) {
+
+        const blockedChars = [" ", ",", ".", "/", "?", ";", ":", "'", "\""];
+
+        if (blockedChars.includes(event.key)) {
+            event.preventDefault(); 
+        }
+    }
+
+    //  Validate Password Length + Characters
+    function validatePassword(input) {
+
+        let password = input.value;
+        const errorMsg = document.getElementById("passwordError");
+
+        // Max 8 Characters Allow Only
+if (password.length > 0 && password.length < 8) {
+    errorMsg.classList.remove("hidden");
+    errorMsg.textContent = "Password must be at least 8 characters";
+} else {
+    errorMsg.classList.add("hidden");
+}
+
+        // Disallowed pattern
+        const invalidPattern = /[ ,\.\/\?\;\:\'"]/;
+
+        if (password.length < 8) {
+            errorMsg.innerText = "Password must be exactly 8 characters.";
+            errorMsg.classList.remove("hidden");
+            input.classList.add("border-red-500");
+            return false;
+        }
+
+        if (invalidPattern.test(password)) {
+            errorMsg.innerText =
+                "Password cannot contain spaces or , . / ? ; : ' \" characters.";
+            errorMsg.classList.remove("hidden");
+            input.classList.add("border-red-500");
+            return false;
+        }
+
+        // Valid password
+        errorMsg.classList.add("hidden");
+        input.classList.remove("border-red-500");
+        input.classList.add("border-emerald-500");
+
+        return true;
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById('settingsForm');
+
+    function clearFieldError(field) {
+        field.classList.remove('field-error');
+        const wrapper = field.closest('.relative') || field.parentNode;
+        const error = wrapper.parentNode.querySelector('.error-text');
+        if (error) error.remove();
+    }
+
+    function showError(field, message) {
+        clearFieldError(field);
+        field.classList.add('field-error');
+
+        const error = document.createElement('p');
+        error.className = 'error-text';
+        error.innerText = message;
+
+        const wrapper = field.closest('.relative') || field.parentNode;
+        wrapper.parentNode.appendChild(error);
+    }
+
+    function clearErrors() {
+        document.querySelectorAll('.field-error').forEach(el => {
+            el.classList.remove('field-error');
+        });
+
+        document.querySelectorAll('.error-text').forEach(el => el.remove());
+    }
+
+    const name = document.getElementById('company_name');
+    const email = document.getElementById('company_email');
+    const phone = document.getElementById('company_phone');
+    const gst = document.getElementById('gst_number');
+    const password = document.getElementById('new-password');
+
+    // LIVE VALIDATION
+    name.addEventListener('input', function() {
+        if (!this.value.trim()) {
+            showError(this, "Company name is required");
+        } else {
+            clearFieldError(this);
+        }
+    });
+
+    phone.addEventListener('input', function() {
+        if (!this.value.trim() || !/^\d{10}$/.test(this.value)) {
+            showError(this, "Mobile must be exactly 10 digits");
+        } else {
+            clearFieldError(this);
+        }
+    });
+
+    if (gst) {
+        gst.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+                if (!gstRegex.test(this.value.trim())) {
+                    showError(this, "Invalid GST format");
+                } else {
+                    clearFieldError(this);
+                }
+            } else {
+                clearFieldError(this);
+            }
+        });
+    }
+
+    let emailTimeout;
+    email.addEventListener('input', function() {
+        clearTimeout(emailTimeout);
+        const emailVal = this.value.trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+            showError(this, "Valid email required");
+        } else {
+            clearFieldError(this);
+            emailTimeout = setTimeout(async () => {
+                try {
+                    const res = await fetch(`/company/check-email/?email=${emailVal}`);
+                    const data = await res.json();
+                    if (data.exists) {
+                        showError(this, "Email already exists");
+                    } else {
+                        clearFieldError(this);
+                    }
+                } catch (err) {
+                    console.error("Email check failed");
+                }
+            }, 500);
+        }
+    });
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault(); // Stop default form submission to allow async validation
+
+        clearErrors();
+        let valid = true;
+
+        // ========
+        // NAME
+        // ========
+        if (!name.value.trim()) {
+            showError(name, "Company name is required");
+            valid = false;
+        }
+
+        // ========
+        // CONTACT NUMBER
+        // ========
+        if (!phone.value.trim() || !/^\d{10}$/.test(phone.value)) {
+            showError(phone, "Mobile must be exactly 10 digits");
+            valid = false;
+        }
+
+        // ========
+        // GST NUMBER
+        // ========
+        if (gst && gst.value.trim() !== '') {
+            const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+            if (!gstRegex.test(gst.value.trim())) {
+                showError(gst, "Invalid GST format");
+                valid = false;
+            }
+        }
+
+        // ========
+        // EMAIL
+        // ========
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+            showError(email, "Valid email required");
+            valid = false;
+        } else {
+            // AJAX CHECK
+            try {
+                const res = await fetch(`/company/check-email/?email=${email.value.trim()}`);
+                const data = await res.json();
+
+                if (data.exists) {
+                    showError(email, "Email already exists");
+                    valid = false;
+                }
+            } catch (err) {
+                console.error("Email check failed");
+            }
+        }
+
+        // ========
+        // PASSWORD
+        // ========
+        const invalidPattern = /[ ,\.\/\?\;\:\'"]/;
+
+        if (password.value.trim() !== "") {
+            const oldPassword = document.getElementById('old-password');
+            if (password.value === oldPassword.value) {
+                showError(password, "New password cannot be the same as your old password");
+                valid = false;
+            } else if (password.value.length < 8) {
+                showError(password, "Minimum 8 characters required");
+                valid = false;
+            } else if (invalidPattern.test(password.value)) {
+                showError(password, "Invalid characters not allowed");
+                valid = false;
+            }
+            
+            const confirmPassword = document.getElementById('confirm-password');
+            if (password.value !== confirmPassword.value) {
+                showError(confirmPassword, "Passwords do not match");
+                valid = false;
+            }
+        }
+
+        if (!valid) {
+            const firstError = document.querySelector('.field-error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+            return;
+        }
+
+        // If all validation passes, submit form natively bypassing the event listener
+        HTMLFormElement.prototype.submit.call(form);
+    });
+
+    // ========
+    // PASSWORD STRENGTH TRACKER
+    // ========
+    const passwordInput = document.getElementById('new-password');
+
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            const val = this.value;
+            const container = document.getElementById('passwordStrengthContainer');
+            
+            if (val.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+            container.classList.remove('hidden');
+
+            let strength = 0;
+            let hasLower = /[a-z]/.test(val);
+            let hasUpper = /[A-Z]/.test(val);
+            let hasNumber = /\d/.test(val);
+            let hasSpecial = /[^A-Za-z0-9]/.test(val);
+            
+            let rulesPassed = [hasLower, hasUpper, hasNumber, hasSpecial].filter(Boolean).length;
+            
+            if (val.length >= 8) {
+                if (rulesPassed === 4) strength = 4;
+                else if (rulesPassed >= 3) strength = 3;
+                else if (rulesPassed >= 2) strength = 2;
+                else strength = 1;
+            } else {
+                strength = 1;
+            }
+
+            const bars = [
+                document.getElementById('strengthBar1'),
+                document.getElementById('strengthBar2'),
+                document.getElementById('strengthBar3'),
+                document.getElementById('strengthBar4')
+            ];
+            const text = document.getElementById('strengthText');
+
+            // Reset
+            bars.forEach(b => { b.className = 'h-full w-1/4 bg-slate-200 transition-colors duration-300'; });
+
+            if (strength === 1) {
+                bars[0].classList.replace('bg-slate-200', 'bg-red-500');
+                text.textContent = 'Weak';
+                text.className = 'text-[11px] font-bold text-red-500';
+            } else if (strength === 2) {
+                bars[0].classList.replace('bg-slate-200', 'bg-orange-400');
+                bars[1].classList.replace('bg-slate-200', 'bg-orange-400');
+                text.textContent = 'Fair';
+                text.className = 'text-[11px] font-bold text-orange-400';
+            } else if (strength === 3) {
+                bars[0].classList.replace('bg-slate-200', 'bg-blue-400');
+                bars[1].classList.replace('bg-slate-200', 'bg-blue-400');
+                bars[2].classList.replace('bg-slate-200', 'bg-blue-400');
+                text.textContent = 'Good';
+                text.className = 'text-[11px] font-bold text-blue-400';
+            } else if (strength === 4) {
+                bars[0].classList.replace('bg-slate-200', 'bg-green-500');
+                bars[1].classList.replace('bg-slate-200', 'bg-green-500');
+                bars[2].classList.replace('bg-slate-200', 'bg-green-500');
+                bars[3].classList.replace('bg-slate-200', 'bg-green-500');
+                text.textContent = 'Strong';
+                text.className = 'text-[11px] font-bold text-green-500';
+            }
+        });
+    }
+
+});
+</script>
+
+
+<script>
+function validatePassword(password) {
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*])[A-Za-z\d@#$%&*]{8,16}$/;
+
+    if (!password) {
+        return "Password is required";
+    }
+
+    if (password.length < 8 || password.length > 16) {
+        return "Password must be 8–16 characters";
+    }
+
+    if (!pattern.test(password)) {
+        return "Must include uppercase, lowercase, number & special character (@#$%&*)";
+    }
+
+    return "";
+}
+</script>
+<script>
+
+document.getElementById("sendOtpBtn").addEventListener("click", function () {
+
+    const btn = this;
+    const msg = document.getElementById("otpMessage");
+
+    btn.disabled = true;
+    btn.innerText = "Sending...";
+
+    fetch("/company/send-password-otp/")
+    .then(response => response.json())
+    .then(data => {
+
+        if(data.success){
+
+            msg.innerText = "OTP has been sent to your registered email.";
+            msg.className = "mt-2 text-sm font-medium text-green-600";
+
+        } else {
+
+            msg.innerText = "Failed to send OTP.";
+            msg.className = "mt-2 text-sm font-medium text-red-600";
+        }
+
+        msg.classList.remove("hidden");
+    })
+    .catch(() => {
+
+        msg.innerText = "Something went wrong.";
+        msg.className = "mt-2 text-sm font-medium text-red-600";
+        msg.classList.remove("hidden");
+
+    })
+    .finally(() => {
+
+        btn.disabled = false;
+        btn.innerText = "Send OTP";
+
+    });
+    
+
+});
+</script>
+<script>
+document.getElementById("verifyOtpBtn").addEventListener("click", function () {
+
+    const otp = document.getElementById("otp").value;
+    const msg = document.getElementById("otpMessage");
+
+    fetch("/company/verify-password-otp/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+        },
+        body: JSON.stringify({
+            otp: otp
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.success) {
+
+            msg.innerText = "OTP Verified Successfully";
+            msg.className = "mt-2 text-sm font-medium text-green-600";
+            msg.classList.remove("hidden");
+
+            document.getElementById("saveChangesBtn").disabled = false;
+
+        } else {
+
+            msg.innerText = "Invalid OTP";
+            msg.className = "mt-2 text-sm font-medium text-red-600";
+            msg.classList.remove("hidden");
+
+            document.getElementById("saveChangesBtn").disabled = true;
+        }
+    });
+});
+</script>
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+
+</html>

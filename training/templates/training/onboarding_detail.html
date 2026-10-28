@@ -1,0 +1,122 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{{ onboarding.staff.name }} {% trans "Onboarding" %}{% endblock %}
+{% block nav_onboarding %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <div class="flex items-center justify-between mb-3">
+        <a href="{% url 'training:onboarding_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Onboarding" %}
+        </a>
+    </div>
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xl">
+                {{ onboarding.staff.name|slice:":1"|upper }}
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">{{ onboarding.staff.name }}</h1>
+                <p class="text-slate-500 text-sm">{{ onboarding.staff.email }} · {% trans "Joined" %} {{ onboarding.join_date|date:"M d, Y" }}</p>
+            </div>
+        </div>
+        <span class="text-sm px-3 py-1.5 rounded-full font-semibold
+            {% if onboarding.status == 'COMPLETED' %}bg-green-100 text-green-700
+            {% elif onboarding.status == 'IN_PROGRESS' %}bg-blue-100 text-blue-700
+            {% else %}bg-slate-100 text-slate-600{% endif %}">
+            {{ onboarding.get_status_display }}
+        </span>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left: Info + Checklist -->
+    <div class="lg:col-span-2 space-y-6">
+        <!-- Progress -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-semibold text-slate-800">{% trans "Overall Progress" %}</h2>
+                <span class="text-2xl font-bold text-indigo-600">{{ onboarding.completion_percentage }}%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-3">
+                <div class="h-3 rounded-full transition-all duration-500
+                    {% if onboarding.completion_percentage == 100 %}bg-green-500{% else %}bg-indigo-500{% endif %}"
+                    style="width: {{ onboarding.completion_percentage }}%"></div>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">
+                {{ checklist|length }} {% trans "tasks total" %} · {{ onboarding.completion_percentage }}% {% trans "complete" %}
+            </p>
+        </div>
+
+        <!-- Checklist -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <div class="p-5 border-b border-slate-100">
+                <h2 class="font-semibold text-slate-800">{% trans "Onboarding Checklist" %}</h2>
+            </div>
+            <div class="p-4 space-y-2">
+                {% for item in checklist %}
+                <form method="post" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="toggle_task">
+                    <input type="hidden" name="task_id" value="{{ item.pk }}">
+                    <button type="submit" class="w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors
+                        {% if item.is_completed %}bg-green-500 border-green-500 text-white{% else %}border-slate-300 hover:border-indigo-400{% endif %}">
+                        {% if item.is_completed %}<i data-lucide="check" class="w-3 h-3"></i>{% endif %}
+                    </button>
+                    <span class="text-sm flex-1 {% if item.is_completed %}line-through text-slate-400{% else %}text-slate-700{% endif %}">{{ item.task }}</span>
+                    {% if item.completed_at %}
+                    <span class="text-xs text-slate-400 opacity-0 group-hover:opacity-100">{{ item.completed_at|date:"M d" }}</span>
+                    {% endif %}
+                </form>
+                {% endfor %}
+            </div>
+            <!-- Add task -->
+            <div class="p-4 border-t border-slate-100">
+                <form method="post" class="flex gap-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add_task">
+                    <input type="text" name="task" required placeholder="{% trans 'Add a new task...' %}" class="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{% trans "Add" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Details -->
+    <div class="space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <h3 class="font-semibold text-slate-800 mb-4">{% trans "Details" %}</h3>
+            <div class="space-y-3">
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Join Date" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ onboarding.join_date|date:"M d, Y" }}</p>
+                </div>
+                {% if onboarding.target_completion_date %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Target Completion" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ onboarding.target_completion_date|date:"M d, Y" }}</p>
+                </div>
+                {% endif %}
+                {% if onboarding.actual_completion_date %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Completed On" %}</p>
+                    <p class="text-sm text-green-700 font-medium mt-0.5">{{ onboarding.actual_completion_date|date:"M d, Y" }}</p>
+                </div>
+                {% endif %}
+                {% if onboarding.mentor %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Mentor" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ onboarding.mentor.name }}</p>
+                </div>
+                {% endif %}
+                {% if onboarding.notes %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Notes" %}</p>
+                    <p class="text-sm text-slate-700 mt-0.5">{{ onboarding.notes }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

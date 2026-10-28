@@ -1,0 +1,4568 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 10:00+0000\n"
+"PO-Revision-Date: 2026-06-01 10:00+0000\n"
+"Language: gu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Dashboard"
+msgstr "ડેશબોર્ડ"
+
+msgid "Business Ops"
+msgstr "બિઝનેસ ઓપરેશન્સ"
+
+msgid "My Inventory"
+msgstr "મારી ઇન્વેન્ટરી"
+
+msgid "Categories"
+msgstr "કેટેગરીઝ"
+
+msgid "Batch Stock"
+msgstr "બેચ સ્ટોક"
+
+msgid "Sales Orders"
+msgstr "સેલ્સ ઓર્ડર"
+
+msgid "Purchases"
+msgstr "ખરીદી"
+
+msgid "Vendors"
+msgstr "વેન્ડર્સ"
+
+msgid "Purchase Orders"
+msgstr "ખરીદ ઓર્ડર"
+
+msgid "Customers"
+msgstr "ગ્રાહકો"
+
+msgid "Inventory Analytics"
+msgstr "ઇન્વેન્ટરી એનાલિટિક્સ"
+
+msgid "ABC Classification"
+msgstr "ABC વર્ગીકરણ"
+
+msgid "Stock Movement"
+msgstr "સ્ટોક મૂવમેન્ટ"
+
+msgid "Fast / Slow Products"
+msgstr "ઝડપી / ધીમા ઉત્પાદનો"
+
+msgid "Stock Aging"
+msgstr "સ્ટોક એજિંગ"
+
+msgid "Reorder Suggestions"
+msgstr "પુન:ઓર્ડર સૂચનો"
+
+msgid "Report Analyst"
+msgstr "રિપોર્ટ વિશ્લેષક"
+
+msgid "All Reports"
+msgstr "બધા રિપોર્ટ"
+
+msgid "Near Expiry"
+msgstr "સમાપ્તિ નજીક"
+
+msgid "Expired Stock"
+msgstr "સમાપ્ત સ્ટોક"
+
+msgid "Supplier Performance"
+msgstr "સપ્લાયર પર્ફોર્મન્સ"
+
+msgid "Profit Margin"
+msgstr "નફો માર્જિન"
+
+msgid "Purchase Stock"
+msgstr "સ્ટોક ખરીદો"
+
+msgid "Administration"
+msgstr "એડમિનિસ્ટ્રેશન"
+
+msgid "Settings"
+msgstr "સેટિંગ્સ"
+
+msgid "Logout"
+msgstr "લૉગ આઉટ"
+
+msgid "Monthly Sales Orders"
+msgstr "માસિક સેલ્સ ઓર્ડર"
+
+msgid "Product / SKU Limit"
+msgstr "ઉત્પાદ / SKU મર્યાદા"
+
+msgid "Absolute Limit"
+msgstr "સંપૂર્ણ મર્યાદા"
+
+msgid "Overview"
+msgstr "ઓવરવ્યૂ"
+
+msgid "Total Products"
+msgstr "કુલ ઉત્પાદનો"
+
+msgid "Low Stock Alerts"
+msgstr "ઓછા સ્ટોક અલર્ટ"
+
+msgid "Out of Stock"
+msgstr "સ્ટોક ખત્મ"
+
+msgid "Pending Shipments"
+msgstr "બાકી શિપમેન્ટ"
+
+msgid "Total Revenue"
+msgstr "કુલ આવક"
+
+msgid "Sales Trends"
+msgstr "વેચાણ ટ્રેન્ડ"
+
+msgid "Order Efficiency"
+msgstr "ઓર્ડર કાર્યક્ષમતા"
+
+msgid "Recent Transactions"
+msgstr "તાજેતરના વ્યવહારો"
+
+msgid "Order ID"
+msgstr "ઓર્ડર આઈડી"
+
+msgid "Amount"
+msgstr "રકમ"
+
+msgid "Status"
+msgstr "સ્થિતિ"
+
+msgid "Date"
+msgstr "તારીખ"
+
+msgid "Inventory Batch Health"
+msgstr "ઇન્વેન્ટરી બેચ આરોગ્ય"
+
+msgid "Active Batches"
+msgstr "સક્રિય બેચ"
+
+msgid "View details"
+msgstr "વિગતો જુઓ"
+
+msgid "Manage products, monitor stock levels, and update pricing."
+msgstr "ઉત્પાદનોનું સંચાલન કરો, સ્ટોક સ્તરોનું નિરીક્ષણ કરો અને કિંમતો અપડેટ કરો."
+
+msgid "DELETE Bulk Action"
+msgstr "બલ્ક ક્રિયા ડિલીટ કરો"
+
+msgid "Export PDF"
+msgstr "PDF એક્સપોર્ટ કરો"
+
+msgid "Add New Product"
+msgstr "નવું ઉત્પાદ ઉમેરો"
+
+msgid "TOTAL SKUS"
+msgstr "કુલ SKU"
+
+msgid "Items"
+msgstr "આઇટમ"
+
+msgid "LOW STOCK"
+msgstr "ઓછો સ્ટોક"
+
+msgid "Alerts"
+msgstr "અલર્ટ"
+
+msgid "Apply"
+msgstr "લાગુ કરો"
+
+msgid "Search product or SKU..."
+msgstr "ઉત્પાદ અથવા SKU શોધો..."
+
+msgid "Search"
+msgstr "શોધો"
+
+msgid "Reset"
+msgstr "રીસેટ"
+
+msgid "PRODUCT DETAILS"
+msgstr "ઉત્પાદ વિગતો"
+
+msgid "SKU CODE"
+msgstr "SKU કોડ"
+
+msgid "CURRENT STOCK"
+msgstr "વર્તમાન સ્ટોક"
+
+msgid "UNIT PRICE"
+msgstr "એકમ કિંમત"
+
+msgid "ACTIONS"
+msgstr "ક્રિયાઓ"
+
+msgid "units"
+msgstr "એકમ"
+
+msgid "IN STOCK"
+msgstr "સ્ટોકમાં"
+
+msgid "NEAR EXPIRY"
+msgstr "સમાપ્તિ નજીક"
+
+msgid "Batches"
+msgstr "બેચ"
+
+msgid "History"
+msgstr "ઇતિહાસ"
+
+msgid "Monitor business revenue, customer orders, and fulfillment status."
+msgstr "બિઝનેસ આવક, ગ્રાહક ઓર્ડર અને પૂર્તિ સ્થિતિનું નિરીક્ષણ કરો."
+
+msgid "TOTAL ORDERS"
+msgstr "કુલ ઓર્ડર"
+
+msgid "PENDING"
+msgstr "બાકી"
+
+msgid "COMPLETED"
+msgstr "પૂર્ણ"
+
+msgid "REVENUE"
+msgstr "આવક"
+
+msgid "New Order"
+msgstr "નવો ઓર્ડર"
+
+msgid "Search orders..."
+msgstr "ઓર્ડર શોધો..."
+
+msgid "ORDER DETAILS"
+msgstr "ઓર્ડર વિગતો"
+
+msgid "CUSTOMER"
+msgstr "ગ્રાહક"
+
+msgid "TOTAL AMOUNT"
+msgstr "કુલ રકમ"
+
+msgid "QUANTITY"
+msgstr "જથ્થો"
+
+msgid "Invoice Generated"
+msgstr "બિલ જનરેટ થયું"
+
+msgid "Regular Customer"
+msgstr "નિયમિત ગ્રાહક"
+
+msgid "DELIVERED"
+msgstr "ડિલિવર થયું"
+
+msgid "PROCESSING"
+msgstr "પ્રક્રિયા ચાલુ"
+
+msgid "View Detail"
+msgstr "વિગત જુઓ"
+
+msgid "Manage procurement from vendors and track incoming stock shipments."
+msgstr "વેન્ડર્સ પાસેથી ખરીદીનું સંચાલન કરો અને આવતા સ્ટોક શિપમેન્ટ ટ્રેક કરો."
+
+msgid "TOTAL POS"
+msgstr "કુલ PO"
+
+msgid "IN TRANSIT"
+msgstr "ટ્રાન્ઝિટમાં"
+
+msgid "RECEIVED"
+msgstr "પ્રાપ્ત"
+
+msgid "TOTAL SPENT"
+msgstr "કુલ ખર્ચ"
+
+msgid "New Purchase"
+msgstr "નવી ખરીદી"
+
+msgid "Search PO or vendor..."
+msgstr "PO અથવા વેન્ડર શોધો..."
+
+msgid "Min Amount"
+msgstr "ન્યૂનતમ રકમ"
+
+msgid "Max Amount"
+msgstr "મહત્તમ રકમ"
+
+msgid "PO NUMBER"
+msgstr "PO નંબર"
+
+msgid "VENDOR / SUPPLIER"
+msgstr "વેન્ડર / સપ્લાયર"
+
+msgid "Internal Procurement"
+msgstr "આંતરિક ખરીદી"
+
+msgid "ORDERED"
+msgstr "ઓર્ડર થયું"
+
+msgid "Details"
+msgstr "વિગતો"
+
+msgid "Print"
+msgstr "પ્રિન્ટ"
+
+msgid "All Status"
+msgstr "બધી સ્થિતિ"
+
+msgid "Pending"
+msgstr "બાકી"
+
+msgid "Received"
+msgstr "પ્રાપ્ત"
+
+msgid "Cancelled"
+msgstr "રદ થયું"
+
+msgid "Business Intelligence & Analytics"
+msgstr "બિઝનેસ ઇન્ટેલિજન્સ અને એનાલિટિક્સ"
+
+msgid "Inventory Health"
+msgstr "ઇન્વેન્ટરી આરોગ્ય"
+
+msgid "Near Expiry Products"
+msgstr "સમાપ્તિ નજીકના ઉત્પાદનો"
+
+msgid "Items expiring within the next 30 days."
+msgstr "આગલા 30 દિવસમાં સમાપ્ત થતા આઇટમ."
+
+msgid "View Report"
+msgstr "રિપોર્ટ જુઓ"
+
+msgid "Expired Products"
+msgstr "સમાપ્ત ઉત્પાદનો"
+
+msgid "Items that have passed their expiration date."
+msgstr "જે આઇટમ તેમની સમાપ્તિ તારીખ પસાર કરી ચૂક્યા છે."
+
+msgid "Financial Performance"
+msgstr "નાણાકીય કામગીરી"
+
+msgid "Profit Margins"
+msgstr "નફો માર્જિન"
+
+msgid "Analyze profit margins across products."
+msgstr "ઉત્પાદનોમાં નફો માર્જિનનું વિશ્લેષણ કરો."
+
+msgid "Evaluate vendor reliability and fulfillment times."
+msgstr "વેન્ડર વિશ્વસનીયતા અને પૂર્તિ સમયનું મૂલ્યાંકન કરો."
+
+msgid "Customer"
+msgstr "ગ્રાહક"
+
+msgid "Total Amount"
+msgstr "કુલ રકમ"
+
+msgid "Quantity"
+msgstr "જથ્થો"
+
+msgid "Actions"
+msgstr "ક્રિયાઓ"
+
+msgid "STATUS"
+msgstr "સ્થિતિ"
+
+msgid "Register a new item into your company's global inventory."
+msgstr "તમારી કંપનીની વૈશ્વિક ઇન્વેન્ટરીમાં નવો આઇટમ નોંધો."
+
+msgid "Basic Information"
+msgstr "મૂળભૂત માહિતી"
+
+msgid "Provide the core identifying details for this product."
+msgstr "આ ઉત્પાદ માટે મૂળ ઓળખ વિગતો પ્રદાન કરો."
+
+msgid "Product Name"
+msgstr "ઉત્પાદનું નામ"
+
+msgid "Product Company"
+msgstr "ઉત્પાદ કંપની"
+
+msgid "SKU Code"
+msgstr "SKU કોડ"
+
+msgid "Category"
+msgstr "કેટેગરી"
+
+msgid "Pricing & Inventory"
+msgstr "કિંમત અને ઇન્વેન્ટરી"
+
+msgid "Set your cost, selling price and initial stock quantities."
+msgstr "તમારી લાગત, વેચાણ કિંમત અને પ્રારંભિક સ્ટોક જથ્થા સેટ કરો."
+
+msgid "Purchase Price"
+msgstr "ખરીદ કિંમત"
+
+msgid "Selling Price"
+msgstr "વેચાણ કિંમત"
+
+msgid "Initial Qty"
+msgstr "પ્રારંભિક જથ્થો"
+
+msgid "Tracking & Expiry"
+msgstr "ટ્રેકિંગ અને સમાપ્તિ"
+
+msgid "Enable for pharmaceutical or perishable goods tracking."
+msgstr "ફાર્માસ્યુટિકલ અથવા ખરાબ થતા માલના ટ્રેકિંગ માટે સક્ષમ કરો."
+
+msgid "Track Expiry Dates"
+msgstr "સમાપ્તિ તારીખો ટ્રેક કરો"
+
+msgid "You must provide an expiry date if this is enabled"
+msgstr "જો આ સક્ષમ છે તો તમારે સમાપ્તિ તારીખ આપવી પડશે"
+
+msgid "Expiry Date"
+msgstr "સમાપ્તિ તારીખ"
+
+msgid "Save Product"
+msgstr "ઉત્પાદ સેવ કરો"
+
+msgid "Discard"
+msgstr "રદ કરો"
+
+msgid "New Sales Order"
+msgstr "નવો સેલ્સ ઓર્ડર"
+
+msgid "Create a sales order for customer purchase."
+msgstr "ગ્રાહક ખરીદી માટે સેલ્સ ઓર્ડર બનાવો."
+
+msgid "Customer & Item Details"
+msgstr "ગ્રાહક અને આઇટમ વિગતો"
+
+msgid "Select the customer and the specific product they are purchasing."
+msgstr "ગ્રાહક અને તેઓ જે ચોક્કસ ઉત્પાદ ખરીદી રહ્યા છે તેનો પસંદગી કરો."
+
+msgid "Select Customer"
+msgstr "ગ્રાહક પસંદ કરો"
+
+msgid "Product Selection"
+msgstr "ઉત્પાદ પસંદગી"
+
+msgid "Order Parameters"
+msgstr "ઓર્ડર પરિમાણો"
+
+msgid "Define the volume and negotiated price for this sale."
+msgstr "આ વેચાણ માટે જથ્થો અને નક્કી કરેલી કિંમત નક્કી કરો."
+
+msgid "Selling Price (Per Unit)"
+msgstr "વેચાણ કિંમત (એકમ દીઠ)"
+
+msgid "Create Sales Order"
+msgstr "સેલ્સ ઓર્ડર બનાવો"
+
+msgid "Cancel"
+msgstr "રદ કરો"
+
+msgid "Add Another Product"
+msgstr "બીજું ઉત્પાદ ઉમેરો"
+
+msgid "New Purchase Order"
+msgstr "નવો ખરીદ ઓર્ડર"
+
+msgid "Create a purchase order for vendor stock."
+msgstr "વેન્ડર સ્ટોક માટે ખરીદ ઓર્ડર બનાવો."
+
+msgid "Supply Source"
+msgstr "સપ્લાય સ્રોત"
+
+msgid "Select the vendor and the specific product you are procuring."
+msgstr "વેન્ડર અને તમે જે ચોક્કસ ઉત્પાદ ખરીદી રહ્યા છો તેનો પસંદગી કરો."
+
+msgid "Vendor / Supplier"
+msgstr "વેન્ડર / સપ્લાયર"
+
+msgid "Financials & Quantity"
+msgstr "નાણાકીય અને જથ્થો"
+
+msgid "Define the volume and negotiated cost for this purchase."
+msgstr "આ ખરીદી માટે જથ્થો અને નક્કી કરેલી લાગત નક્કી કરો."
+
+msgid "Cost Price (Per Unit)"
+msgstr "લાગત કિંમત (એકમ દીઠ)"
+
+msgid "Batch Number"
+msgstr "બેચ નંબર"
+
+msgid "Create Purchase Order"
+msgstr "ખરીદ ઓર્ડર બનાવો"
+
+msgid "Back to List"
+msgstr "યાદીમાં પાછા જાઓ"
+
+msgid "e.g. Premium Wireless Headphones"
+msgstr "દા.ત. પ્રીમિયમ વાયરલેસ હેડફોન"
+
+msgid "Manufacturer/Brand Name"
+msgstr "ઉત્પાદક/બ્રાન્ડ નામ"
+
+msgid "Select Category"
+msgstr "કેટેગરી પસંદ કરો"
+
+msgid "Customer Name"
+msgstr "ગ્રાહકનું નામ"
+
+msgid "e.g. Acme Corp / Jane Smith"
+msgstr "દા.ત. Acme Corp / Jane Smith"
+
+msgid "Select Product"
+msgstr "ઉત્પાદ પસંદ કરો"
+
+msgid "Search and choose..."
+msgstr "શોધો અને પસંદ કરો..."
+
+msgid "Add Product"
+msgstr "ઉત્પાદ ઉમેરો"
+
+msgid "System Guard Enabled"
+msgstr "સિસ્ટમ ગાર્ડ સક્ષમ"
+
+msgid "Initiate a new transaction for your customers and update stock."
+msgstr "તમારા ગ્રાહકો માટે નવો વ્યવહાર શરૂ કરો અને સ્ટોક અપડેટ કરો."
+
+msgid "Items & Fulfillment"
+msgstr "આઇટમ અને પૂર્તિ"
+
+msgid "Select products and specify quantities. Stock is automatically managed using FEFO."
+msgstr "ઉત્પાદનોની પસંદગી કરો અને જથ્થા નિર્દિષ્ટ કરો. FEFO નો ઉપયોગ કરીને સ્ટોક આપમેળે સંચાલિત થાય છે."
+
+msgid "Customer Details"
+msgstr "ગ્રાહક વિગતો"
+
+msgid "Basic information about the buyer for this specific transaction."
+msgstr "આ ચોક્કસ વ્યવહાર માટે ખરીદદાર વિશે મૂળભૂત માહિતી."
+
+msgid "Back to Orders"
+msgstr "ઓર્ડરમાં પાછા જાઓ"
+
+msgid "Select a vendor..."
+msgstr "એક વેન્ડર પસંદ કરો..."
+
+msgid "Select a product..."
+msgstr "એક ઉત્પાદ પસંદ કરો..."
+
+msgid "Company Settings"
+msgstr "કંપની સેટિંગ્સ"
+
+msgid "Regional & Language Settings"
+msgstr "પ્રાદેશિક અને ભાષા સેટિંગ્સ"
+
+msgid "Save Changes"
+msgstr "ફેરફારો સેવ કરો"
+
+msgid "Add Vendor"
+msgstr "વેન્ડર ઉમેરો"
+
+msgid "Edit Vendor"
+msgstr "વેન્ડર એડિટ કરો"
+
+msgid "Vendor Management"
+msgstr "વેન્ડર સંચાલન"
+
+msgid "Add Customer"
+msgstr "ગ્રાહક ઉમેરો"
+
+msgid "Edit Customer"
+msgstr "ગ્રાહક એડિટ કરો"
+
+msgid "Customer Management"
+msgstr "ગ્રાહક સંચાલન"
+
+msgid "Add Category"
+msgstr "કેટેગરી ઉમેરો"
+
+msgid "Edit Category"
+msgstr "કેટેગરી એડિટ કરો"
+
+msgid "Product Categories"
+msgstr "ઉત્પાદ કેટેગરીઝ"
+
+msgid "Adjust Stock"
+msgstr "સ્ટોક સમાયોજિત કરો"
+
+msgid "Update Stock"
+msgstr "સ્ટોક અપડેટ કરો"
+
+msgid "Analytics"
+msgstr "એનાલિટિક્સ"
+
+msgid "Reports"
+msgstr "રિપોર્ટ"
+
+msgid "Near Expiry Report"
+msgstr "સમાપ્તિ નજીક રિપોર્ટ"
+
+msgid "Name"
+msgstr "નામ"
+
+msgid "Contact"
+msgstr "સંપર્ક"
+
+msgid "Added On"
+msgstr "ઉમેરાયેલ"
+
+msgid "Phone"
+msgstr "ફોન"
+
+msgid "Email"
+msgstr "ઇમેઇલ"
+
+msgid "Address"
+msgstr "સરનામું"
+
+msgid "Description"
+msgstr "વર્ણન"
+
+msgid "Save"
+msgstr "સેવ કરો"
+
+msgid "Expiry"
+msgstr "સમાપ્તિ"
+
+msgid "Qty"
+msgstr "જથ્થો"
+
+msgid "Total Value"
+msgstr "કુલ કિંમત"
+
+msgid "Filter"
+msgstr "ફિલ્ટર"
+
+msgid "Export"
+msgstr "એક્સપોર્ટ"
+
+msgid "Total Purchases"
+msgstr "કુલ ખરીદી"
+
+msgid "On-Time Delivery"
+msgstr "સમયસર ડિલિવરી"
+
+msgid "Defect Rate"
+msgstr "ખામી દર"
+
+msgid "A Class"
+msgstr "A ક્લાસ"
+
+msgid "B Class"
+msgstr "B ક્લાસ"
+
+msgid "C Class"
+msgstr "C ક્લાસ"
+
+msgid "Cumulative Value"
+msgstr "સંચયી કિંમત"
+
+msgid "Product"
+msgstr "ઉત્પાદ"
+
+msgid "SKU"
+msgstr "SKU"
+
+msgid "Revenue"
+msgstr "આવક"
+
+msgid "Cost"
+msgstr "લાગત"
+
+msgid "Profit"
+msgstr "નફો"
+
+msgid "Margin"
+msgstr "માર્જિન"
+
+msgid "Update"
+msgstr "અપડેટ કરો"
+
+msgid "Delete"
+msgstr "ડિલીટ કરો"
+
+msgid "Edit"
+msgstr "એડિટ કરો"
+
+msgid "View"
+msgstr "જુઓ"
+
+msgid "Download"
+msgstr "ડાઉનલોડ કરો"
+
+msgid "Contact Information"
+msgstr "સંપર્ક માહિતી"
+
+msgid "Financial Details"
+msgstr "નાણાકીય વિગતો"
+
+msgid "Inventory Categories"
+msgstr "ઇન્વેન્ટરી કેટેગરીઝ"
+
+msgid "Organize your products by grouping them into meaningful categories."
+msgstr "તમારા ઉત્પાદનોને અર્થપૂર્ણ કેટેગરીઝમાં જૂથ બનાવીને વ્યવસ્થિત કરો."
+
+msgid "Quick Add Category"
+msgstr "ઝડપથી કેટેગરી ઉમેરો"
+
+msgid "Enter new category name..."
+msgstr "નવી કેટેગરીનું નામ દાખલ કરો..."
+
+msgid "Existing Categories"
+msgstr "હાલની કેટેગરીઝ"
+
+msgid "CATEGORY NAME"
+msgstr "કેટેગરી નામ"
+
+msgid "Batch-wise Stock Control"
+msgstr "બેચ-વાર સ્ટોક નિયંત્રણ"
+
+msgid "Detailed visibility into specific product batches and expiration windows."
+msgstr "ચોક્કસ ઉત્પાદ બેચ અને સમાપ્તિ વિન્ડોમાં વિગતવાર દૃશ્યતા."
+
+msgid "ACTIVE BATCHES"
+msgstr "સક્રિય બેચ"
+
+msgid "EXPIRED"
+msgstr "સમાપ્ત"
+
+msgid "EXPIRING SOON"
+msgstr "ટૂંક સમયમાં સમાપ્ત"
+
+msgid "GOOD CONDITION"
+msgstr "સારી સ્થિતિ"
+
+msgid "Search batch or product..."
+msgstr "બેચ અથવા ઉત્પાદ શોધો..."
+
+msgid "PRODUCT INFORMATION"
+msgstr "ઉત્પાદ માહિતી"
+
+msgid "EXPIRY DATE"
+msgstr "સમાપ્તિ તારીખ"
+
+msgid "QTY IN STOCK"
+msgstr "સ્ટોકમાં જથ્થો"
+
+msgid "COMPLIANCE STATUS"
+msgstr "અનુપાલન સ્થિતિ"
+
+msgid "Safe"
+msgstr "સુરક્ષિત"
+
+msgid "Print Report"
+msgstr "રિપોર્ટ પ્રિન્ટ કરો"
+
+msgid "Approved Suppliers"
+msgstr "મંજૂર સપ્લાયર્સ"
+
+msgid "Maintain supplier contacts and procurement partners."
+msgstr "સપ્લાયર સંપર્ક અને ખરીદી પાર્ટનર્સ જાળવો."
+
+msgid "Export CSV"
+msgstr "CSV એક્સપોર્ટ કરો"
+
+msgid "Apply Filter"
+msgstr "ફિલ્ટર લાગુ કરો"
+
+msgid "VENDOR IDENTITY"
+msgstr "વેન્ડર ઓળખ"
+
+msgid "CONTACT DETAILS"
+msgstr "સંપર્ક વિગતો"
+
+msgid "Manage customer details, contacts & procurement partners."
+msgstr "ગ્રાહક વિગતો, સંપર્ક અને ખરીદી પાર્ટનર્સનું સંચાલન કરો."
+
+msgid "Download Excel"
+msgstr "Excel ડાઉનલોડ કરો"
+
+msgid "CUSTOMER NAME"
+msgstr "ગ્રાહક નામ"
+
+msgid "COMPANY"
+msgstr "કંપની"
+
+msgid "PAGE 1 OF 1"
+msgstr "પેજ 1 નું 1"
+
+msgid "Enterprise"
+msgstr "એન્ટરપ્રાઇઝ"
+
+msgid "Fast / Slow Moving Products"
+msgstr "ઝડપી / ધીમી ગતિના ઉત્પાદનો"
+
+msgid "Stock Aging Analysis"
+msgstr "સ્ટોક એજિંગ વિશ્લેષણ"
+
+msgid "BACK TO CUSTOMERS"
+msgstr "ગ્રાહકોમાં પાછા જાઓ"
+
+msgid "01. Basic Profile"
+msgstr "01. મૂળભૂત પ્રોફાઇલ"
+
+msgid "02. Business Locations"
+msgstr "02. બિઝનેસ સ્થળો"
+
+msgid "03. Contact Persons"
+msgstr "03. સંપર્ક વ્યક્તિઓ"
+
+msgid "Save Customer"
+msgstr "ગ્રાહક સેવ કરો"
+
+msgid "Staff Management"
+msgstr "સ્ટાફ સંચાલન"
+
+msgid "Add Staff"
+msgstr "સ્ટાફ ઉમેરો"
+
+msgid "Create Quote"
+msgstr "ક્વોટ બનાવો"
+
+msgid "Quote Date"
+msgstr "ક્વોટ તારીખ"
+
+msgid "Valid Until"
+msgstr "માન્ય સુધી"
+
+msgid "Generate Quote"
+msgstr "ક્વોટ જનરેટ કરો"
+
+msgid "Contact Name"
+msgstr "સંપર્ક નામ"
+
+msgid "Company Name"
+msgstr "કંપની નામ"
+
+msgid "ABC Inventory Classification"
+msgstr "ABC ઇન્વેન્ટરી વર્ગીકરણ"
+
+msgid "Strategic classification based on inventory value (Pareto Principle)."
+msgstr "ઇન્વેન્ટરી કિંમત પર આધારિત વ્યૂહાત્મક વર્ગીકરણ (પારેટો સિદ્ધાંત)."
+
+msgid "CLASS A - HIGH VALUE"
+msgstr "ક્લાસ A - ઉચ્ચ કિંમત"
+
+msgid "CLASS B - MEDIUM VALUE"
+msgstr "ક્લાસ B - મધ્યમ કિંમત"
+
+msgid "CLASS C - LOW VALUE"
+msgstr "ક્લાસ C - ઓછી કિંમત"
+
+msgid "Driving ~0.0% of total stock value"
+msgstr "કુલ સ્ટોક કિંમતના ~0.0% ચલાવે છે"
+
+msgid "Driving ~100.0% of total stock value"
+msgstr "કુલ સ્ટોક કિંમતના ~100.0% ચલાવે છે"
+
+msgid "INVENTORY VALUE BREAKDOWN"
+msgstr "ઇન્વેન્ટરી કિંમત વિભાજન"
+
+msgid "STOCK QTY"
+msgstr "સ્ટોક જથ્થો"
+
+msgid "INVENTORY VALUE"
+msgstr "ઇન્વેન્ટરી કિંમત"
+
+msgid "ABC CLASS"
+msgstr "ABC ક્લાસ"
+
+msgid "Page 1 of 1"
+msgstr "પેજ 1 નું 1"
+
+msgid "Stock Movement Report"
+msgstr "સ્ટોક મૂવમેન્ટ રિપોર્ટ"
+
+msgid "Historical ledger of all inventory inflows and outflows."
+msgstr "બધા ઇન્વેન્ટરી ઇનફ્લો અને આઉટફ્લોનો ઐતિહાસિક હિસાબ."
+
+msgid "Advanced Filter"
+msgstr "અદ્યતન ફિલ્ટર"
+
+msgid "STOCK IN (MONTHLY)"
+msgstr "સ્ટોક ઇન (માસિક)"
+
+msgid "STOCK OUT (MONTHLY)"
+msgstr "સ્ટોક આઉટ (માસિક)"
+
+msgid "NET VELOCITY"
+msgstr "નેટ વેગ"
+
+msgid "TRANSACTION DATE"
+msgstr "વ્યવહાર તારીખ"
+
+msgid "ITEM DETAILS"
+msgstr "આઇટમ વિગતો"
+
+msgid "FLOW TYPE"
+msgstr "પ્રવાહ પ્રકાર"
+
+msgid "SOURCE / REASON"
+msgstr "સ્રોત / કારણ"
+
+msgid "REFERENCE"
+msgstr "સંદર્ભ"
+
+msgid "HANDLED BY"
+msgstr "દ્વારા સંચાલિત"
+
+msgid "Back to list"
+msgstr "યાદીમાં પાછા જાઓ"
+
+msgid "Identifying product turnover rates to optimize purchasing and storage."
+msgstr "ખરીદી અને સંગ્રહને ઑપ્ટિમાઇઝ કરવા માટે ઉત્પાદ ટર્નઓવર દરોની ઓળખ."
+
+msgid "HIGH PERFORMERS"
+msgstr "ઉચ્ચ પ્રદર્શનકારો"
+
+msgid "STEADY ITEMS"
+msgstr "સ્થિર આઇટમ"
+
+msgid "SLOW/DEAD STOCK"
+msgstr "ધીમો/મૃત સ્ટોક"
+
+msgid "Consistent turnover rate"
+msgstr "સતત ટર્નઓવર દર"
+
+msgid "Requires liquidation or review"
+msgstr "લિક્વિડેશન અથવા સમીક્ષાની જરૂર"
+
+msgid "Sort By:"
+msgstr "ક્રમમાં:"
+
+msgid "Velocity (Highest)"
+msgstr "વેગ (સૌથી વધુ)"
+
+msgid "ITEM IDENTITY"
+msgstr "આઇટમ ઓળખ"
+
+msgid "AVG. SALE/WEEK"
+msgstr "સરેરાશ વેચાણ/અઠવાડિયા"
+
+msgid "TURNOVER DAYS"
+msgstr "ટર્નઓવર દિવસો"
+
+msgid "VELOCITY STATUS"
+msgstr "વેગ સ્થિતિ"
+
+msgid "Smart suggestions based on real-time sales velocity and current stock levels."
+msgstr "વાસ્તવિક સમયના વેચાણ વેગ અને વર્તમાન સ્ટોક સ્તરો પર આધારિત સ્માર્ટ સૂચનો."
+
+msgid "Create Bulk Purchase Orders"
+msgstr "બલ્ક ખરીદ ઓર્ડર બનાવો"
+
+msgid "URGENT ATTENTION"
+msgstr "તાત્કાલિક ધ્યાન"
+
+msgid "PREDICTED VOLUME"
+msgstr "અનુમાનિત જથ્થો"
+
+msgid "STOCK HEALTH"
+msgstr "સ્ટોક આરોગ્ય"
+
+msgid "Requiring immediate restocking"
+msgstr "તાત્કાલિક પુન:સ્ટોકિંગની જરૂર"
+
+msgid "Recommended total reorder quantity"
+msgstr "અનુશંસિત કુલ પુન:ઓર્ડર જથ્થો"
+
+msgid "Average inventory coverage"
+msgstr "સરેરાશ ઇન્વેન્ટરી કવરેજ"
+
+msgid "PRODUCT NAME"
+msgstr "ઉત્પાદ નામ"
+
+msgid "AVG DAILY SALES"
+msgstr "સરેરાશ દૈનિક વેચાણ"
+
+msgid "SUGGESTED REORDER"
+msgstr "અનુશંસિત પુન:ઓર્ડર"
+
+msgid "INVENTORY STATUS"
+msgstr "ઇન્વેન્ટરી સ્થિતિ"
+
+msgid "Categorized view of current inventory by time since arrival."
+msgstr "આગમન પછીના સમય મુજબ વર્તમાન ઇન્વેન્ટરીનો વર્ગીકૃત દૃશ્ય."
+
+msgid "Export Ledger"
+msgstr "હિસાબ એક્સપોર્ટ કરો"
+
+msgid "FRESH STOCK"
+msgstr "તાજો સ્ટોક"
+
+msgid "STABLE STOCK"
+msgstr "સ્થિર સ્ટોક"
+
+msgid "HIGH RISK / SLOW"
+msgstr "ઊચો જોખમ / ધીમો"
+
+msgid "Fast-Moving / Fresh (0-30 Days)"
+msgstr "ઝડપી ગતિશીલ / તાજો (0-30 દિવસ)"
+
+msgid "Mature Stock (31-60 Days)"
+msgstr "પરિપક્વ સ્ટોક (31-60 દિવસ)"
+
+msgid "RECENT RECEIPTS"
+msgstr "તાજેતરની પ્રાપ્તિઓ"
+
+msgid "STANDARD FLOW"
+msgstr "માનક પ્રવાહ"
+
+msgid "Company Dashboard"
+msgstr "કંપની ડેશબોર્ડ"
+
+msgid "BUSINESS PLAN"
+msgstr "બિઝનેસ પ્લાન"
+
+msgid "Extend Plan"
+msgstr "પ્લાન વિસ્તૃત કરો"
+
+msgid "Welcome back,"
+msgstr "પાછા આવવા બદલ સ્વાગત છે,"
+
+msgid "Everything looks good today."
+msgstr "આજે બધું સારું દેખાય છે."
+
+msgid "EFFICIENCY"
+msgstr "કાર્યક્ષમતા"
+
+msgid "Live Flow"
+msgstr "લાઈવ ફ્લો"
+
+msgid "INVENTORY"
+msgstr "ઇન્વેન્ટરી"
+
+msgid "MY PRODUCTS"
+msgstr "મારા ઉત્પાદનો"
+
+msgid "PENDING SHIPMENTS"
+msgstr "બાકી શિપમેન્ટ"
+
+msgid "LOW STOCK ITEMS"
+msgstr "ઓછા સ્ટોકના આઇટમ"
+
+msgid "Sales Trend (Last 7 Days)"
+msgstr "વેચાણ ટ્રેન્ડ (છેલ્લા 7 દિવસ)"
+
+msgid "Stock Overview"
+msgstr "સ્ટોક ઓવરવ્યૂ"
+
+msgid "View All"
+msgstr "બધું જુઓ"
+
+msgid "Add New Vendor"
+msgstr "નવો વેન્ડર ઉમેરો"
+
+msgid "Register a new supplier to manage procurement and stock sourcing."
+msgstr "ખરીદી અને સ્ટોક સોર્સિંગનું સંચાલન કરવા માટે નવો સપ્લાયર નોંધો."
+
+msgid "Primary Contact"
+msgstr "પ્રાથમિક સંપર્ક"
+
+msgid "Main point of contact for this vendor."
+msgstr "આ વેન્ડર માટે મુખ્ય સંપર્ક બિંદુ."
+
+msgid "Salutation"
+msgstr "અભિવાદન"
+
+msgid "First Name"
+msgstr "પ્રથમ નામ"
+
+msgid "Last Name"
+msgstr "અંતિમ નામ"
+
+msgid "Supplier Identity"
+msgstr "સપ્લાયર ઓળખ"
+
+msgid "Company or business information."
+msgstr "કંપની અથવા વ્યાવસાયિક માહિતી."
+
+msgid "Vendor Name"
+msgstr "વેન્ડર નામ"
+
+msgid "GST Number"
+msgstr "GST નંબર"
+
+msgid "Display Name"
+msgstr "પ્રદર્શન નામ"
+
+msgid "Contact Details"
+msgstr "સંપર્ક વિગતો"
+
+msgid "Communication information."
+msgstr "સંચાર માહિતી."
+
+msgid "Email Address"
+msgstr "ઇમેઇલ સરનામું"
+
+msgid "Mobile Number"
+msgstr "મોબાઇલ નંબર"
+
+msgid "Billing & shipping address."
+msgstr "બિલિંગ અને શિપિંગ સરનામું."
+
+msgid "Save Vendor"
+msgstr "વેન્ડર સેવ કરો"
+
+msgid "Adjust Batch Stock"
+msgstr "બેચ સ્ટોક સમાયોજિત કરો"
+
+msgid "Update quantities and track reasons for inventory adjustments."
+msgstr "જથ્થા અપડેટ કરો અને ઇન્વેન્ટરી સમાયોજન માટેના કારણો ટ્રેક કરો."
+
+msgid "Select a product"
+msgstr "એક ઉત્પાદ પસંદ કરો"
+
+msgid "Select Batch"
+msgstr "બેચ પસંદ કરો"
+
+msgid "Select a batch"
+msgstr "એક બેચ પસંદ કરો"
+
+msgid "Adjustment Type"
+msgstr "સમાયોજન પ્રકાર"
+
+msgid "Reason for Adjustment"
+msgstr "સમાયોજન માટે કારણ"
+
+msgid "Provide details for this stock adjustment"
+msgstr "આ સ્ટોક સમાયોજન માટે વિગતો પ્રદાન કરો"
+
+msgid "Confirm Adjustment"
+msgstr "સમાયોજનની પુષ્ટિ કરો"
+
+msgid "Create a new purchase order for your vendors."
+msgstr "તમારા વેન્ડર્સ માટે નવો ખરીદ ઓર્ડર બનાવો."
+
+msgid "Select Vendor"
+msgstr "વેન્ડર પસંદ કરો"
+
+msgid "Order Date"
+msgstr "ઓર્ડર તારીખ"
+
+msgid "Expected Delivery"
+msgstr "અપેક્ષિત ડિલિવરી"
+
+msgid "Search Products..."
+msgstr "ઉત્પાદનો શોધો..."
+
+msgid "Order Summary"
+msgstr "ઓર્ડર સારાંશ"
+
+msgid "Subtotal"
+msgstr "ઉપ-કુલ"
+
+msgid "Tax Amount"
+msgstr "કર રકમ"
+
+msgid "Notes / Terms"
+msgstr "નોંધો / શરતો"
+
+msgid "Save as Draft"
+msgstr "ડ્રાફ્ટ તરીકે સેવ કરો"
+
+msgid "Confirm Order"
+msgstr "ઓર્ડરની પુષ્ટિ કરો"
+
+msgid "Comprehensive view of all your inventory analytics and metrics."
+msgstr "તમારી બધી ઇન્વેન્ટરી એનાલિટિક્સ અને મેટ્રિક્સનો વ્યાપક દૃશ્ય."
+
+msgid "Overview Reports"
+msgstr "ઓવરવ્યૂ રિપોર્ટ"
+
+msgid "Financial Reports"
+msgstr "નાણાકીય રિપોર્ટ"
+
+msgid "Alert Reports"
+msgstr "અલર્ટ રિપોર્ટ"
+
+msgid "Track daily inventory inflows and outflows."
+msgstr "દૈનિક ઇન્વેન્ટરી ઇનફ્લો અને આઉટફ્લો ટ્રેક કરો."
+
+msgid "Identify high and low performing products."
+msgstr "ઉચ્ચ અને નિમ્ન પ્રદર્શન ધરાવતા ઉત્પાદનોની ઓળખ કરો."
+
+msgid "Monitor inventory age and turnover rates."
+msgstr "ઇન્વેન્ટરી ઉંમર અને ટર્નઓવર દરોનું નિરીક્ષણ કરો."
+
+msgid "Analyze profitability across your product lines."
+msgstr "તમારી ઉત્પાદ લાઇનોમાં નફાકારકતાનું વિશ્લેષણ કરો."
+
+msgid "Value-based inventory categorization."
+msgstr "મૂલ્ય-આધારિત ઇન્વેન્ટરી વર્ગીકરણ."
+
+msgid "Track purchase costs and stock valuations."
+msgstr "ખરીદ લાગત અને સ્ટોક મૂલ્યાંકન ટ્રેક કરો."
+
+msgid "Monitor products approaching expiration."
+msgstr "સમાપ્તિ નજીક આવતા ઉત્પાદનોનું નિરીક્ષણ કરો."
+
+msgid "View and manage expired inventory items."
+msgstr "સમાપ્ત થયેલા ઇન્વેન્ટરી આઇટમ જુઓ અને સંચાલન કરો."
+
+msgid "Evaluate vendor reliability and performance."
+msgstr "વેન્ડર વિશ્વસનીયતા અને પ્રદર્શનનું મૂલ્યાંકન કરો."
+
+msgid "Expired Stock Report"
+msgstr "સમાપ્ત સ્ટોક રિપોર્ટ"
+
+msgid "Track and manage expired inventory."
+msgstr "સમાપ્ત ઇન્વેન્ટરી ટ્રેક અને સંચાલન કરો."
+
+msgid "Profit Margin Report"
+msgstr "નફો માર્જિન રિપોર્ટ"
+
+msgid "Analyze profitability across products."
+msgstr "ઉત્પાદનોમાં નફાકારકતાનું વિશ્લેષણ કરો."
+
+msgid "Purchase Stock Report"
+msgstr "ખરીદ સ્ટોક રિપોર્ટ"
+
+msgid "Detailed view of purchase history."
+msgstr "ખરીદ ઇતિહાસનો વિગતવાર દૃશ્ય."
+
+msgid "-- Assign Later --"
+msgstr "-- Assign Later --"
+
+msgid "-- None --"
+msgstr "-- None --"
+
+msgid "-- Select --"
+msgstr "-- Select --"
+
+msgid "-- Select Status --"
+msgstr "-- Select સ્થિતિ --"
+
+msgid "-- Select Type --"
+msgstr "-- Select Type --"
+
+msgid "-- Select Vehicle --"
+msgstr "-- Select વાહન --"
+
+msgid "1-on-1 Guided Tour"
+msgstr "1-on-1 Guided Tour"
+
+msgid "10-digit Indian mobile number starting with 6, 7, 8 or 9"
+msgstr "10-digit Indian mobile number starting with 6, 7, 8 or 9"
+
+msgid "10-digit mobile"
+msgstr "10-digit mobile"
+
+msgid "10-digit mobile number"
+msgstr "10-digit mobile number"
+
+msgid "20 User Accounts"
+msgstr "20 User Accounts"
+
+msgid "24 hours"
+msgstr "24 hours"
+
+msgid "3 User Accounts"
+msgstr "3 User Accounts"
+
+msgid "3 days"
+msgstr "3 days"
+
+msgid "6-digit pincode"
+msgstr "6-digit pincode"
+
+msgid "7 Days Free"
+msgstr "7 Days Free"
+
+msgid "7-Day Free Trial"
+msgstr "7-Day Free Trial"
+
+msgid "8 standard onboarding tasks will be created. You can add or customise them after creation."
+msgstr "8 standard onboarding tasks will be created. You can add or customise them after creation."
+
+msgid "A default checklist will be created automatically"
+msgstr "A default checklist will be created automatically"
+
+msgid "A flexible system that fits your business — not the other way around."
+msgstr "A flexible system that fits your business — not the other way around."
+
+msgid "A powerful, fully customizable Inventory Management System that gives you real-time visibility, reduces losses, and streamlines operations across your entire business."
+msgstr "A powerful, fully customizable Inventory વ્યવસ્થાપન System that gives you real-time visibility, reduces losses, and streamlines operations across your entire business."
+
+msgid "A secure password will be <strong>auto-generated</strong> and sent to the staff member's email along with their username."
+msgstr "A secure password will be <strong>auto-generated</strong> and sent to the staff member's email along with their username."
+
+msgid "A senior enterprise sales representative has been assigned to your request. They will be in touch with you within the next 24 hours to discuss a customized solution and provide you with a tailored proposal."
+msgstr "A senior enterprise sales representative has been assigned to your request. They will be in touch with you within the next 24 hours to discuss a customized solution and provide you with a tailored proposal."
+
+msgid "ABC Class"
+msgstr "ABC Class"
+
+msgid "ALL RIGHTS RESERVED"
+msgstr "ALL RIGHTS RESERVED"
+
+msgid "AMOUNT"
+msgstr "AMOUNT"
+
+msgid "Account Now"
+msgstr "Account Now"
+
+msgid "Account Owner"
+msgstr "Account Owner"
+
+msgid "Account in less than 2 minutes."
+msgstr "Account in less than 2 minutes."
+
+msgid "Account | CWS Inventory"
+msgstr "Account | CWS Inventory"
+
+msgid "Action"
+msgstr "ક્રિયા"
+
+msgid "Action Required"
+msgstr "ક્રિયા Required"
+
+msgid "Action needed"
+msgstr "ક્રિયા needed"
+
+msgid "Actionable insights with advanced reporting"
+msgstr "Actionable insights with advanced reporting"
+
+msgid "Activate Account"
+msgstr "Activate Account"
+
+msgid "Active"
+msgstr "સક્રિય"
+
+msgid "Active Filter:"
+msgstr "સક્રિય ફિલ્ટર"
+
+msgid "Active Status"
+msgstr "સક્રિય સ્થિતિ"
+
+msgid "Add"
+msgstr "ઉમેરો"
+
+msgid "Add Address"
+msgstr "ઉમેરો સરનામું"
+
+msgid "Add Contact"
+msgstr "ઉમેરો Contact"
+
+msgid "Add Driver"
+msgstr "ઉમેરો ચાલક"
+
+msgid "Add First Material"
+msgstr "ઉમેરો First Material"
+
+msgid "Add First Product"
+msgstr "ઉમેરો First ઉત્પાદન"
+
+msgid "Add Items in Bulk"
+msgstr "ઉમેરો Items in Bulk"
+
+msgid "Add Material"
+msgstr "ઉમેરો Material"
+
+msgid "Add New"
+msgstr "ઉમેરો New"
+
+msgid "Add New Entry"
+msgstr "ઉમેરો New Entry"
+
+msgid "Add New Row"
+msgstr "ઉમેરો New Row"
+
+msgid "Add New Staff"
+msgstr "ઉમેરો New Staff"
+
+msgid "Add New Staff Member"
+msgstr "ઉમેરો New Staff Member"
+
+msgid "Add Product Stock"
+msgstr "ઉમેરો ઉત્પાદન સ્ટોક"
+
+msgid "Add Stock"
+msgstr "ઉમેરો સ્ટોક"
+
+msgid "Add Supplier"
+msgstr "ઉમેરો Supplier"
+
+msgid "Add Training"
+msgstr "ઉમેરો તાલીમ"
+
+msgid "Add Training Material"
+msgstr "ઉમેરો તાલીમ Material"
+
+msgid "Add Vehicle"
+msgstr "ઉમેરો વાહન"
+
+msgid "Add a Comment"
+msgstr "ઉમેરો a Comment"
+
+msgid "Add a comment or provide more details..."
+msgstr "ઉમેરો a comment or provide more details..."
+
+msgid "Add a new task..."
+msgstr "ઉમેરો a new task..."
+
+msgid "Add first vehicle →"
+msgstr "ઉમેરો first vehicle →"
+
+msgid "Add product"
+msgstr "ઉમેરો product"
+
+msgid "Add products with stock and purchase prices to view the ABC classification ledger."
+msgstr "ઉમેરો products with stock and purchase prices to view the ABC classification ledger."
+
+msgid "Add products, categories, and suppliers into the system."
+msgstr "ઉમેરો products, categories, and suppliers into the system."
+
+msgid "Add to Google Calendar"
+msgstr "ઉમેરો to Google Calendar"
+
+msgid "Add vendor now"
+msgstr "ઉમેરો vendor now"
+
+msgid "Add your first driver →"
+msgstr "ઉમેરો your first driver →"
+
+msgid "Add your first vehicle →"
+msgstr "ઉમેરો your first vehicle →"
+
+msgid "Additional notes..."
+msgstr "Additional notes..."
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Admin Control"
+msgstr "Admin Control"
+
+msgid "Admin Dashboard"
+msgstr "Admin ડેશબોર્ડ"
+
+msgid "Admin Dashboard | Management"
+msgstr "Admin ડેશબોર્ડ | વ્યવસ્થાપન"
+
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+msgid "Admin Portal | Secure Login"
+msgstr "Admin Portal | Secure Login"
+
+msgid "Admin — Issue Resolved"
+msgstr "Admin — Issue Resolved"
+
+msgid "Admin — Under Review"
+msgstr "Admin — Under Review"
+
+msgid "Administrative Actions"
+msgstr "Administrative Actions"
+
+msgid "Advanced API Access"
+msgstr "Advanced API Access"
+
+msgid "After submitting, our admin team will review and respond. You can add comments at any time. Once resolved,"
+msgstr "After submitting, our admin team will review and respond. You can add comments at any time. Once resolved,"
+
+msgid "Aging Days"
+msgstr "Aging Days"
+
+msgid "Alert Identity"
+msgstr "Alert Identity"
+
+msgid "Alerts & Notifications"
+msgstr "Alerts & Notifications"
+
+msgid "All Notifications"
+msgstr "All Notifications"
+
+msgid "All Priorities"
+msgstr "All Priorities"
+
+msgid "All Staff"
+msgstr "All Staff"
+
+msgid "All Statuses"
+msgstr "All Statuses"
+
+msgid "All Transactions"
+msgstr "All Transactions"
+
+msgid "All Types"
+msgstr "All Types"
+
+msgid "All inventory items are active."
+msgstr "All inventory items are active."
+
+msgid "All rights reserved."
+msgstr "All rights reserved."
+
+msgid "All tickets across all companies."
+msgstr "All tickets across all companies."
+
+msgid "All training assigned to you."
+msgstr "All training assigned to you."
+
+msgid "Allocated"
+msgstr "Allocated"
+
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+msgid "Amount Paid"
+msgstr "Amount Paid"
+
+msgid "Analyze &"
+msgstr "Analyze &"
+
+msgid "Any additional notes about this driver…"
+msgstr "Any additional notes about this driver…"
+
+msgid "Any additional notes about this vehicle…"
+msgstr "Any additional notes about this vehicle…"
+
+msgid "Any special notes for this onboarding..."
+msgstr "Any special notes for this onboarding..."
+
+msgid "Archived"
+msgstr "Archived"
+
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+msgid "Assign Driver"
+msgstr "Assign ચાલક"
+
+msgid "Assign Training"
+msgstr "Assign તાલીમ"
+
+msgid "Assign Vehicle"
+msgstr "Assign વાહન"
+
+msgid "Assigned Driver"
+msgstr "Assigned ચાલક"
+
+msgid "Assigned Mentor"
+msgstr "Assigned Mentor"
+
+msgid "Assigned Vehicles"
+msgstr "Assigned Vehicles"
+
+msgid "Assignment & Dates"
+msgstr "Assignment & Dates"
+
+msgid "Attach File(s) to Quote"
+msgstr "Attach File(s) to Quote"
+
+msgid "Attention"
+msgstr "Attention"
+
+msgid "Authorized Sign In"
+msgstr "Authorized Sign In"
+
+msgid "Authorized Signature"
+msgstr "Authorized Signature"
+
+msgid "Available"
+msgstr "Available"
+
+msgid "Avg Daily Sales"
+msgstr "Avg Daily Sales"
+
+msgid "Avg. Sale/Week"
+msgstr "Avg. Sale/Week"
+
+msgid "Back"
+msgstr "પાછળ"
+
+msgid "Back to All Tickets"
+msgstr "પાછળ to All Tickets"
+
+msgid "Back to Dashboard"
+msgstr "પાછળ to ડેશબોર્ડ"
+
+msgid "Back to Home"
+msgstr "પાછળ to Home"
+
+msgid "Back to Materials"
+msgstr "પાછળ to Materials"
+
+msgid "Back to My Training"
+msgstr "પાછળ to My તાલીમ"
+
+msgid "Back to Onboarding"
+msgstr "પાછળ to Onboarding"
+
+msgid "Back to Records"
+msgstr "પાછળ to Records"
+
+msgid "Back to Tickets"
+msgstr "પાછળ to Tickets"
+
+msgid "Basic Expiry Alerts"
+msgstr "Basic Expiry Alerts"
+
+msgid "Batch"
+msgstr "Batch"
+
+msgid "Batch Allocation Mode"
+msgstr "Batch Allocation Mode"
+
+msgid "Batch-wise and expiry tracking with automated alerts"
+msgstr "Batch-wise and expiry tracking with automated alerts"
+
+msgid "Battery"
+msgstr "Battery"
+
+msgid "Battery & Range"
+msgstr "Battery & Range"
+
+msgid "Battery After (%)"
+msgstr "Battery After (%)"
+
+msgid "Battery After must be greater than Battery Before."
+msgstr "Battery After must be greater than Battery Before."
+
+msgid "Battery Before (%)"
+msgstr "Battery Before (%)"
+
+msgid "Battery Level Preview"
+msgstr "Battery Level Preview"
+
+msgid "Before → After"
+msgstr "Before → After"
+
+msgid "Benefits"
+msgstr "Benefits"
+
+msgid "Best"
+msgstr "Best"
+
+msgid "Best regards"
+msgstr "Best regards"
+
+msgid "Book a Demo"
+msgstr "Book a Demo"
+
+msgid "Book a Demo | CWS Inventory"
+msgstr "Book a Demo | CWS Inventory"
+
+msgid "Book a Personalized Demo"
+msgstr "Book a Personalized Demo"
+
+msgid "Brief description of the material..."
+msgstr "Brief description of the material..."
+
+msgid "Brief summary of the issue"
+msgstr "Brief summary of the issue"
+
+msgid "Built Around Your Business — Fully Customizable"
+msgstr "Built Around Your Business — Fully Customizable"
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Business Details"
+msgstr "Business વિગતો"
+
+msgid "Business Identity"
+msgstr "Business Identity"
+
+msgid "Business Info"
+msgstr "Business Info"
+
+msgid "Business Locations"
+msgstr "Business Locations"
+
+msgid "Business Login"
+msgstr "Business Login"
+
+msgid "Business Name"
+msgstr "Business નામ"
+
+msgid "Business Plan"
+msgstr "Business Plan"
+
+msgid "Business Type"
+msgstr "Business Type"
+
+msgid "Business Type:"
+msgstr "Business Type:"
+
+msgid "By"
+msgstr "By"
+
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+msgid "CWS Enterprise Solutions. All rights reserved."
+msgstr "CWS Enterprise Solutions. All rights reserved."
+
+msgid "CWS Inventory | Modern Inventory Management"
+msgstr "CWS Inventory | Modern Inventory વ્યવસ્થાપન"
+
+msgid "Call Us"
+msgstr "Call Us"
+
+msgid "Cancel anytime"
+msgstr "રદ કરો anytime"
+
+msgid "Capacity (kWh)"
+msgstr "Capacity (kWh)"
+
+msgid "Category Details"
+msgstr "કેટેગરી વિગતો"
+
+msgid "Category Name"
+msgstr "કેટેગરી નામ"
+
+msgid "Change Status To"
+msgstr "Change સ્થિતિ To"
+
+msgid "Charged At"
+msgstr "Charged At"
+
+msgid "Charging Logs"
+msgstr "Charging Logs"
+
+msgid "Charging date and time is required."
+msgstr "Charging date and time is required."
+
+msgid "Check Your Email"
+msgstr "Check Your ઇમેઇલ"
+
+msgid "Checklist Items"
+msgstr "Checklist Items"
+
+msgid "City"
+msgstr "City"
+
+msgid "Class A"
+msgstr "Class A"
+
+msgid "Class C"
+msgstr "Class C"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Clear Filter"
+msgstr "Clear ફિલ્ટર"
+
+msgid "Clear Filters"
+msgstr "Clear Filters"
+
+msgid "Clear all filters"
+msgstr "Clear all filters"
+
+msgid "Click below to open or download"
+msgstr "Click below to open or download"
+
+msgid "Close Ticket"
+msgstr "Close Ticket"
+
+msgid "Closed"
+msgstr "Closed"
+
+msgid "Closed At"
+msgstr "Closed At"
+
+msgid "Closed By Company"
+msgstr "Closed By કંપની"
+
+msgid "Comments"
+msgstr "Comments"
+
+msgid "Companies"
+msgstr "Companies"
+
+msgid "Companies Registry"
+msgstr "Companies Registry"
+
+msgid "Company"
+msgstr "કંપની"
+
+msgid "Company Logo"
+msgstr "કંપની Logo"
+
+msgid "Company Owner"
+msgstr "કંપની Owner"
+
+msgid "Company Owner Login"
+msgstr "કંપની Owner Login"
+
+msgid "Company Plans"
+msgstr "કંપની Plans"
+
+msgid "Company Profile"
+msgstr "કંપની Profile"
+
+msgid "Company Size"
+msgstr "કંપની Size"
+
+msgid "Company — Closes ticket"
+msgstr "કંપની — Closes ticket"
+
+msgid "Company — Submits ticket"
+msgstr "કંપની — Submits ticket"
+
+msgid "Company:"
+msgstr "કંપની"
+
+msgid "Complete"
+msgstr "Complete"
+
+msgid "Complete Setup & Go to Dashboard"
+msgstr "Complete Setup & Go to ડેશબોર્ડ"
+
+msgid "Completed"
+msgstr "પૂર્ણ"
+
+msgid "Completed On"
+msgstr "પૂર્ણ On"
+
+msgid "Completion Date"
+msgstr "Completion તારીખ"
+
+msgid "Compliance Status"
+msgstr "Compliance સ્થિતિ"
+
+msgid "Comprehensive solution for growing distributors."
+msgstr "Comprehensive solution for growing distributors."
+
+msgid "Confidence"
+msgstr "Confidence"
+
+msgid "Configure approvals, stock movement, returns, and FEFO rules"
+msgstr "Configure approvals, stock movement, returns, and FEFO rules"
+
+msgid "Configure rules and alerts later."
+msgstr "Configure rules and alerts later."
+
+msgid "Confirm Password"
+msgstr "પુષ્ટિ કરો Password"
+
+msgid "Confirm to sign out of your admin portal"
+msgstr "પુષ્ટિ કરો to sign out of your admin portal"
+
+msgid "Confirm to sign out of your admin portal."
+msgstr "પુષ્ટિ કરો to sign out of your admin portal."
+
+msgid "Confirm to sign out of your portal."
+msgstr "પુષ્ટિ કરો to sign out of your portal."
+
+msgid "Confirm to sign out of your portal. We'll make sure your session is closed securely."
+msgstr "પુષ્ટિ કરો to sign out of your portal. We'll make sure your session is closed securely."
+
+msgid "Contact & Owner"
+msgstr "Contact & Owner"
+
+msgid "Contact Info"
+msgstr "Contact Info"
+
+msgid "Contact Inquiries"
+msgstr "Contact Inquiries"
+
+msgid "Contact Inquiries Registry"
+msgstr "Contact Inquiries Registry"
+
+msgid "Contact Inquiries | Admin"
+msgstr "Contact Inquiries | Admin"
+
+msgid "Contact Sales"
+msgstr "Contact Sales"
+
+msgid "Contact Sales | CWS Inventory Enterprise"
+msgstr "Contact Sales | CWS Inventory Enterprise"
+
+msgid "Contact Support"
+msgstr "Contact સપોર્ટ"
+
+msgid "Contact Us"
+msgstr "Contact Us"
+
+msgid "Contact your company admin for more information."
+msgstr "Contact your company admin for more information."
+
+msgid "Control stock limits, expiry settings, and restrictions"
+msgstr "Control stock limits, expiry settings, and restrictions"
+
+msgid "Cost/Unit"
+msgstr "Cost/Unit"
+
+msgid "Create PO"
+msgstr "Create PO"
+
+msgid "Create Password"
+msgstr "Create Password"
+
+msgid "Create Your Account"
+msgstr "Create Your Account"
+
+msgid "Create a ticket to get help from our team."
+msgstr "Create a ticket to get help from our team."
+
+msgid "Create first delivery →"
+msgstr "Create first delivery →"
+
+msgid "Create purchase orders and receive stock with GRN."
+msgstr "Create purchase orders and receive stock with GRN."
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Critical"
+msgstr "Critical"
+
+msgid "Critical Errors"
+msgstr "Critical Errors"
+
+msgid "Current Battery (%)"
+msgstr "Current Battery (%)"
+
+msgid "Current Location"
+msgstr "Current Location"
+
+msgid "Current Plan"
+msgstr "Current Plan"
+
+msgid "Current Stock"
+msgstr "Current સ્ટોક"
+
+msgid "Current:"
+msgstr "Current:"
+
+msgid "Customer Insight"
+msgstr "ગ્રાહક Insight"
+
+msgid "Customer Name*"
+msgstr "ગ્રાહક નામ"
+
+msgid "Customer Notes"
+msgstr "ગ્રાહક Notes"
+
+msgid "Customize KPIs, reports, and views"
+msgstr "Customize KPIs, reports, and views"
+
+msgid "Daily and monthly stock purchase analysis"
+msgstr "Daily and monthly stock purchase analysis"
+
+msgid "Date & Time"
+msgstr "તારીખ & Time"
+
+msgid "Date:"
+msgstr "તારીખ"
+
+msgid "Days Left"
+msgstr "Days Left"
+
+msgid "Days to Expiry"
+msgstr "Days to Expiry"
+
+msgid "Dead Stock"
+msgstr "Dead સ્ટોક"
+
+msgid "Dead Stock Items"
+msgstr "Dead સ્ટોક Items"
+
+msgid "Dead Stock Management"
+msgstr "Dead સ્ટોક વ્યવસ્થાપન"
+
+msgid "Default checklist included"
+msgstr "Default checklist included"
+
+msgid "Defects %"
+msgstr "Defects %"
+
+msgid "Define roles, permissions, and access levels"
+msgstr "Define roles, permissions, and access levels"
+
+msgid "Delayed reporting and lack of insights"
+msgstr "Delayed reporting and lack of insights"
+
+msgid "Delivered"
+msgstr "Delivered"
+
+msgid "Delivered At"
+msgstr "Delivered At"
+
+msgid "Delivered Today"
+msgstr "Delivered Today"
+
+msgid "Deliveries"
+msgstr "Deliveries"
+
+msgid "Delivery"
+msgstr "ડિલિવરી"
+
+msgid "Delivery Address"
+msgstr "ડિલિવરી સરનામું"
+
+msgid "Delivery Notes"
+msgstr "ડિલિવરી Notes"
+
+msgid "Delivery Order"
+msgstr "ડિલિવરી ઓર્ડર"
+
+msgid "Delivery Orders"
+msgstr "ડિલિવરી Orders"
+
+msgid "Demo Booked!"
+msgstr "Demo Booked!"
+
+msgid "Demo Confirmed | CWS Inventory"
+msgstr "Demo Confirmed | CWS Inventory"
+
+msgid "Demo Request Confirmed"
+msgstr "Demo Request Confirmed"
+
+msgid "Demo Request Received"
+msgstr "Demo Request Received"
+
+msgid "Demo Requests"
+msgstr "Demo Requests"
+
+msgid "Demo Requests Registry"
+msgstr "Demo Requests Registry"
+
+msgid "Demo Requests | Admin"
+msgstr "Demo Requests | Admin"
+
+msgid "Describe the issue in detail — what happened, steps to reproduce, any error messages..."
+msgstr "Describe the issue in detail — what happened, steps to reproduce, any error messages..."
+
+msgid "Describe your issue and our team will get back to you."
+msgstr "Describe your issue and our team will get back to you."
+
+msgid "Describe your issue in detail — steps to reproduce, error messages, etc."
+msgstr "Describe your issue in detail — steps to reproduce, error messages, etc."
+
+msgid "Detailed batch-level inventory analysis."
+msgstr "Detailed batch-level inventory analysis."
+
+msgid "Details of the maintenance work to be done…"
+msgstr "વિગતો of the maintenance work to be done…"
+
+msgid "Discount"
+msgstr "Discount"
+
+msgid "Discount Suggested"
+msgstr "Discount Suggested"
+
+msgid "Dispatch"
+msgstr "Dispatch"
+
+msgid "Distance"
+msgstr "Distance"
+
+msgid "Distributors"
+msgstr "Distributors"
+
+msgid "Download the full CSV for procurement planning."
+msgstr "ડાઉનલોડ કરો the full CSV for procurement planning."
+
+msgid "Drag & drop a file here, or"
+msgstr "Drag & drop a file here, or"
+
+msgid "Driver"
+msgstr "ચાલક"
+
+msgid "Driver Details"
+msgstr "ચાલક વિગતો"
+
+msgid "Driver's address…"
+msgstr "Driver's address…"
+
+msgid "Drivers"
+msgstr "Drivers"
+
+msgid "Due Date"
+msgstr "Due તારીખ"
+
+msgid "E-Vehicle"
+msgstr "E-Vehicle"
+
+msgid "E-Vehicle Fleet"
+msgstr "E-Vehicle Fleet"
+
+msgid "E-Vehicles"
+msgstr "E-Vehicles"
+
+msgid "EV Charging Logs"
+msgstr "EV Charging Logs"
+
+msgid "Edit Company"
+msgstr "એડિટ કરો કંપની"
+
+msgid "Edit Material"
+msgstr "એડિટ કરો Material"
+
+msgid "Edit Record"
+msgstr "એડિટ કરો Record"
+
+msgid "Edit Training Record"
+msgstr "એડિટ કરો તાલીમ Record"
+
+msgid "Effective Date: May 2026"
+msgstr "Effective તારીખ May 2026"
+
+msgid "Efficiently manage fast-moving inventory with real-time stock updates, automatic low-stock alerts, and seamless billing integration."
+msgstr "Efficiently manage fast-moving inventory with real-time stock updates, automatic low-stock alerts, and seamless billing integration."
+
+msgid "Eliminate manual errors and inefficiencies"
+msgstr "Eliminate manual errors and inefficiencies"
+
+msgid "Email Us"
+msgstr "ઇમેઇલ Us"
+
+msgid "Email, phone, and physical address for fulfillment."
+msgstr "ઇમેઇલ phone, and physical address for fulfillment."
+
+msgid "Enable only what you need, add custom fields"
+msgstr "Enable only what you need, add custom fields"
+
+msgid "Enhance decision-making with real-time insights"
+msgstr "Enhance decision-making with real-time insights"
+
+msgid "Ensure compliance and safety with strict expiry tracking, batch-level visibility, and automatic near-expiry alerts. Prevent the sale of expired products."
+msgstr "Ensure compliance and safety with strict expiry tracking, batch-level visibility, and automatic near-expiry alerts. Prevent the sale of expired products."
+
+msgid "Ensure optimal stock utilization by prioritizing items nearing expiry."
+msgstr "Ensure optimal stock utilization by prioritizing items nearing expiry."
+
+msgid "Ensure security and accountability with custom permissions."
+msgstr "Ensure security and accountability with custom permissions."
+
+msgid "Enter a valid purchase price."
+msgstr "Enter a valid purchase price."
+
+msgid "Enter a value between 0-100."
+msgstr "Enter a value between 0-100."
+
+msgid "Enter admin username"
+msgstr "Enter admin username"
+
+msgid "Enter your username"
+msgstr "Enter your username"
+
+msgid "Enterprise Info"
+msgstr "Enterprise Info"
+
+msgid "Enterprise Portal"
+msgstr "Enterprise Portal"
+
+msgid "Enterprise Solution"
+msgstr "Enterprise Solution"
+
+msgid "Enterprise Solutions. All rights reserved."
+msgstr "Enterprise Solutions. All rights reserved."
+
+msgid "Enterprise Transport Management Module"
+msgstr "Enterprise Transport વ્યવસ્થાપન Module"
+
+msgid "Enterprise Vendor Management Module"
+msgstr "Enterprise વેન્ડર વ્યવસ્થાપન Module"
+
+msgid "Error Loading Data"
+msgstr "Error Loading Data"
+
+msgid "Est. Distance"
+msgstr "Est. Distance"
+
+msgid "Est. Distance (km)"
+msgstr "Est. Distance (km)"
+
+msgid "Every business works differently. Our system adapts to your processes, giving you full flexibility without forcing changes to your workflow."
+msgstr "Every business works differently. Our system adapts to your processes, giving you full flexibility without forcing changes to your workflow."
+
+msgid "Expected Date:"
+msgstr "Expected તારીખ"
+
+msgid "Experience the full power of CWS Inventory. Automate your workflows, eliminate stockouts, and grow your business with zero risk."
+msgstr "Experience the full power of CWS Inventory. Automate your workflows, eliminate stockouts, and grow your business with zero risk."
+
+msgid "Expiration Date"
+msgstr "Expiration તારીખ"
+
+msgid "Expired"
+msgstr "Expired"
+
+msgid "Expired products causing financial loss"
+msgstr "Expired products causing financial loss"
+
+msgid "Expiring Soon"
+msgstr "Expiring Soon"
+
+msgid "Expiry & Batch Tracking"
+msgstr "Expiry & Batch Tracking"
+
+msgid "Expiry date must be today or a future date"
+msgstr "Expiry date must be today or a future date"
+
+msgid "Expiry date required when tracking enabled"
+msgstr "Expiry date required when tracking enabled"
+
+msgid "Export Analysis"
+msgstr "એક્સપોર્ટ Analysis"
+
+msgid "Export Data"
+msgstr "એક્સપોર્ટ Data"
+
+msgid "Export Excel"
+msgstr "એક્સપોર્ટ Excel"
+
+msgid "External Resource"
+msgstr "External Resource"
+
+msgid "FEFO Auto-Selection"
+msgstr "FEFO Auto-Selection"
+
+msgid "FEFO Automation"
+msgstr "FEFO Automation"
+
+msgid "FIFO Selection"
+msgstr "FIFO Selection"
+
+msgid "Failed"
+msgstr "Failed"
+
+msgid "Failure / Cancel Reason"
+msgstr "Failure / રદ કરો Reason"
+
+msgid "Fast &amp; Slow-Moving Products"
+msgstr "Fast &amp; Slow-Moving Products"
+
+msgid "Fill in recipient and delivery details below."
+msgstr "Fill in recipient and delivery details below."
+
+msgid "Fill in the driver details below."
+msgstr "Fill in the driver details below."
+
+msgid "Fill in the electric vehicle details below."
+msgstr "Fill in the electric vehicle details below."
+
+msgid "Fill out the details below and we'll connect you with the right team."
+msgstr "Fill out the details below and we'll connect you with the right team."
+
+msgid "Filter Product"
+msgstr "ફિલ્ટર ઉત્પાદન"
+
+msgid "First"
+msgstr "First"
+
+msgid "First-Expire, First-Out (Recommended for perishables)"
+msgstr "First-Expire, First-Out (Recommended for perishables)"
+
+msgid "First-In, First-Out"
+msgstr "First-In, First-Out"
+
+msgid "Fleet"
+msgstr "Fleet"
+
+msgid "Fleet Status"
+msgstr "Fleet સ્થિતિ"
+
+msgid "Flexible Pricing That Grows With You"
+msgstr "Flexible Pricing That Grows With You"
+
+msgid "Flexible workflows tailored to your business"
+msgstr "Flexible workflows tailored to your business"
+
+msgid "Flow Type"
+msgstr "Flow Type"
+
+msgid "Forgot Password"
+msgstr "Forgot Password"
+
+msgid "Free Trial"
+msgstr "Free Trial"
+
+msgid "From Date"
+msgstr "From તારીખ"
+
+msgid "Full FEFO Automation"
+msgstr "Full FEFO Automation"
+
+msgid "Full Name"
+msgstr "Full નામ"
+
+msgid "Full access to all features"
+msgstr "Full access to all features"
+
+msgid "Full delivery address including landmark"
+msgstr "Full delivery address including landmark"
+
+msgid "Full name"
+msgstr "Full name"
+
+msgid "Fundamental data used for billing, shipping documents, and tax filings."
+msgstr "Fundamental data used for billing, shipping documents, and tax filings."
+
+msgid "Gain complete visibility and control over your stock with real-time updates and automated tracking."
+msgstr "Gain complete visibility and control over your stock with real-time updates and automated tracking."
+
+msgid "Gain full control, reduce losses, and streamline your operations with a system built for your business."
+msgstr "Gain full control, reduce losses, and streamline your operations with a system built for your business."
+
+msgid "General Information"
+msgstr "General માહિતી"
+
+msgid "Generated by Stock Management System"
+msgstr "Generated by સ્ટોક વ્યવસ્થાપન System"
+
+msgid "Get Started"
+msgstr "Get Started"
+
+msgid "Go to Dashboard"
+msgstr "Go to ડેશબોર્ડ"
+
+msgid "Go to Dashboard to Add"
+msgstr "Go to ડેશબોર્ડ to ઉમેરો"
+
+msgid "Go to Login Page"
+msgstr "Go to Login Page"
+
+msgid "Go to Staff Login"
+msgstr "Go to Staff Login"
+
+msgid "Good Condition"
+msgstr "Good Condition"
+
+msgid "Google Meet / Zoom (Link in Email)"
+msgstr "Google Meet / Zoom (Link in ઇમેઇલ"
+
+msgid "Got it, thanks!"
+msgstr "Got it, thanks!"
+
+msgid "Grand Total"
+msgstr "Grand કુલ"
+
+msgid "Great News!"
+msgstr "Great News!"
+
+msgid "Handle high-volume inventory with structured stock movement, optimized storage tracking, and configurable workflows that align with your operational processes."
+msgstr "Handle high-volume inventory with structured stock movement, optimized storage tracking, and configurable workflows that align with your operational processes."
+
+msgid "Handled By"
+msgstr "Handled By"
+
+msgid "Hardware"
+msgstr "Hardware"
+
+msgid "Headquarters"
+msgstr "Headquarters"
+
+msgid "Health & Compliance Alerts"
+msgstr "Health & Compliance Alerts"
+
+msgid "Hello"
+msgstr "Hello"
+
+msgid "Help Center"
+msgstr "Help Center"
+
+msgid "Help Desk"
+msgstr "Help Desk"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "How It Works"
+msgstr "How It Works"
+
+msgid "Ideal for small retail stores or boutique warehouses."
+msgstr "Ideal for small retail stores or boutique warehouses."
+
+msgid "If amount was deducted, it will be refunded automatically within 5-7 business days."
+msgstr "If amount was deducted, it will be refunded automatically within 5-7 business days."
+
+msgid "If the button doesn't work, you can copy and paste this link into your browser:"
+msgstr "If the button doesn't work, you can copy and paste this link into your browser:"
+
+msgid "If the issue is fixed, please close the ticket below."
+msgstr "If the issue is fixed, please close the ticket below."
+
+msgid "If you choose not to upgrade, your account access will be locked at the end of the trial, and your data will be securely deleted after a 30-day grace period."
+msgstr "If you choose not to upgrade, your account access will be locked at the end of the trial, and your data will be securely deleted after a 30-day grace period."
+
+msgid "If you have any immediate questions or need to add anything to your inquiry, simply reply to this email."
+msgstr "If you have any immediate questions or need to add anything to your inquiry, simply reply to this email."
+
+msgid "If you have any questions, just reply to this email!"
+msgstr "If you have any questions, just reply to this email!"
+
+msgid "If you selected a time on our calendar, a formal invitation with meeting links will be sent to your inbox shortly. If you haven't picked a time yet, one of our product specialists will reach out to you within 24 hours to get you scheduled."
+msgstr "If you selected a time on our calendar, a formal invitation with meeting links will be sent to your inbox shortly. If you haven't picked a time yet, one of our product specialists will reach out to you within 24 hours to get you scheduled."
+
+msgid "Important Account Update"
+msgstr "Important Account Update"
+
+msgid "Improve stock accuracy and visibility"
+msgstr "Improve stock accuracy and visibility"
+
+msgid "In Progress"
+msgstr "In Progress"
+
+msgid "In Stock"
+msgstr "In સ્ટોક"
+
+msgid "In Transit"
+msgstr "In Transit"
+
+msgid "In Use"
+msgstr "In Use"
+
+msgid "In the meantime, feel free to check out our website to learn more about our features."
+msgstr "In the meantime, feel free to check out our website to learn more about our features."
+
+msgid "Increase operational efficiency and productivity"
+msgstr "Increase operational efficiency and productivity"
+
+msgid "Industry"
+msgstr "Industry"
+
+msgid "Industry:"
+msgstr "Industry:"
+
+msgid "Inefficient supplier and purchase management"
+msgstr "Inefficient supplier and purchase management"
+
+msgid "Information"
+msgstr "માહિતી"
+
+msgid "Inquiry Details"
+msgstr "Inquiry વિગતો"
+
+msgid "Inquiry Received"
+msgstr "Inquiry Received"
+
+msgid "Inquiry Successfully Received"
+msgstr "Inquiry Successfully Received"
+
+msgid "Instant account activation"
+msgstr "Instant account activation"
+
+msgid "Insurance Expiry"
+msgstr "Insurance Expiry"
+
+msgid "Integrate with POS for automatic stock updates."
+msgstr "Integrate with POS for automatic stock updates."
+
+msgid "Intelligent Operations Management"
+msgstr "Intelligent Operations વ્યવસ્થાપન"
+
+msgid "Internal Documentation"
+msgstr "Internal Documentation"
+
+msgid "Invalid captcha."
+msgstr "Invalid captcha."
+
+msgid "Inventory"
+msgstr "Inventory"
+
+msgid "Inventory Alerts"
+msgstr "Inventory Alerts"
+
+msgid "Inventory Challenges Are Slowing Down Your Business"
+msgstr "Inventory Challenges Are Slowing Down Your Business"
+
+msgid "Inventory Logic"
+msgstr "Inventory Logic"
+
+msgid "Inventory Management"
+msgstr "Inventory વ્યવસ્થાપન"
+
+msgid "Inventory Rules"
+msgstr "Inventory Rules"
+
+msgid "Inventory Status"
+msgstr "Inventory સ્થિતિ"
+
+msgid "Inventory Strategy"
+msgstr "Inventory Strategy"
+
+msgid "Inventory Value"
+msgstr "Inventory Value"
+
+msgid "Invite Link Expired"
+msgstr "Invite Link Expired"
+
+msgid "Issue Resolved by Support"
+msgstr "Issue Resolved by સપોર્ટ"
+
+msgid "Item Details"
+msgstr "Item વિગતો"
+
+msgid "Item Identity"
+msgstr "Item Identity"
+
+msgid "Item Name"
+msgstr "Item નામ"
+
+msgid "Item Table"
+msgstr "Item Table"
+
+msgid "Join Date"
+msgstr "Join તારીખ"
+
+msgid "Joined"
+msgstr "Joined"
+
+msgid "Joined Date"
+msgstr "Joined તારીખ"
+
+msgid "Keep inventory updated with every sale automatically."
+msgstr "Keep inventory updated with every sale automatically."
+
+msgid "Keep your organizational information up to date for billing and system records."
+msgstr "Keep your organizational information up to date for billing and system records."
+
+msgid "Key Contact Persons"
+msgstr "Key Contact Persons"
+
+msgid "Key value points:"
+msgstr "Key value points:"
+
+msgid "Lack of real-time visibility into stock levels"
+msgstr "Lack of real-time visibility into stock levels"
+
+msgid "Last"
+msgstr "Last"
+
+msgid "Last Activity"
+msgstr "Last Activity"
+
+msgid "Last Updated"
+msgstr "Last Updated"
+
+msgid "Last updated May 15, 2026"
+msgstr "Last updated May 15, 2026"
+
+msgid "Last updated: May 15, 2026"
+msgstr "Last updated: May 15, 2026"
+
+msgid "Lead Time"
+msgstr "Lead Time"
+
+msgid "Leave blank to use company warehouse as pickup point"
+msgstr "Leave blank to use company warehouse as pickup point"
+
+msgid "Legal Company Name"
+msgstr "Legal કંપની નામ"
+
+msgid "Let your customer know what this Quote is for"
+msgstr "Let your customer know what this Quote is for"
+
+msgid "Let's scale your inventory operations."
+msgstr "Let's scale your inventory operations."
+
+msgid "Let's set up your workspace so you can get started quickly."
+msgstr "Let's set up your workspace so you can get started quickly."
+
+msgid "License & Dates"
+msgstr "License & Dates"
+
+msgid "License Expiry"
+msgstr "License Expiry"
+
+msgid "License No."
+msgstr "License ના"
+
+msgid "License Number"
+msgstr "License Number"
+
+msgid "Limit Reached"
+msgstr "Limit Reached"
+
+msgid "Links"
+msgstr "Links"
+
+msgid "Live Database"
+msgstr "Live Database"
+
+msgid "Loading report data..."
+msgstr "Loading report data..."
+
+msgid "Localization"
+msgstr "Localization"
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Log Charging"
+msgstr "Log Charging"
+
+msgid "Log Charging Session"
+msgstr "Log Charging Session"
+
+msgid "Log in here"
+msgstr "Log in here"
+
+msgid "Logistics"
+msgstr "લોજિસ્ટિક્સ"
+
+msgid "Logistics &amp; E-Vehicle Dashboard"
+msgstr "લોજિસ્ટિક્સ &amp; E-Vehicle ડેશબોર્ડ"
+
+msgid "Logistics Dashboard"
+msgstr "લોજિસ્ટિક્સ ડેશબોર્ડ"
+
+msgid "Logistics · E-Delivery"
+msgstr "લોજિસ્ટિક્સ · E-Delivery"
+
+msgid "Looking forward for your business."
+msgstr "Looking forward for your business."
+
+msgid "Loss (-)"
+msgstr "Loss (-)"
+
+msgid "Low Battery"
+msgstr "Low Battery"
+
+msgid "Low battery – needs charging"
+msgstr "Low battery – needs charging"
+
+msgid "Low battery — this vehicle will need charging soon."
+msgstr "Low battery — this vehicle will need charging soon."
+
+msgid "Main Dashboard"
+msgstr "Main ડેશબોર્ડ"
+
+msgid "Main Menu"
+msgstr "Main Menu"
+
+msgid "Maintenance"
+msgstr "જાળવણી"
+
+msgid "Make informed decisions with actionable, real-time insights."
+msgstr "Make informed decisions with actionable, real-time insights."
+
+msgid "Manage"
+msgstr "Manage"
+
+msgid "Manage and overview all active organizations"
+msgstr "Manage and overview all active organizations"
+
+msgid "Manage drivers for delivery operations"
+msgstr "Manage drivers for delivery operations"
+
+msgid "Manage electric vehicles for delivery operations"
+msgstr "Manage electric vehicles for delivery operations"
+
+msgid "Manage enterprise sales and contact inquiries"
+msgstr "Manage enterprise sales and contact inquiries"
+
+msgid "Manage requests to book a product demo"
+msgstr "Manage requests to book a product demo"
+
+msgid "Manage specific tracking rules for quality assurance."
+msgstr "Manage specific tracking rules for quality assurance."
+
+msgid "Manage training programs, onboarding, and technical support"
+msgstr "Manage training programs, onboarding, and technical support"
+
+msgid "Manage your company resources"
+msgstr "Manage your company resources"
+
+msgid "Manage your library of training content"
+msgstr "Manage your library of training content"
+
+msgid "Manage your suppliers in the dashboard."
+msgstr "Manage your suppliers in the dashboard."
+
+msgid "Management"
+msgstr "વ્યવસ્થાપન"
+
+msgid "Manual Batch Selection"
+msgstr "Manual Batch Selection"
+
+msgid "Manual tracking errors and inconsistencies"
+msgstr "Manual tracking errors and inconsistencies"
+
+msgid "Manually pick which batches to dispatch"
+msgstr "Manually pick which batches to dispatch"
+
+msgid "Manufacturer"
+msgstr "Manufacturer"
+
+msgid "Many businesses still rely on manual methods or disconnected systems to manage inventory. This leads to inefficiencies, errors, and financial losses that can impact growth and customer satisfaction."
+msgstr "Many businesses still rely on manual methods or disconnected systems to manage inventory. This leads to inefficiencies, errors, and financial losses that can impact growth and customer satisfaction."
+
+msgid "Mark Done"
+msgstr "Mark Done"
+
+msgid "Mark Selected as Read"
+msgstr "Mark Selected as Read"
+
+msgid "Mark all read"
+msgstr "Mark all read"
+
+msgid "Material"
+msgstr "Material"
+
+msgid "Material Content"
+msgstr "Material Content"
+
+msgid "Material:"
+msgstr "Material:"
+
+msgid "Materials"
+msgstr "Materials"
+
+msgid "Meeting Details"
+msgstr "Meeting વિગતો"
+
+msgid "Mentor"
+msgstr "Mentor"
+
+msgid "Mentor:"
+msgstr "Mentor:"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Message (Optional)"
+msgstr "Message (Optional)"
+
+msgid "Message Detail"
+msgstr "Message Detail"
+
+msgid "Message Received!"
+msgstr "Message Received!"
+
+msgid "Minimize losses and ensure compliance with advanced tracking capabilities."
+msgstr "Minimize losses and ensure compliance with advanced tracking capabilities."
+
+msgid "Minimum 8 characters"
+msgstr "Minimum 8 characters"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Model Name"
+msgstr "Model નામ"
+
+msgid "Modules & Features"
+msgstr "Modules & Features"
+
+msgid "Mon - Sat"
+msgstr "Mon - Sat"
+
+msgid "Monitor customer orders and payment status"
+msgstr "Monitor customer orders and payment status"
+
+msgid "Monitor stock in and stock out in real time."
+msgstr "Monitor stock in and stock out in real time."
+
+msgid "Monitor your e-vehicle fleet and delivery operations"
+msgstr "Monitor your e-vehicle fleet and delivery operations"
+
+msgid "Most Popular"
+msgstr "Most Popular"
+
+msgid "Movements"
+msgstr "Movements"
+
+msgid "Mrs"
+msgstr "Mrs"
+
+msgid "Multi-Warehouse Support"
+msgstr "Multi-Warehouse સપોર્ટ"
+
+msgid "Must be 6-20 characters with uppercase, lowercase, number & special character."
+msgstr "Must be 6-20 characters with uppercase, lowercase, number & special character."
+
+msgid "My Dashboard"
+msgstr "My ડેશબોર્ડ"
+
+msgid "My Onboarding"
+msgstr "My Onboarding"
+
+msgid "My Products"
+msgstr "My Products"
+
+msgid "My Support Tickets"
+msgstr "My સપોર્ટ Tickets"
+
+msgid "My Tickets"
+msgstr "My Tickets"
+
+msgid "My Training"
+msgstr "My તાલીમ"
+
+msgid "Name & Company"
+msgstr "નામ & કંપની"
+
+msgid "Need to transfer ownership?"
+msgstr "Need to transfer ownership?"
+
+msgid "Net Velocity"
+msgstr "Net Velocity"
+
+msgid "Never"
+msgstr "Never"
+
+msgid "New Delivery"
+msgstr "New ડિલિવરી"
+
+msgid "New Entry"
+msgstr "New Entry"
+
+msgid "New Quote"
+msgstr "New Quote"
+
+msgid "New Status"
+msgstr "New સ્થિતિ"
+
+msgid "New Support Ticket"
+msgstr "New સપોર્ટ Ticket"
+
+msgid "New Ticket"
+msgstr "New Ticket"
+
+msgid "Next"
+msgstr "આગળ"
+
+msgid "Next Billing Date"
+msgstr "આગળ Billing તારીખ"
+
+msgid "Next Step"
+msgstr "આગળ Step"
+
+msgid "No Companies Found"
+msgstr "ના Companies Found"
+
+msgid "No Contact Inquiries"
+msgstr "ના Contact Inquiries"
+
+msgid "No Data Available"
+msgstr "ના Data Available"
+
+msgid "No Dead Stock Found"
+msgstr "ના Dead સ્ટોક Found"
+
+msgid "No Demo Requests"
+msgstr "ના Demo Requests"
+
+msgid "No Notifications"
+msgstr "ના Notifications"
+
+msgid "No Onboarding Assigned"
+msgstr "ના Onboarding Assigned"
+
+msgid "No Records Found"
+msgstr "ના Records Found"
+
+msgid "No active stock available."
+msgstr "ના active stock available."
+
+msgid "No available vehicles. Add or free up a vehicle first."
+msgstr "ના available vehicles. ઉમેરો or free up a vehicle first."
+
+msgid "No charging records yet."
+msgstr "ના charging records yet."
+
+msgid "No checklist items have been added yet."
+msgstr "ના checklist items have been added yet."
+
+msgid "No classification data"
+msgstr "ના classification data"
+
+msgid "No comments yet."
+msgstr "ના comments yet."
+
+msgid "No comments yet. Add one below to communicate with support."
+msgstr "ના comments yet. ઉમેરો one below to communicate with support."
+
+msgid "No companies match your current search or filter criteria. Try adjusting your filters."
+msgstr "ના companies match your current search or filter criteria. Try adjusting your filters."
+
+msgid "No credit card required"
+msgstr "ના credit card required"
+
+msgid "No customers found"
+msgstr "ના customers found"
+
+msgid "No deliveries yet."
+msgstr "ના deliveries yet."
+
+msgid "No delivery orders found."
+msgstr "ના delivery orders found."
+
+msgid "No drivers found."
+msgstr "ના drivers found."
+
+msgid "No e-vehicles found."
+msgstr "ના e-vehicles found."
+
+msgid "No entries added yet."
+msgstr "ના entries added yet."
+
+msgid "No expired stock found"
+msgstr "ના expired stock found"
+
+msgid "No file or link has been attached to this material yet."
+msgstr "ના file or link has been attached to this material yet."
+
+msgid "No further comments can be added."
+msgstr "ના further comments can be added."
+
+msgid "No inventory discrepancies or expiration risks detected. All stocks are within optimal safety ranges."
+msgstr "ના inventory discrepancies or expiration risks detected. All stocks are within optimal safety ranges."
+
+msgid "No maintenance records yet."
+msgstr "ના maintenance records yet."
+
+msgid "No mentor"
+msgstr "ના mentor"
+
+msgid "No message"
+msgstr "ના message"
+
+msgid "No more guesswork. No more manual errors. Just complete control."
+msgstr "ના more guesswork. ના more manual errors. Just complete control."
+
+msgid "No movements recorded"
+msgstr "ના movements recorded"
+
+msgid "No onboardings yet"
+msgstr "ના onboardings yet"
+
+msgid "No orders match your current filters."
+msgstr "ના orders match your current filters."
+
+msgid "No products found"
+msgstr "ના products found"
+
+msgid "No quotes found."
+msgstr "ના quotes found."
+
+msgid "No records yet"
+msgstr "ના records yet"
+
+msgid "No sales orders yet"
+msgstr "ના sales orders yet"
+
+msgid "No stock available"
+msgstr "ના stock available"
+
+msgid "No suppliers found"
+msgstr "ના suppliers found"
+
+msgid "No support tickets yet"
+msgstr "ના support tickets yet"
+
+msgid "No tickets found."
+msgstr "ના tickets found."
+
+msgid "No tickets raised yet."
+msgstr "ના tickets raised yet."
+
+msgid "No tickets yet"
+msgstr "ના tickets yet"
+
+msgid "No tickets yet."
+msgstr "ના tickets yet."
+
+msgid "No tracking events yet."
+msgstr "ના tracking events yet."
+
+msgid "No training assigned yet."
+msgstr "ના training assigned yet."
+
+msgid "No training materials yet"
+msgstr "ના training materials yet"
+
+msgid "No training records found"
+msgstr "ના training records found"
+
+msgid "No training records found."
+msgstr "ના training records found."
+
+msgid "No vehicles added yet."
+msgstr "ના vehicles added yet."
+
+msgid "No vendors found"
+msgstr "ના vendors found"
+
+msgid "None"
+msgstr "None"
+
+msgid "Not assigned"
+msgstr "Not assigned"
+
+msgid "Note / Reason"
+msgstr "Note / Reason"
+
+msgid "Note: Only you (admin) can mark as Resolved. The company will then close it."
+msgstr "Note: Only you (admin) can mark as Resolved. The company will then close it."
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Notes from your manager"
+msgstr "Notes from your manager"
+
+msgid "Notes regarding credit terms, special instructions, or history. Only visible to staff."
+msgstr "Notes regarding credit terms, special instructions, or history. Only visible to staff."
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Number of Users"
+msgstr "Number of Users"
+
+msgid "On-Time %"
+msgstr "On-Time %"
+
+msgid "Onboarding"
+msgstr "Onboarding"
+
+msgid "Onboarding Checklist"
+msgstr "Onboarding Checklist"
+
+msgid "Onboarding Status"
+msgstr "Onboarding સ્થિતિ"
+
+msgid "Onboarding | CWS Inventory"
+msgstr "Onboarding | CWS Inventory"
+
+msgid "Onboardings"
+msgstr "Onboardings"
+
+msgid "One of our enterprise inventory experts is currently reviewing your details and will reach out to schedule a personalized consultation."
+msgstr "One of our enterprise inventory experts is currently reviewing your details and will reach out to schedule a personalized consultation."
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Open / Download"
+msgstr "Open / ડાઉનલોડ કરો"
+
+msgid "Open Link"
+msgstr "Open Link"
+
+msgid "Open Tickets"
+msgstr "Open Tickets"
+
+msgid "Open full size"
+msgstr "Open full size"
+
+msgid "Open in new tab"
+msgstr "Open in new tab"
+
+msgid "Operate faster, reduce errors, and make confident business decisions backed by real-time data."
+msgstr "Operate faster, reduce errors, and make confident business decisions backed by real-time data."
+
+msgid "Optimization Tip"
+msgstr "Optimization Tip"
+
+msgid "Optimize"
+msgstr "Optimize"
+
+msgid "Optimized For Your Industry"
+msgstr "Optimized For Your Industry"
+
+msgid "Optional note — required if marking FAILED or CANCELLED"
+msgstr "Optional note — required if marking FAILED or CANCELLED"
+
+msgid "Optional notes about this charging session…"
+msgstr "Optional notes about this charging session…"
+
+msgid "Order"
+msgstr "ઓર્ડર"
+
+msgid "Order Info"
+msgstr "ઓર્ડર Info"
+
+msgid "Order No."
+msgstr "ઓર્ડર ના"
+
+msgid "Order no, recipient, phone…"
+msgstr "ઓર્ડર no, recipient, phone…"
+
+msgid "Ordered"
+msgstr "Ordered"
+
+msgid "Orders"
+msgstr "Orders"
+
+msgid "Our pricing is designed to suit businesses of all sizes, with options for customization based on your specific requirements."
+msgstr "Our pricing is designed to suit businesses of all sizes, with options for customization based on your specific requirements."
+
+msgid "Our team has resolved this ticket"
+msgstr "Our team has resolved this ticket"
+
+msgid "Overall Progress"
+msgstr "Overall Progress"
+
+msgid "Overdue"
+msgstr "Overdue"
+
+msgid "Overstocking leading to blocked capital"
+msgstr "Overstocking leading to blocked capital"
+
+msgid "PDF, DOC, DOCX, PPT, PPTX, MP4, ZIP — max 50MB"
+msgstr "PDF, DOC, DOCX, PPT, PPTX, MP4, ZIP — max 50MB"
+
+msgid "PO No:"
+msgstr "PO ના"
+
+msgid "PURCHASE ORDER"
+msgstr "PURCHASE ORDER"
+
+msgid "Package"
+msgstr "Package"
+
+msgid "Package &amp; Assignment"
+msgstr "Package &amp; Assignment"
+
+msgid "Package &amp; Schedule"
+msgstr "Package &amp; Schedule"
+
+msgid "Package Description"
+msgstr "Package વર્ણન"
+
+msgid "Packing your workspace..."
+msgstr "Packing your workspace..."
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Password Strength"
+msgstr "Password Strength"
+
+msgid "Passwords do not match."
+msgstr "Passwords do not match."
+
+msgid "Payment Failed"
+msgstr "Payment Failed"
+
+msgid "Payment Failed!"
+msgstr "Payment Failed!"
+
+msgid "Payment Successful"
+msgstr "Payment Successful"
+
+msgid "Payment Successful!"
+msgstr "Payment Successful!"
+
+msgid "Pending Orders"
+msgstr "બાકી Orders"
+
+msgid "Pending Tasks"
+msgstr "બાકી Tasks"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Pharmacies"
+msgstr "Pharmacies"
+
+msgid "Phone Number"
+msgstr "ફોન Number"
+
+msgid "Pick a descriptive name that helps in grouping similar products."
+msgstr "Pick a descriptive name that helps in grouping similar products."
+
+msgid "Pickup Address"
+msgstr "Pickup સરનામું"
+
+msgid "Pincode"
+msgstr "Pincode"
+
+msgid "Plan"
+msgstr "Plan"
+
+msgid "Plan Renewed!"
+msgstr "Plan Renewed!"
+
+msgid "Plan Tier"
+msgstr "Plan Tier"
+
+msgid "Please check your inbox and click the link to verify your account. If you don't see it, be sure to check your spam or junk folder."
+msgstr "Please check your inbox and click the link to verify your account. If you don't see it, be sure to check your spam or junk folder."
+
+msgid "Please contact your administrator to send a new invite link."
+msgstr "Please contact your administrator to send a new invite link."
+
+msgid "Please fill out your valid details correctly on the left to choose a meeting time."
+msgstr "Please fill out your valid details correctly on the left to choose a meeting time."
+
+msgid "Please provide a reason for failure/cancellation."
+msgstr "Please provide a reason for failure/cancellation."
+
+msgid "Please select a status."
+msgstr "Please select a status."
+
+msgid "Please select a vehicle."
+msgstr "Please select a vehicle."
+
+msgid "Please try again using another payment method."
+msgstr "Please try again using another payment method."
+
+msgid "Portal"
+msgstr "Portal"
+
+msgid "Powerful Features To Simplify"
+msgstr "Powerful Features To Simplify"
+
+msgid "Prepare for scale with support for bulk operations, pricing rules, and advanced inventory logic designed for wholesale environments."
+msgstr "Prepare for scale with support for bulk operations, pricing rules, and advanced inventory logic designed for wholesale environments."
+
+msgid "Previous"
+msgstr "પાછલું"
+
+msgid "Price"
+msgstr "કિંમત"
+
+msgid "Pricing varies based on modules, users, and customization requirements."
+msgstr "Pricing varies based on modules, users, and customization requirements."
+
+msgid "Primary Business Email"
+msgstr "Primary Business ઇમેઇલ"
+
+msgid "Primary point of contacts at the customer organization."
+msgstr "Primary point of contacts at the customer organization."
+
+msgid "Print Now"
+msgstr "પ્રિન્ટ Now"
+
+msgid "Print Purchase Order"
+msgstr "પ્રિન્ટ Purchase ઓર્ડર"
+
+msgid "Priority"
+msgstr "Priority"
+
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+msgid "Privacy Policy | CWS Inventory"
+msgstr "Privacy Policy | CWS Inventory"
+
+msgid "Procurement"
+msgstr "Procurement"
+
+msgid "Procurement Policy"
+msgstr "Procurement Policy"
+
+msgid "Product Details"
+msgstr "ઉત્પાદન વિગતો"
+
+msgid "Product Information"
+msgstr "ઉત્પાદન માહિતી"
+
+msgid "Product Velocity Analysis"
+msgstr "ઉત્પાદન Velocity Analysis"
+
+msgid "Product is required."
+msgstr "ઉત્પાદન is required."
+
+msgid "Products Analysed"
+msgstr "Products Analysed"
+
+msgid "Profit &amp; Loss Summary"
+msgstr "Profit &amp; Loss Summary"
+
+msgid "Profit (+)"
+msgstr "Profit (+)"
+
+msgid "Progress"
+msgstr "Progress"
+
+msgid "Project Name"
+msgstr "Project નામ"
+
+msgid "Protected by 256-bit Encryption"
+msgstr "Protected by 256-bit Encryption"
+
+msgid "Provide multiple billing and shipping address details."
+msgstr "Provide multiple billing and shipping address details."
+
+msgid "Purchase Date"
+msgstr "Purchase તારીખ"
+
+msgid "Purchase Details"
+msgstr "Purchase વિગતો"
+
+msgid "Purchase From"
+msgstr "Purchase From"
+
+msgid "Purchase Order"
+msgstr "Purchase ઓર્ડર"
+
+msgid "Purchase Order Management"
+msgstr "Purchase ઓર્ડર વ્યવસ્થાપન"
+
+msgid "Purchase Stock Reports"
+msgstr "Purchase સ્ટોક Reports"
+
+msgid "Purchase To"
+msgstr "Purchase To"
+
+msgid "Qty Sold"
+msgstr "Qty Sold"
+
+msgid "Qty in Stock"
+msgstr "Qty in સ્ટોક"
+
+msgid "Quick Info"
+msgstr "Quick Info"
+
+msgid "Quote #"
+msgstr "Quote #"
+
+msgid "Quote Date*"
+msgstr "Quote તારીખ"
+
+msgid "Quote#*"
+msgstr "Quote#*"
+
+msgid "Quotes"
+msgstr "Quotes"
+
+msgid "RATE"
+msgstr "RATE"
+
+msgid "Raise a Support Ticket"
+msgstr "Raise a સપોર્ટ Ticket"
+
+msgid "Raise a Ticket"
+msgstr "Raise a Ticket"
+
+msgid "Raise a ticket if you need help from the support team."
+msgstr "Raise a ticket if you need help from the support team."
+
+msgid "Raise issues and track resolutions with our support team."
+msgstr "Raise issues and track resolutions with our support team."
+
+msgid "Raised"
+msgstr "Raised"
+
+msgid "Raised By"
+msgstr "Raised By"
+
+msgid "Raised on"
+msgstr "Raised on"
+
+msgid "Range / charge"
+msgstr "Range / charge"
+
+msgid "Range / charge (km)"
+msgstr "Range / charge (km)"
+
+msgid "Re-enter password"
+msgstr "Re-enter password"
+
+msgid "Ready to go?"
+msgstr "Ready to go?"
+
+msgid "Real-time stock visibility across all operations"
+msgstr "Real-time stock visibility across all operations"
+
+msgid "Reason"
+msgstr "Reason"
+
+msgid "Recent Deliveries"
+msgstr "Recent Deliveries"
+
+msgid "Recent Tickets"
+msgstr "Recent Tickets"
+
+msgid "Recent Training"
+msgstr "Recent તાલીમ"
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Recipient Information"
+msgstr "Recipient માહિતી"
+
+msgid "Recipient Name"
+msgstr "Recipient નામ"
+
+msgid "Recover?"
+msgstr "Recover?"
+
+msgid "Reduce losses due to expired or unsold stock"
+msgstr "Reduce losses due to expired or unsold stock"
+
+msgid "Ref ID"
+msgstr "Ref ID"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Reference#"
+msgstr "Reference#"
+
+msgid "Refresh Data"
+msgstr "Refresh Data"
+
+msgid "Refund & Cancellation Policy"
+msgstr "Refund & Cancellation Policy"
+
+msgid "Refund & Cancellation Policy | CWS Inventory"
+msgstr "Refund & Cancellation Policy | CWS Inventory"
+
+msgid "Register a new staff member. Login credentials will be emailed automatically."
+msgstr "Register a new staff member. Login credentials will be emailed automatically."
+
+msgid "Registered"
+msgstr "Registered"
+
+msgid "Registered Companies"
+msgstr "Registered Companies"
+
+msgid "Registered Companies | Admin"
+msgstr "Registered Companies | Admin"
+
+msgid "Registered Vendors"
+msgstr "Registered Vendors"
+
+msgid "Registration No."
+msgstr "Registration ના"
+
+msgid "Remaining"
+msgstr "Remaining"
+
+msgid "Remaining Days"
+msgstr "Remaining Days"
+
+msgid "Remember me"
+msgstr "Remember me"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Remove this material?"
+msgstr "Remove this material?"
+
+msgid "Renew Plan Now"
+msgstr "Renew Plan Now"
+
+msgid "Reply to Company"
+msgstr "Reply to કંપની"
+
+msgid "Report Data"
+msgstr "રિપોર્ટ Data"
+
+msgid "Reporting"
+msgstr "Reporting"
+
+msgid "Reports & Analytics"
+msgstr "Reports & એનાલિટિક્સ"
+
+msgid "Reports & Dashboards"
+msgstr "Reports & Dashboards"
+
+msgid "Reports Overview"
+msgstr "Reports ઝાંખી"
+
+msgid "Request Received!"
+msgstr "Request Received!"
+
+msgid "Required when marking as Resolved — describe what was fixed..."
+msgstr "Required when marking as Resolved — describe what was fixed..."
+
+msgid "Requirements / Message"
+msgstr "Requirements / Message"
+
+msgid "Resolution Action"
+msgstr "Resolution ક્રિયા"
+
+msgid "Resolution Notes"
+msgstr "Resolution Notes"
+
+msgid "Resolution Notes from Support"
+msgstr "Resolution Notes from સપોર્ટ"
+
+msgid "Resolved"
+msgstr "Resolved"
+
+msgid "Resolved At"
+msgstr "Resolved At"
+
+msgid "Retail"
+msgstr "Retail"
+
+msgid "Retry Payment"
+msgstr "Retry Payment"
+
+msgid "Return to Console"
+msgstr "Return to Console"
+
+msgid "Return to Home"
+msgstr "Return to Home"
+
+msgid "Return to Homepage"
+msgstr "Return to Homepage"
+
+msgid "Review"
+msgstr "Review"
+
+msgid "Review critical system triggers and take direct action to stabilize stock levels."
+msgstr "Review critical system triggers and take direct action to stabilize stock levels."
+
+msgid "SR NO"
+msgstr "SR NO"
+
+msgid "Sale Date"
+msgstr "Sale તારીખ"
+
+msgid "Sale From"
+msgstr "Sale From"
+
+msgid "Sale To"
+msgstr "Sale To"
+
+msgid "Sales Integration (POS)"
+msgstr "Sales Integration (POS)"
+
+msgid "Sales Reports"
+msgstr "Sales Reports"
+
+msgid "Salesperson"
+msgstr "Salesperson"
+
+msgid "Save & Select"
+msgstr "સેવ કરો & Select"
+
+msgid "Save Log"
+msgstr "સેવ કરો Log"
+
+msgid "Save Staff"
+msgstr "સેવ કરો Staff"
+
+msgid "Save Stock"
+msgstr "સેવ કરો સ્ટોક"
+
+msgid "Save and Send"
+msgstr "સેવ કરો and Send"
+
+msgid "Save time with automated processes"
+msgstr "સેવ કરો time with automated processes"
+
+msgid "Saved Entries"
+msgstr "Saved Entries"
+
+msgid "Saving progress and signing out safely."
+msgstr "Saving progress and signing out safely."
+
+msgid "Scale your business without changing systems"
+msgstr "Scale your business without changing systems"
+
+msgid "Scan to Print"
+msgstr "Scan to પ્રિન્ટ"
+
+msgid "Scanned Print Link:"
+msgstr "Scanned પ્રિન્ટ Link:"
+
+msgid "Schedule"
+msgstr "Schedule"
+
+msgid "Schedule Maintenance"
+msgstr "Schedule જાળવણી"
+
+msgid "Schedule and track maintenance for your e-vehicle fleet"
+msgstr "Schedule and track maintenance for your e-vehicle fleet"
+
+msgid "Scheduled"
+msgstr "Scheduled"
+
+msgid "Scheduled Date"
+msgstr "Scheduled તારીખ"
+
+msgid "Scheduled date is required."
+msgstr "Scheduled date is required."
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Score (%)"
+msgstr "Score (%)"
+
+msgid "Search by Company Name"
+msgstr "શોધો by કંપની નામ"
+
+msgid "Search by Email"
+msgstr "શોધો by ઇમેઇલ"
+
+msgid "Search by company name or email"
+msgstr "શોધો by company name or email"
+
+msgid "Search by ticket ID, title or company..."
+msgstr "શોધો by ticket ID, title or company..."
+
+msgid "Search by title or ticket ID..."
+msgstr "શોધો by title or ticket ID..."
+
+msgid "Search materials..."
+msgstr "શોધો materials..."
+
+msgid "Search name, phone, license no…"
+msgstr "શોધો name, phone, license no…"
+
+msgid "Search product..."
+msgstr "શોધો product..."
+
+msgid "Search vehicle ID, reg. no, model…"
+msgstr "શોધો vehicle ID, reg. no, model…"
+
+msgid "Secure Data Environment"
+msgstr "Secure Data Environment"
+
+msgid "Secure Razorpay Payment"
+msgstr "Secure Razorpay Payment"
+
+msgid "Secure system access for authorized personnel"
+msgstr "Secure system access for authorized personnel"
+
+msgid "Security Credentials"
+msgstr "Security Credentials"
+
+msgid "Security Policy"
+msgstr "Security Policy"
+
+msgid "See how CWS Inventory can streamline your operations. Fill out your details below and select a time that works for you."
+msgstr "See how CWS Inventory can streamline your operations. Fill out your details below and select a time that works for you."
+
+msgid "Select Batches"
+msgstr "Select Batches"
+
+msgid "Select Item"
+msgstr "Select Item"
+
+msgid "Select Number (Optional)"
+msgstr "Select Number (Optional)"
+
+msgid "Select Plan"
+msgstr "Select Plan"
+
+msgid "Select a Tax"
+msgstr "Select a Tax"
+
+msgid "Select a Time"
+msgstr "Select a Time"
+
+msgid "Select maintenance type."
+msgstr "Select maintenance type."
+
+msgid "Select material..."
+msgstr "Select material..."
+
+msgid "Select or add a customer"
+msgstr "Select or add a customer"
+
+msgid "Select size..."
+msgstr "Select size..."
+
+msgid "Select staff..."
+msgstr "Select staff..."
+
+msgid "Select type..."
+msgstr "Select type..."
+
+msgid "Sell with"
+msgstr "Sell with"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Send Comment"
+msgstr "Send Comment"
+
+msgid "Send Reply"
+msgstr "Send Reply"
+
+msgid "Set Stock Rules"
+msgstr "Set સ્ટોક Rules"
+
+msgid "Set Your Password"
+msgstr "Set Your Password"
+
+msgid "Set a password to activate your staff account"
+msgstr "Set a password to activate your staff account"
+
+msgid "Set thresholds and notification preferences"
+msgstr "Set thresholds and notification preferences"
+
+msgid "Set up your"
+msgstr "Set up your"
+
+msgid "Set up your free trial in less than 2 minutes."
+msgstr "Set up your free trial in less than 2 minutes."
+
+msgid "Setup Your"
+msgstr "Setup Your"
+
+msgid "Severity"
+msgstr "Severity"
+
+msgid "Shared in your Email / Calendly Invite"
+msgstr "Shared in your ઇમેઇલ / Calendly Invite"
+
+msgid "Short, clear summary of the issue"
+msgstr "Short, clear summary of the issue"
+
+msgid "Showing page"
+msgstr "Showing page"
+
+msgid "Sign In"
+msgstr "Sign In"
+
+msgid "Sign in to access your training & support"
+msgstr "Sign in to access your training & support"
+
+msgid "Single Warehouse"
+msgstr "Single Warehouse"
+
+msgid "Size:"
+msgstr "Size:"
+
+msgid "Skip / Not sure"
+msgstr "Skip / Not sure"
+
+msgid "Slow Moving"
+msgstr "Slow Moving"
+
+msgid "Social Media"
+msgstr "Social Media"
+
+msgid "Source / Reason"
+msgstr "Source / Reason"
+
+msgid "Special instructions, landmark, access notes, call before delivery…"
+msgstr "Special instructions, landmark, access notes, call before delivery…"
+
+msgid "Staff"
+msgstr "Staff"
+
+msgid "Staff List"
+msgstr "Staff List"
+
+msgid "Staff Login"
+msgstr "Staff Login"
+
+msgid "Staff Member"
+msgstr "Staff Member"
+
+msgid "Staff Name"
+msgstr "Staff નામ"
+
+msgid "Staff Onboarding"
+msgstr "Staff Onboarding"
+
+msgid "Staff Portal"
+msgstr "Staff Portal"
+
+msgid "Staff:"
+msgstr "Staff:"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Start 7-Day Free Trial"
+msgstr "Start 7-Day Free Trial"
+
+msgid "Start First Onboarding"
+msgstr "Start First Onboarding"
+
+msgid "Start Free Trial"
+msgstr "Start Free Trial"
+
+msgid "Start Free Trial | CWS Inventory"
+msgstr "Start Free Trial | CWS Inventory"
+
+msgid "Start Managing Your Inventory The Smart Way"
+msgstr "Start Managing Your Inventory The Smart Way"
+
+msgid "Start Onboarding"
+msgstr "Start Onboarding"
+
+msgid "Start Staff Onboarding"
+msgstr "Start Staff Onboarding"
+
+msgid "Start by adding your first customer."
+msgstr "Start by adding your first customer."
+
+msgid "Start by adding your first procurement partner to the system."
+msgstr "Start by adding your first procurement partner to the system."
+
+msgid "Starter"
+msgstr "Starter"
+
+msgid "Starter Plan"
+msgstr "Starter Plan"
+
+msgid "Starter plan allows max 5 vendors. Upgrade to Business plan for unlimited vendors."
+msgstr "Starter plan allows max 5 vendors. Upgrade to Business plan for unlimited vendors."
+
+msgid "Status:"
+msgstr "સ્થિતિ"
+
+msgid "Stay here"
+msgstr "Stay here"
+
+msgid "Stay proactive with real-time stock and expiry updates."
+msgstr "Stay proactive with real-time stock and expiry updates."
+
+msgid "Stock Aging Report"
+msgstr "સ્ટોક Aging રિપોર્ટ"
+
+msgid "Stock In (Monthly)"
+msgstr "સ્ટોક In (Monthly)"
+
+msgid "Stock Levels Healthy"
+msgstr "સ્ટોક Levels Healthy"
+
+msgid "Stock Out (Monthly)"
+msgstr "સ્ટોક Out (Monthly)"
+
+msgid "Stock Qty"
+msgstr "સ્ટોક Qty"
+
+msgid "Stock Quantity"
+msgstr "સ્ટોક જથ્થો"
+
+msgid "Stock Value"
+msgstr "સ્ટોક Value"
+
+msgid "Stockouts resulting in lost sales"
+msgstr "Stockouts resulting in lost sales"
+
+msgid "Streamline procurement with structured workflows and approval systems."
+msgstr "Streamline procurement with structured workflows and approval systems."
+
+msgid "Strengthen relationships and improve procurement efficiency."
+msgstr "Strengthen relationships and improve procurement efficiency."
+
+msgid "Sub Total"
+msgstr "Sub કુલ"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Submit Details"
+msgstr "સબમિટ કરો વિગતો"
+
+msgid "Submit Inquiry"
+msgstr "સબમિટ કરો Inquiry"
+
+msgid "Submit Ticket"
+msgstr "સબમિટ કરો Ticket"
+
+msgid "Subscription Alert"
+msgstr "Subscription Alert"
+
+msgid "Subscription Expired"
+msgstr "Subscription Expired"
+
+msgid "Suggested Reorder"
+msgstr "Suggested Reorder"
+
+msgid "Supplier"
+msgstr "Supplier"
+
+msgid "Supplier Management"
+msgstr "Supplier વ્યવસ્થાપન"
+
+msgid "Supplier Rankings"
+msgstr "Supplier Rankings"
+
+msgid "Supplier metrics and performance overview"
+msgstr "Supplier metrics and performance overview"
+
+msgid "Support Team"
+msgstr "સપોર્ટ Team"
+
+msgid "Support Tickets"
+msgstr "સપોર્ટ Tickets"
+
+msgid "Support Tickets — Admin"
+msgstr "સપોર્ટ Tickets — Admin"
+
+msgid "System Administration Interface v2.4"
+msgstr "System Administration Interface v2.4"
+
+msgid "System Overview & Entity Management"
+msgstr "System ઝાંખી & Entity વ્યવસ્થાપન"
+
+msgid "System Status: Healthy"
+msgstr "System સ્થિતિ Healthy"
+
+msgid "System-wide identifiers and categorization tags."
+msgstr "System-wide identifiers and categorization tags."
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Tailored workflows for specific business demands."
+msgstr "Tailored workflows for specific business demands."
+
+msgid "Take Complete Control Of"
+msgstr "Take Complete Control Of"
+
+msgid "Take control of your inventory today."
+msgstr "Take control of your inventory today."
+
+msgid "Target Completion"
+msgstr "Target Completion"
+
+msgid "Target Date"
+msgstr "Target તારીખ"
+
+msgid "Tax"
+msgstr "Tax"
+
+msgid "Team Members"
+msgstr "Team Members"
+
+msgid "Team,"
+msgstr "Team,"
+
+msgid "Tell us about your business requirements. Our enterprise experts will reach out within 24 hours to schedule a personalized demo."
+msgstr "Tell us about your business requirements. Our enterprise experts will reach out within 24 hours to schedule a personalized demo."
+
+msgid "Tell us about your inventory challenges and specific needs..."
+msgstr "Tell us about your inventory challenges and specific needs..."
+
+msgid "Terms & Conditions"
+msgstr "Terms & Conditions"
+
+msgid "Terms of Use"
+msgstr "Terms of Use"
+
+msgid "Terms of Use | CWS Inventory"
+msgstr "Terms of Use | CWS Inventory"
+
+msgid "Thank You For Your Business"
+msgstr "Thank You For Your Business"
+
+msgid "Thank You | CWS Inventory Enterprise"
+msgstr "Thank You | CWS Inventory Enterprise"
+
+msgid "Thank you for booking a demo! We've successfully received your request and are excited to show you how CWS Inventory can help streamline your business operations."
+msgstr "Thank you for booking a demo! We've successfully received your request and are excited to show you how CWS Inventory can help streamline your business operations."
+
+msgid "Thank you for reaching out to the CWS Inventory Enterprise Team. We have successfully received your inquiry and our team is currently reviewing your details."
+msgstr "Thank you for reaching out to the CWS Inventory Enterprise Team. We have successfully received your inquiry and our team is currently reviewing your details."
+
+msgid "Thank you for reaching out. Our enterprise experts are reviewing your details and will contact you within"
+msgstr "Thank you for reaching out. Our enterprise experts are reviewing your details and will contact you within"
+
+msgid "Thank you for scheduling a demo. A calendar invitation has been sent to your email with all the necessary details."
+msgstr "Thank you for scheduling a demo. A calendar invitation has been sent to your email with all the necessary details."
+
+msgid "Thank you for starting your"
+msgstr "Thank you for starting your"
+
+msgid "Thank you for your payment!"
+msgstr "Thank you for your payment!"
+
+msgid "The CWS Enterprise Team"
+msgstr "The CWS Enterprise Team"
+
+msgid "The CWS Sales Team"
+msgstr "The CWS Sales Team"
+
+msgid "The CWS Success Team"
+msgstr "The CWS Success Team"
+
+msgid "The main point of contact for this supplier."
+msgstr "The main point of contact for this supplier."
+
+msgid "There are currently no active batches for this product."
+msgstr "There are currently no active batches for this product."
+
+msgid "There are currently no demo requests. When a user submits the form, it will appear here."
+msgstr "There are currently no demo requests. When a user submits the form, it will appear here."
+
+msgid "There are currently no enterprise inquiries. When a user submits the form, it will appear here."
+msgstr "There are currently no enterprise inquiries. When a user submits the form, it will appear here."
+
+msgid "There are currently no registered companies in the database."
+msgstr "There are currently no registered companies in the database."
+
+msgid "There are currently no registered companies in the database. When you add a company, it will appear here."
+msgstr "There are currently no registered companies in the database. When you add a company, it will appear here."
+
+msgid "This action cannot be undone."
+msgstr "This action cannot be undone."
+
+msgid "This invite link is no longer valid. It may have already been used or has been revoked by your administrator."
+msgstr "This invite link is no longer valid. It may have already been used or has been revoked by your administrator."
+
+msgid "This is an automated message from CWS Inventory System."
+msgstr "This is an automated message from CWS Inventory System."
+
+msgid "This is an automated notice regarding your active CWS Inventory subscription plan."
+msgstr "This is an automated notice regarding your active CWS Inventory subscription plan."
+
+msgid "This is an automated receipt from CWS Inventory System."
+msgstr "This is an automated receipt from CWS Inventory System."
+
+msgid "This ticket is closed — comments are disabled."
+msgstr "This ticket is closed — comments are disabled."
+
+msgid "This ticket is closed. No further comments can be added."
+msgstr "This ticket is closed. ના further comments can be added."
+
+msgid "This ticket was closed by the company on"
+msgstr "This ticket was closed by the company on"
+
+msgid "This ticket was closed by you on"
+msgstr "This ticket was closed by you on"
+
+msgid "Ticket"
+msgstr "Ticket"
+
+msgid "Ticket Details"
+msgstr "Ticket વિગતો"
+
+msgid "Ticket ID"
+msgstr "Ticket ID"
+
+msgid "Ticket Info"
+msgstr "Ticket Info"
+
+msgid "Ticket Workflow"
+msgstr "Ticket Workflow"
+
+msgid "Ticket will be raised at:"
+msgstr "Ticket will be raised at:"
+
+msgid "Tickets you have raised with the support team."
+msgstr "Tickets you have raised with the support team."
+
+msgid "Time Slot"
+msgstr "Time Slot"
+
+msgid "Timestamp"
+msgstr "Timestamp"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "To Date"
+msgstr "To તારીખ"
+
+msgid "To ensure uninterrupted access to your dashboard, products, and sales orders, please upgrade your plan before the trial ends."
+msgstr "To ensure uninterrupted access to your dashboard, products, and sales orders, please upgrade your plan before the trial ends."
+
+msgid "To ensure your account is secure and ready to go, please verify your email address by clicking the button below:"
+msgstr "To ensure your account is secure and ready to go, please verify your email address by clicking the button below:"
+
+msgid "Total"
+msgstr "કુલ"
+
+msgid "Total Companies"
+msgstr "કુલ Companies"
+
+msgid "Total Inquiries"
+msgstr "કુલ Inquiries"
+
+msgid "Total Items"
+msgstr "કુલ Items"
+
+msgid "Total On-Hand"
+msgstr "કુલ On-Hand"
+
+msgid "Total Quantity"
+msgstr "કુલ જથ્થો"
+
+msgid "Total Requests"
+msgstr "કુલ Requests"
+
+msgid "Total Staff"
+msgstr "કુલ Staff"
+
+msgid "Total Vehicles"
+msgstr "કુલ Vehicles"
+
+msgid "Track Stock"
+msgstr "Track સ્ટોક"
+
+msgid "Track all e-vehicle delivery assignments"
+msgstr "Track all e-vehicle delivery assignments"
+
+msgid "Track battery charging history for all e-vehicles"
+msgstr "Track battery charging history for all e-vehicles"
+
+msgid "Track dead stock, slow moving inventory and aging analysis."
+msgstr "Track dead stock, slow moving inventory and aging analysis."
+
+msgid "Track new employee onboarding progress"
+msgstr "Track new employee onboarding progress"
+
+msgid "Track product velocity and inventory turnover rates"
+msgstr "Track product velocity and inventory turnover rates"
+
+msgid "Track staff training progress and completion"
+msgstr "Track staff training progress and completion"
+
+msgid "Track your onboarding progress and complete your checklist."
+msgstr "Track your onboarding progress and complete your checklist."
+
+msgid "Tracking Timeline"
+msgstr "Tracking Timeline"
+
+msgid "Training"
+msgstr "તાલીમ"
+
+msgid "Training & Support"
+msgstr "તાલીમ & સપોર્ટ"
+
+msgid "Training & Support Dashboard"
+msgstr "તાલીમ & સપોર્ટ ડેશબોર્ડ"
+
+msgid "Training &amp; Support"
+msgstr "તાલીમ &amp; સપોર્ટ"
+
+msgid "Training Activity"
+msgstr "તાલીમ Activity"
+
+msgid "Training Material"
+msgstr "તાલીમ Material"
+
+msgid "Training Materials"
+msgstr "તાલીમ Materials"
+
+msgid "Training Records"
+msgstr "તાલીમ Records"
+
+msgid "Training tasks"
+msgstr "તાલીમ tasks"
+
+msgid "Transaction Date"
+msgstr "Transaction તારીખ"
+
+msgid "Transaction ID"
+msgstr "Transaction ID"
+
+msgid "Transaction Records"
+msgstr "Transaction Records"
+
+msgid "Transform The Way You Manage"
+msgstr "Transform The Way You Manage"
+
+msgid "Transform the way you manage inventory with real-time insights and automated workflows."
+msgstr "Transform the way you manage inventory with real-time insights and automated workflows."
+
+msgid "Transport Management"
+msgstr "Transport વ્યવસ્થાપન"
+
+msgid "Trial"
+msgstr "Trial"
+
+msgid "Trust this workstation"
+msgstr "Trust this workstation"
+
+msgid "Trusted by 500+ businesses across multiple industries."
+msgstr "Trusted by 500+ businesses across multiple industries."
+
+msgid "Turnover Days"
+msgstr "Turnover Days"
+
+msgid "Tutorials"
+msgstr "Tutorials"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Type below image text"
+msgstr "Type below image text"
+
+msgid "Type your message to the support team..."
+msgstr "Type your message to the support team..."
+
+msgid "Type:"
+msgstr "Type:"
+
+msgid "URL / Link"
+msgstr "URL / Link"
+
+msgid "Undo"
+msgstr "Undo"
+
+msgid "Unit Price"
+msgstr "Unit કિંમત"
+
+msgid "Units (kWh)"
+msgstr "Units (kWh)"
+
+msgid "Unlimited SKUs"
+msgstr "Unlimited SKUs"
+
+msgid "Unlock Calendar"
+msgstr "Unlock Calendar"
+
+msgid "Up to 500 SKUs"
+msgstr "Up to 500 SKUs"
+
+msgid "Upcoming Maintenance"
+msgstr "Upcoming જાળવણી"
+
+msgid "Update Delivery Status"
+msgstr "Update ડિલિવરી સ્થિતિ"
+
+msgid "Update Material"
+msgstr "Update Material"
+
+msgid "Update Product Details"
+msgstr "Update ઉત્પાદન વિગતો"
+
+msgid "Update Record"
+msgstr "Update Record"
+
+msgid "Update Status"
+msgstr "Update સ્થિતિ"
+
+msgid "Update Ticket Status"
+msgstr "Update Ticket સ્થિતિ"
+
+msgid "Update Vendor"
+msgstr "Update વેન્ડર"
+
+msgid "Update unit economics and check real-time stock availability."
+msgstr "Update unit economics and check real-time stock availability."
+
+msgid "Upgrade My Plan Now"
+msgstr "Upgrade My Plan Now"
+
+msgid "Upgrade Now"
+msgstr "Upgrade Now"
+
+msgid "Upgrade Plan"
+msgstr "Upgrade Plan"
+
+msgid "Upload File"
+msgstr "અપલોડ કરો File"
+
+msgid "Use Simplified View"
+msgstr "Use Simplified View"
+
+msgid "Use reports and alerts to make better decisions."
+msgstr "Use reports and alerts to make better decisions."
+
+msgid "User & Role Management"
+msgstr "User & Role વ્યવસ્થાપન"
+
+msgid "User Roles"
+msgstr "User Roles"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Users:"
+msgstr "Users:"
+
+msgid "Vehicle"
+msgstr "વાહન"
+
+msgid "Vehicle &amp; Driver Assignment"
+msgstr "વાહન &amp; ચાલક Assignment"
+
+msgid "Vehicle / Driver"
+msgstr "વાહન / ચાલક"
+
+msgid "Vehicle ID"
+msgstr "વાહન ID"
+
+msgid "Vehicle Identity"
+msgstr "વાહન Identity"
+
+msgid "Vehicle Maintenance"
+msgstr "વાહન જાળવણી"
+
+msgid "Vehicle Type"
+msgstr "વાહન Type"
+
+msgid "Velocity Status"
+msgstr "Velocity સ્થિતિ"
+
+msgid "Velocity-Based Strategy"
+msgstr "Velocity-Based Strategy"
+
+msgid "Vendor"
+msgstr "વેન્ડર"
+
+msgid "Vendor / Service Centre"
+msgstr "વેન્ડર / Service Centre"
+
+msgid "Vendor Details"
+msgstr "વેન્ડર વિગતો"
+
+msgid "Vendor Identity"
+msgstr "વેન્ડર Identity"
+
+msgid "Vendor Limit Reached"
+msgstr "વેન્ડર Limit Reached"
+
+msgid "Vendors:"
+msgstr "Vendors:"
+
+msgid "Verify Email & Get Started"
+msgstr "Verify ઇમેઇલ & Get Started"
+
+msgid "Verify Email | CWS Inventory"
+msgstr "Verify ઇમેઇલ | CWS Inventory"
+
+msgid "View Batch"
+msgstr "View Batch"
+
+msgid "View Details"
+msgstr "View વિગતો"
+
+msgid "View Full"
+msgstr "View Full"
+
+msgid "View all"
+msgstr "View all"
+
+msgid "View your entire notification history"
+msgstr "View your entire notification history"
+
+msgid "Warehouses"
+msgstr "Warehouses"
+
+msgid "Warm regards"
+msgstr "Warm regards"
+
+msgid "Warnings"
+msgstr "Warnings"
+
+msgid "Way"
+msgstr "Way"
+
+msgid "We couldn't process your payment successfully."
+msgstr "We couldn't process your payment successfully."
+
+msgid "We have successfully received your payment and your subscription has been renewed. Thank you for continuing to choose CWS Inventory!"
+msgstr "We have successfully received your payment and your subscription has been renewed. Thank you for continuing to choose CWS Inventory!"
+
+msgid "We hope you are enjoying your free trial of CWS Inventory! This is a quick reminder that your 7-day free trial will expire in exactly"
+msgstr "We hope you are enjoying your free trial of CWS Inventory! This is a quick reminder that your 7-day free trial will expire in exactly"
+
+msgid "We're here to support you at every step. If you have any questions, simply reply to this email."
+msgstr "We're here to support you at every step. If you have any questions, simply reply to this email."
+
+msgid "We've sent a verification link to"
+msgstr "We've sent a verification link to"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Weight (kg)"
+msgstr "Weight (kg)"
+
+msgid "Welcome to CWS Inventory"
+msgstr "Welcome to CWS Inventory"
+
+msgid "Welcome to CWS Inventory!"
+msgstr "Welcome to CWS Inventory!"
+
+msgid "Welcome,"
+msgstr "Welcome,"
+
+msgid "What's next?"
+msgstr "What's next?"
+
+msgid "Work Email"
+msgstr "Work ઇમેઇલ"
+
+msgid "Workflows"
+msgstr "Workflows"
+
+msgid "Write a response or ask for more details..."
+msgstr "Write a response or ask for more details..."
+
+msgid "Yes, Log me out"
+msgstr "હા Log me out"
+
+msgid "You"
+msgstr "You"
+
+msgid "You (Admin)"
+msgstr "You (Admin)"
+
+msgid "You are receiving this because you submitted a demo request at CWS Inventory."
+msgstr "You are receiving this because you submitted a demo request at CWS Inventory."
+
+msgid "You can add your products once you reach the dashboard."
+msgstr "You can add your products once you reach the dashboard."
+
+msgid "You can attach PDFs, images, or documents (multiple files allowed)."
+msgstr "You can attach PDFs, images, or documents (multiple files allowed)."
+
+msgid "You received this email because you signed up for a trial account at CWS Inventory."
+msgstr "You received this email because you signed up for a trial account at CWS Inventory."
+
+msgid "You received this email because you submitted a contact request on our website."
+msgstr "You received this email because you submitted a contact request on our website."
+
+msgid "You — Mark as Resolved"
+msgstr "You — Mark as Resolved"
+
+msgid "You — Review & comment"
+msgstr "You — Review & comment"
+
+msgid "You — Ticket Closed"
+msgstr "You — Ticket Closed"
+
+msgid "You — Ticket Submitted"
+msgstr "You — Ticket Submitted"
+
+msgid "You're all caught up! There are no notifications to display."
+msgstr "You're all caught up! There are no notifications to display."
+
+msgid "You've already provided your business name during signup. Add your address or GST details if you'd like (Optional)."
+msgstr "You've already provided your business name during signup. ઉમેરો your address or GST details if you'd like (Optional)."
+
+msgid "Your"
+msgstr "Your"
+
+msgid "Your Details"
+msgstr "Your વિગતો"
+
+msgid "Your Free Trial is Expiring"
+msgstr "Your Free Trial is Expiring"
+
+msgid "Your Inventory —"
+msgstr "Your Inventory —"
+
+msgid "Your Progress"
+msgstr "Your Progress"
+
+msgid "Your browser does not support the video tag."
+msgstr "Your browser does not support the video tag."
+
+msgid "Your company admin hasn't set up an onboarding plan for you yet."
+msgstr "Your company admin hasn't set up an onboarding plan for you yet."
+
+msgid "Your company admin will assign training to you."
+msgstr "Your company admin will assign training to you."
+
+msgid "Your inventory is empty or matches no filters."
+msgstr "Your inventory is empty or matches no filters."
+
+msgid "Your subscription expired today. Your account has been temporarily restricted."
+msgstr "Your subscription expired today. Your account has been temporarily restricted."
+
+msgid "Your subscription is expiring in"
+msgstr "Your subscription is expiring in"
+
+msgid "Your workspace is fully active and ready to go."
+msgstr "Your workspace is fully active and ready to go."
+
+msgid "browse"
+msgstr "browse"
+
+msgid "close the ticket."
+msgstr "close the ticket."
+
+msgid "companies"
+msgstr "companies"
+
+msgid "complete"
+msgstr "complete"
+
+msgid "days"
+msgstr "days"
+
+msgid "e.g. 10:00 AM – 12:00 PM"
+msgstr "e.g. 10:00 AM – 12:00 PM"
+
+msgid "e.g. 154"
+msgstr "e.g. 154"
+
+msgid "e.g. 21.3"
+msgstr "e.g. 21.3"
+
+msgid "e.g. 85.5"
+msgstr "e.g. 85.5"
+
+msgid "e.g. 9876543210"
+msgstr "e.g. 9876543210"
+
+msgid "e.g. Delivery Route Optimization Guide"
+msgstr "e.g. ડિલિવરી Route Optimization Guide"
+
+msgid "e.g. EV Care Pune"
+msgstr "e.g. EV Care Pune"
+
+msgid "e.g. EV-001"
+msgstr "e.g. EV-001"
+
+msgid "e.g. Electronics x2, Medicines – fragile"
+msgstr "e.g. Electronics x2, Medicines – fragile"
+
+msgid "e.g. John Smith"
+msgstr "e.g. John Smith"
+
+msgid "e.g. MH20 2023 0012345"
+msgstr "e.g. MH20 2023 0012345"
+
+msgid "e.g. MH20AB1234"
+msgstr "e.g. MH20AB1234"
+
+msgid "e.g. MH28BP88514 or MH2020230012345"
+msgstr "e.g. MH28BP88514 or MH2020230012345"
+
+msgid "e.g. Near Railway Station"
+msgstr "e.g. Near Railway Station"
+
+msgid "e.g. Rahul Sharma"
+msgstr "e.g. Rahul Sharma"
+
+msgid "e.g. Ramesh Kumar"
+msgstr "e.g. Ramesh Kumar"
+
+msgid "e.g. Tata Ace EV"
+msgstr "e.g. Tata Ace EV"
+
+msgid "e.g. Tata Motors"
+msgstr "e.g. Tata Motors"
+
+msgid "e.g. john@example.com"
+msgstr "e.g. john@example.com"
+
+msgid "inquiries"
+msgstr "inquiries"
+
+msgid "km left"
+msgstr "km left"
+
+msgid "leave blank for warehouse default"
+msgstr "leave blank for warehouse default"
+
+msgid "logistics, safety, delivery (comma-separated)"
+msgstr "logistics, safety, delivery (comma-separated)"
+
+msgid "message"
+msgstr "message"
+
+msgid "mo"
+msgstr "mo"
+
+msgid "of"
+msgstr "of"
+
+msgid "on"
+msgstr "on"
+
+msgid "optional"
+msgstr "optional"
+
+msgid "rahul@company.com"
+msgstr "rahul@company.com"
+
+msgid "requests"
+msgstr "requests"
+
+msgid "tasks total"
+msgstr "tasks total"
+
+msgid "with CWS Inventory. We're thrilled to have you on board and can't wait to see how our platform transforms your business operations."
+msgstr "with CWS Inventory. We're thrilled to have you on board and can't wait to see how our platform transforms your business operations."
+
+msgid "you"
+msgstr "you"
+

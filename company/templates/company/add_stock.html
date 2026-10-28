@@ -1,0 +1,106 @@
+{% load i18n %}
+{ % load static % }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Add Stock" %}</title>
+    <link rel="icon" type="image/png" href="{% static 'accounts/images/Tab Logo.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-xl bg-white rounded-2xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-slate-800 mb-6">{% trans "Add Stock" %}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mb-4 p-3 rounded text-white 
+                {% if message.tags == 'success' %}bg-green-600{% else %}bg-red-600{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+            <label class="block text-sm font-medium text-slate-700">{% trans "Product Name" %}</label>
+            <input type="text" name="product_name" required
+                   class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-slate-700">{% trans "Quantity" %}</label>
+            <input type="number" name="quantity" min="1" required
+                   class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <div class="flex justify-end gap-3">
+            <a href="{% url 'company_dashboard' %}"
+               class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300">{% trans "Cancel" %}</a>
+            <button type="submit"
+                    class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
+                {% trans "Save Stock" %}
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+</html>

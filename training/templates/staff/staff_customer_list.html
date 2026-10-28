@@ -1,0 +1,147 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Customers" %}{% endblock %}
+
+{% block breadcrumb %}
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<span class="font-semibold text-slate-800">{% trans "Customers" %}</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">{% trans "Customers" %}</h2>
+            <p class="text-slate-500 text-sm">{% trans "Manage your customer relationships and contact details." %}</p>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <a href="{% url 'staff_customer_create' %}" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition flex items-center justify-center gap-2">
+                <i data-lucide="user-plus" class="w-4 h-4"></i>
+                {% trans "Add Customer" %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-slate-100 gap-4">
+            <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                {% trans "Customer Directory" %}
+            </h3>
+            <span class="bg-indigo-100 text-indigo-700 text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-wider">
+                {{ customers.paginator.count|default:customers.count }} {% trans "Total" %}
+            </span>
+            
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <button onclick="toggleCustomerFilter()" class="icon-btn border border-slate-200 bg-white p-2 rounded-lg" title="Filter customers">
+                    <i data-lucide="filter" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filter Panel -->
+        <div id="customerFilterPanel" class="bg-white border-b border-slate-100 p-4 sm:p-6 hidden">
+            <form method="get" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Name" %}</label>
+                    <input type="text" name="name" value="{{ request.GET.name }}" placeholder="{% trans 'Search customer name...' %}" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Email" %}</label>
+                    <input type="email" name="email" value="{{ request.GET.email }}" placeholder="{% trans 'Search email...' %}" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div class="flex flex-row items-end gap-3 mt-4">
+                    <button type="submit" class="bg-indigo-600 text-white px-3 py-2 rounded-lg text-sm font-bold hover:bg-indigo-700 transition">
+                        {% trans "Apply Filter" %}
+                    </button>
+                    <a href="{% url 'staff_customer_list' %}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-indigo-700 transition inline-flex items-center justify-center">
+                        {% trans "Reset" %}
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left min-w-[600px]">
+                <thead class="bg-slate-50 text-slate-500 text-[11px] font-black uppercase tracking-widest border-b border-slate-100">
+                    <tr>
+                        <th class="px-6 sm:px-8 py-4">{% trans "Customer Name" %}</th>
+                        <th>{% trans "Company" %}</th>
+                        <th class="px-6 sm:px-8 py-4">{% trans "Email" %}</th>
+                        <th class="px-6 sm:px-8 py-4">{% trans "Phone" %}</th>
+                        <th class="px-6 sm:px-8 py-4 text-right">{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for customer in customers %}
+                    <tr class="hover:bg-slate-50 transition-colors group">
+                        <td class="px-6 sm:px-8 py-4 font-bold text-slate-700">{{ customer.contact_name }}</td>
+                        <td class="px-6 sm:px-8 py-4">{{ customer.company_name|default:"-" }}</td>
+                        <td class="px-6 sm:px-8 py-4">{{ customer.email }}</td>
+                        <td class="px-6 sm:px-8 py-4">{{ customer.phone }}</td>
+                        <td class="px-6 sm:px-8 py-4 text-right">
+                            <div class="flex items-center justify-end gap-2">
+                                <a href="{% url 'staff_customer_edit' customer.id %}" class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all" title="Edit Customer">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </a>
+                                <form method="post" action="{% url 'staff_customer_delete_request' customer.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="reason" value="Staff request from list view">
+                                    <button type="submit" onclick="return confirm('Request to delete this customer?')" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" title="Delete Customer">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-16 sm:py-24">
+                            <div class="flex flex-col items-center px-4">
+                                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                    <i data-lucide="users" class="w-8 h-8 text-slate-200"></i>
+                                </div>
+                                <h3 class="text-slate-900 font-bold">{% trans "No customers found" %}</h3>
+                                <p>{% trans "Start by adding your first customer." %}</p>
+                                <a href="{% url 'staff_customer_create' %}" class="mt-4 text-indigo-600 font-bold text-sm hover:underline flex items-center gap-2">
+                                    {% trans "Add customer now" %} <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between px-6 py-4 bg-slate-50 border-t">
+            <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest">
+                {% trans "Page" %} {{ customers.number|default:"1" }} {% trans "of" %} {{ customers.paginator.num_pages|default:"1" }}
+            </p>
+            <div class="flex items-center gap-2">
+                <a href="?page={% if customers.has_previous %}{{ customers.previous_page_number }}{% else %}1{% endif %}&name={{ request.GET.name }}&email={{ request.GET.email }}" class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 {% if not customers.has_previous %}opacity-40 pointer-events-none{% endif %}">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </a>
+                <a href="?page={% if customers.has_next %}{{ customers.next_page_number }}{% else %}{{ customers.paginator.num_pages|default:'1' }}{% endif %}&name={{ request.GET.name }}&email={{ request.GET.email }}" class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 {% if not customers.has_next %}opacity-40 pointer-events-none{% endif %}">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function toggleCustomerFilter() {
+        document.getElementById("customerFilterPanel").classList.toggle("hidden");
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{{ action }} {% trans "Driver" %}{% endblock %}
+{% block nav_drivers %}active-nav{% endblock %}
+{% block page_title %}{{ action }} {% trans "Driver" %}{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto">
+<div class="mb-6 flex items-center gap-3">
+    <a href="{% url 'driver_list' %}" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500 transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </a>
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{{ action }} {% trans "Driver" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Fill in the driver details below." %}</p>
+    </div>
+</div>
+
+<form method="post" class="space-y-0">
+    {% csrf_token %}
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
+
+        <!-- ── Section: Identity ── -->
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i data-lucide="user-round" class="w-4 h-4 text-indigo-500"></i> {% trans "Driver Details" %}
+        </h3>
+
+        <!-- Row: Name & Phone -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Name" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="name" required
+                       value="{{ driver.name|default:'' }}"
+                       placeholder="{% trans 'e.g. Ramesh Kumar' %}"
+                       pattern="[A-Za-z\s]+"
+                       title="{% trans 'Only alphabetic characters and spaces are allowed.' %}"
+                       oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                {% if form.name.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ form.name.errors.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Phone" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="phone" required
+                       value="{{ driver.phone|default:'' }}"
+                       placeholder="{% trans 'e.g. 9876543210' %}"
+                       maxlength="10"
+                       pattern="[6-9][0-9]{9}"
+                        title="{% trans '10-digit Indian mobile number starting with 6, 7, 8 or 9' %}"
+                       oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                {% if form.phone.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ form.phone.errors.0 }}</p>
+                {% endif %}
+                <p class="text-slate-400 text-xs mt-1">{% trans "10-digit mobile number" %}</p>
+            </div>
+        </div>
+
+        <!-- Row: Email & Status -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Email" %}</label>
+                <input type="email" name="email"
+                       value="{{ driver.email|default:'' }}"
+                       placeholder="driver@example.com"
+                       maxlength="254"
+                       pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                       title="{% trans 'Please enter a valid email address.' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                {% if form.email.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Status" %}</label>
+                <select name="status"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    {% for val, label in status_choices %}
+                    <option value="{{ val }}" {% if driver.status == val %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- ── Section: License ── -->
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100 pt-2">
+            <i data-lucide="id-card" class="w-4 h-4 text-indigo-500"></i> {% trans "License & Dates" %}
+        </h3>
+
+        <!-- Row: License Number & Expiry -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "License Number" %}</label>
+                <input type="text" name="license_number" id="id_license_number"
+                       value="{{ driver.license_number|default:'' }}"
+                       placeholder="{% trans 'e.g. MH20 2023 0012345' %}"
+                       maxlength="20"
+                        title="{% trans 'e.g. MH28BP88514 or MH2020230012345' %}"
+                       oninput="this.value=this.value.replace(/[^A-Za-z0-9 ]/g,'').toUpperCase()"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                {% if form.license_number.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ form.license_number.errors.0 }}</p>
+                {% endif %}
+                <p class="text-slate-400 text-xs mt-1">{% trans "e.g. MH28BP88514 or MH2020230012345" %}</p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "License Expiry" %}</label>
+                <input type="date" name="license_expiry"
+                       value="{{ driver.license_expiry|date:'Y-m-d'|default:'' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+        </div>
+
+        <!-- Row: Joined Date -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Joined Date" %}</label>
+                <input type="date" name="joined_date"
+                       value="{{ driver.joined_date|date:'Y-m-d'|default:'' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Address" %}</label>
+            <textarea name="address" rows="2"
+                      placeholder="{% trans "Driver's address…" %}"
+                      class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ driver.address|default:'' }}</textarea>
+        </div>
+
+        <!-- Notes -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Notes" %}</label>
+            <textarea name="notes" rows="3"
+                      placeholder="{% trans 'Any additional notes about this driver…' %}"
+                      class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ driver.notes|default:'' }}</textarea>
+        </div>
+
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end gap-3 mt-4 pt-4">
+        <a href="{% url 'driver_list' %}"
+           class="px-5 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">{% trans "Cancel" %}</a>
+        <button type="submit"
+                class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors flex items-center gap-2 shadow-sm shadow-indigo-200">
+            <i data-lucide="save" class="w-4 h-4"></i> {% if action == 'Edit' %}{% trans "Update" %}{% else %}{{ action }}{% endif %} {% trans "Driver" %}
+        </button>
+    </div>
+</form>
+
+</div>
+{% endblock %}

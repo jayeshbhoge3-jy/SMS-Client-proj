@@ -1,0 +1,345 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Start Onboarding" %}{% endblock %}
+{% block nav_onboarding %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <a href="{% url 'training:onboarding_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1 mb-3">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Onboarding" %}
+        </a>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Start Staff Onboarding" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "A default checklist will be created automatically" %}</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 max-w-2xl">
+    <form method="post">
+        {% csrf_token %}
+        <div class="space-y-4">
+
+            <!-- Staff Member — custom dropdown -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Staff Member" %} <span class="text-red-500">*</span></label>
+                <input type="hidden" name="staff" id="staff-input" value="">
+                <div class="flex gap-2">
+                    <div class="relative flex-1" id="staff-dropdown">
+                        <button type="button" onclick="toggleDrop('staff')"
+                                class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                            <span id="staff-label" class="text-slate-400">{% trans "Select staff..." %}</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="staff-chevron"></i>
+                        </button>
+                        <div id="staff-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-48">
+                            <button type="button" onclick="pickOption('staff','','{% trans "Select staff..." %}',true)"
+                                    class="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-indigo-50 transition-colors">{% trans "Select staff..." %}</button>
+                            {% for s in staff_list %}
+                            <button type="button" onclick="pickOption('staff','{{ s.pk }}','{{ s.name }} — {{ s.email }}')"
+                                    class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors staff-opt" data-id="{{ s.pk }}" data-name="{{ s.name }}">
+                                {{ s.name }} — {{ s.email }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <button type="button" onclick="openAddStaffModal()"
+                        class="flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> {% trans "Add New" %}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dates -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Join Date" %} <span class="text-red-500">*</span></label>
+                    <input type="date" name="join_date" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Target Completion" %}</label>
+                    <input type="date" name="target_completion_date" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                </div>
+            </div>
+
+            <!-- Assigned Mentor — custom dropdown -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Assigned Mentor" %}</label>
+                <input type="hidden" name="mentor" id="mentor-input" value="">
+                <div class="relative" id="mentor-dropdown">
+                    <button type="button" onclick="toggleDrop('mentor')"
+                            class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                        <span id="mentor-label" class="text-slate-500">{% trans "No mentor" %}</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="mentor-chevron"></i>
+                    </button>
+                    <div id="mentor-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-48">
+                        <button type="button" onclick="pickOption('mentor','','{% trans "No mentor" %}',true)"
+                                class="w-full text-left px-4 py-2.5 text-sm text-slate-500 hover:bg-indigo-50 transition-colors">{% trans "No mentor" %}</button>
+                        {% for s in staff_list %}
+                        <button type="button" onclick="pickOption('mentor','{{ s.pk }}','{{ s.name }}')"
+                                class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors mentor-opt" data-id="{{ s.pk }}" data-name="{{ s.name }}">
+                            {{ s.name }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Notes" %}</label>
+                <textarea name="notes" rows="3" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'Any special notes for this onboarding...' %}"></textarea>
+            </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mt-4">
+            <p class="text-sm text-amber-800 font-medium flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4"></i> {% trans "Default checklist included" %}
+            </p>
+            <p class="text-xs text-amber-700 mt-1">{% trans "8 standard onboarding tasks will be created. You can add or customise them after creation." %}</p>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% trans "Start Onboarding" %}
+            </button>
+            <a href="{% url 'training:onboarding_list' %}" class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+</div>
+
+<!-- Add New Staff Modal -->
+<div id="add-staff-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md mx-4 p-6">
+        <div class="flex items-center justify-between mb-5">
+            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <i data-lucide="user-plus" class="w-5 h-5 text-indigo-600"></i> {% trans "Add New Staff Member" %}
+            </h2>
+            <button onclick="closeAddStaffModal()" class="text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div id="modal-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-4"></div>
+        <div id="modal-success" class="hidden bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl px-4 py-3 mb-4"></div>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
+                <input type="text" id="new-staff-name"
+                    class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-all"
+                    placeholder="{% trans 'e.g. Rahul Sharma' %}" autocomplete="off" maxlength="50">
+                <p id="name-field-error" class="hidden mt-1.5 text-xs text-red-600 font-medium flex items-center gap-1">
+                    <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                    <span id="name-field-error-text"></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Email" %} <span class="text-red-500">*</span></label>
+                <input type="email" id="new-staff-email"
+                    class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-all"
+                    placeholder="{% trans 'rahul@company.com' %}" autocomplete="off" maxlength="100">
+                <p id="email-field-error" class="hidden mt-1.5 text-xs text-red-600 font-medium flex items-center gap-1">
+                    <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                    <span id="email-field-error-text"></span>
+                </p>
+            </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button type="button" onclick="submitNewStaff()" id="save-staff-btn"
+                class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="save" class="w-4 h-4"></i> {% trans "Save & Select" %}
+            </button>
+            <button type="button" onclick="closeAddStaffModal()"
+                class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% trans "Cancel" %}
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── Custom dropdown helpers ────────────────────────────────────────────────
+function toggleDrop(name) {
+    const opts = document.getElementById(name + '-options');
+    const chev = document.getElementById(name + '-chevron');
+    const isHidden = opts.classList.contains('hidden');
+    // close all others first
+    ['staff', 'mentor'].forEach(n => {
+        document.getElementById(n + '-options').classList.add('hidden');
+        document.getElementById(n + '-chevron').style.transform = '';
+    });
+    if (isHidden) {
+        opts.classList.remove('hidden');
+        chev.style.transform = 'rotate(180deg)';
+    }
+}
+
+function pickOption(name, val, label, muted) {
+    document.getElementById(name + '-input').value = val;
+    const lbl = document.getElementById(name + '-label');
+    lbl.textContent = label;
+    lbl.className = muted ? 'text-slate-400' : 'text-slate-800';
+    document.getElementById(name + '-options').classList.add('hidden');
+    document.getElementById(name + '-chevron').style.transform = '';
+}
+
+// close dropdowns on outside click
+document.addEventListener('click', function(e) {
+    ['staff', 'mentor'].forEach(name => {
+        const wrap = document.getElementById(name + '-dropdown');
+        if (wrap && !wrap.contains(e.target)) {
+            document.getElementById(name + '-options').classList.add('hidden');
+            document.getElementById(name + '-chevron').style.transform = '';
+        }
+    });
+});
+
+// ── Field helpers ──────────────────────────────────────────────────────────
+function setFieldError(inputId, errorId, errorTextId, message) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    const errorTextEl = document.getElementById(errorTextId);
+    input.classList.add('border-red-400', 'bg-red-50');
+    input.classList.remove('border-slate-200', 'border-green-400', 'bg-green-50');
+    errorTextEl.textContent = message;
+    errorEl.classList.remove('hidden');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function setFieldSuccess(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    input.classList.add('border-green-400', 'bg-green-50');
+    input.classList.remove('border-red-400', 'bg-red-50', 'border-slate-200');
+    errorEl.classList.add('hidden');
+}
+
+function resetField(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    input.classList.remove('border-red-400', 'bg-red-50', 'border-green-400', 'bg-green-50');
+    input.classList.add('border-slate-200');
+    errorEl.classList.add('hidden');
+}
+
+function validateModalName() {
+    const raw = document.getElementById('new-staff-name').value;
+    const val = raw.trim();
+    if (!val) { setFieldError('new-staff-name', 'name-field-error', 'name-field-error-text', 'Full name is required.'); return false; }
+    if (raw !== raw.trimStart()) { setFieldError('new-staff-name', 'name-field-error', 'name-field-error-text', 'Name cannot start with a space.'); return false; }
+    if (val.length < 2) { setFieldError('new-staff-name', 'name-field-error', 'name-field-error-text', 'Name must be at least 2 characters.'); return false; }
+    if (!/^[A-Za-z\s]+$/.test(val)) { setFieldError('new-staff-name', 'name-field-error', 'name-field-error-text', 'Name can only contain letters and spaces.'); return false; }
+    if (/\s{2,}/.test(val)) { setFieldError('new-staff-name', 'name-field-error', 'name-field-error-text', 'Name cannot have consecutive spaces.'); return false; }
+    setFieldSuccess('new-staff-name', 'name-field-error');
+    return true;
+}
+
+function validateModalEmail() {
+    const raw = document.getElementById('new-staff-email').value;
+    const val = raw.trim();
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!val) { setFieldError('new-staff-email', 'email-field-error', 'email-field-error-text', 'Email address is required.'); return false; }
+    if (/\s/.test(raw)) { setFieldError('new-staff-email', 'email-field-error', 'email-field-error-text', 'Email cannot contain spaces.'); return false; }
+    if (!emailPattern.test(val)) { setFieldError('new-staff-email', 'email-field-error', 'email-field-error-text', 'Please enter a valid email address.'); return false; }
+    setFieldSuccess('new-staff-email', 'email-field-error');
+    return true;
+}
+
+function openAddStaffModal() {
+    document.getElementById('add-staff-modal').classList.remove('hidden');
+    document.getElementById('modal-error').classList.add('hidden');
+    document.getElementById('modal-success').classList.add('hidden');
+    document.getElementById('new-staff-name').value = '';
+    document.getElementById('new-staff-email').value = '';
+    resetField('new-staff-name', 'name-field-error');
+    resetField('new-staff-email', 'email-field-error');
+    setTimeout(() => document.getElementById('new-staff-name').focus(), 50);
+}
+
+function closeAddStaffModal() {
+    document.getElementById('add-staff-modal').classList.add('hidden');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const nameInput  = document.getElementById('new-staff-name');
+    const emailInput = document.getElementById('new-staff-email');
+    nameInput.addEventListener('keydown', function(e) { if (e.key.length === 1 && !/^[A-Za-z\s]$/.test(e.key)) e.preventDefault(); });
+    nameInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        if (this.value.trim()) validateModalName(); else resetField('new-staff-name', 'name-field-error');
+    });
+    nameInput.addEventListener('blur', function() { if (this.value.trim()) validateModalName(); });
+    emailInput.addEventListener('keydown', function(e) { if (e.key === ' ') e.preventDefault(); });
+    emailInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\s/g, '');
+        if (this.value.trim()) validateModalEmail(); else resetField('new-staff-email', 'email-field-error');
+    });
+    emailInput.addEventListener('blur', function() { if (this.value.trim()) validateModalEmail(); });
+    [nameInput, emailInput].forEach(el => {
+        el.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); submitNewStaff(); } });
+    });
+});
+
+async function submitNewStaff() {
+    const nameOk  = validateModalName();
+    const emailOk = validateModalEmail();
+    if (!nameOk || !emailOk) return;
+
+    const name  = document.getElementById('new-staff-name').value.trim();
+    const email = document.getElementById('new-staff-email').value.trim();
+    const errorBox   = document.getElementById('modal-error');
+    const successBox = document.getElementById('modal-success');
+    const btn = document.getElementById('save-staff-btn');
+    errorBox.classList.add('hidden');
+    successBox.classList.add('hidden');
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="animate-spin w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg> Saving...';
+
+    try {
+        const res = await fetch("{% url 'training:add_staff_ajax' %}", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
+            body: JSON.stringify({ name, email })
+        });
+        const data = await res.json();
+        if (data.success) {
+            // Add to staff custom dropdown
+            const staffOpts = document.getElementById('staff-options');
+            const staffBtn = document.createElement('button');
+            staffBtn.type = 'button';
+            staffBtn.className = 'w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors';
+            staffBtn.textContent = data.name + ' — ' + data.email;
+            staffBtn.onclick = () => pickOption('staff', data.id, data.name + ' — ' + data.email);
+            staffOpts.appendChild(staffBtn);
+
+            // Add to mentor custom dropdown
+            const mentorOpts = document.getElementById('mentor-options');
+            const mentorBtn = document.createElement('button');
+            mentorBtn.type = 'button';
+            mentorBtn.className = 'w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors';
+            mentorBtn.textContent = data.name;
+            mentorBtn.onclick = () => pickOption('mentor', data.id, data.name);
+            mentorOpts.appendChild(mentorBtn);
+
+            // Auto-select in staff dropdown
+            pickOption('staff', data.id, data.name + ' — ' + data.email);
+
+            successBox.textContent = data.name + ' added and selected!';
+            successBox.classList.remove('hidden');
+            setTimeout(() => closeAddStaffModal(), 1000);
+        } else {
+            errorBox.textContent = data.error || 'Failed to add staff.';
+            errorBox.classList.remove('hidden');
+        }
+    } catch (e) {
+        errorBox.textContent = 'Network error. Please try again.';
+        errorBox.classList.remove('hidden');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Save & Select';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+}
+
+document.getElementById('add-staff-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeAddStaffModal();
+});
+</script>
+{% endblock %}

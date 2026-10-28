@@ -1,0 +1,51 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "My Delete Requests" %}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">{% trans "My Delete Requests" %}</h1>
+    <p class="text-slate-500 text-sm mt-1">{% trans "Track the status of your deletion requests" %}</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-left text-sm whitespace-nowrap">
+        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500">
+            <tr>
+                <th class="px-6 py-3 font-medium">{% trans "Date" %}</th>
+                <th class="px-6 py-3 font-medium">{% trans "Module" %}</th>
+                <th class="px-6 py-3 font-medium">{% trans "Item" %}</th>
+                <th class="px-6 py-3 font-medium">{% trans "Reason" %}</th>
+                <th class="px-6 py-3 font-medium">{% trans "Status" %}</th>
+                <th class="px-6 py-3 font-medium">{% trans "Review Note" %}</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200">
+            {% for req in requests %}
+            <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 text-slate-500">{{ req.created_at|date:"M d, Y H:i" }}</td>
+                <td class="px-6 py-4 text-slate-800 font-medium">{{ req.get_module_display }}</td>
+                <td class="px-6 py-4 text-slate-500">{{ req.object_repr }}</td>
+                <td class="px-6 py-4 text-slate-500 truncate max-w-xs" title="{{ req.reason }}">{{ req.reason|default:"-" }}</td>
+                <td class="px-6 py-4">
+                    {% if req.status == 'PENDING' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
+                    {% elif req.status == 'APPROVED' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
+                    {% elif req.status == 'REJECTED' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rejected</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-slate-500 truncate max-w-xs" title="{{ req.rejection_note }}">{{ req.rejection_note|default:"-" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+                    {% trans "No delete requests found." %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

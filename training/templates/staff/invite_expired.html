@@ -1,0 +1,26 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Invite Link Expired" %} | {% trans "Staff Portal" %}</title>
+    <link rel="icon" type="image/png" href="{% static 'accounts/images/Tab Logo.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 w-full max-w-md p-8 text-center">
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            </svg>
+        </div>
+        <h1 class="text-xl font-bold text-slate-800 mb-2">{% trans "Invite Link Expired" %}</h1>
+        <p class="text-slate-500 text-sm mb-6">{% trans "This invite link is no longer valid. It may have already been used or has been revoked by your administrator." %}</p>
+        <p class="text-slate-500 text-sm">{% trans "Please contact your administrator to send a new invite link." %}</p>
+        <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="{% url 'staff_login' %}" class="text-sm text-indigo-600 hover:underline">{% trans "Go to Staff Login" %} →</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{% if record %}{% trans "Edit Record" %}{% else %}{% trans "Assign Training" %}{% endif %}{% endblock %}
+{% block nav_records %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <a href="{% url 'training:record_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1 mb-3">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Records" %}
+        </a>
+        <h1 class="text-2xl font-bold text-slate-800">{% if record %}{% trans "Edit Training Record" %}{% else %}{% trans "Assign Training" %}{% endif %}</h1>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 max-w-2xl">
+    <form method="post">
+        {% csrf_token %}
+        <div class="space-y-4">
+
+            {% if not record %}
+            <!-- Staff Member -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Staff Member" %} <span class="text-red-500">*</span></label>
+                <input type="hidden" name="staff" id="staff-input" value="">
+                <div class="relative" id="staff-dropdown">
+                    <button type="button" onclick="toggleDrop('staff')"
+                            class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                        <span id="staff-label" class="text-slate-400">{% trans "Select staff..." %}</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="staff-chevron"></i>
+                    </button>
+                    <div id="staff-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-48">
+                        <button type="button" onclick="pickOption('staff','','{% trans "Select staff..." %}',true)"
+                                class="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-indigo-50 transition-colors">{% trans "Select staff..." %}</button>
+                        {% for s in staff_list %}
+                        <button type="button" onclick="pickOption('staff','{{ s.pk }}','{{ s.name }} — {{ s.email }}')"
+                                class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors">
+                            {{ s.name }} — {{ s.email }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Material -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Training Material" %} <span class="text-red-500">*</span></label>
+                <input type="hidden" name="material" id="material-input" value="">
+                <div class="relative" id="material-dropdown">
+                    <button type="button" onclick="toggleDrop('material')"
+                            class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                        <span id="material-label" class="text-slate-400">{% trans "Select material..." %}</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="material-chevron"></i>
+                    </button>
+                    <div id="material-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-48">
+                        <button type="button" onclick="pickOption('material','','{% trans "Select material..." %}',true)"
+                                class="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-indigo-50 transition-colors">{% trans "Select material..." %}</button>
+                        {% for m in materials %}
+                        <button type="button" onclick="pickOption('material','{{ m.pk }}','{{ m.title }} ({{ m.get_material_type_display }})')"
+                                class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors">
+                            {{ m.title }} ({{ m.get_material_type_display }})
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="bg-slate-50 rounded-xl p-4">
+                <p class="text-sm text-slate-600"><span class="font-medium">{% trans "Staff:" %}</span> {{ record.staff.name }}</p>
+                <p class="text-sm text-slate-600 mt-1"><span class="font-medium">{% trans "Material:" %}</span> {{ record.material.title }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Status + Score -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Status" %}</label>
+                    <input type="hidden" name="status" id="status-input" value="{{ record.status|default:status_choices.0.0 }}">
+                    <div class="relative" id="status-dropdown">
+                        <button type="button" onclick="toggleDrop('status')"
+                                class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                            <span id="status-label" class="text-slate-800">{% for val, label in status_choices %}{% if record.status == val or forloop.first %}{{ label }}{% endif %}{% endfor %}</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="status-chevron"></i>
+                        </button>
+                        <div id="status-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+                            {% for val, label in status_choices %}
+                            <button type="button" onclick="pickOption('status','{{ val }}','{{ label }}')"
+                                    class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors">{{ label }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Score (%)" %}</label>
+                    <input type="number" name="score" value="{{ record.score|default:'' }}" min="0" max="100" step="0.01"
+                           class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'e.g. 85.5' %}">
+                </div>
+            </div>
+
+            <!-- Due Date + Completion Date -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Due Date" %}</label>
+                    <input type="date" name="due_date" value="{{ record.due_date|default:'' }}" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Completion Date" %}</label>
+                    <input type="date" name="completion_date" value="{{ record.completion_date|default:'' }}" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Notes" %}</label>
+                <textarea name="notes" rows="3" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'Additional notes...' %}">{{ record.notes|default:'' }}</textarea>
+            </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% if record %}{% trans "Update Record" %}{% else %}{% trans "Assign Training" %}{% endif %}
+            </button>
+            <a href="{% url 'training:record_list' %}" class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+</div>
+
+
+<script>
+
+// ── Custom dropdown helpers ────────────────────────────────────────────────
+const dropNames = ['staff','material','status'];
+function toggleDrop(name) {
+    const opts = document.getElementById(name+'-options');
+    const chev = document.getElementById(name+'-chevron');
+    const isHidden = opts.classList.contains('hidden');
+    dropNames.forEach(n => {
+        const o = document.getElementById(n+'-options');
+        const c = document.getElementById(n+'-chevron');
+        if (o) o.classList.add('hidden');
+        if (c) c.style.transform = '';
+    });
+    if (isHidden) { opts.classList.remove('hidden'); chev.style.transform = 'rotate(180deg)'; }
+}
+function pickOption(name, val, label, muted) {
+    document.getElementById(name+'-input').value = val;
+    const lbl = document.getElementById(name+'-label');
+    lbl.textContent = label;
+    lbl.className = muted ? 'text-slate-400' : 'text-slate-800';
+    document.getElementById(name+'-options').classList.add('hidden');
+    document.getElementById(name+'-chevron').style.transform = '';
+}
+document.addEventListener('click', function(e) {
+    dropNames.forEach(name => {
+        const wrap = document.getElementById(name+'-dropdown');
+        if (wrap && !wrap.contains(e.target)) {
+            const o = document.getElementById(name+'-options');
+            const c = document.getElementById(name+'-chevron');
+            if (o) o.classList.add('hidden');
+            if (c) c.style.transform = '';
+        }
+    });
+});
+</script>
+{% endblock %}

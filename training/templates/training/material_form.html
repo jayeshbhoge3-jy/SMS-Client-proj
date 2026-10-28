@@ -1,0 +1,159 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{% if material %}{% trans "Edit Material" %}{% else %}{% trans "Add Material" %}{% endif %}{% endblock %}
+{% block nav_materials %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <a href="{% url 'training:material_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1 mb-3">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Materials" %}
+        </a>
+        <h1 class="text-2xl font-bold text-slate-800">{% if material %}{% trans "Edit Material" %}{% else %}{% trans "Add Training Material" %}{% endif %}</h1>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 max-w-2xl">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Title" %} <span class="text-red-500">*</span></label>
+                <input type="text" name="title" value="{{ material.title|default:'' }}" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'e.g. Delivery Route Optimization Guide' %}">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Description" %}</label>
+                <textarea name="description" rows="3" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'Brief description of the material...' %}">{{ material.description|default:'' }}</textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Type" %} <span class="text-red-500">*</span></label>
+                <input type="hidden" name="material_type" id="material_type-input" value="{{ material.material_type|default:type_choices.0.0 }}">
+                <div class="relative" id="material_type-dropdown">
+                    <button type="button" onclick="toggleDrop()"
+                            class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                        <span id="material_type-label">{% for val, label in type_choices %}{% if material.material_type == val %}{{ label }}{% if forloop.first and not material %}{% endif %}{% elif forloop.first and not material.material_type %}{{ label }}{% endif %}{% endfor %}</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0" id="material_type-chevron"></i>
+                    </button>
+                    <div id="material_type-options" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+                        {% for val, label in type_choices %}
+                        <button type="button" onclick="pickOption('{{ val }}', '{{ label }}')"
+                                class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors {% if material.material_type == val %}bg-indigo-50 text-indigo-700 font-medium{% endif %}">
+                            {{ label }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "URL / Link" %}</label>
+                <input type="url" name="file_url" value="{{ material.file_url|default:'' }}" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="https://...">
+            </div>
+
+            <!-- File Upload -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Upload File" %}</label>
+                {% if material.file_upload %}
+                <div class="flex items-center gap-2 mb-2 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
+                    <i data-lucide="paperclip" class="w-4 h-4 text-indigo-500"></i>
+                    <span>{% trans "Current:" %} <a href="{{ material.file_upload.url }}" target="_blank" class="text-indigo-600 hover:underline">{{ material.file_upload.name }}</a></span>
+                </div>
+                {% endif %}
+                <div id="drop-zone" class="border-2 border-dashed border-slate-200 rounded-xl px-4 py-6 text-center cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition-colors">
+                    <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+                    <p class="text-sm text-slate-500">{% trans "Drag & drop a file here, or" %} <span class="text-indigo-600 font-medium">{% trans "browse" %}</span></p>
+                    <p class="text-xs text-slate-400 mt-1">{% trans "PDF, DOC, DOCX, PPT, PPTX, MP4, ZIP — max 50MB" %}</p>
+                    <input type="file" name="file_upload" id="file-input" class="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.zip,.xlsx,.xls">
+                </div>
+                <div id="file-preview" class="hidden mt-2 flex items-center gap-2 text-sm text-slate-700 bg-green-50 border border-green-200 rounded-xl px-4 py-2.5">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                    <span id="file-name"></span>
+                    <span id="file-size" class="text-slate-400 text-xs"></span>
+                    <button type="button" onclick="clearFile()" class="ml-auto text-slate-400 hover:text-red-500">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Tags" %}</label>
+                <input type="text" name="tags" value="{{ material.tags|default:'' }}" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="{% trans 'logistics, safety, delivery (comma-separated)' %}">
+            </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% if material %}{% trans "Update Material" %}{% else %}{% trans "Add Material" %}{% endif %}
+            </button>
+            <a href="{% url 'training:material_list' %}" class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+function toggleDrop() {
+    const opts = document.getElementById('material_type-options');
+    const chev = document.getElementById('material_type-chevron');
+    const isHidden = opts.classList.contains('hidden');
+    opts.classList.toggle('hidden', !isHidden);
+    chev.style.transform = isHidden ? 'rotate(180deg)' : '';
+}
+function pickOption(val, label) {
+    document.getElementById('material_type-input').value = val;
+    document.getElementById('material_type-label').textContent = label;
+    document.getElementById('material_type-options').classList.add('hidden');
+    document.getElementById('material_type-chevron').style.transform = '';
+}
+document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('material_type-dropdown');
+    if (wrap && !wrap.contains(e.target)) {
+        document.getElementById('material_type-options').classList.add('hidden');
+        document.getElementById('material_type-chevron').style.transform = '';
+    }
+});
+
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+const filePreview = document.getElementById('file-preview');
+const fileName = document.getElementById('file-name');
+const fileSize = document.getElementById('file-size');
+
+dropZone.addEventListener('click', () => fileInput.click());
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('border-indigo-400', 'bg-indigo-50');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('border-indigo-400', 'bg-indigo-50');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-indigo-400', 'bg-indigo-50');
+    const file = e.dataTransfer.files[0];
+    if (file) showFile(file);
+});
+
+fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) showFile(fileInput.files[0]);
+});
+
+function showFile(file) {
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    fileInput.files = dt.files;
+    fileName.textContent = file.name;
+    fileSize.textContent = '(' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+    filePreview.classList.remove('hidden');
+    dropZone.classList.add('hidden');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function clearFile() {
+    fileInput.value = '';
+    filePreview.classList.add('hidden');
+    dropZone.classList.remove('hidden');
+}
+</script>
+{% endblock %}

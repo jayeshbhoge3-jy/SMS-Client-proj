@@ -1,0 +1,406 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{{ action }} {% trans "Vehicle" %}{% endblock %}
+{% block nav_vehicles %}active-nav{% endblock %}
+{% block page_title %}{{ action }} {% trans "E-Vehicle" %}{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Live battery preview */
+    .preview-bar { height: 10px; border-radius: 9999px; background: #e2e8f0; overflow: hidden; transition: width 0.3s; }
+    .preview-fill { height: 100%; border-radius: 9999px; transition: width 0.3s, background-color 0.3s; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto">
+<div class="mb-6 flex items-center gap-3">
+    <a href="{% url 'vehicle_list' %}" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500 transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </a>
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{{ action }} {% trans "E-Vehicle" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Fill in the electric vehicle details below." %}</p>
+    </div>
+</div>
+
+<form method="post" id="vehicleForm" novalidate class="space-y-0">
+    {% csrf_token %}
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
+
+        <!-- ── Section: Identity ── -->
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i data-lucide="fingerprint" class="w-4 h-4 text-indigo-500"></i> {% trans "Vehicle Identity" %}
+        </h3>
+
+        <!-- Row: Vehicle ID & Registration -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Vehicle ID" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="vehicle_id" name="vehicle_id"
+                       value="{{ vehicle.vehicle_id|default:'' }}"
+                       placeholder="{% trans 'e.g. EV-001' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_vehicle_id">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Registration No." %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="registration_number" name="registration_number"
+                       value="{{ vehicle.registration_number|default:'' }}"
+                       placeholder="{% trans 'e.g. MH20AB1234' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="this.value=this.value.toUpperCase()">
+                <p class="error-msg" id="err_registration_number">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Row: Model & Manufacturer -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Model Name" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="model_name" name="model_name"
+                       value="{{ vehicle.model_name|default:'' }}"
+                       placeholder="{% trans 'e.g. Tata Ace EV' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/^\s+/g, '');">
+                <p class="error-msg" id="err_model_name">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Manufacturer" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="manufacturer" name="manufacturer"
+                       value="{{ vehicle.manufacturer|default:'' }}"
+                       placeholder="{% trans 'e.g. Tata Motors' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/^\s+/g, '');">
+                <p class="error-msg" id="err_manufacturer">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Row: Type & Status -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Vehicle Type" %} <span class="text-red-500">*</span>
+                </label>
+                <select id="vehicle_type" name="vehicle_type"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    <option value="">{% trans "-- Select Type --" %}</option>
+                    {% for val, label in type_choices %}
+                    <option value="{{ val }}" {% if vehicle.vehicle_type == val %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                <p class="error-msg" id="err_vehicle_type">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Status" %}</label>
+                <select name="status"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    {% for val, label in status_choices %}
+                    <option value="{{ val }}" {% if vehicle.status == val %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- ── Section: Battery ── -->
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100 pt-2">
+            <i data-lucide="battery-charging" class="w-4 h-4 text-indigo-500"></i> {% trans "Battery & Range" %}
+        </h3>
+
+        <!-- Row: Battery capacity, Range, Current % -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Capacity (kWh)" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="number" step="0.01" id="battery_capacity_kwh" name="battery_capacity_kwh"
+                       value="{{ vehicle.battery_capacity_kwh|default:'' }}"
+                       placeholder="{% trans 'e.g. 21.3' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_battery_capacity_kwh">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Range / charge (km)" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="number" id="range_per_charge_km" name="range_per_charge_km"
+                       value="{{ vehicle.range_per_charge_km|default:'' }}"
+                       placeholder="{% trans 'e.g. 154' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_range_per_charge_km">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Current Battery (%)" %}
+                </label>
+                <input type="number" id="current_battery_percent" name="current_battery_percent"
+                       min="0" max="100"
+                       value="{{ vehicle.current_battery_percent|default:100 }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="updateBatteryPreview(this.value)">
+                <p class="error-msg" id="err_current_battery_percent">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Live Battery Preview -->
+        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-xs font-medium text-slate-500">{% trans "Battery Level Preview" %}</p>
+                <p id="batteryPct" class="text-xs font-bold text-slate-700">{{ vehicle.current_battery_percent|default:100 }}%</p>
+            </div>
+            <div class="preview-bar">
+                <div id="batteryFill" class="preview-fill bg-green-500"
+                     style="width: {{ vehicle.current_battery_percent|default:100 }}%"></div>
+            </div>
+            <p id="batteryWarning" class="text-xs text-red-600 mt-2 hidden flex items-center gap-1">
+                <i data-lucide="alert-triangle" class="w-3 h-3"></i> {% trans "Low battery — this vehicle will need charging soon." %}
+            </p>
+        </div>
+
+        <!-- ── Section: Assignment & Dates ── -->
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100 pt-2">
+            <i data-lucide="user-check" class="w-4 h-4 text-indigo-500"></i> {% trans "Assignment & Dates" %}
+        </h3>
+
+        <!-- Assigned Driver -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Assigned Driver" %}</label>
+            <select name="assigned_driver"
+                    class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                <option value="">{% trans "-- None --" %}</option>
+                {% for driver in drivers %}
+                <option value="{{ driver.pk }}" {% if vehicle.assigned_driver_id == driver.pk %}selected{% endif %}>{{ driver.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Row: Purchase Date & Insurance Expiry -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Purchase Date" %}</label>
+                <input type="date" id="purchase_date" name="purchase_date"
+                       value="{{ vehicle.purchase_date|default:'' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Insurance Expiry" %}</label>
+                <input type="date" id="insurance_expiry" name="insurance_expiry"
+                       value="{{ vehicle.insurance_expiry|default:'' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_insurance_expiry">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Notes" %}</label>
+            <textarea name="notes" rows="3"
+                      placeholder="{% trans 'Any additional notes about this vehicle…' %}"
+                      class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ vehicle.notes|default:'' }}</textarea>
+        </div>
+
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end gap-3 mt-4 pt-4">
+        <a href="{% url 'vehicle_list' %}"
+           class="px-5 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">{% trans "Cancel" %}</a>
+        <button type="submit"
+                class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors flex items-center gap-2 shadow-sm shadow-indigo-200">
+            <i data-lucide="save" class="w-4 h-4"></i> {% if action == 'Edit' %}{% trans "Update" %}{% else %}{{ action }}{% endif %} {% trans "Vehicle" %}
+        </button>
+    </div>
+</form>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* ════════════════════════════════════════════════
+   VEHICLE FORM — CLIENT-SIDE VALIDATION
+   Mirrors the Django model constraints exactly.
+════════════════════════════════════════════════ */
+
+// ── Battery preview ──
+function updateBatteryPreview(val) {
+    const pct = Math.min(100, Math.max(0, parseInt(val) || 0));
+    const fill    = document.getElementById('batteryFill');
+    const pctText = document.getElementById('batteryPct');
+    const warning = document.getElementById('batteryWarning');
+
+    fill.style.width = pct + '%';
+    pctText.textContent = pct + '%';
+
+    fill.className = 'preview-fill ' +
+        (pct < 20 ? 'bg-red-500' : pct < 50 ? 'bg-amber-400' : 'bg-green-500');
+    warning.classList.toggle('hidden', pct >= 20);
+    lucide.createIcons();
+}
+// Run on page load for edit forms
+updateBatteryPreview(document.getElementById('current_battery_percent').value);
+
+// ── Helper: show / clear error ──
+function showError(fieldId, msg) {
+    const input = document.getElementById(fieldId);
+    const errEl = document.getElementById('err_' + fieldId);
+    if (!input || !errEl) return;
+    input.classList.add('field-error');
+    errEl.querySelector('span').textContent = msg;
+    errEl.classList.add('show');
+    lucide.createIcons();
+}
+function clearError(fieldId) {
+    const input = document.getElementById(fieldId);
+    const errEl = document.getElementById('err_' + fieldId);
+    if (!input || !errEl) return;
+    input.classList.remove('field-error');
+    errEl.classList.remove('show');
+}
+
+// ── Attach blur-time validation ──
+function attachBlur(fieldId, validator) {
+    const el = document.getElementById(fieldId);
+    if (el) el.addEventListener('blur', () => validator(el.value));
+}
+
+// ── Individual validators (return true = valid) ──
+function validateVehicleId(val) {
+    clearError('vehicle_id');
+    if (!val.trim()) { showError('vehicle_id', 'Vehicle ID is required.'); return false; }
+    if (!/^EV-\d{3,}$/.test(val.trim())) { showError('vehicle_id', 'Format must be EV-001, EV-002 …'); return false; }
+    return true;
+}
+function validateRegNum(val) {
+    clearError('registration_number');
+    if (!val.trim()) { showError('registration_number', 'Registration No. is required.'); return false; }
+    if (!/^[A-Z]{2}\d{2}[A-Z]{1,3}\d{4}$/.test(val.trim())) {
+        showError('registration_number', 'Format: MH20AB1234 (state code + 2 digits + 1-3 letters + 4 digits)');
+        return false;
+    }
+    return true;
+}
+function validateModelName(val) {
+    clearError('model_name');
+    if (!val.trim()) { showError('model_name', 'Model name is required.'); return false; }
+    if (/[^a-zA-Z\s]/.test(val)) { showError('model_name', 'Only alphabetic characters and spaces are allowed.'); return false; }
+    return true;
+}
+function validateManufacturer(val) {
+    clearError('manufacturer');
+    if (!val.trim()) { showError('manufacturer', 'Manufacturer is required.'); return false; }
+    if (/[^a-zA-Z\s]/.test(val)) { showError('manufacturer', 'Only alphabetic characters and spaces are allowed.'); return false; }
+    return true;
+}
+function validateVehicleType(val) {
+    clearError('vehicle_type');
+    if (!val) { showError('vehicle_type', 'Please select a vehicle type.'); return false; }
+    return true;
+}
+function validateBatteryCapacity(val) {
+    clearError('battery_capacity_kwh');
+    if (!val || isNaN(val) || parseFloat(val) <= 0) {
+        showError('battery_capacity_kwh', 'Battery capacity must be greater than 0 kWh.');
+        return false;
+    }
+    return true;
+}
+function validateRange(val) {
+    clearError('range_per_charge_km');
+    if (!val || isNaN(val) || parseInt(val) <= 0) {
+        showError('range_per_charge_km', 'Range must be greater than 0 km.');
+        return false;
+    }
+    return true;
+}
+function validateBatteryPercent(val) {
+    clearError('current_battery_percent');
+    const n = parseInt(val);
+    if (isNaN(n) || n < 0 || n > 100) {
+        showError('current_battery_percent', 'Battery % must be between 0 and 100.');
+        return false;
+    }
+    return true;
+}
+function validateInsuranceExpiry() {
+    clearError('insurance_expiry');
+    const purchase  = document.getElementById('purchase_date').value;
+    const insurance = document.getElementById('insurance_expiry').value;
+    if (insurance && purchase && insurance < purchase) {
+        showError('insurance_expiry', 'Insurance expiry must be after purchase date.');
+        return false;
+    }
+    return true;
+}
+
+// ── Attach blur listeners ──
+attachBlur('vehicle_id',            validateVehicleId);
+attachBlur('registration_number',   validateRegNum);
+attachBlur('model_name',            validateModelName);
+attachBlur('manufacturer',          validateManufacturer);
+attachBlur('vehicle_type',          validateVehicleType);
+attachBlur('battery_capacity_kwh',  validateBatteryCapacity);
+attachBlur('range_per_charge_km',   validateRange);
+attachBlur('current_battery_percent', validateBatteryPercent);
+attachBlur('insurance_expiry',      validateInsuranceExpiry);
+document.getElementById('purchase_date')?.addEventListener('blur', validateInsuranceExpiry);
+
+// ── Submit: run all validators ──
+document.getElementById('vehicleForm').addEventListener('submit', function(e) {
+    const checks = [
+        validateVehicleId(document.getElementById('vehicle_id').value),
+        validateRegNum(document.getElementById('registration_number').value),
+        validateModelName(document.getElementById('model_name').value),
+        validateManufacturer(document.getElementById('manufacturer').value),
+        validateVehicleType(document.getElementById('vehicle_type').value),
+        validateBatteryCapacity(document.getElementById('battery_capacity_kwh').value),
+        validateRange(document.getElementById('range_per_charge_km').value),
+        validateBatteryPercent(document.getElementById('current_battery_percent').value),
+        validateInsuranceExpiry(),
+    ];
+    if (checks.includes(false)) {
+        e.preventDefault();
+        // Scroll to first error
+        const firstErr = document.querySelector('.field-error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+});
+</script>
+{% endblock %}

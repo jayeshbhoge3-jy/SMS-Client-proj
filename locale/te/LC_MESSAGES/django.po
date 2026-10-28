@@ -1,0 +1,4567 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 10:00+0000\n"
+"PO-Revision-Date: 2026-06-01 10:00+0000\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Dashboard"
+msgstr "డాష్‌బోర్డ్"
+
+msgid "Business Ops"
+msgstr "బిజినెస్ ఆపరేషన్స్"
+
+msgid "My Inventory"
+msgstr "నా ఇన్వెంటరీ"
+
+msgid "Categories"
+msgstr "కేటగిరీలు"
+
+msgid "Batch Stock"
+msgstr "బ్యాచ్ స్టాక్"
+
+msgid "Sales Orders"
+msgstr "సేల్స్ ఆర్డర్లు"
+
+msgid "Purchases"
+msgstr "కొనుగోళ్లు"
+
+msgid "Vendors"
+msgstr "వెండర్లు"
+
+msgid "Purchase Orders"
+msgstr "పర్చేజ్ ఆర్డర్లు"
+
+msgid "Customers"
+msgstr "కస్టమర్లు"
+
+msgid "Inventory Analytics"
+msgstr "ఇన్వెంటరీ అనాలిటిక్స్"
+
+msgid "ABC Classification"
+msgstr "ABC వర్గీకరణ"
+
+msgid "Stock Movement"
+msgstr "స్టాక్ కదలిక"
+
+msgid "Fast / Slow Products"
+msgstr "వేగవంతమైన / నెమ్మదిగల ఉత్పత్తులు"
+
+msgid "Stock Aging"
+msgstr "స్టాక్ వయస్సు"
+
+msgid "Reorder Suggestions"
+msgstr "రీఆర్డర్ సూచనలు"
+
+msgid "Report Analyst"
+msgstr "రిపోర్ట్ విశ్లేషకుడు"
+
+msgid "All Reports"
+msgstr "అన్ని రిపోర్టులు"
+
+msgid "Near Expiry"
+msgstr "గడువు సమీపంలో"
+
+msgid "Expired Stock"
+msgstr "గడువు ముగిసిన స్టాక్"
+
+msgid "Supplier Performance"
+msgstr "సరఫరాదారు పనితీరు"
+
+msgid "Profit Margin"
+msgstr "లాభ మార్జిన్"
+
+msgid "Purchase Stock"
+msgstr "పర్చేజ్ స్టాక్"
+
+msgid "Administration"
+msgstr "పాలన"
+
+msgid "Settings"
+msgstr "సెట్టింగ్‌లు"
+
+msgid "Logout"
+msgstr "లాగ్ అవుట్"
+
+msgid "Monthly Sales Orders"
+msgstr "నెలవారీ సేల్స్ ఆర్డర్లు"
+
+msgid "Product / SKU Limit"
+msgstr "ఉత్పత్తి / SKU పరిమితి"
+
+msgid "Absolute Limit"
+msgstr "సంపూర్ణ పరిమితి"
+
+msgid "Overview"
+msgstr "అవలోకనం"
+
+msgid "Total Products"
+msgstr "మొత్తం ఉత్పత్తులు"
+
+msgid "Low Stock Alerts"
+msgstr "తక్కువ స్టాక్ అలర్ట్‌లు"
+
+msgid "Out of Stock"
+msgstr "స్టాక్ అయిపోయింది"
+
+msgid "Pending Shipments"
+msgstr "పెండింగ్ షిప్‌మెంట్లు"
+
+msgid "Total Revenue"
+msgstr "మొత్తం ఆదాయం"
+
+msgid "Sales Trends"
+msgstr "సేల్స్ ట్రెండ్లు"
+
+msgid "Order Efficiency"
+msgstr "ఆర్డర్ సామర్థ్యం"
+
+msgid "Recent Transactions"
+msgstr "ఇటీవలి లావాదేవీలు"
+
+msgid "Order ID"
+msgstr "ఆర్డర్ ID"
+
+msgid "Amount"
+msgstr "మొత్తం"
+
+msgid "Status"
+msgstr "స్థితి"
+
+msgid "Date"
+msgstr "తేదీ"
+
+msgid "Inventory Batch Health"
+msgstr "ఇన్వెంటరీ బ్యాచ్ ఆరోగ్యం"
+
+msgid "Active Batches"
+msgstr "సక్రియ బ్యాచ్‌లు"
+
+msgid "View details"
+msgstr "వివరాలు చూడండి"
+
+msgid "Manage products, monitor stock levels, and update pricing."
+msgstr "ఉత్పత్తులను నిర్వహించండి, స్టాక్ స్థాయిలను పర్యవేక్షించండి మరియు ధరలను నవీకరించండి."
+
+msgid "DELETE Bulk Action"
+msgstr "బల్క్ చర్యను తొలగించండి"
+
+msgid "Export PDF"
+msgstr "PDF ఎగుమతి"
+
+msgid "Add New Product"
+msgstr "కొత్త ఉత్పత్తిని జోడించండి"
+
+msgid "TOTAL SKUS"
+msgstr "మొత్తం SKUS"
+
+msgid "Items"
+msgstr "అంశాలు"
+
+msgid "LOW STOCK"
+msgstr "తక్కువ స్టాక్"
+
+msgid "Alerts"
+msgstr "అలర్ట్‌లు"
+
+msgid "Apply"
+msgstr "వర్తింపజేయండి"
+
+msgid "Search product or SKU..."
+msgstr "ఉత్పత్తి లేదా SKU శోధించండి..."
+
+msgid "Search"
+msgstr "శోధించండి"
+
+msgid "Reset"
+msgstr "రీసెట్"
+
+msgid "PRODUCT DETAILS"
+msgstr "ఉత్పత్తి వివరాలు"
+
+msgid "SKU CODE"
+msgstr "SKU కోడ్"
+
+msgid "CURRENT STOCK"
+msgstr "ప్రస్తుత స్టాక్"
+
+msgid "UNIT PRICE"
+msgstr "యూనిట్ ధర"
+
+msgid "ACTIONS"
+msgstr "చర్యలు"
+
+msgid "units"
+msgstr "యూనిట్లు"
+
+msgid "IN STOCK"
+msgstr "స్టాక్‌లో ఉంది"
+
+msgid "NEAR EXPIRY"
+msgstr "గడువు సమీపంలో"
+
+msgid "Batches"
+msgstr "బ్యాచ్‌లు"
+
+msgid "History"
+msgstr "చరిత్ర"
+
+msgid "Monitor business revenue, customer orders, and fulfillment status."
+msgstr "వ్యాపార ఆదాయం, కస్టమర్ ఆర్డర్లు మరియు పూర్తి చేసే స్థితిని పర్యవేక్షించండి."
+
+msgid "TOTAL ORDERS"
+msgstr "మొత్తం ఆర్డర్లు"
+
+msgid "PENDING"
+msgstr "పెండింగ్"
+
+msgid "COMPLETED"
+msgstr "పూర్తయింది"
+
+msgid "REVENUE"
+msgstr "ఆదాయం"
+
+msgid "New Order"
+msgstr "కొత్త ఆర్డర్"
+
+msgid "Search orders..."
+msgstr "ఆర్డర్లు శోధించండి..."
+
+msgid "ORDER DETAILS"
+msgstr "ఆర్డర్ వివరాలు"
+
+msgid "CUSTOMER"
+msgstr "కస్టమర్"
+
+msgid "TOTAL AMOUNT"
+msgstr "మొత్తం మొత్తం"
+
+msgid "QUANTITY"
+msgstr "పరిమాణం"
+
+msgid "Invoice Generated"
+msgstr "ఇన్వాయిస్ రూపొందించబడింది"
+
+msgid "Regular Customer"
+msgstr "రెగ్యులర్ కస్టమర్"
+
+msgid "DELIVERED"
+msgstr "డెలివరీ అయింది"
+
+msgid "PROCESSING"
+msgstr "ప్రాసెసింగ్"
+
+msgid "View Detail"
+msgstr "వివరాలు చూడండి"
+
+msgid "Manage procurement from vendors and track incoming stock shipments."
+msgstr "వెండర్ల నుండి ప్రొక్యూర్‌మెంట్‌ను నిర్వహించండి మరియు వస్తున్న స్టాక్ షిప్‌మెంట్లను ట్రాక్ చేయండి."
+
+msgid "TOTAL POS"
+msgstr "మొత్తం POS"
+
+msgid "IN TRANSIT"
+msgstr "రవాణాలో"
+
+msgid "RECEIVED"
+msgstr "స్వీకరించబడింది"
+
+msgid "TOTAL SPENT"
+msgstr "మొత్తం ఖర్చు"
+
+msgid "New Purchase"
+msgstr "కొత్త కొనుగోలు"
+
+msgid "Search PO or vendor..."
+msgstr "PO లేదా వెండర్‌ను శోధించండి..."
+
+msgid "Min Amount"
+msgstr "కనీస మొత్తం"
+
+msgid "Max Amount"
+msgstr "గరిష్ట మొత్తం"
+
+msgid "PO NUMBER"
+msgstr "PO సంఖ్య"
+
+msgid "VENDOR / SUPPLIER"
+msgstr "వెండర్ / సరఫరాదారు"
+
+msgid "Internal Procurement"
+msgstr "అంతర్గత ప్రొక్యూర్‌మెంట్"
+
+msgid "ORDERED"
+msgstr "ఆర్డర్ చేయబడింది"
+
+msgid "Details"
+msgstr "వివరాలు"
+
+msgid "Print"
+msgstr "ప్రింట్"
+
+msgid "All Status"
+msgstr "అన్ని స్థితులు"
+
+msgid "Pending"
+msgstr "పెండింగ్"
+
+msgid "Received"
+msgstr "స్వీకరించబడింది"
+
+msgid "Cancelled"
+msgstr "రద్దు చేయబడింది"
+
+msgid "Business Intelligence & Analytics"
+msgstr "బిజినెస్ ఇంటెలిజెన్స్ & అనాలిటిక్స్"
+
+msgid "Inventory Health"
+msgstr "ఇన్వెంటరీ ఆరోగ్యం"
+
+msgid "Near Expiry Products"
+msgstr "గడువు సమీపంలో ఉన్న ఉత్పత్తులు"
+
+msgid "Items expiring within the next 30 days."
+msgstr "వచ్చే 30 రోజుల్లో గడువు ముగిసే అంశాలు."
+
+msgid "View Report"
+msgstr "రిపోర్ట్ చూడండి"
+
+msgid "Expired Products"
+msgstr "గడువు ముగిసిన ఉత్పత్తులు"
+
+msgid "Items that have passed their expiration date."
+msgstr "వాటి గడువు తేదీ దాటిన అంశాలు."
+
+msgid "Financial Performance"
+msgstr "ఆర్థిక పనితీరు"
+
+msgid "Profit Margins"
+msgstr "లాభ మార్జిన్‌లు"
+
+msgid "Analyze profit margins across products."
+msgstr "ఉత్పత్తుల్లో లాభ మార్జిన్‌లను విశ్లేషించండి."
+
+msgid "Evaluate vendor reliability and fulfillment times."
+msgstr "వెండర్ నమ్మకత్వం మరియు పూర్తి చేసే సమయాలను అంచనా వేయండి."
+
+msgid "Customer"
+msgstr "కస్టమర్"
+
+msgid "Total Amount"
+msgstr "మొత్తం మొత్తం"
+
+msgid "Quantity"
+msgstr "పరిమాణం"
+
+msgid "Actions"
+msgstr "చర్యలు"
+
+msgid "STATUS"
+msgstr "స్థితి"
+
+msgid "Register a new item into your company's global inventory."
+msgstr "మీ కంపెనీ గ్లోబల్ ఇన్వెంటరీలో కొత్త అంశాన్ని నమోదు చేయండి."
+
+msgid "Basic Information"
+msgstr "ప్రాథమిక సమాచారం"
+
+msgid "Provide the core identifying details for this product."
+msgstr "ఈ ఉత్పత్తి కోసం ప్రధాన గుర్తింపు వివరాలను అందించండి."
+
+msgid "Product Name"
+msgstr "ఉత్పత్తి పేరు"
+
+msgid "Product Company"
+msgstr "ఉత్పత్తి కంపెనీ"
+
+msgid "SKU Code"
+msgstr "SKU కోడ్"
+
+msgid "Category"
+msgstr "కేటగిరీ"
+
+msgid "Pricing & Inventory"
+msgstr "ధర & ఇన్వెంటరీ"
+
+msgid "Set your cost, selling price and initial stock quantities."
+msgstr "మీ ఖర్చు, అమ్మకపు ధర మరియు ప్రారంభ స్టాక్ పరిమాణాలను సెట్ చేయండి."
+
+msgid "Purchase Price"
+msgstr "కొనుగోలు ధర"
+
+msgid "Selling Price"
+msgstr "అమ్మకపు ధర"
+
+msgid "Initial Qty"
+msgstr "ప్రారంభ పరిమాణం"
+
+msgid "Tracking & Expiry"
+msgstr "ట్రాకింగ్ & గడువు"
+
+msgid "Enable for pharmaceutical or perishable goods tracking."
+msgstr "ఔషధ లేదా త్వరగా పాడయ్యే వస్తువుల ట్రాకింగ్ కోసం సక్రియం చేయండి."
+
+msgid "Track Expiry Dates"
+msgstr "గడువు తేదీలను ట్రాక్ చేయండి"
+
+msgid "You must provide an expiry date if this is enabled"
+msgstr "ఇది సక్రియంగా ఉంటే మీరు గడువు తేదీని అందించాలి"
+
+msgid "Expiry Date"
+msgstr "గడువు తేదీ"
+
+msgid "Save Product"
+msgstr "ఉత్పత్తిని సేవ్ చేయండి"
+
+msgid "Discard"
+msgstr "విస్మరించండి"
+
+msgid "New Sales Order"
+msgstr "కొత్త సేల్స్ ఆర్డర్"
+
+msgid "Create a sales order for customer purchase."
+msgstr "కస్టమర్ కొనుగోలు కోసం సేల్స్ ఆర్డర్‌ను సృష్టించండి."
+
+msgid "Customer & Item Details"
+msgstr "కస్టమర్ & అంశం వివరాలు"
+
+msgid "Select the customer and the specific product they are purchasing."
+msgstr "కస్టమర్ మరియు వారు కొనుగోలు చేస్తున్న నిర్దిష్ట ఉత్పత్తిని ఎంచుకోండి."
+
+msgid "Select Customer"
+msgstr "కస్టమర్‌ను ఎంచుకోండి"
+
+msgid "Product Selection"
+msgstr "ఉత్పత్తి ఎంపిక"
+
+msgid "Order Parameters"
+msgstr "ఆర్డర్ పారామితులు"
+
+msgid "Define the volume and negotiated price for this sale."
+msgstr "ఈ అమ్మకానికి పరిమాణం మరియు చర్చలు జరిపిన ధరను నిర్వచించండి."
+
+msgid "Selling Price (Per Unit)"
+msgstr "అమ్మకపు ధర (యూనిట్ కు)"
+
+msgid "Create Sales Order"
+msgstr "సేల్స్ ఆర్డర్ సృష్టించండి"
+
+msgid "Cancel"
+msgstr "రద్దు చేయండి"
+
+msgid "Add Another Product"
+msgstr "మరొక ఉత్పత్తిని జోడించండి"
+
+msgid "New Purchase Order"
+msgstr "కొత్త పర్చేజ్ ఆర్డర్"
+
+msgid "Create a purchase order for vendor stock."
+msgstr "వెండర్ స్టాక్ కోసం పర్చేజ్ ఆర్డర్ సృష్టించండి."
+
+msgid "Supply Source"
+msgstr "సరఫరా మూలం"
+
+msgid "Select the vendor and the specific product you are procuring."
+msgstr "మీరు ప్రొక్యూర్ చేస్తున్న వెండర్ మరియు నిర్దిష్ట ఉత్పత్తిని ఎంచుకోండి."
+
+msgid "Vendor / Supplier"
+msgstr "వెండర్ / సరఫరాదారు"
+
+msgid "Financials & Quantity"
+msgstr "ఆర్థిక & పరిమాణం"
+
+msgid "Define the volume and negotiated cost for this purchase."
+msgstr "ఈ కొనుగోలు కోసం పరిమాణం మరియు చర్చలు జరిపిన ఖర్చును నిర్వచించండి."
+
+msgid "Cost Price (Per Unit)"
+msgstr "ఖర్చు ధర (యూనిట్ కు)"
+
+msgid "Batch Number"
+msgstr "బ్యాచ్ సంఖ్య"
+
+msgid "Create Purchase Order"
+msgstr "పర్చేజ్ ఆర్డర్ సృష్టించండి"
+
+msgid "Back to List"
+msgstr "జాబితాకు తిరిగి వెళ్ళండి"
+
+msgid "e.g. Premium Wireless Headphones"
+msgstr "ఉదా. ప్రీమియం వైర్లెస్ హెడ్‌ఫోన్స్"
+
+msgid "Manufacturer/Brand Name"
+msgstr "తయారీదారు/బ్రాండ్ పేరు"
+
+msgid "Select Category"
+msgstr "కేటగిరీని ఎంచుకోండి"
+
+msgid "Customer Name"
+msgstr "కస్టమర్ పేరు"
+
+msgid "e.g. Acme Corp / Jane Smith"
+msgstr "ఉదా. అక్మే కార్ప్ / జేన్ స్మిత్"
+
+msgid "Select Product"
+msgstr "ఉత్పత్తిని ఎంచుకోండి"
+
+msgid "Search and choose..."
+msgstr "శోధించండి మరియు ఎంచుకోండి..."
+
+msgid "Add Product"
+msgstr "ఉత్పత్తిని జోడించండి"
+
+msgid "System Guard Enabled"
+msgstr "సిస్టమ్ గార్డ్ సక్రియం"
+
+msgid "Initiate a new transaction for your customers and update stock."
+msgstr "మీ కస్టమర్ల కోసం కొత్త లావాదేవీని ప్రారంభించండి మరియు స్టాక్‌ను నవీకరించండి."
+
+msgid "Items & Fulfillment"
+msgstr "అంశాలు & పూర్తి చేయడం"
+
+msgid "Select products and specify quantities. Stock is automatically managed using FEFO."
+msgstr "ఉత్పత్తులను ఎంచుకోండి మరియు పరిమాణాలను నిర్దేశించండి. FEFO ఉపయోగించి స్టాక్ స్వయంచాలకంగా నిర్వహించబడుతుంది."
+
+msgid "Customer Details"
+msgstr "కస్టమర్ వివరాలు"
+
+msgid "Basic information about the buyer for this specific transaction."
+msgstr "ఈ నిర్దిష్ట లావాదేవీ కోసం కొనుగోలుదారు గురించి ప్రాథమిక సమాచారం."
+
+msgid "Back to Orders"
+msgstr "ఆర్డర్లకు తిరిగి వెళ్ళండి"
+
+msgid "Select a vendor..."
+msgstr "వెండర్‌ను ఎంచుకోండి..."
+
+msgid "Select a product..."
+msgstr "ఉత్పత్తిని ఎంచుకోండి..."
+
+msgid "Company Settings"
+msgstr "కంపెనీ సెట్టింగ్‌లు"
+
+msgid "Regional & Language Settings"
+msgstr "ప్రాంతీయ & భాషా సెట్టింగ్‌లు"
+
+msgid "Save Changes"
+msgstr "మార్పులను సేవ్ చేయండి"
+
+msgid "Add Vendor"
+msgstr "వెండర్‌ను జోడించండి"
+
+msgid "Edit Vendor"
+msgstr "వెండర్‌ను సవరించండి"
+
+msgid "Vendor Management"
+msgstr "వెండర్ నిర్వహణ"
+
+msgid "Add Customer"
+msgstr "కస్టమర్‌ను జోడించండి"
+
+msgid "Edit Customer"
+msgstr "కస్టమర్‌ను సవరించండి"
+
+msgid "Customer Management"
+msgstr "కస్టమర్ నిర్వహణ"
+
+msgid "Add Category"
+msgstr "కేటగిరీని జోడించండి"
+
+msgid "Edit Category"
+msgstr "కేటగిరీని సవరించండి"
+
+msgid "Product Categories"
+msgstr "ఉత్పత్తి కేటగిరీలు"
+
+msgid "Adjust Stock"
+msgstr "స్టాక్ సర్దుబాటు చేయండి"
+
+msgid "Update Stock"
+msgstr "స్టాక్ నవీకరించండి"
+
+msgid "Analytics"
+msgstr "అనాలిటిక్స్"
+
+msgid "Reports"
+msgstr "రిపోర్టులు"
+
+msgid "Near Expiry Report"
+msgstr "గడువు సమీపం రిపోర్ట్"
+
+msgid "Name"
+msgstr "పేరు"
+
+msgid "Contact"
+msgstr "సంపర్కం"
+
+msgid "Added On"
+msgstr "జోడించబడింది"
+
+msgid "Phone"
+msgstr "ఫోన్"
+
+msgid "Email"
+msgstr "ఇమెయిల్"
+
+msgid "Address"
+msgstr "చిరునామా"
+
+msgid "Description"
+msgstr "వివరణ"
+
+msgid "Save"
+msgstr "సేవ్ చేయండి"
+
+msgid "Expiry"
+msgstr "గడువు"
+
+msgid "Qty"
+msgstr "పరిమాణం"
+
+msgid "Total Value"
+msgstr "మొత్తం విలువ"
+
+msgid "Filter"
+msgstr "ఫిల్టర్"
+
+msgid "Export"
+msgstr "ఎగుమతి"
+
+msgid "Total Purchases"
+msgstr "మొత్తం కొనుగోళ్లు"
+
+msgid "On-Time Delivery"
+msgstr "సమయానికి డెలివరీ"
+
+msgid "Defect Rate"
+msgstr "లోపం రేటు"
+
+msgid "A Class"
+msgstr "A క్లాస్"
+
+msgid "B Class"
+msgstr "B క్లాస్"
+
+msgid "C Class"
+msgstr "C క్లాస్"
+
+msgid "Cumulative Value"
+msgstr "సంచిత విలువ"
+
+msgid "Product"
+msgstr "ఉత్పత్తి"
+
+msgid "SKU"
+msgstr "SKU"
+
+msgid "Revenue"
+msgstr "ఆదాయం"
+
+msgid "Cost"
+msgstr "ఖర్చు"
+
+msgid "Profit"
+msgstr "లాభం"
+
+msgid "Margin"
+msgstr "మార్జిన్"
+
+msgid "Update"
+msgstr "నవీకరించండి"
+
+msgid "Delete"
+msgstr "తొలగించండి"
+
+msgid "Edit"
+msgstr "సవరించండి"
+
+msgid "View"
+msgstr "చూడండి"
+
+msgid "Download"
+msgstr "డౌన్‌లోడ్ చేయండి"
+
+msgid "Contact Information"
+msgstr "సంపర్క సమాచారం"
+
+msgid "Financial Details"
+msgstr "ఆర్థిక వివరాలు"
+
+msgid "Inventory Categories"
+msgstr "ఇన్వెంటరీ కేటగిరీలు"
+
+msgid "Organize your products by grouping them into meaningful categories."
+msgstr "మీ ఉత్పత్తులను అర్థవంతమైన కేటగిరీలలో సమూహంగా ఏర్పాటు చేయండి."
+
+msgid "Quick Add Category"
+msgstr "త్వరితంగా కేటగిరీ జోడించండి"
+
+msgid "Enter new category name..."
+msgstr "కొత్త కేటగిరీ పేరు నమోదు చేయండి..."
+
+msgid "Existing Categories"
+msgstr "ఉన్న కేటగిరీలు"
+
+msgid "CATEGORY NAME"
+msgstr "కేటగిరీ పేరు"
+
+msgid "Batch-wise Stock Control"
+msgstr "బ్యాచ్-వారీ స్టాక్ నియంత్రణ"
+
+msgid "Detailed visibility into specific product batches and expiration windows."
+msgstr "నిర్దిష్ట ఉత్పత్తి బ్యాచ్‌లు మరియు గడువు విండోలలో వివరమైన దృశ్యం."
+
+msgid "ACTIVE BATCHES"
+msgstr "సక్రియ బ్యాచ్‌లు"
+
+msgid "EXPIRED"
+msgstr "గడువు ముగిసింది"
+
+msgid "EXPIRING SOON"
+msgstr "త్వరలో గడువు ముగుస్తుంది"
+
+msgid "GOOD CONDITION"
+msgstr "మంచి పరిస్థితి"
+
+msgid "Search batch or product..."
+msgstr "బ్యాచ్ లేదా ఉత్పత్తిని శోధించండి..."
+
+msgid "PRODUCT INFORMATION"
+msgstr "ఉత్పత్తి సమాచారం"
+
+msgid "EXPIRY DATE"
+msgstr "గడువు తేదీ"
+
+msgid "QTY IN STOCK"
+msgstr "స్టాక్‌లో పరిమాణం"
+
+msgid "COMPLIANCE STATUS"
+msgstr "అనుసరణ స్థితి"
+
+msgid "Safe"
+msgstr "సురక్షితం"
+
+msgid "Print Report"
+msgstr "రిపోర్ట్ ప్రింట్ చేయండి"
+
+msgid "Approved Suppliers"
+msgstr "ఆమోదించబడిన సరఫరాదారులు"
+
+msgid "Maintain supplier contacts and procurement partners."
+msgstr "సరఫరాదారుల సంపర్కాలు మరియు ప్రొక్యూర్‌మెంట్ భాగస్వాములను నిర్వహించండి."
+
+msgid "Export CSV"
+msgstr "CSV ఎగుమతి"
+
+msgid "Apply Filter"
+msgstr "ఫిల్టర్ వర్తింపజేయండి"
+
+msgid "VENDOR IDENTITY"
+msgstr "వెండర్ గుర్తింపు"
+
+msgid "CONTACT DETAILS"
+msgstr "సంపర్క వివరాలు"
+
+msgid "Manage customer details, contacts & procurement partners."
+msgstr "కస్టమర్ వివరాలు, సంపర్కాలు మరియు ప్రొక్యూర్‌మెంట్ భాగస్వాములను నిర్వహించండి."
+
+msgid "Download Excel"
+msgstr "ఎక్సెల్ డౌన్‌లోడ్ చేయండి"
+
+msgid "CUSTOMER NAME"
+msgstr "కస్టమర్ పేరు"
+
+msgid "COMPANY"
+msgstr "కంపెనీ"
+
+msgid "PAGE 1 OF 1"
+msgstr "1 యొక్క 1 పేజీ"
+
+msgid "Enterprise"
+msgstr "ఎంటర్‌ప్రైజ్"
+
+msgid "Fast / Slow Moving Products"
+msgstr "వేగవంతమైన / నెమ్మదిగా కదిలే ఉత్పత్తులు"
+
+msgid "Stock Aging Analysis"
+msgstr "స్టాక్ వయస్సు విశ్లేషణ"
+
+msgid "BACK TO CUSTOMERS"
+msgstr "కస్టమర్లకు తిరిగి వెళ్ళండి"
+
+msgid "01. Basic Profile"
+msgstr "01. ప్రాథమిక ప్రొఫైల్"
+
+msgid "02. Business Locations"
+msgstr "02. వ్యాపార స్థానాలు"
+
+msgid "03. Contact Persons"
+msgstr "03. సంపర్క వ్యక్తులు"
+
+msgid "Save Customer"
+msgstr "కస్టమర్‌ను సేవ్ చేయండి"
+
+msgid "Staff Management"
+msgstr "సిబ్బంది నిర్వహణ"
+
+msgid "Add Staff"
+msgstr "సిబ్బందిని జోడించండి"
+
+msgid "Create Quote"
+msgstr "కోట్ సృష్టించండి"
+
+msgid "Quote Date"
+msgstr "కోట్ తేదీ"
+
+msgid "Valid Until"
+msgstr "వరకు చెల్లుబాటు"
+
+msgid "Generate Quote"
+msgstr "కోట్ రూపొందించండి"
+
+msgid "Contact Name"
+msgstr "సంపర్క పేరు"
+
+msgid "Company Name"
+msgstr "కంపెనీ పేరు"
+
+msgid "ABC Inventory Classification"
+msgstr "ABC ఇన్వెంటరీ వర్గీకరణ"
+
+msgid "Strategic classification based on inventory value (Pareto Principle)."
+msgstr "ఇన్వెంటరీ విలువపై ఆధారపడిన వ్యూహాత్మక వర్గీకరణ (పారెటో సూత్రం)."
+
+msgid "CLASS A - HIGH VALUE"
+msgstr "A క్లాస్ - అధిక విలువ"
+
+msgid "CLASS B - MEDIUM VALUE"
+msgstr "B క్లాస్ - మధ్యస్థ విలువ"
+
+msgid "CLASS C - LOW VALUE"
+msgstr "C క్లాస్ - తక్కువ విలువ"
+
+msgid "Driving ~0.0% of total stock value"
+msgstr "మొత్తం స్టాక్ విలువలో ~0.0% డ్రైవింగ్"
+
+msgid "Driving ~100.0% of total stock value"
+msgstr "మొత్తం స్టాక్ విలువలో ~100.0% డ్రైవింగ్"
+
+msgid "INVENTORY VALUE BREAKDOWN"
+msgstr "ఇన్వెంటరీ విలువ విభజన"
+
+msgid "STOCK QTY"
+msgstr "స్టాక్ పరిమాణం"
+
+msgid "INVENTORY VALUE"
+msgstr "ఇన్వెంటరీ విలువ"
+
+msgid "ABC CLASS"
+msgstr "ABC క్లాస్"
+
+msgid "Page 1 of 1"
+msgstr "1 యొక్క 1 పేజీ"
+
+msgid "Stock Movement Report"
+msgstr "స్టాక్ కదలిక రిపోర్ట్"
+
+msgid "Historical ledger of all inventory inflows and outflows."
+msgstr "అన్ని ఇన్వెంటరీ ఇన్‌ఫ్లోలు మరియు అవుట్‌ఫ్లోల చారిత్రక లెజర్."
+
+msgid "Advanced Filter"
+msgstr "అధునాతన ఫిల్టర్"
+
+msgid "STOCK IN (MONTHLY)"
+msgstr "స్టాక్ ఇన్ (నెలవారీ)"
+
+msgid "STOCK OUT (MONTHLY)"
+msgstr "స్టాక్ అవుట్ (నెలవారీ)"
+
+msgid "NET VELOCITY"
+msgstr "నెట్ వేగం"
+
+msgid "TRANSACTION DATE"
+msgstr "లావాదేవీ తేదీ"
+
+msgid "ITEM DETAILS"
+msgstr "అంశం వివరాలు"
+
+msgid "FLOW TYPE"
+msgstr "ప్రవాహ రకం"
+
+msgid "SOURCE / REASON"
+msgstr "మూలం / కారణం"
+
+msgid "REFERENCE"
+msgstr "రిఫరెన్స్"
+
+msgid "HANDLED BY"
+msgstr "ద్వారా నిర్వహించబడింది"
+
+msgid "Back to list"
+msgstr "జాబితాకు తిరిగి వెళ్ళండి"
+
+msgid "Identifying product turnover rates to optimize purchasing and storage."
+msgstr "కొనుగోలు మరియు నిల్వను అనుకూలీకరించడానికి ఉత్పత్తి టర్నోవర్ రేట్లను గుర్తించడం."
+
+msgid "HIGH PERFORMERS"
+msgstr "అధిక పనితీరు"
+
+msgid "STEADY ITEMS"
+msgstr "స్థిర అంశాలు"
+
+msgid "SLOW/DEAD STOCK"
+msgstr "నెమ్మది/మృత స్టాక్"
+
+msgid "Consistent turnover rate"
+msgstr "నిలకడైన టర్నోవర్ రేటు"
+
+msgid "Requires liquidation or review"
+msgstr "లిక్విడేషన్ లేదా సమీక్ష అవసరం"
+
+msgid "Sort By:"
+msgstr "దీని ద్వారా క్రమబద్ధం చేయండి:"
+
+msgid "Velocity (Highest)"
+msgstr "వేగం (అధిక)"
+
+msgid "ITEM IDENTITY"
+msgstr "అంశం గుర్తింపు"
+
+msgid "AVG. SALE/WEEK"
+msgstr "సగటు అమ్మకం/వారం"
+
+msgid "TURNOVER DAYS"
+msgstr "టర్నోవర్ రోజులు"
+
+msgid "VELOCITY STATUS"
+msgstr "వేగ స్థితి"
+
+msgid "Smart suggestions based on real-time sales velocity and current stock levels."
+msgstr "రియల్-టైమ్ సేల్స్ వేగం మరియు ప్రస్తుత స్టాక్ స్థాయిలపై ఆధారపడిన స్మార్ట్ సూచనలు."
+
+msgid "Create Bulk Purchase Orders"
+msgstr "బల్క్ పర్చేజ్ ఆర్డర్లు సృష్టించండి"
+
+msgid "URGENT ATTENTION"
+msgstr "అత్యవసర శ్రద్ధ"
+
+msgid "PREDICTED VOLUME"
+msgstr "అంచనా వాల్యూమ్"
+
+msgid "STOCK HEALTH"
+msgstr "స్టాక్ ఆరోగ్యం"
+
+msgid "Requiring immediate restocking"
+msgstr "తక్షణ రీస్టాకింగ్ అవసరం"
+
+msgid "Recommended total reorder quantity"
+msgstr "సిఫార్సు చేయబడిన మొత్తం రీఆర్డర్ పరిమాణం"
+
+msgid "Average inventory coverage"
+msgstr "సగటు ఇన్వెంటరీ కవరేజ్"
+
+msgid "PRODUCT NAME"
+msgstr "ఉత్పత్తి పేరు"
+
+msgid "AVG DAILY SALES"
+msgstr "సగటు దైనందిన అమ్మకాలు"
+
+msgid "SUGGESTED REORDER"
+msgstr "సిఫార్సు చేయబడిన రీఆర్డర్"
+
+msgid "INVENTORY STATUS"
+msgstr "ఇన్వెంటరీ స్థితి"
+
+msgid "Categorized view of current inventory by time since arrival."
+msgstr "రాక నుండి సమయం ప్రకారం ప్రస్తుత ఇన్వెంటరీ వర్గీకృత దృశ్యం."
+
+msgid "Export Ledger"
+msgstr "లెజర్ ఎగుమతి"
+
+msgid "FRESH STOCK"
+msgstr "తాజా స్టాక్"
+
+msgid "STABLE STOCK"
+msgstr "స్థిర స్టాక్"
+
+msgid "HIGH RISK / SLOW"
+msgstr "అధిక ప్రమాదం / నెమ్మది"
+
+msgid "Fast-Moving / Fresh (0-30 Days)"
+msgstr "వేగవంతమైన / తాజా (0-30 రోజులు)"
+
+msgid "Mature Stock (31-60 Days)"
+msgstr "పరిపక్వ స్టాక్ (31-60 రోజులు)"
+
+msgid "RECENT RECEIPTS"
+msgstr "ఇటీవలి రశీదులు"
+
+msgid "STANDARD FLOW"
+msgstr "ప్రామాణిక ప్రవాహం"
+
+msgid "Company Dashboard"
+msgstr "కంపెనీ డాష్‌బోర్డ్"
+
+msgid "BUSINESS PLAN"
+msgstr "బిజినెస్ ప్లాన్"
+
+msgid "Extend Plan"
+msgstr "ప్లాన్ పొడిగించండి"
+
+msgid "Welcome back,"
+msgstr "తిరిగి స్వాగతం,"
+
+msgid "Everything looks good today."
+msgstr "ఈ రోజు ప్రతిదీ బాగుంది."
+
+msgid "EFFICIENCY"
+msgstr "సామర్థ్యం"
+
+msgid "Live Flow"
+msgstr "లైవ్ ఫ్లో"
+
+msgid "INVENTORY"
+msgstr "ఇన్వెంటరీ"
+
+msgid "MY PRODUCTS"
+msgstr "నా ఉత్పత్తులు"
+
+msgid "PENDING SHIPMENTS"
+msgstr "పెండింగ్ షిప్‌మెంట్లు"
+
+msgid "LOW STOCK ITEMS"
+msgstr "తక్కువ స్టాక్ అంశాలు"
+
+msgid "Sales Trend (Last 7 Days)"
+msgstr "సేల్స్ ట్రెండ్ (గత 7 రోజులు)"
+
+msgid "Stock Overview"
+msgstr "స్టాక్ అవలోకనం"
+
+msgid "View All"
+msgstr "అన్నీ చూడండి"
+
+msgid "Add New Vendor"
+msgstr "కొత్త వెండర్‌ను జోడించండి"
+
+msgid "Register a new supplier to manage procurement and stock sourcing."
+msgstr "ప్రొక్యూర్‌మెంట్ మరియు స్టాక్ సోర్సింగ్ నిర్వహించడానికి కొత్త సరఫరాదారుని నమోదు చేయండి."
+
+msgid "Primary Contact"
+msgstr "ప్రాథమిక సంపర్కం"
+
+msgid "Main point of contact for this vendor."
+msgstr "ఈ వెండర్ కోసం ప్రధాన సంపర్క బిందువు."
+
+msgid "Salutation"
+msgstr "అభివందనం"
+
+msgid "First Name"
+msgstr "మొదటి పేరు"
+
+msgid "Last Name"
+msgstr "ఇంటి పేరు"
+
+msgid "Supplier Identity"
+msgstr "సరఫరాదారు గుర్తింపు"
+
+msgid "Company or business information."
+msgstr "కంపెనీ లేదా వ్యాపార సమాచారం."
+
+msgid "Vendor Name"
+msgstr "వెండర్ పేరు"
+
+msgid "GST Number"
+msgstr "GST సంఖ్య"
+
+msgid "Display Name"
+msgstr "ప్రదర్శన పేరు"
+
+msgid "Contact Details"
+msgstr "సంపర్క వివరాలు"
+
+msgid "Communication information."
+msgstr "కమ్యూనికేషన్ సమాచారం."
+
+msgid "Email Address"
+msgstr "ఇమెయిల్ చిరునామా"
+
+msgid "Mobile Number"
+msgstr "మొబైల్ నంబర్"
+
+msgid "Billing & shipping address."
+msgstr "బిల్లింగ్ & షిప్పింగ్ చిరునామా."
+
+msgid "Save Vendor"
+msgstr "వెండర్‌ను సేవ్ చేయండి"
+
+msgid "Adjust Batch Stock"
+msgstr "బ్యాచ్ స్టాక్ సర్దుబాటు చేయండి"
+
+msgid "Update quantities and track reasons for inventory adjustments."
+msgstr "పరిమాణాలను నవీకరించండి మరియు ఇన్వెంటరీ సర్దుబాట్ల కారణాలను ట్రాక్ చేయండి."
+
+msgid "Select a product"
+msgstr "ఉత్పత్తిని ఎంచుకోండి"
+
+msgid "Select Batch"
+msgstr "బ్యాచ్ ఎంచుకోండి"
+
+msgid "Select a batch"
+msgstr "బ్యాచ్ ఎంచుకోండి"
+
+msgid "Adjustment Type"
+msgstr "సర్దుబాటు రకం"
+
+msgid "Reason for Adjustment"
+msgstr "సర్దుబాటు కారణం"
+
+msgid "Provide details for this stock adjustment"
+msgstr "ఈ స్టాక్ సర్దుబాటు కోసం వివరాలు అందించండి"
+
+msgid "Confirm Adjustment"
+msgstr "సర్దుబాటును ధృవీకరించండి"
+
+msgid "Create a new purchase order for your vendors."
+msgstr "మీ వెండర్ల కోసం కొత్త పర్చేజ్ ఆర్డర్ సృష్టించండి."
+
+msgid "Select Vendor"
+msgstr "వెండర్‌ను ఎంచుకోండి"
+
+msgid "Order Date"
+msgstr "ఆర్డర్ తేదీ"
+
+msgid "Expected Delivery"
+msgstr "అంచనా డెలివరీ"
+
+msgid "Search Products..."
+msgstr "ఉత్పత్తులను శోధించండి..."
+
+msgid "Order Summary"
+msgstr "ఆర్డర్ సారాంశం"
+
+msgid "Subtotal"
+msgstr "ఉప-మొత్తం"
+
+msgid "Tax Amount"
+msgstr "పన్ను మొత్తం"
+
+msgid "Notes / Terms"
+msgstr "గమనికలు / నిబంధనలు"
+
+msgid "Save as Draft"
+msgstr "డ్రాఫ్ట్ గా సేవ్ చేయండి"
+
+msgid "Confirm Order"
+msgstr "ఆర్డర్‌ను ధృవీకరించండి"
+
+msgid "Comprehensive view of all your inventory analytics and metrics."
+msgstr "మీ అన్ని ఇన్వెంటరీ అనాలిటిక్స్ మరియు మెట్రిక్స్ యొక్క సమగ్ర దృశ్యం."
+
+msgid "Overview Reports"
+msgstr "అవలోకన రిపోర్టులు"
+
+msgid "Financial Reports"
+msgstr "ఆర్థిక రిపోర్టులు"
+
+msgid "Alert Reports"
+msgstr "అలర్ట్ రిపోర్టులు"
+
+msgid "Track daily inventory inflows and outflows."
+msgstr "దైనందిన ఇన్వెంటరీ ఇన్‌ఫ్లోలు మరియు అవుట్‌ఫ్లోలను ట్రాక్ చేయండి."
+
+msgid "Identify high and low performing products."
+msgstr "అధిక మరియు తక్కువ పనితీరు ఉన్న ఉత్పత్తులను గుర్తించండి."
+
+msgid "Monitor inventory age and turnover rates."
+msgstr "ఇన్వెంటరీ వయస్సు మరియు టర్నోవర్ రేట్లను పర్యవేక్షించండి."
+
+msgid "Analyze profitability across your product lines."
+msgstr "మీ ఉత్పత్తి లైన్‌లలో లాభదాయకతను విశ్లేషించండి."
+
+msgid "Value-based inventory categorization."
+msgstr "విలువ ఆధారిత ఇన్వెంటరీ వర్గీకరణ."
+
+msgid "Track purchase costs and stock valuations."
+msgstr "కొనుగోలు ఖర్చులు మరియు స్టాక్ విలువలను ట్రాక్ చేయండి."
+
+msgid "Monitor products approaching expiration."
+msgstr "గడువు సమీపిస్తున్న ఉత్పత్తులను పర్యవేక్షించండి."
+
+msgid "View and manage expired inventory items."
+msgstr "గడువు ముగిసిన ఇన్వెంటరీ అంశాలను చూడండి మరియు నిర్వహించండి."
+
+msgid "Evaluate vendor reliability and performance."
+msgstr "వెండర్ నమ్మకత్వం మరియు పనితీరును అంచనా వేయండి."
+
+msgid "Expired Stock Report"
+msgstr "గడువు ముగిసిన స్టాక్ రిపోర్ట్"
+
+msgid "Track and manage expired inventory."
+msgstr "గడువు ముగిసిన ఇన్వెంటరీని ట్రాక్ మరియు నిర్వహించండి."
+
+msgid "Profit Margin Report"
+msgstr "లాభ మార్జిన్ రిపోర్ట్"
+
+msgid "Analyze profitability across products."
+msgstr "ఉత్పత్తుల్లో లాభదాయకతను విశ్లేషించండి."
+
+msgid "Purchase Stock Report"
+msgstr "పర్చేజ్ స్టాక్ రిపోర్ట్"
+
+msgid "Detailed view of purchase history."
+msgstr "కొనుగోలు చరిత్ర యొక్క వివరమైన దృశ్యం."
+
+msgid "-- Assign Later --"
+msgstr "-- తర్వాత కేటాయించండి --"
+
+msgid "-- None --"
+msgstr "-- ఏదీ లేదు --"
+
+msgid "-- Select --"
+msgstr "-- ఎంచుకోండి --"
+
+msgid "-- Select Status --"
+msgstr "-- ఎంచుకోండి స్థితి --"
+
+msgid "-- Select Type --"
+msgstr "-- ఎంచుకోండి రకం --"
+
+msgid "-- Select Vehicle --"
+msgstr "-- ఎంచుకోండి వాహనం --"
+
+msgid "1-on-1 Guided Tour"
+msgstr "1-ఒన్-1 గైడెడ్ టూర్"
+
+msgid "10-digit Indian mobile number starting with 6, 7, 8 or 9"
+msgstr "10-digit Indian mobile number starting తో 6, 7, 8 లేదా 9"
+
+msgid "10-digit mobile"
+msgstr "10 అంకెల మొబైల్"
+
+msgid "10-digit mobile number"
+msgstr "10 అంకెల మొబైల్ నంబర్"
+
+msgid "20 User Accounts"
+msgstr "20 యూజర్ ఖాతాలు"
+
+msgid "24 hours"
+msgstr "24 గంటలు"
+
+msgid "3 User Accounts"
+msgstr "3 యూజర్ ఖాతాలు"
+
+msgid "3 days"
+msgstr "3 రోజులు"
+
+msgid "6-digit pincode"
+msgstr "6 అంకెల పిన్‌కోడ్"
+
+msgid "7 Days Free"
+msgstr "7 రోజులు ఉచితం"
+
+msgid "7-Day Free Trial"
+msgstr "7-Day Free ట్రయల్"
+
+msgid "8 standard onboarding tasks will be created. You can add or customise them after creation."
+msgstr "8 standard onboarding tasks వస్తుంది be created. మీరు చేయవచ్చు add లేదా customise them తర్వాత creation."
+
+msgid "A default checklist will be created automatically"
+msgstr "A default checklist వస్తుంది be created automatically"
+
+msgid "A flexible system that fits your business — not the other way around."
+msgstr "A flexible system ఆ fits మీ business — కాదు  ఇతర way around."
+
+msgid "A powerful, fully customizable Inventory Management System that gives you real-time visibility, reduces losses, and streamlines operations across your entire business."
+msgstr "A powerful, fully customizable ఇన్‌వెంటరీ నిర్వహణ System ఆ gives మీరు real-time visibility, reduces losses, మరియు streamlines operations across మీ entire business."
+
+msgid "A secure password will be <strong>auto-generated</strong> and sent to the staff member's email along with their username."
+msgstr "A secure password వస్తుంది be <strong>auto-generated</strong> మరియు sent కి  staff member's email along తో వారి username."
+
+msgid "A senior enterprise sales representative has been assigned to your request. They will be in touch with you within the next 24 hours to discuss a customized solution and provide you with a tailored proposal."
+msgstr "A senior enterprise sales representative has been assigned కి మీ request. They వస్తుంది be లో touch తో మీరు within  next 24 hours కి discuss a customized solution మరియు provide మీరు తో a tailored proposal."
+
+msgid "ABC Class"
+msgstr "ABC క్లాస్"
+
+msgid "ALL RIGHTS RESERVED"
+msgstr "అన్ని RIGHTS RESERVED"
+
+msgid "AMOUNT"
+msgstr "మొత్తం"
+
+msgid "Account Now"
+msgstr "Account ఇప్పుడు"
+
+msgid "Account Owner"
+msgstr "ఖాతా యజమాని"
+
+msgid "Account in less than 2 minutes."
+msgstr "Account లో less than 2 minutes."
+
+msgid "Account | CWS Inventory"
+msgstr "Account | CWS ఇన్‌వెంటరీ"
+
+msgid "Action"
+msgstr "చర్య"
+
+msgid "Action Required"
+msgstr "చర్య Required"
+
+msgid "Action needed"
+msgstr "చర్య needed"
+
+msgid "Actionable insights with advanced reporting"
+msgstr "Actionable insights తో advanced reporting"
+
+msgid "Activate Account"
+msgstr "ఖాతాను సక్రియం చేయండి"
+
+msgid "Active"
+msgstr "యాక్టివ్"
+
+msgid "Active Filter:"
+msgstr "యాక్‌టివ్ ఫిల్‌టర్:"
+
+msgid "Active Status"
+msgstr "యాక్‌టివ్ స్థితి"
+
+msgid "Add"
+msgstr "జోడించండి"
+
+msgid "Add Address"
+msgstr "జోడించండి చిరునామా"
+
+msgid "Add Contact"
+msgstr "జోడించండి Contact"
+
+msgid "Add Driver"
+msgstr "జోడించండి డ్‌రైవర్"
+
+msgid "Add First Material"
+msgstr "జోడించండి మొదటి Material"
+
+msgid "Add First Product"
+msgstr "జోడించండి మొదటి ఉత్పత్తి"
+
+msgid "Add Items in Bulk"
+msgstr "జోడించండి Items లో Bulk"
+
+msgid "Add Material"
+msgstr "జోడించండి Material"
+
+msgid "Add New"
+msgstr "జోడించండి కొత్త"
+
+msgid "Add New Entry"
+msgstr "జోడించండి కొత్త Entry"
+
+msgid "Add New Row"
+msgstr "జోడించండి కొత్త Row"
+
+msgid "Add New Staff"
+msgstr "జోడించండి కొత్త సిబ్బంది"
+
+msgid "Add New Staff Member"
+msgstr "జోడించండి కొత్త సిబ్బంది Member"
+
+msgid "Add Product Stock"
+msgstr "జోడించండి ఉత్పత్తి స్టాక్"
+
+msgid "Add Stock"
+msgstr "జోడించండి స్టాక్"
+
+msgid "Add Supplier"
+msgstr "జోడించండి Supplier"
+
+msgid "Add Training"
+msgstr "జోడించండి శిక్షణ"
+
+msgid "Add Training Material"
+msgstr "జోడించండి శిక్షణ Material"
+
+msgid "Add Vehicle"
+msgstr "జోడించండి వాహనం"
+
+msgid "Add a Comment"
+msgstr "జోడించండి a Comment"
+
+msgid "Add a comment or provide more details..."
+msgstr "జోడించండి a comment లేదా provide మరిన్ని details..."
+
+msgid "Add a new task..."
+msgstr "జోడించండి a కొత్త task..."
+
+msgid "Add first vehicle →"
+msgstr "జోడించండి first vehicle →"
+
+msgid "Add product"
+msgstr "జోడించండి product"
+
+msgid "Add products with stock and purchase prices to view the ABC classification ledger."
+msgstr "జోడించండి products తో stock మరియు purchase prices కి view  ABC classification ledger."
+
+msgid "Add products, categories, and suppliers into the system."
+msgstr "జోడించండి products, categories, మరియు suppliers లోనికి  system."
+
+msgid "Add to Google Calendar"
+msgstr "జోడించండి కి Google Calendar"
+
+msgid "Add vendor now"
+msgstr "జోడించండి vendor ఇప్పుడు"
+
+msgid "Add your first driver →"
+msgstr "జోడించండి మీ first driver →"
+
+msgid "Add your first vehicle →"
+msgstr "జోడించండి మీ first vehicle →"
+
+msgid "Additional notes..."
+msgstr "అదనపు గమనికలు..."
+
+msgid "Admin"
+msgstr "అడ్మిన్"
+
+msgid "Admin Control"
+msgstr "అడ్మిన్ Control"
+
+msgid "Admin Dashboard"
+msgstr "అడ్మిన్ డాష్‌బోర్డ్"
+
+msgid "Admin Dashboard | Management"
+msgstr "అడ్మిన్ డాష్‌బోర్డ్ | నిర్వహణ"
+
+msgid "Admin Panel"
+msgstr "అడ్మిన్ Panel"
+
+msgid "Admin Portal | Secure Login"
+msgstr "అడ్మిన్ పోర్టల్ | Secure Login"
+
+msgid "Admin — Issue Resolved"
+msgstr "అడ్మిన్ — Issue పరిష్కరించబడింది"
+
+msgid "Admin — Under Review"
+msgstr "అడ్మిన్ — క్రింద సమీక్ష"
+
+msgid "Administrative Actions"
+msgstr "పరిపాలనా చర్యలు"
+
+msgid "Advanced API Access"
+msgstr "అధునాతన API యాక్సెస్"
+
+msgid "After submitting, our admin team will review and respond. You can add comments at any time. Once resolved,"
+msgstr "తర్వాత submitting, మా admin team వస్తుంది review మరియు respond. మీరు చేయవచ్చు add comments వద్ద ఏదైనా time. ఒకసారి resolved,"
+
+msgid "Aging Days"
+msgstr "వయస్సు రోజులు"
+
+msgid "Alert Identity"
+msgstr "హెచ్చరిక గుర్తింపు"
+
+msgid "Alerts & Notifications"
+msgstr "హెచ్‌చరికలు & నోటిఫికేషన్‌లు"
+
+msgid "All Notifications"
+msgstr "అన్ని నోటిఫికేషన్‌లు"
+
+msgid "All Priorities"
+msgstr "అన్ని Priorities"
+
+msgid "All Staff"
+msgstr "అన్ని సిబ్బంది"
+
+msgid "All Statuses"
+msgstr "అన్ని Statuses"
+
+msgid "All Transactions"
+msgstr "అన్ని Transactions"
+
+msgid "All Types"
+msgstr "అన్ని Types"
+
+msgid "All inventory items are active."
+msgstr "అన్ని inventory items ఉన్నాయి active."
+
+msgid "All rights reserved."
+msgstr "అన్ని rights reserved."
+
+msgid "All tickets across all companies."
+msgstr "అన్ని tickets across అన్ని companies."
+
+msgid "All training assigned to you."
+msgstr "అన్ని training assigned కి మీరు."
+
+msgid "Allocated"
+msgstr "కేటాయించబడింది"
+
+msgid "Already have an account?"
+msgstr "ఇప్పటికే ఖాతా ఉందా?"
+
+msgid "Amount Paid"
+msgstr "మొత్తం Paid"
+
+msgid "Analyze &"
+msgstr "విశ్లేషించండి &"
+
+msgid "Any additional notes about this driver…"
+msgstr "ఏదైనా additional notes గురించి ఈ driver…"
+
+msgid "Any additional notes about this vehicle…"
+msgstr "ఏదైనా additional notes గురించి ఈ vehicle…"
+
+msgid "Any special notes for this onboarding..."
+msgstr "ఏదైనా special notes కోసం ఈ onboarding..."
+
+msgid "Archived"
+msgstr "ఆర్‌కైవ్ చేయబడింది"
+
+msgid "Are you sure?"
+msgstr "ఉన్నాయి మీరు sure?"
+
+msgid "Assign Driver"
+msgstr "Assign డ్‌రైవర్"
+
+msgid "Assign Training"
+msgstr "Assign శిక్షణ"
+
+msgid "Assign Vehicle"
+msgstr "Assign వాహనం"
+
+msgid "Assigned Driver"
+msgstr "నియమించబడింది డ్‌రైవర్"
+
+msgid "Assigned Mentor"
+msgstr "నియమించబడింది Mentor"
+
+msgid "Assigned Vehicles"
+msgstr "నియమించబడింది Vehicles"
+
+msgid "Assignment & Dates"
+msgstr "కేటాయింపు & తేదీలు"
+
+msgid "Attach File(s) to Quote"
+msgstr "Attach File(s) కి Quote"
+
+msgid "Attention"
+msgstr "దృష్టి"
+
+msgid "Authorized Sign In"
+msgstr "Authorized Sign లో"
+
+msgid "Authorized Signature"
+msgstr "అధికృత సంతకం"
+
+msgid "Available"
+msgstr "అందుబాటులో ఉంది"
+
+msgid "Avg Daily Sales"
+msgstr "సగటు రోజువారీ అమ్మకాలు"
+
+msgid "Avg. Sale/Week"
+msgstr "సగటు అమ్మకం/వారం"
+
+msgid "Back"
+msgstr "వెనుక"
+
+msgid "Back to All Tickets"
+msgstr "వెనుక కి అన్ని టికెట్లు"
+
+msgid "Back to Dashboard"
+msgstr "వెనుక కి డాష్‌బోర్డ్"
+
+msgid "Back to Home"
+msgstr "వెనుక కి హోమ్"
+
+msgid "Back to Materials"
+msgstr "వెనుక కి మెటీరియల్స్"
+
+msgid "Back to My Training"
+msgstr "వెనుక కి నా శిక్షణ"
+
+msgid "Back to Onboarding"
+msgstr "వెనుక కి Onboarding"
+
+msgid "Back to Records"
+msgstr "వెనుక కి Records"
+
+msgid "Back to Tickets"
+msgstr "వెనుక కి టికెట్లు"
+
+msgid "Basic Expiry Alerts"
+msgstr "Basic Expiry హెచ్‌చరికలు"
+
+msgid "Batch"
+msgstr "బ్యాచ్"
+
+msgid "Batch Allocation Mode"
+msgstr "బ్యాచ్ కేటాయింపు మోడ్"
+
+msgid "Batch-wise and expiry tracking with automated alerts"
+msgstr "Batch-wise మరియు expiry tracking తో automated alerts"
+
+msgid "Battery"
+msgstr "బ్యాటరీ"
+
+msgid "Battery & Range"
+msgstr "బ్యాటరీ & రేంజ్"
+
+msgid "Battery After (%)"
+msgstr "బ్యాటరీ తర్వాత (%)"
+
+msgid "Battery After must be greater than Battery Before."
+msgstr "బ్యాటరీ తర్వాత must be greater than బ్యాటరీ ముందు."
+
+msgid "Battery Before (%)"
+msgstr "బ్యాటరీ ముందు (%)"
+
+msgid "Battery Level Preview"
+msgstr "బ్యాటరీ Level Preview"
+
+msgid "Before → After"
+msgstr "ముందు → తర్వాత"
+
+msgid "Benefits"
+msgstr "ప్రయోజనాలు"
+
+msgid "Best"
+msgstr "ఉత్తమ"
+
+msgid "Best regards"
+msgstr "శుభాకాంక్షలు"
+
+msgid "Book a Demo"
+msgstr "డెమో బుక్ చేయండి"
+
+msgid "Book a Demo | CWS Inventory"
+msgstr "Book a Demo | CWS ఇన్‌వెంటరీ"
+
+msgid "Book a Personalized Demo"
+msgstr "వ్యక్తిగతీకరించిన డెమో బుక్ చేయండి"
+
+msgid "Brief description of the material..."
+msgstr "Brief description యొక్క  material..."
+
+msgid "Brief summary of the issue"
+msgstr "Brief summary యొక్క  issue"
+
+msgid "Built Around Your Business — Fully Customizable"
+msgstr "Built Around మీ వ్యాపారం — Fully Customizable"
+
+msgid "Business"
+msgstr "వ్యాపారం"
+
+msgid "Business Details"
+msgstr "వ్యాపారం వివరాలు"
+
+msgid "Business Identity"
+msgstr "వ్యాపారం Identity"
+
+msgid "Business Info"
+msgstr "వ్యాపారం Info"
+
+msgid "Business Locations"
+msgstr "వ్యాపారం Locations"
+
+msgid "Business Login"
+msgstr "వ్యాపారం Login"
+
+msgid "Business Name"
+msgstr "వ్యాపారం పేరు"
+
+msgid "Business Plan"
+msgstr "వ్యాపారం ప్లాన్"
+
+msgid "Business Type"
+msgstr "వ్యాపారం రకం"
+
+msgid "Business Type:"
+msgstr "వ్యాపారం రకం:"
+
+msgid "By"
+msgstr "ద్వారా"
+
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+msgid "CWS Enterprise Solutions. All rights reserved."
+msgstr "CWS ఎంటర్‌ప్రైజ్ Solutions. అన్ని rights reserved."
+
+msgid "CWS Inventory | Modern Inventory Management"
+msgstr "CWS ఇన్‌వెంటరీ | Modern ఇన్‌వెంటరీ నిర్వహణ"
+
+msgid "Call Us"
+msgstr "మమ్మల్ని కాల్ చేయండి"
+
+msgid "Cancel anytime"
+msgstr "రద్దు చేయండి anytime"
+
+msgid "Capacity (kWh)"
+msgstr "సామర్థ్యం (kWh)"
+
+msgid "Category Details"
+msgstr "వర్గం వివరాలు"
+
+msgid "Category Name"
+msgstr "వర్గం పేరు"
+
+msgid "Change Status To"
+msgstr "Change స్థితి కి"
+
+msgid "Charged At"
+msgstr "Charged వద్ద"
+
+msgid "Charging Logs"
+msgstr "ఛార్జింగ్ లాగ్‌లు"
+
+msgid "Charging date and time is required."
+msgstr "Charging date మరియు time ఉంది required."
+
+msgid "Check Your Email"
+msgstr "Check మీ ఇమెయిల్"
+
+msgid "Checklist Items"
+msgstr "చెక్‌లిస్ట్ అంశాలు"
+
+msgid "City"
+msgstr "నగరం"
+
+msgid "Class A"
+msgstr "క్లాస్ A"
+
+msgid "Class C"
+msgstr "క్లాస్ C"
+
+msgid "Clear"
+msgstr "క్లియర్ చేయండి"
+
+msgid "Clear Filter"
+msgstr "క్లియర్ చేయండి ఫిల్‌టర్"
+
+msgid "Clear Filters"
+msgstr "క్లియర్ చేయండి Filters"
+
+msgid "Clear all filters"
+msgstr "క్లియర్ చేయండి అన్ని filters"
+
+msgid "Click below to open or download"
+msgstr "Click దిగువ కి open లేదా download"
+
+msgid "Close Ticket"
+msgstr "టికెట్ మూసివేయండి"
+
+msgid "Closed"
+msgstr "మూసివేయబడింది"
+
+msgid "Closed At"
+msgstr "మూసివేయబడింది వద్ద"
+
+msgid "Closed By Company"
+msgstr "మూసివేయబడింది ద్వారా కంపెనీ"
+
+msgid "Comments"
+msgstr "వ్యాఖ్యలు"
+
+msgid "Companies"
+msgstr "కంపెనీలు"
+
+msgid "Companies Registry"
+msgstr "కంపెనీల రిజిస్ట్రీ"
+
+msgid "Company"
+msgstr "కంపెనీ"
+
+msgid "Company Logo"
+msgstr "కంపెనీ Logo"
+
+msgid "Company Owner"
+msgstr "కంపెనీ Owner"
+
+msgid "Company Owner Login"
+msgstr "కంపెనీ Owner Login"
+
+msgid "Company Plans"
+msgstr "కంపెనీ Plans"
+
+msgid "Company Profile"
+msgstr "కంపెనీ Profile"
+
+msgid "Company Size"
+msgstr "కంపెనీ Size"
+
+msgid "Company — Closes ticket"
+msgstr "కంపెనీ — Closes ticket"
+
+msgid "Company — Submits ticket"
+msgstr "కంపెనీ — Submits ticket"
+
+msgid "Company:"
+msgstr "కంపెనీ:"
+
+msgid "Complete"
+msgstr "పూర్తి"
+
+msgid "Complete Setup & Go to Dashboard"
+msgstr "పూర్తి Setup & Go కి డాష్‌బోర్డ్"
+
+msgid "Completed"
+msgstr "పూర్తయింది"
+
+msgid "Completed On"
+msgstr "పూర్తయింది పై"
+
+msgid "Completion Date"
+msgstr "Completion తేదీ"
+
+msgid "Compliance Status"
+msgstr "Compliance స్థితి"
+
+msgid "Comprehensive solution for growing distributors."
+msgstr "Comprehensive solution కోసం growing distributors."
+
+msgid "Confidence"
+msgstr "నమ్మకం"
+
+msgid "Configure approvals, stock movement, returns, and FEFO rules"
+msgstr "Configure approvals, stock movement, returns, మరియు FEFO rules"
+
+msgid "Configure rules and alerts later."
+msgstr "Configure rules మరియు alerts later."
+
+msgid "Confirm Password"
+msgstr "నిర్‌ధారించండి పాస్‌వర్డ్"
+
+msgid "Confirm to sign out of your admin portal"
+msgstr "నిర్‌ధారించండి కి sign బయట యొక్క మీ admin portal"
+
+msgid "Confirm to sign out of your admin portal."
+msgstr "నిర్‌ధారించండి కి sign బయట యొక్క మీ admin portal."
+
+msgid "Confirm to sign out of your portal."
+msgstr "నిర్‌ధారించండి కి sign బయట యొక్క మీ portal."
+
+msgid "Confirm to sign out of your portal. We'll make sure your session is closed securely."
+msgstr "నిర్‌ధారించండి కి sign బయట యొక్క మీ portal. We'll make sure మీ session ఉంది closed securely."
+
+msgid "Contact & Owner"
+msgstr "సంప్రదింపు & యజమాని"
+
+msgid "Contact Info"
+msgstr "సంప్రదింపు సమాచారం"
+
+msgid "Contact Inquiries"
+msgstr "Contact విచారణలు"
+
+msgid "Contact Inquiries Registry"
+msgstr "Contact విచారణలు Registry"
+
+msgid "Contact Inquiries | Admin"
+msgstr "Contact విచారణలు | అడ్మిన్"
+
+msgid "Contact Sales"
+msgstr "అమ్మకాలను సంప్రదించండి"
+
+msgid "Contact Sales | CWS Inventory Enterprise"
+msgstr "Contact Sales | CWS ఇన్‌వెంటరీ ఎంటర్‌ప్రైజ్"
+
+msgid "Contact Support"
+msgstr "Contact మద్దతు"
+
+msgid "Contact Us"
+msgstr "మమ్మల్ని సంప్రదించండి"
+
+msgid "Contact your company admin for more information."
+msgstr "Contact మీ company admin కోసం మరిన్ని information."
+
+msgid "Control stock limits, expiry settings, and restrictions"
+msgstr "Control stock limits, expiry settings, మరియు restrictions"
+
+msgid "Cost/Unit"
+msgstr "ఖర్చు/యూనిట్"
+
+msgid "Create PO"
+msgstr "PO సృష్టించండి"
+
+msgid "Create Password"
+msgstr "Create పాస్‌వర్డ్"
+
+msgid "Create Your Account"
+msgstr "Create మీ Account"
+
+msgid "Create a ticket to get help from our team."
+msgstr "Create a ticket కి get help నుండి మా team."
+
+msgid "Create first delivery →"
+msgstr "మొదటి డెలివరీని సృష్టించండి →"
+
+msgid "Create purchase orders and receive stock with GRN."
+msgstr "Create purchase orders మరియు receive stock తో GRN."
+
+msgid "Created"
+msgstr "సృష్టించబడింది"
+
+msgid "Critical"
+msgstr "క్లిష్టమైన"
+
+msgid "Critical Errors"
+msgstr "క్లిష్టమైన Errors"
+
+msgid "Current Battery (%)"
+msgstr "ప్రస్తుత బ్యాటరీ (%)"
+
+msgid "Current Location"
+msgstr "ప్రస్తుత స్థానం"
+
+msgid "Current Plan"
+msgstr "ప్రస్తుత ప్లాన్"
+
+msgid "Current Stock"
+msgstr "ప్రస్తుత స్టాక్"
+
+msgid "Current:"
+msgstr "ప్రస్తుత:"
+
+msgid "Customer Insight"
+msgstr "కస్‌టమర్ Insight"
+
+msgid "Customer Name*"
+msgstr "కస్‌టమర్ Name*"
+
+msgid "Customer Notes"
+msgstr "కస్‌టమర్ గమనికలు"
+
+msgid "Customize KPIs, reports, and views"
+msgstr "Customize KPIs, reports, మరియు views"
+
+msgid "Daily and monthly stock purchase analysis"
+msgstr "Daily మరియు monthly stock purchase analysis"
+
+msgid "Date & Time"
+msgstr "తేదీ & Time"
+
+msgid "Date:"
+msgstr "తేదీ:"
+
+msgid "Days Left"
+msgstr "మిగిలిన రోజులు"
+
+msgid "Days to Expiry"
+msgstr "Days కి Expiry"
+
+msgid "Dead Stock"
+msgstr "Dead స్టాక్"
+
+msgid "Dead Stock Items"
+msgstr "Dead స్టాక్ Items"
+
+msgid "Dead Stock Management"
+msgstr "Dead స్టాక్ నిర్వహణ"
+
+msgid "Default checklist included"
+msgstr "డిఫాల్ట్ చెక్‌లిస్ట్ చేర్చబడింది"
+
+msgid "Defects %"
+msgstr "లోపాలు %"
+
+msgid "Define roles, permissions, and access levels"
+msgstr "Define roles, permissions, మరియు access levels"
+
+msgid "Delayed reporting and lack of insights"
+msgstr "Delayed reporting మరియు lack యొక్క insights"
+
+msgid "Delivered"
+msgstr "డెలివరీ అయింది"
+
+msgid "Delivered At"
+msgstr "డెలివరీ అయింది వద్ద"
+
+msgid "Delivered Today"
+msgstr "డెలివరీ అయింది ఈ రోజు"
+
+msgid "Deliveries"
+msgstr "డెలివరీలు"
+
+msgid "Delivery"
+msgstr "డెలివరీ"
+
+msgid "Delivery Address"
+msgstr "డెలివరీ చిరునామా"
+
+msgid "Delivery Notes"
+msgstr "డెలివరీ గమనికలు"
+
+msgid "Delivery Order"
+msgstr "డెలివరీ ఆర్డర్"
+
+msgid "Delivery Orders"
+msgstr "డెలివరీ ఆర్డర్లు"
+
+msgid "Demo Booked!"
+msgstr "డెమో బుక్ చేయబడింది!"
+
+msgid "Demo Confirmed | CWS Inventory"
+msgstr "Demo Confirmed | CWS ఇన్‌వెంటరీ"
+
+msgid "Demo Request Confirmed"
+msgstr "డెమో అభ్యర్థన నిర్ధారించబడింది"
+
+msgid "Demo Request Received"
+msgstr "Demo Request స్వీకరించబడింది"
+
+msgid "Demo Requests"
+msgstr "Demo అభ్యర్థనలు"
+
+msgid "Demo Requests Registry"
+msgstr "Demo అభ్యర్థనలు Registry"
+
+msgid "Demo Requests | Admin"
+msgstr "Demo అభ్యర్థనలు | అడ్మిన్"
+
+msgid "Describe the issue in detail — what happened, steps to reproduce, any error messages..."
+msgstr "Describe  issue లో detail — ఏమి happened, steps కి reproduce, ఏదైనా error messages..."
+
+msgid "Describe your issue and our team will get back to you."
+msgstr "Describe మీ issue మరియు మా team వస్తుంది get back కి మీరు."
+
+msgid "Describe your issue in detail — steps to reproduce, error messages, etc."
+msgstr "Describe మీ issue లో detail — steps కి reproduce, error messages, etc."
+
+msgid "Detailed batch-level inventory analysis."
+msgstr "వివరణాత్మక బ్యాచ్-స్థాయి ఇన్వెంటరీ విశ్లేషణ."
+
+msgid "Details of the maintenance work to be done…"
+msgstr "వివరాలు యొక్క  maintenance work కి be done…"
+
+msgid "Discount"
+msgstr "తగ్గింపు"
+
+msgid "Discount Suggested"
+msgstr "తగ్గింపు Suggested"
+
+msgid "Dispatch"
+msgstr "డిస్‌పాచ్"
+
+msgid "Distance"
+msgstr "దూరం"
+
+msgid "Distributors"
+msgstr "పంపిణీదారులు"
+
+msgid "Download the full CSV for procurement planning."
+msgstr "డౌన్‌లోడ్ చేయండి  full CSV కోసం procurement planning."
+
+msgid "Drag & drop a file here, or"
+msgstr "Drag & drop a file ఇక్కడ, లేదా"
+
+msgid "Driver"
+msgstr "డ్రైవర్"
+
+msgid "Driver Details"
+msgstr "డ్‌రైవర్ వివరాలు"
+
+msgid "Driver's address…"
+msgstr "డ్రైవర్ చిరునామా…"
+
+msgid "Drivers"
+msgstr "డ్‌రైవర్లు"
+
+msgid "Due Date"
+msgstr "Due తేదీ"
+
+msgid "E-Vehicle"
+msgstr "ఈ-వాహనం"
+
+msgid "E-Vehicle Fleet"
+msgstr "E-Vehicle ఫ్లీట్"
+
+msgid "E-Vehicles"
+msgstr "ఈ-వాహనాలు"
+
+msgid "EV Charging Logs"
+msgstr "EV ఛార్జింగ్ లాగ్‌లు"
+
+msgid "Edit Company"
+msgstr "సవరించండి కంపెనీ"
+
+msgid "Edit Material"
+msgstr "సవరించండి Material"
+
+msgid "Edit Record"
+msgstr "సవరించండి Record"
+
+msgid "Edit Training Record"
+msgstr "సవరించండి శిక్షణ Record"
+
+msgid "Effective Date: May 2026"
+msgstr "Effective తేదీ: May 2026"
+
+msgid "Efficiently manage fast-moving inventory with real-time stock updates, automatic low-stock alerts, and seamless billing integration."
+msgstr "Efficiently manage fast-moving inventory తో real-time stock updates, automatic low-stock alerts, మరియు seamless billing integration."
+
+msgid "Eliminate manual errors and inefficiencies"
+msgstr "Eliminate manual errors మరియు inefficiencies"
+
+msgid "Email Us"
+msgstr "ఇమెయిల్ Us"
+
+msgid "Email, phone, and physical address for fulfillment."
+msgstr "ఇమెయిల్, phone, మరియు physical address కోసం fulfillment."
+
+msgid "Enable only what you need, add custom fields"
+msgstr "Enable మాత్రమే ఏమి మీరు need, add custom fields"
+
+msgid "Enhance decision-making with real-time insights"
+msgstr "Enhance decision-making తో real-time insights"
+
+msgid "Ensure compliance and safety with strict expiry tracking, batch-level visibility, and automatic near-expiry alerts. Prevent the sale of expired products."
+msgstr "Ensure compliance మరియు safety తో strict expiry tracking, batch-level visibility, మరియు automatic near-expiry alerts. Prevent  sale యొక్క expired products."
+
+msgid "Ensure optimal stock utilization by prioritizing items nearing expiry."
+msgstr "Ensure optimal stock utilization ద్వారా prioritizing items nearing expiry."
+
+msgid "Ensure security and accountability with custom permissions."
+msgstr "Ensure security మరియు accountability తో custom permissions."
+
+msgid "Enter a valid purchase price."
+msgstr "చెల్లుబాటు అయ్యే కొనుగోలు ధరను నమోదు చేయండి."
+
+msgid "Enter a value between 0-100."
+msgstr "Enter a value మధ్య 0-100."
+
+msgid "Enter admin username"
+msgstr "అడ్మిన్ వినియోగదారు పేరును నమోదు చేయండి"
+
+msgid "Enter your username"
+msgstr "Enter మీ username"
+
+msgid "Enterprise Info"
+msgstr "ఎంటర్‌ప్రైజ్ Info"
+
+msgid "Enterprise Portal"
+msgstr "ఎంటర్‌ప్రైజ్ పోర్టల్"
+
+msgid "Enterprise Solution"
+msgstr "ఎంటర్‌ప్రైజ్ Solution"
+
+msgid "Enterprise Solutions. All rights reserved."
+msgstr "ఎంటర్‌ప్రైజ్ Solutions. అన్ని rights reserved."
+
+msgid "Enterprise Transport Management Module"
+msgstr "ఎంటర్‌ప్రైజ్ Transport నిర్వహణ Module"
+
+msgid "Enterprise Vendor Management Module"
+msgstr "ఎంటర్‌ప్రైజ్ వెండర్ నిర్వహణ Module"
+
+msgid "Error Loading Data"
+msgstr "డేటా లోడ్ చేయడంలో లోపం"
+
+msgid "Est. Distance"
+msgstr "Est. దూరం"
+
+msgid "Est. Distance (km)"
+msgstr "Est. దూరం (km)"
+
+msgid "Every business works differently. Our system adapts to your processes, giving you full flexibility without forcing changes to your workflow."
+msgstr "ప్రతి business works differently. మా system adapts కి మీ processes, giving మీరు full flexibility లేకుండా forcing changes కి మీ workflow."
+
+msgid "Expected Date:"
+msgstr "Expected తేదీ:"
+
+msgid "Experience the full power of CWS Inventory. Automate your workflows, eliminate stockouts, and grow your business with zero risk."
+msgstr "Experience  full power యొక్క CWS ఇన్‌వెంటరీ. Automate మీ workflows, eliminate stockouts, మరియు grow మీ business తో zero risk."
+
+msgid "Expiration Date"
+msgstr "Expiration తేదీ"
+
+msgid "Expired"
+msgstr "గడువు ముగిసింది"
+
+msgid "Expired products causing financial loss"
+msgstr "గడువు ముగిసింది products causing financial loss"
+
+msgid "Expiring Soon"
+msgstr "త్వరలో గడువు ముగుస్తుంది"
+
+msgid "Expiry & Batch Tracking"
+msgstr "గడువు & బ్యాచ్ ట్రాకింగ్"
+
+msgid "Expiry date must be today or a future date"
+msgstr "Expiry date must be ఈ రోజు లేదా a future date"
+
+msgid "Expiry date required when tracking enabled"
+msgstr "Expiry date required ఎప్పుడు tracking enabled"
+
+msgid "Export Analysis"
+msgstr "ఎగుమతి Analysis"
+
+msgid "Export Data"
+msgstr "ఎగుమతి Data"
+
+msgid "Export Excel"
+msgstr "ఎగుమతి Excel"
+
+msgid "External Resource"
+msgstr "బాహ్య వనరు"
+
+msgid "FEFO Auto-Selection"
+msgstr "FEFO ఆటో-సెలెక్షన్"
+
+msgid "FEFO Automation"
+msgstr "FEFO ఆటోమేషన్"
+
+msgid "FIFO Selection"
+msgstr "FIFO సెలెక్షన్"
+
+msgid "Failed"
+msgstr "విఫలమైంది"
+
+msgid "Failure / Cancel Reason"
+msgstr "Failure / రద్దు చేయండి కారణం"
+
+msgid "Fast &amp; Slow-Moving Products"
+msgstr "Fast &amp; Slow-Moving ఉత్పత్తులు"
+
+msgid "Fill in recipient and delivery details below."
+msgstr "Fill లో recipient మరియు delivery details దిగువ."
+
+msgid "Fill in the driver details below."
+msgstr "Fill లో  driver details దిగువ."
+
+msgid "Fill in the electric vehicle details below."
+msgstr "Fill లో  electric vehicle details దిగువ."
+
+msgid "Fill out the details below and we'll connect you with the right team."
+msgstr "Fill బయట  details దిగువ మరియు we'll connect మీరు తో  right team."
+
+msgid "Filter Product"
+msgstr "ఫిల్‌టర్ ఉత్పత్తి"
+
+msgid "First"
+msgstr "మొదటి"
+
+msgid "First-Expire, First-Out (Recommended for perishables)"
+msgstr "First-Expire, First-Out (Recommended కోసం perishables)"
+
+msgid "First-In, First-Out"
+msgstr "మొదట వచ్చినది, మొదట వెళ్ళినది"
+
+msgid "Fleet"
+msgstr "ఫ్లీట్"
+
+msgid "Fleet Status"
+msgstr "ఫ్లీట్ స్థితి"
+
+msgid "Flexible Pricing That Grows With You"
+msgstr "Flexible Pricing ఆ Grows తో మీరు"
+
+msgid "Flexible workflows tailored to your business"
+msgstr "Flexible workflows tailored కి మీ business"
+
+msgid "Flow Type"
+msgstr "Flow రకం"
+
+msgid "Forgot Password"
+msgstr "Forgot పాస్‌వర్డ్"
+
+msgid "Free Trial"
+msgstr "Free ట్రయల్"
+
+msgid "From Date"
+msgstr "నుండి తేదీ"
+
+msgid "Full FEFO Automation"
+msgstr "పూర్తి FEFO Automation"
+
+msgid "Full Name"
+msgstr "పూర్తి పేరు"
+
+msgid "Full access to all features"
+msgstr "పూర్తి access కి అన్ని features"
+
+msgid "Full delivery address including landmark"
+msgstr "పూర్తి delivery address including landmark"
+
+msgid "Full name"
+msgstr "పూర్తి name"
+
+msgid "Fundamental data used for billing, shipping documents, and tax filings."
+msgstr "Fundamental data used కోసం billing, shipping documents, మరియు tax filings."
+
+msgid "Gain complete visibility and control over your stock with real-time updates and automated tracking."
+msgstr "Gain complete visibility మరియు control పైన మీ stock తో real-time updates మరియు automated tracking."
+
+msgid "Gain full control, reduce losses, and streamline your operations with a system built for your business."
+msgstr "Gain full control, reduce losses, మరియు streamline మీ operations తో a system built కోసం మీ business."
+
+msgid "General Information"
+msgstr "General సమాచారం"
+
+msgid "Generated by Stock Management System"
+msgstr "Generated ద్వారా స్టాక్ నిర్వహణ System"
+
+msgid "Get Started"
+msgstr "ప్రారంభించండి"
+
+msgid "Go to Dashboard"
+msgstr "Go కి డాష్‌బోర్డ్"
+
+msgid "Go to Dashboard to Add"
+msgstr "Go కి డాష్‌బోర్డ్ కి జోడించండి"
+
+msgid "Go to Login Page"
+msgstr "Go కి Login పేజీ"
+
+msgid "Go to Staff Login"
+msgstr "Go కి సిబ్బంది Login"
+
+msgid "Good Condition"
+msgstr "మంచి పరిస్థితి"
+
+msgid "Google Meet / Zoom (Link in Email)"
+msgstr "Google Meet / Zoom (Link లో ఇమెయిల్)"
+
+msgid "Got it, thanks!"
+msgstr "Got ఇది, thanks!"
+
+msgid "Grand Total"
+msgstr "Grand మొత్తం"
+
+msgid "Great News!"
+msgstr "గొప్ప వార్త!"
+
+msgid "Handle high-volume inventory with structured stock movement, optimized storage tracking, and configurable workflows that align with your operational processes."
+msgstr "Handle high-volume inventory తో structured stock movement, optimized storage tracking, మరియు configurable workflows ఆ align తో మీ operational processes."
+
+msgid "Handled By"
+msgstr "Handled ద్వారా"
+
+msgid "Hardware"
+msgstr "హార్డ్‌వేర్"
+
+msgid "Headquarters"
+msgstr "ప్రధాన కార్యాలయం"
+
+msgid "Health & Compliance Alerts"
+msgstr "Health & Compliance హెచ్‌చరికలు"
+
+msgid "Hello"
+msgstr "హలో"
+
+msgid "Help Center"
+msgstr "సహాయ కేంద్రం"
+
+msgid "Help Desk"
+msgstr "సహాయ డెస్క్"
+
+msgid "Home"
+msgstr "హోమ్"
+
+msgid "How It Works"
+msgstr "ఎలా ఇది Works"
+
+msgid "Ideal for small retail stores or boutique warehouses."
+msgstr "Ideal కోసం small retail stores లేదా boutique warehouses."
+
+msgid "If amount was deducted, it will be refunded automatically within 5-7 business days."
+msgstr "ఒకవేళ amount was deducted, ఇది వస్తుంది be refunded automatically within 5-7 business days."
+
+msgid "If the button doesn't work, you can copy and paste this link into your browser:"
+msgstr "ఒకవేళ  button doesn't work, మీరు చేయవచ్చు copy మరియు paste ఈ link లోనికి మీ browser:"
+
+msgid "If the issue is fixed, please close the ticket below."
+msgstr "ఒకవేళ  issue ఉంది fixed, please close  ticket దిగువ."
+
+msgid "If you choose not to upgrade, your account access will be locked at the end of the trial, and your data will be securely deleted after a 30-day grace period."
+msgstr "ఒకవేళ మీరు choose కాదు కి upgrade, మీ account access వస్తుంది be locked వద్ద  end యొక్క  trial, మరియు మీ data వస్తుంది be securely deleted తర్వాత a 30-day grace period."
+
+msgid "If you have any immediate questions or need to add anything to your inquiry, simply reply to this email."
+msgstr "ఒకవేళ మీరు have ఏదైనా immediate questions లేదా need కి add anything కి మీ inquiry, simply reply కి ఈ email."
+
+msgid "If you have any questions, just reply to this email!"
+msgstr "ఒకవేళ మీరు have ఏదైనా questions, మాత్రమే reply కి ఈ email!"
+
+msgid "If you selected a time on our calendar, a formal invitation with meeting links will be sent to your inbox shortly. If you haven't picked a time yet, one of our product specialists will reach out to you within 24 hours to get you scheduled."
+msgstr "ఒకవేళ మీరు selected a time పై మా calendar, a formal invitation తో meeting links వస్తుంది be sent కి మీ inbox shortly. ఒకవేళ మీరు haven't picked a time ఇంకా, one యొక్క మా product specialists వస్తుంది reach బయట కి మీరు within 24 hours కి get మీరు scheduled."
+
+msgid "Important Account Update"
+msgstr "Important Account నవీకరించండి"
+
+msgid "Improve stock accuracy and visibility"
+msgstr "Improve stock accuracy మరియు visibility"
+
+msgid "In Progress"
+msgstr "లో ప్రగతి"
+
+msgid "In Stock"
+msgstr "లో స్టాక్"
+
+msgid "In Transit"
+msgstr "లో Transit"
+
+msgid "In Use"
+msgstr "లో Use"
+
+msgid "In the meantime, feel free to check out our website to learn more about our features."
+msgstr "లో  meantime, feel free కి check బయట మా website కి learn మరిన్ని గురించి మా features."
+
+msgid "Increase operational efficiency and productivity"
+msgstr "Increase operational efficiency మరియు productivity"
+
+msgid "Industry"
+msgstr "పరిశ్రమ"
+
+msgid "Industry:"
+msgstr "పరిశ్రమ:"
+
+msgid "Inefficient supplier and purchase management"
+msgstr "Inefficient supplier మరియు purchase management"
+
+msgid "Information"
+msgstr "సమాచారం"
+
+msgid "Inquiry Details"
+msgstr "Inquiry వివరాలు"
+
+msgid "Inquiry Received"
+msgstr "Inquiry స్వీకరించబడింది"
+
+msgid "Inquiry Successfully Received"
+msgstr "Inquiry Successfully స్వీకరించబడింది"
+
+msgid "Instant account activation"
+msgstr "తక్షణ ఖాతా సక్రియం"
+
+msgid "Insurance Expiry"
+msgstr "బీమా గడువు"
+
+msgid "Integrate with POS for automatic stock updates."
+msgstr "Integrate తో POS కోసం automatic stock updates."
+
+msgid "Intelligent Operations Management"
+msgstr "Intelligent Operations నిర్వహణ"
+
+msgid "Internal Documentation"
+msgstr "అంతర్గత పత్రాలు"
+
+msgid "Invalid captcha."
+msgstr "చెల్లని క్యాప్చా."
+
+msgid "Inventory"
+msgstr "ఇన్‌వెంటరీ"
+
+msgid "Inventory Alerts"
+msgstr "ఇన్‌వెంటరీ హెచ్‌చరికలు"
+
+msgid "Inventory Challenges Are Slowing Down Your Business"
+msgstr "ఇన్‌వెంటరీ Challenges ఉన్నాయి Slowing Down మీ వ్యాపారం"
+
+msgid "Inventory Logic"
+msgstr "ఇన్‌వెంటరీ Logic"
+
+msgid "Inventory Management"
+msgstr "ఇన్‌వెంటరీ నిర్వహణ"
+
+msgid "Inventory Rules"
+msgstr "ఇన్‌వెంటరీ Rules"
+
+msgid "Inventory Status"
+msgstr "ఇన్‌వెంటరీ స్థితి"
+
+msgid "Inventory Strategy"
+msgstr "ఇన్‌వెంటరీ Strategy"
+
+msgid "Inventory Value"
+msgstr "ఇన్‌వెంటరీ Value"
+
+msgid "Invite Link Expired"
+msgstr "Invite Link గడువు ముగిసింది"
+
+msgid "Issue Resolved by Support"
+msgstr "Issue పరిష్కరించబడింది ద్వారా మద్దతు"
+
+msgid "Item Details"
+msgstr "Item వివరాలు"
+
+msgid "Item Identity"
+msgstr "అంశం గుర్తింపు"
+
+msgid "Item Name"
+msgstr "Item పేరు"
+
+msgid "Item Table"
+msgstr "అంశాల పట్టిక"
+
+msgid "Join Date"
+msgstr "Join తేదీ"
+
+msgid "Joined"
+msgstr "చేరారు"
+
+msgid "Joined Date"
+msgstr "చేరారు తేదీ"
+
+msgid "Keep inventory updated with every sale automatically."
+msgstr "Keep inventory updated తో ప్రతి sale automatically."
+
+msgid "Keep your organizational information up to date for billing and system records."
+msgstr "Keep మీ organizational information పైకి కి date కోసం billing మరియు system records."
+
+msgid "Key Contact Persons"
+msgstr "ముఖ్య సంప్రదింపు వ్యక్తులు"
+
+msgid "Key value points:"
+msgstr "ముఖ్య విలువ పాయింట్లు:"
+
+msgid "Lack of real-time visibility into stock levels"
+msgstr "Lack యొక్క real-time visibility లోనికి stock levels"
+
+msgid "Last"
+msgstr "చివరి"
+
+msgid "Last Activity"
+msgstr "చివరి Activity"
+
+msgid "Last Updated"
+msgstr "చివరి Updated"
+
+msgid "Last updated May 15, 2026"
+msgstr "చివరి updated May 15, 2026"
+
+msgid "Last updated: May 15, 2026"
+msgstr "చివరి updated: May 15, 2026"
+
+msgid "Lead Time"
+msgstr "లీడ్ టైమ్"
+
+msgid "Leave blank to use company warehouse as pickup point"
+msgstr "Leave blank కి use company warehouse as pickup point"
+
+msgid "Legal Company Name"
+msgstr "Legal కంపెనీ పేరు"
+
+msgid "Let your customer know what this Quote is for"
+msgstr "Let మీ customer know ఏమి ఈ Quote ఉంది కోసం"
+
+msgid "Let's scale your inventory operations."
+msgstr "Let's scale మీ inventory operations."
+
+msgid "Let's set up your workspace so you can get started quickly."
+msgstr "Let's set పైకి మీ workspace so మీరు చేయవచ్చు get started quickly."
+
+msgid "License & Dates"
+msgstr "లైసెన్స్ & తేదీలు"
+
+msgid "License Expiry"
+msgstr "లైసెన్స్ గడువు"
+
+msgid "License No."
+msgstr "License కాదు."
+
+msgid "License Number"
+msgstr "లైసెన్స్ నంబర్"
+
+msgid "Limit Reached"
+msgstr "పరిమితి చేరుకుంది"
+
+msgid "Links"
+msgstr "లింక్‌లు"
+
+msgid "Live Database"
+msgstr "లైవ్ డేటాబేస్"
+
+msgid "Loading report data..."
+msgstr "నివేదిక డేటా లోడ్ అవుతోంది..."
+
+msgid "Localization"
+msgstr "స్థానికీకరణ"
+
+msgid "Location"
+msgstr "స్థానం"
+
+msgid "Log Charging"
+msgstr "ఛార్జింగ్ లాగ్ చేయండి"
+
+msgid "Log Charging Session"
+msgstr "ఛార్జింగ్ సెషన్ లాగ్ చేయండి"
+
+msgid "Log in here"
+msgstr "Log లో ఇక్కడ"
+
+msgid "Logistics"
+msgstr "లాజిస్టిక్స్"
+
+msgid "Logistics &amp; E-Vehicle Dashboard"
+msgstr "లాజిస్‌టిక్‌స్ &amp; E-Vehicle డాష్‌బోర్డ్"
+
+msgid "Logistics Dashboard"
+msgstr "లాజిస్‌టిక్‌స్ డాష్‌బోర్డ్"
+
+msgid "Logistics · E-Delivery"
+msgstr "లాజిస్‌టిక్‌స్ · E-Delivery"
+
+msgid "Looking forward for your business."
+msgstr "Looking forward కోసం మీ business."
+
+msgid "Loss (-)"
+msgstr "నష్టం (-)"
+
+msgid "Low Battery"
+msgstr "Low బ్యాటరీ"
+
+msgid "Low battery – needs charging"
+msgstr "తక్కువ బ్యాటరీ – ఛార్జింగ్ అవసరం"
+
+msgid "Low battery — this vehicle will need charging soon."
+msgstr "Low battery — ఈ vehicle వస్తుంది need charging soon."
+
+msgid "Main Dashboard"
+msgstr "ప్రధాన డాష్‌బోర్డ్"
+
+msgid "Main Menu"
+msgstr "ప్రధాన Menu"
+
+msgid "Maintenance"
+msgstr "నిర్వహణ"
+
+msgid "Make informed decisions with actionable, real-time insights."
+msgstr "Make informed decisions తో actionable, real-time insights."
+
+msgid "Manage"
+msgstr "నిర్వహించండి"
+
+msgid "Manage and overview all active organizations"
+msgstr "నిర్వహించండి మరియు overview అన్ని active organizations"
+
+msgid "Manage drivers for delivery operations"
+msgstr "నిర్వహించండి drivers కోసం delivery operations"
+
+msgid "Manage electric vehicles for delivery operations"
+msgstr "నిర్వహించండి electric vehicles కోసం delivery operations"
+
+msgid "Manage enterprise sales and contact inquiries"
+msgstr "నిర్వహించండి enterprise sales మరియు contact inquiries"
+
+msgid "Manage requests to book a product demo"
+msgstr "నిర్వహించండి requests కి book a product demo"
+
+msgid "Manage specific tracking rules for quality assurance."
+msgstr "నిర్వహించండి specific tracking rules కోసం quality assurance."
+
+msgid "Manage training programs, onboarding, and technical support"
+msgstr "నిర్వహించండి training programs, onboarding, మరియు technical support"
+
+msgid "Manage your company resources"
+msgstr "నిర్వహించండి మీ company resources"
+
+msgid "Manage your library of training content"
+msgstr "నిర్వహించండి మీ library యొక్క training content"
+
+msgid "Manage your suppliers in the dashboard."
+msgstr "నిర్వహించండి మీ suppliers లో  dashboard."
+
+msgid "Management"
+msgstr "నిర్వహణ"
+
+msgid "Manual Batch Selection"
+msgstr "మాన్యువల్ బ్యాచ్ సెలెక్షన్"
+
+msgid "Manual tracking errors and inconsistencies"
+msgstr "Manual tracking errors మరియు inconsistencies"
+
+msgid "Manually pick which batches to dispatch"
+msgstr "Manually pick ఏది batches కి dispatch"
+
+msgid "Manufacturer"
+msgstr "తయారీదారు"
+
+msgid "Many businesses still rely on manual methods or disconnected systems to manage inventory. This leads to inefficiencies, errors, and financial losses that can impact growth and customer satisfaction."
+msgstr "చాలా businesses still rely పై manual methods లేదా disconnected systems కి manage inventory. ఈ leads కి inefficiencies, errors, మరియు financial losses ఆ చేయవచ్చు impact growth మరియు customer satisfaction."
+
+msgid "Mark Done"
+msgstr "పూర్తయినట్లు గుర్తించండి"
+
+msgid "Mark Selected as Read"
+msgstr "ఎంచుకున్నవి చదివినట్లు గుర్తించండి"
+
+msgid "Mark all read"
+msgstr "Mark అన్ని read"
+
+msgid "Material"
+msgstr "మెటీరియల్"
+
+msgid "Material Content"
+msgstr "మెటీరియల్ కంటెంట్"
+
+msgid "Material:"
+msgstr "మెటీరియల్:"
+
+msgid "Materials"
+msgstr "మెటీరియల్స్"
+
+msgid "Meeting Details"
+msgstr "Meeting వివరాలు"
+
+msgid "Mentor"
+msgstr "మెంటార్"
+
+msgid "Mentor:"
+msgstr "మెంటార్:"
+
+msgid "Message"
+msgstr "సందేశం"
+
+msgid "Message (Optional)"
+msgstr "సందేశం (ఐచ్ఛికం)"
+
+msgid "Message Detail"
+msgstr "సందేశం వివరాలు"
+
+msgid "Message Received!"
+msgstr "Message స్వీకరించబడింది!"
+
+msgid "Minimize losses and ensure compliance with advanced tracking capabilities."
+msgstr "Minimize losses మరియు ensure compliance తో advanced tracking capabilities."
+
+msgid "Minimum 8 characters"
+msgstr "కనీసం 8 అక్షరాలు"
+
+msgid "Model"
+msgstr "మోడల్"
+
+msgid "Model Name"
+msgstr "మోడల్ పేరు"
+
+msgid "Modules & Features"
+msgstr "మాడ్యూల్స్ & Features"
+
+msgid "Mon - Sat"
+msgstr "సోమ - శని"
+
+msgid "Monitor customer orders and payment status"
+msgstr "Monitor customer orders మరియు payment status"
+
+msgid "Monitor stock in and stock out in real time."
+msgstr "Monitor stock లో మరియు stock బయట లో real time."
+
+msgid "Monitor your e-vehicle fleet and delivery operations"
+msgstr "Monitor మీ e-vehicle fleet మరియు delivery operations"
+
+msgid "Most Popular"
+msgstr "ఎక్కువ Popular"
+
+msgid "Movements"
+msgstr "కదలికలు"
+
+msgid "Mrs"
+msgstr "శ్రీమతి"
+
+msgid "Multi-Warehouse Support"
+msgstr "Multi-Warehouse మద్దతు"
+
+msgid "Must be 6-20 characters with uppercase, lowercase, number & special character."
+msgstr "Must be 6-20 characters తో uppercase, lowercase, number & special character."
+
+msgid "My Dashboard"
+msgstr "నా డాష్‌బోర్డ్"
+
+msgid "My Onboarding"
+msgstr "నా Onboarding"
+
+msgid "My Products"
+msgstr "నా ఉత్పత్తులు"
+
+msgid "My Support Tickets"
+msgstr "నా మద్దతు టికెట్లు"
+
+msgid "My Tickets"
+msgstr "నా టికెట్లు"
+
+msgid "My Training"
+msgstr "నా శిక్షణ"
+
+msgid "Name & Company"
+msgstr "పేరు & కంపెనీ"
+
+msgid "Need to transfer ownership?"
+msgstr "Need కి transfer ownership?"
+
+msgid "Net Velocity"
+msgstr "నెట్ Velocity"
+
+msgid "Never"
+msgstr "ఎప్పుడూ కాదు"
+
+msgid "New Delivery"
+msgstr "కొత్త డెలివరీ"
+
+msgid "New Entry"
+msgstr "కొత్త Entry"
+
+msgid "New Quote"
+msgstr "కొత్త Quote"
+
+msgid "New Status"
+msgstr "కొత్త స్థితి"
+
+msgid "New Support Ticket"
+msgstr "కొత్త మద్దతు Ticket"
+
+msgid "New Ticket"
+msgstr "కొత్త Ticket"
+
+msgid "Next"
+msgstr "తదుపరి"
+
+msgid "Next Billing Date"
+msgstr "తదుపరి Billing తేదీ"
+
+msgid "Next Step"
+msgstr "తదుపరి Step"
+
+msgid "No Companies Found"
+msgstr "కాదు Companies Found"
+
+msgid "No Contact Inquiries"
+msgstr "కాదు Contact విచారణలు"
+
+msgid "No Data Available"
+msgstr "కాదు Data అందుబాటులో ఉంది"
+
+msgid "No Dead Stock Found"
+msgstr "కాదు Dead స్టాక్ Found"
+
+msgid "No Demo Requests"
+msgstr "కాదు Demo అభ్యర్థనలు"
+
+msgid "No Notifications"
+msgstr "కాదు నోటిఫికేషన్‌లు"
+
+msgid "No Onboarding Assigned"
+msgstr "కాదు Onboarding నియమించబడింది"
+
+msgid "No Records Found"
+msgstr "కాదు Records Found"
+
+msgid "No active stock available."
+msgstr "కాదు active stock available."
+
+msgid "No available vehicles. Add or free up a vehicle first."
+msgstr "కాదు available vehicles. జోడించండి లేదా free పైకి a vehicle first."
+
+msgid "No charging records yet."
+msgstr "కాదు charging records ఇంకా."
+
+msgid "No checklist items have been added yet."
+msgstr "కాదు checklist items have been added ఇంకా."
+
+msgid "No classification data"
+msgstr "కాదు classification data"
+
+msgid "No comments yet."
+msgstr "కాదు comments ఇంకా."
+
+msgid "No comments yet. Add one below to communicate with support."
+msgstr "కాదు comments ఇంకా. జోడించండి one దిగువ కి communicate తో support."
+
+msgid "No companies match your current search or filter criteria. Try adjusting your filters."
+msgstr "కాదు companies match మీ current search లేదా filter criteria. Try adjusting మీ filters."
+
+msgid "No credit card required"
+msgstr "కాదు credit card required"
+
+msgid "No customers found"
+msgstr "కాదు customers found"
+
+msgid "No deliveries yet."
+msgstr "కాదు deliveries ఇంకా."
+
+msgid "No delivery orders found."
+msgstr "కాదు delivery orders found."
+
+msgid "No drivers found."
+msgstr "కాదు drivers found."
+
+msgid "No e-vehicles found."
+msgstr "కాదు e-vehicles found."
+
+msgid "No entries added yet."
+msgstr "కాదు entries added ఇంకా."
+
+msgid "No expired stock found"
+msgstr "కాదు expired stock found"
+
+msgid "No file or link has been attached to this material yet."
+msgstr "కాదు file లేదా link has been attached కి ఈ material ఇంకా."
+
+msgid "No further comments can be added."
+msgstr "కాదు further comments చేయవచ్చు be added."
+
+msgid "No inventory discrepancies or expiration risks detected. All stocks are within optimal safety ranges."
+msgstr "కాదు inventory discrepancies లేదా expiration risks detected. అన్ని stocks ఉన్నాయి within optimal safety ranges."
+
+msgid "No maintenance records yet."
+msgstr "కాదు maintenance records ఇంకా."
+
+msgid "No mentor"
+msgstr "కాదు mentor"
+
+msgid "No message"
+msgstr "కాదు message"
+
+msgid "No more guesswork. No more manual errors. Just complete control."
+msgstr "కాదు మరిన్ని guesswork. కాదు మరిన్ని manual errors. మాత్రమే complete control."
+
+msgid "No movements recorded"
+msgstr "కాదు movements recorded"
+
+msgid "No onboardings yet"
+msgstr "కాదు onboardings ఇంకా"
+
+msgid "No orders match your current filters."
+msgstr "కాదు orders match మీ current filters."
+
+msgid "No products found"
+msgstr "కాదు products found"
+
+msgid "No quotes found."
+msgstr "కాదు quotes found."
+
+msgid "No records yet"
+msgstr "కాదు records ఇంకా"
+
+msgid "No sales orders yet"
+msgstr "కాదు sales orders ఇంకా"
+
+msgid "No stock available"
+msgstr "కాదు stock available"
+
+msgid "No suppliers found"
+msgstr "కాదు suppliers found"
+
+msgid "No support tickets yet"
+msgstr "కాదు support tickets ఇంకా"
+
+msgid "No tickets found."
+msgstr "కాదు tickets found."
+
+msgid "No tickets raised yet."
+msgstr "కాదు tickets raised ఇంకా."
+
+msgid "No tickets yet"
+msgstr "కాదు tickets ఇంకా"
+
+msgid "No tickets yet."
+msgstr "కాదు tickets ఇంకా."
+
+msgid "No tracking events yet."
+msgstr "కాదు tracking events ఇంకా."
+
+msgid "No training assigned yet."
+msgstr "కాదు training assigned ఇంకా."
+
+msgid "No training materials yet"
+msgstr "కాదు training materials ఇంకా"
+
+msgid "No training records found"
+msgstr "కాదు training records found"
+
+msgid "No training records found."
+msgstr "కాదు training records found."
+
+msgid "No vehicles added yet."
+msgstr "కాదు vehicles added ఇంకా."
+
+msgid "No vendors found"
+msgstr "కాదు vendors found"
+
+msgid "None"
+msgstr "ఏదీ లేదు"
+
+msgid "Not assigned"
+msgstr "కాదు assigned"
+
+msgid "Note / Reason"
+msgstr "Note / కారణం"
+
+msgid "Note: Only you (admin) can mark as Resolved. The company will then close it."
+msgstr "Note: మాత్రమే మీరు (admin) చేయవచ్చు mark as పరిష్కరించబడింది.  company వస్తుంది then close ఇది."
+
+msgid "Notes"
+msgstr "గమనికలు"
+
+msgid "Notes from your manager"
+msgstr "గమనికలు నుండి మీ manager"
+
+msgid "Notes regarding credit terms, special instructions, or history. Only visible to staff."
+msgstr "గమనికలు regarding credit terms, special instructions, లేదా history. మాత్రమే visible కి staff."
+
+msgid "Notifications"
+msgstr "నోటిఫికేషన్‌లు"
+
+msgid "Number of Users"
+msgstr "Number యొక్క యూజర్లు"
+
+msgid "On-Time %"
+msgstr "సమయానికి %"
+
+msgid "Onboarding"
+msgstr "ఆన్‌బోర్డింగ్"
+
+msgid "Onboarding Checklist"
+msgstr "ఆన్‌బోర్డింగ్ చెక్‌లిస్ట్"
+
+msgid "Onboarding Status"
+msgstr "Onboarding స్థితి"
+
+msgid "Onboarding | CWS Inventory"
+msgstr "Onboarding | CWS ఇన్‌వెంటరీ"
+
+msgid "Onboardings"
+msgstr "ఆన్‌బోర్డింగ్‌లు"
+
+msgid "One of our enterprise inventory experts is currently reviewing your details and will reach out to schedule a personalized consultation."
+msgstr "One యొక్క మా enterprise inventory experts ఉంది currently reviewing మీ details మరియు వస్తుంది reach బయట కి schedule a personalized consultation."
+
+msgid "Open"
+msgstr "తెరవండి"
+
+msgid "Open / Download"
+msgstr "తెరవండి / డౌన్‌లోడ్ చేయండి"
+
+msgid "Open Link"
+msgstr "తెరవండి Link"
+
+msgid "Open Tickets"
+msgstr "తెరవండి టికెట్లు"
+
+msgid "Open full size"
+msgstr "తెరవండి full size"
+
+msgid "Open in new tab"
+msgstr "తెరవండి లో కొత్త tab"
+
+msgid "Operate faster, reduce errors, and make confident business decisions backed by real-time data."
+msgstr "Operate faster, reduce errors, మరియు make confident business decisions backed ద్వారా real-time data."
+
+msgid "Optimization Tip"
+msgstr "ఆప్టిమైజేషన్ చిట్కా"
+
+msgid "Optimize"
+msgstr "ఆప్టిమైజ్ చేయండి"
+
+msgid "Optimized For Your Industry"
+msgstr "Optimized కోసం మీ పరిశ్రమ"
+
+msgid "Optional note — required if marking FAILED or CANCELLED"
+msgstr "Optional note — required ఒకవేళ marking FAILED లేదా CANCELLED"
+
+msgid "Optional notes about this charging session…"
+msgstr "Optional notes గురించి ఈ charging session…"
+
+msgid "Order"
+msgstr "ఆర్డర్"
+
+msgid "Order Info"
+msgstr "ఆర్డర్ Info"
+
+msgid "Order No."
+msgstr "ఆర్డర్ కాదు."
+
+msgid "Order no, recipient, phone…"
+msgstr "ఆర్డర్ కాదు, recipient, phone…"
+
+msgid "Ordered"
+msgstr "ఆర్డర్ చేయబడింది"
+
+msgid "Orders"
+msgstr "ఆర్డర్లు"
+
+msgid "Our pricing is designed to suit businesses of all sizes, with options for customization based on your specific requirements."
+msgstr "మా pricing ఉంది designed కి suit businesses యొక్క అన్ని sizes, తో options కోసం customization based పై మీ specific requirements."
+
+msgid "Our team has resolved this ticket"
+msgstr "మా team has resolved ఈ ticket"
+
+msgid "Overall Progress"
+msgstr "Overall ప్రగతి"
+
+msgid "Overdue"
+msgstr "అతిగా ఆలస్యం"
+
+msgid "Overstocking leading to blocked capital"
+msgstr "Overstocking leading కి blocked capital"
+
+msgid "PDF, DOC, DOCX, PPT, PPTX, MP4, ZIP — max 50MB"
+msgstr "PDF, DOC, DOCX, PPT, PPTX, MP4, ZIP — గరిష్టం 50MB"
+
+msgid "PO No:"
+msgstr "PO కాదు:"
+
+msgid "PURCHASE ORDER"
+msgstr "కొనుగోలు ఆర్డర్"
+
+msgid "Package"
+msgstr "ప్యాకేజీ"
+
+msgid "Package &amp; Assignment"
+msgstr "ప్యాకేజీ &amp; కేటాయింపు"
+
+msgid "Package &amp; Schedule"
+msgstr "Package &amp; షెడ్యూల్"
+
+msgid "Package Description"
+msgstr "Package వివరణ"
+
+msgid "Packing your workspace..."
+msgstr "Packing మీ workspace..."
+
+msgid "Page"
+msgstr "పేజీ"
+
+msgid "Password"
+msgstr "పాస్‌వర్డ్"
+
+msgid "Password Strength"
+msgstr "పాస్‌వర్డ్ Strength"
+
+msgid "Passwords do not match."
+msgstr "Passwords do కాదు match."
+
+msgid "Payment Failed"
+msgstr "Payment విఫలమైంది"
+
+msgid "Payment Failed!"
+msgstr "Payment విఫలమైంది!"
+
+msgid "Payment Successful"
+msgstr "చెల్లింపు విజయవంతమైంది"
+
+msgid "Payment Successful!"
+msgstr "చెల్లింపు విజయవంతమైంది!"
+
+msgid "Pending Orders"
+msgstr "పెండింగ్ ఆర్డర్లు"
+
+msgid "Pending Tasks"
+msgstr "పెండింగ్ Tasks"
+
+msgid "Period"
+msgstr "పీరియడ్"
+
+msgid "Pharmacies"
+msgstr "ఫార్మసీలు"
+
+msgid "Phone Number"
+msgstr "ఫోన్ Number"
+
+msgid "Pick a descriptive name that helps in grouping similar products."
+msgstr "Pick a descriptive name ఆ helps లో grouping similar products."
+
+msgid "Pickup Address"
+msgstr "Pickup చిరునామా"
+
+msgid "Pincode"
+msgstr "పిన్‌కోడ్"
+
+msgid "Plan"
+msgstr "ప్లాన్"
+
+msgid "Plan Renewed!"
+msgstr "ప్లాన్ Renewed!"
+
+msgid "Plan Tier"
+msgstr "ప్లాన్ Tier"
+
+msgid "Please check your inbox and click the link to verify your account. If you don't see it, be sure to check your spam or junk folder."
+msgstr "Please check మీ inbox మరియు click  link కి verify మీ account. ఒకవేళ మీరు don't see ఇది, be sure కి check మీ spam లేదా junk folder."
+
+msgid "Please contact your administrator to send a new invite link."
+msgstr "Please contact మీ administrator కి send a కొత్త invite link."
+
+msgid "Please fill out your valid details correctly on the left to choose a meeting time."
+msgstr "Please fill బయట మీ valid details correctly పై  left కి choose a meeting time."
+
+msgid "Please provide a reason for failure/cancellation."
+msgstr "Please provide a reason కోసం failure/cancellation."
+
+msgid "Please select a status."
+msgstr "దయచేసి స్థితిని ఎంచుకోండి."
+
+msgid "Please select a vehicle."
+msgstr "దయచేసి వాహనాన్ని ఎంచుకోండి."
+
+msgid "Please try again using another payment method."
+msgstr "Please try again using మరొక payment method."
+
+msgid "Portal"
+msgstr "పోర్టల్"
+
+msgid "Powerful Features To Simplify"
+msgstr "Powerful Features కి Simplify"
+
+msgid "Prepare for scale with support for bulk operations, pricing rules, and advanced inventory logic designed for wholesale environments."
+msgstr "Prepare కోసం scale తో support కోసం bulk operations, pricing rules, మరియు advanced inventory logic designed కోసం wholesale environments."
+
+msgid "Previous"
+msgstr "మునుపటి"
+
+msgid "Price"
+msgstr "ధర"
+
+msgid "Pricing varies based on modules, users, and customization requirements."
+msgstr "Pricing varies based పై modules, users, మరియు customization requirements."
+
+msgid "Primary Business Email"
+msgstr "ప్రాథమిక వ్యాపారం ఇమెయిల్"
+
+msgid "Primary point of contacts at the customer organization."
+msgstr "ప్రాథమిక point యొక్క contacts వద్ద  customer organization."
+
+msgid "Print Now"
+msgstr "ముద్రించండి ఇప్పుడు"
+
+msgid "Print Purchase Order"
+msgstr "ముద్రించండి Purchase ఆర్డర్"
+
+msgid "Priority"
+msgstr "ప్రాధాన్యత"
+
+msgid "Privacy Policy"
+msgstr "గోప్యతా విధానం"
+
+msgid "Privacy Policy | CWS Inventory"
+msgstr "Privacy Policy | CWS ఇన్‌వెంటరీ"
+
+msgid "Procurement"
+msgstr "ప్రొక్‌యూర్‌మెంట్"
+
+msgid "Procurement Policy"
+msgstr "ప్రొక్‌యూర్‌మెంట్ Policy"
+
+msgid "Product Details"
+msgstr "ఉత్పత్తి వివరాలు"
+
+msgid "Product Information"
+msgstr "ఉత్పత్తి సమాచారం"
+
+msgid "Product Velocity Analysis"
+msgstr "ఉత్పత్తి Velocity Analysis"
+
+msgid "Product is required."
+msgstr "ఉత్పత్తి ఉంది required."
+
+msgid "Products Analysed"
+msgstr "ఉత్పత్తులు Analysed"
+
+msgid "Profit &amp; Loss Summary"
+msgstr "లాభం &amp; Loss Summary"
+
+msgid "Profit (+)"
+msgstr "లాభం (+)"
+
+msgid "Progress"
+msgstr "ప్రగతి"
+
+msgid "Project Name"
+msgstr "Project పేరు"
+
+msgid "Protected by 256-bit Encryption"
+msgstr "Protected ద్వారా 256-bit Encryption"
+
+msgid "Provide multiple billing and shipping address details."
+msgstr "Provide multiple billing మరియు shipping address details."
+
+msgid "Purchase Date"
+msgstr "Purchase తేదీ"
+
+msgid "Purchase Details"
+msgstr "Purchase వివరాలు"
+
+msgid "Purchase From"
+msgstr "Purchase నుండి"
+
+msgid "Purchase Order"
+msgstr "Purchase ఆర్డర్"
+
+msgid "Purchase Order Management"
+msgstr "Purchase ఆర్డర్ నిర్వహణ"
+
+msgid "Purchase Stock Reports"
+msgstr "Purchase స్టాక్ రిపోర్టులు"
+
+msgid "Purchase To"
+msgstr "Purchase కి"
+
+msgid "Qty Sold"
+msgstr "అమ్మిన పరిమాణం"
+
+msgid "Qty in Stock"
+msgstr "Qty లో స్టాక్"
+
+msgid "Quick Info"
+msgstr "త్వరిత సమాచారం"
+
+msgid "Quote #"
+msgstr "కోట్ #"
+
+msgid "Quote Date*"
+msgstr "కోట్ తేదీ*"
+
+msgid "Quote#*"
+msgstr "కోట్#*"
+
+msgid "Quotes"
+msgstr "కోట్లు"
+
+msgid "RATE"
+msgstr "రేటు"
+
+msgid "Raise a Support Ticket"
+msgstr "Raise a మద్దతు Ticket"
+
+msgid "Raise a Ticket"
+msgstr "టికెట్ లేవనెత్తండి"
+
+msgid "Raise a ticket if you need help from the support team."
+msgstr "Raise a ticket ఒకవేళ మీరు need help నుండి  support team."
+
+msgid "Raise issues and track resolutions with our support team."
+msgstr "Raise issues మరియు track resolutions తో మా support team."
+
+msgid "Raised"
+msgstr "లేవనెత్తబడింది"
+
+msgid "Raised By"
+msgstr "లేవనెత్తబడింది ద్వారా"
+
+msgid "Raised on"
+msgstr "లేవనెత్తబడింది పై"
+
+msgid "Range / charge"
+msgstr "రేంజ్ / charge"
+
+msgid "Range / charge (km)"
+msgstr "రేంజ్ / charge (km)"
+
+msgid "Re-enter password"
+msgstr "పాస్‌వర్డ్ మళ్ళీ నమోదు చేయండి"
+
+msgid "Ready to go?"
+msgstr "Ready కి go?"
+
+msgid "Real-time stock visibility across all operations"
+msgstr "Real-time stock visibility across అన్ని operations"
+
+msgid "Reason"
+msgstr "కారణం"
+
+msgid "Recent Deliveries"
+msgstr "Recent డెలివరీలు"
+
+msgid "Recent Tickets"
+msgstr "Recent టికెట్లు"
+
+msgid "Recent Training"
+msgstr "Recent శిక్షణ"
+
+msgid "Recipient"
+msgstr "స్వీకరణదారు"
+
+msgid "Recipient Information"
+msgstr "Recipient సమాచారం"
+
+msgid "Recipient Name"
+msgstr "Recipient పేరు"
+
+msgid "Recover?"
+msgstr "రికవరీ?"
+
+msgid "Reduce losses due to expired or unsold stock"
+msgstr "Reduce losses due కి expired లేదా unsold stock"
+
+msgid "Ref ID"
+msgstr "రెఫ్ ID"
+
+msgid "Reference"
+msgstr "రిఫరెన్స్"
+
+msgid "Reference#"
+msgstr "రిఫరెన్స్#"
+
+msgid "Refresh Data"
+msgstr "డేటా రిఫ్రెష్ చేయండి"
+
+msgid "Refund & Cancellation Policy"
+msgstr "రిఫండ్ & రద్దు విధానం"
+
+msgid "Refund & Cancellation Policy | CWS Inventory"
+msgstr "Refund & Cancellation Policy | CWS ఇన్‌వెంటరీ"
+
+msgid "Register a new staff member. Login credentials will be emailed automatically."
+msgstr "Register a కొత్త staff member. Login credentials వస్తుంది be emailed automatically."
+
+msgid "Registered"
+msgstr "నమోదు చేయబడింది"
+
+msgid "Registered Companies"
+msgstr "నమోదు చేయబడింది Companies"
+
+msgid "Registered Companies | Admin"
+msgstr "నమోదు చేయబడింది Companies | అడ్మిన్"
+
+msgid "Registered Vendors"
+msgstr "నమోదు చేయబడింది వెండర్లు"
+
+msgid "Registration No."
+msgstr "Registration కాదు."
+
+msgid "Remaining"
+msgstr "మిగిలిన"
+
+msgid "Remaining Days"
+msgstr "మిగిలిన రోజులు"
+
+msgid "Remember me"
+msgstr "నన్ను గుర్తుంచుకోండి"
+
+msgid "Remove"
+msgstr "తొలగించండి"
+
+msgid "Remove this material?"
+msgstr "తొలగించండి ఈ material?"
+
+msgid "Renew Plan Now"
+msgstr "Renew ప్లాన్ ఇప్పుడు"
+
+msgid "Reply to Company"
+msgstr "Reply కి కంపెనీ"
+
+msgid "Report Data"
+msgstr "నివేదిక Data"
+
+msgid "Reporting"
+msgstr "నివేదిక"
+
+msgid "Reports & Analytics"
+msgstr "రిపోర్టులు & అనలిటిక్‌స్"
+
+msgid "Reports & Dashboards"
+msgstr "రిపోర్టులు & Dashboards"
+
+msgid "Reports Overview"
+msgstr "రిపోర్టులు అవలోకనం"
+
+msgid "Request Received!"
+msgstr "Request స్వీకరించబడింది!"
+
+msgid "Required when marking as Resolved — describe what was fixed..."
+msgstr "Required ఎప్పుడు marking as పరిష్కరించబడింది — describe ఏమి was fixed..."
+
+msgid "Requirements / Message"
+msgstr "అవసరాలు / సందేశం"
+
+msgid "Resolution Action"
+msgstr "Resolution చర్య"
+
+msgid "Resolution Notes"
+msgstr "Resolution గమనికలు"
+
+msgid "Resolution Notes from Support"
+msgstr "Resolution గమనికలు నుండి మద్దతు"
+
+msgid "Resolved"
+msgstr "పరిష్కరించబడింది"
+
+msgid "Resolved At"
+msgstr "పరిష్కరించబడింది వద్ద"
+
+msgid "Retail"
+msgstr "రిటైల్"
+
+msgid "Retry Payment"
+msgstr "చెల్లింపు మళ్ళీ ప్రయత్నించండి"
+
+msgid "Return to Console"
+msgstr "Return కి Console"
+
+msgid "Return to Home"
+msgstr "Return కి హోమ్"
+
+msgid "Return to Homepage"
+msgstr "Return కి Homepage"
+
+msgid "Review"
+msgstr "సమీక్ష"
+
+msgid "Review critical system triggers and take direct action to stabilize stock levels."
+msgstr "సమీక్ష critical system triggers మరియు take direct action కి stabilize stock levels."
+
+msgid "SR NO"
+msgstr "SR కాదు"
+
+msgid "Sale Date"
+msgstr "Sale తేదీ"
+
+msgid "Sale From"
+msgstr "Sale నుండి"
+
+msgid "Sale To"
+msgstr "Sale కి"
+
+msgid "Sales Integration (POS)"
+msgstr "అమ్మకాల సమైక్యం (POS)"
+
+msgid "Sales Reports"
+msgstr "Sales రిపోర్టులు"
+
+msgid "Salesperson"
+msgstr "సేల్స్‌పర్సన్"
+
+msgid "Save & Select"
+msgstr "సేవ్ చేయండి & ఎంచుకోండి"
+
+msgid "Save Log"
+msgstr "సేవ్ చేయండి Log"
+
+msgid "Save Staff"
+msgstr "సేవ్ చేయండి సిబ్బంది"
+
+msgid "Save Stock"
+msgstr "సేవ్ చేయండి స్టాక్"
+
+msgid "Save and Send"
+msgstr "సేవ్ చేయండి మరియు పంపండి"
+
+msgid "Save time with automated processes"
+msgstr "సేవ్ చేయండి time తో automated processes"
+
+msgid "Saved Entries"
+msgstr "సేవ్ చేయబడిన ఎంట్రీలు"
+
+msgid "Saving progress and signing out safely."
+msgstr "Saving progress మరియు signing బయట safely."
+
+msgid "Scale your business without changing systems"
+msgstr "Scale మీ business లేకుండా changing systems"
+
+msgid "Scan to Print"
+msgstr "Scan కి ముద్రించండి"
+
+msgid "Scanned Print Link:"
+msgstr "Scanned ముద్రించండి Link:"
+
+msgid "Schedule"
+msgstr "షెడ్యూల్"
+
+msgid "Schedule Maintenance"
+msgstr "షెడ్యూల్ నిర్వహణ"
+
+msgid "Schedule and track maintenance for your e-vehicle fleet"
+msgstr "షెడ్యూల్ మరియు track maintenance కోసం మీ e-vehicle fleet"
+
+msgid "Scheduled"
+msgstr "షెడ్యూల్ చేయబడింది"
+
+msgid "Scheduled Date"
+msgstr "షెడ్యూల్ చేయబడింది తేదీ"
+
+msgid "Scheduled date is required."
+msgstr "షెడ్యూల్ చేయబడింది date ఉంది required."
+
+msgid "Score"
+msgstr "స్కోర్"
+
+msgid "Score (%)"
+msgstr "స్కోర్ (%)"
+
+msgid "Search by Company Name"
+msgstr "శోధించండి ద్వారా కంపెనీ పేరు"
+
+msgid "Search by Email"
+msgstr "శోధించండి ద్వారా ఇమెయిల్"
+
+msgid "Search by company name or email"
+msgstr "శోధించండి ద్వారా company name లేదా email"
+
+msgid "Search by ticket ID, title or company..."
+msgstr "శోధించండి ద్వారా ticket ID, title లేదా company..."
+
+msgid "Search by title or ticket ID..."
+msgstr "శోధించండి ద్వారా title లేదా ticket ID..."
+
+msgid "Search materials..."
+msgstr "శోధించండి materials..."
+
+msgid "Search name, phone, license no…"
+msgstr "శోధించండి name, phone, license no…"
+
+msgid "Search product..."
+msgstr "శోధించండి product..."
+
+msgid "Search vehicle ID, reg. no, model…"
+msgstr "శోధించండి vehicle ID, reg. కాదు, model…"
+
+msgid "Secure Data Environment"
+msgstr "సురక్షిత డేటా వాతావరణం"
+
+msgid "Secure Razorpay Payment"
+msgstr "సురక్షిత Razorpay చెల్లింపు"
+
+msgid "Secure system access for authorized personnel"
+msgstr "Secure system access కోసం authorized personnel"
+
+msgid "Security Credentials"
+msgstr "భద్రతా ఆధారాలు"
+
+msgid "Security Policy"
+msgstr "భద్రతా విధానం"
+
+msgid "See how CWS Inventory can streamline your operations. Fill out your details below and select a time that works for you."
+msgstr "See ఎలా CWS ఇన్‌వెంటరీ చేయవచ్చు streamline మీ operations. Fill బయట మీ details దిగువ మరియు select a time ఆ works కోసం మీరు."
+
+msgid "Select Batches"
+msgstr "ఎంచుకోండి బ్యాచ్‌లు"
+
+msgid "Select Item"
+msgstr "ఎంచుకోండి Item"
+
+msgid "Select Number (Optional)"
+msgstr "ఎంచుకోండి Number (Optional)"
+
+msgid "Select Plan"
+msgstr "ఎంచుకోండి ప్లాన్"
+
+msgid "Select a Tax"
+msgstr "ఎంచుకోండి a పన్ను"
+
+msgid "Select a Time"
+msgstr "ఎంచుకోండి a Time"
+
+msgid "Select maintenance type."
+msgstr "ఎంచుకోండి maintenance type."
+
+msgid "Select material..."
+msgstr "ఎంచుకోండి material..."
+
+msgid "Select or add a customer"
+msgstr "ఎంచుకోండి లేదా add a customer"
+
+msgid "Select size..."
+msgstr "ఎంచుకోండి size..."
+
+msgid "Select staff..."
+msgstr "ఎంచుకోండి staff..."
+
+msgid "Select type..."
+msgstr "ఎంచుకోండి type..."
+
+msgid "Sell with"
+msgstr "Sell తో"
+
+msgid "Send"
+msgstr "పంపండి"
+
+msgid "Send Comment"
+msgstr "పంపండి Comment"
+
+msgid "Send Reply"
+msgstr "పంపండి Reply"
+
+msgid "Set Stock Rules"
+msgstr "Set స్టాక్ Rules"
+
+msgid "Set Your Password"
+msgstr "Set మీ పాస్‌వర్డ్"
+
+msgid "Set a password to activate your staff account"
+msgstr "Set a password కి activate మీ staff account"
+
+msgid "Set thresholds and notification preferences"
+msgstr "Set thresholds మరియు notification preferences"
+
+msgid "Set up your"
+msgstr "Set పైకి మీ"
+
+msgid "Set up your free trial in less than 2 minutes."
+msgstr "Set పైకి మీ free trial లో less than 2 minutes."
+
+msgid "Setup Your"
+msgstr "Setup మీ"
+
+msgid "Severity"
+msgstr "తీవ్రత"
+
+msgid "Shared in your Email / Calendly Invite"
+msgstr "Shared లో మీ ఇమెయిల్ / Calendly Invite"
+
+msgid "Short, clear summary of the issue"
+msgstr "Short, clear summary యొక్క  issue"
+
+msgid "Showing page"
+msgstr "పేజీ చూపిస్తోంది"
+
+msgid "Sign In"
+msgstr "Sign లో"
+
+msgid "Sign in to access your training & support"
+msgstr "Sign లో కి access మీ training & support"
+
+msgid "Single Warehouse"
+msgstr "ఏకైక గోదాము"
+
+msgid "Size:"
+msgstr "పరిమాణం:"
+
+msgid "Skip / Not sure"
+msgstr "Skip / కాదు sure"
+
+msgid "Slow Moving"
+msgstr "నెమ్మదిగా కదిలే"
+
+msgid "Social Media"
+msgstr "సోషల్ మీడియా"
+
+msgid "Source / Reason"
+msgstr "మూలం / కారణం"
+
+msgid "Special instructions, landmark, access notes, call before delivery…"
+msgstr "Special instructions, landmark, access notes, call ముందు delivery…"
+
+msgid "Staff"
+msgstr "సిబ్బంది"
+
+msgid "Staff List"
+msgstr "సిబ్బంది List"
+
+msgid "Staff Login"
+msgstr "సిబ్బంది Login"
+
+msgid "Staff Member"
+msgstr "సిబ్బంది Member"
+
+msgid "Staff Name"
+msgstr "సిబ్బంది పేరు"
+
+msgid "Staff Onboarding"
+msgstr "సిబ్బంది Onboarding"
+
+msgid "Staff Portal"
+msgstr "సిబ్బంది పోర్టల్"
+
+msgid "Staff:"
+msgstr "సిబ్బంది:"
+
+msgid "Start"
+msgstr "ప్రారంభించండి"
+
+msgid "Start 7-Day Free Trial"
+msgstr "ప్రారంభించండి 7-Day Free ట్రయల్"
+
+msgid "Start First Onboarding"
+msgstr "ప్రారంభించండి మొదటి Onboarding"
+
+msgid "Start Free Trial"
+msgstr "ప్రారంభించండి Free ట్రయల్"
+
+msgid "Start Free Trial | CWS Inventory"
+msgstr "ప్రారంభించండి Free ట్రయల్ | CWS ఇన్‌వెంటరీ"
+
+msgid "Start Managing Your Inventory The Smart Way"
+msgstr "ప్రారంభించండి Managing మీ ఇన్‌వెంటరీ  Smart Way"
+
+msgid "Start Onboarding"
+msgstr "ప్రారంభించండి Onboarding"
+
+msgid "Start Staff Onboarding"
+msgstr "ప్రారంభించండి సిబ్బంది Onboarding"
+
+msgid "Start by adding your first customer."
+msgstr "ప్రారంభించండి ద్వారా adding మీ first customer."
+
+msgid "Start by adding your first procurement partner to the system."
+msgstr "ప్రారంభించండి ద్వారా adding మీ first procurement partner కి  system."
+
+msgid "Starter"
+msgstr "స్టార్టర్"
+
+msgid "Starter Plan"
+msgstr "Starter ప్లాన్"
+
+msgid "Starter plan allows max 5 vendors. Upgrade to Business plan for unlimited vendors."
+msgstr "Starter plan allows max 5 vendors. Upgrade కి వ్యాపారం plan కోసం unlimited vendors."
+
+msgid "Status:"
+msgstr "స్థితి:"
+
+msgid "Stay here"
+msgstr "Stay ఇక్కడ"
+
+msgid "Stay proactive with real-time stock and expiry updates."
+msgstr "Stay proactive తో real-time stock మరియు expiry updates."
+
+msgid "Stock Aging Report"
+msgstr "స్టాక్ Aging నివేదిక"
+
+msgid "Stock In (Monthly)"
+msgstr "స్టాక్ లో (Monthly)"
+
+msgid "Stock Levels Healthy"
+msgstr "స్టాక్ Levels Healthy"
+
+msgid "Stock Out (Monthly)"
+msgstr "స్టాక్ బయట (Monthly)"
+
+msgid "Stock Qty"
+msgstr "స్టాక్ Qty"
+
+msgid "Stock Quantity"
+msgstr "స్టాక్ పరిమాణం"
+
+msgid "Stock Value"
+msgstr "స్టాక్ Value"
+
+msgid "Stockouts resulting in lost sales"
+msgstr "Stockouts resulting లో lost sales"
+
+msgid "Streamline procurement with structured workflows and approval systems."
+msgstr "Streamline procurement తో structured workflows మరియు approval systems."
+
+msgid "Strengthen relationships and improve procurement efficiency."
+msgstr "Strengthen relationships మరియు improve procurement efficiency."
+
+msgid "Sub Total"
+msgstr "Sub మొత్తం"
+
+msgid "Subject"
+msgstr "సబ్జెక్ట్"
+
+msgid "Submit Details"
+msgstr "సమర్పించండి వివరాలు"
+
+msgid "Submit Inquiry"
+msgstr "సమర్పించండి Inquiry"
+
+msgid "Submit Ticket"
+msgstr "సమర్పించండి Ticket"
+
+msgid "Subscription Alert"
+msgstr "సబ్స్క్రిప్షన్ హెచ్చరిక"
+
+msgid "Subscription Expired"
+msgstr "Subscription గడువు ముగిసింది"
+
+msgid "Suggested Reorder"
+msgstr "సూచించిన రీఆర్డర్"
+
+msgid "Supplier"
+msgstr "సరఫరాదారు"
+
+msgid "Supplier Management"
+msgstr "Supplier నిర్వహణ"
+
+msgid "Supplier Rankings"
+msgstr "సరఫరాదారుల ర్యాంకింగ్‌లు"
+
+msgid "Supplier metrics and performance overview"
+msgstr "Supplier metrics మరియు performance overview"
+
+msgid "Support Team"
+msgstr "మద్దతు Team"
+
+msgid "Support Tickets"
+msgstr "మద్దతు టికెట్లు"
+
+msgid "Support Tickets — Admin"
+msgstr "మద్దతు టికెట్లు — అడ్మిన్"
+
+msgid "System Administration Interface v2.4"
+msgstr "సిస్టమ్ అడ్మినిస్ట్రేషన్ ఇంటర్‌ఫేస్ v2.4"
+
+msgid "System Overview & Entity Management"
+msgstr "System అవలోకనం & Entity నిర్వహణ"
+
+msgid "System Status: Healthy"
+msgstr "System స్థితి: Healthy"
+
+msgid "System-wide identifiers and categorization tags."
+msgstr "System-wide identifiers మరియు categorization tags."
+
+msgid "Tags"
+msgstr "ట్యాగ్‌లు"
+
+msgid "Tailored workflows for specific business demands."
+msgstr "Tailored workflows కోసం specific business demands."
+
+msgid "Take Complete Control Of"
+msgstr "Take పూర్తి Control యొక్క"
+
+msgid "Take control of your inventory today."
+msgstr "Take control యొక్క మీ inventory ఈ రోజు."
+
+msgid "Target Completion"
+msgstr "లక్ష్య పూర్తి"
+
+msgid "Target Date"
+msgstr "Target తేదీ"
+
+msgid "Tax"
+msgstr "పన్ను"
+
+msgid "Team Members"
+msgstr "టీమ్ సభ్యులు"
+
+msgid "Team,"
+msgstr "టీమ్,"
+
+msgid "Tell us about your business requirements. Our enterprise experts will reach out within 24 hours to schedule a personalized demo."
+msgstr "Tell us గురించి మీ business requirements. మా enterprise experts వస్తుంది reach బయట within 24 hours కి schedule a personalized demo."
+
+msgid "Tell us about your inventory challenges and specific needs..."
+msgstr "Tell us గురించి మీ inventory challenges మరియు specific needs..."
+
+msgid "Terms & Conditions"
+msgstr "నిబంధనలు & షరతులు"
+
+msgid "Terms of Use"
+msgstr "Terms యొక్క Use"
+
+msgid "Terms of Use | CWS Inventory"
+msgstr "Terms యొక్క Use | CWS ఇన్‌వెంటరీ"
+
+msgid "Thank You For Your Business"
+msgstr "Thank మీరు కోసం మీ వ్యాపారం"
+
+msgid "Thank You | CWS Inventory Enterprise"
+msgstr "Thank మీరు | CWS ఇన్‌వెంటరీ ఎంటర్‌ప్రైజ్"
+
+msgid "Thank you for booking a demo! We've successfully received your request and are excited to show you how CWS Inventory can help streamline your business operations."
+msgstr "Thank మీరు కోసం booking a demo! We've successfully received మీ request మరియు ఉన్నాయి excited కి show మీరు ఎలా CWS ఇన్‌వెంటరీ చేయవచ్చు help streamline మీ business operations."
+
+msgid "Thank you for reaching out to the CWS Inventory Enterprise Team. We have successfully received your inquiry and our team is currently reviewing your details."
+msgstr "Thank మీరు కోసం reaching బయట కి  CWS ఇన్‌వెంటరీ ఎంటర్‌ప్రైజ్ Team. We have successfully received మీ inquiry మరియు మా team ఉంది currently reviewing మీ details."
+
+msgid "Thank you for reaching out. Our enterprise experts are reviewing your details and will contact you within"
+msgstr "Thank మీరు కోసం reaching బయట. మా enterprise experts ఉన్నాయి reviewing మీ details మరియు వస్తుంది contact మీరు within"
+
+msgid "Thank you for scheduling a demo. A calendar invitation has been sent to your email with all the necessary details."
+msgstr "Thank మీరు కోసం scheduling a demo. A calendar invitation has been sent కి మీ email తో అన్ని  necessary details."
+
+msgid "Thank you for starting your"
+msgstr "Thank మీరు కోసం starting మీ"
+
+msgid "Thank you for your payment!"
+msgstr "Thank మీరు కోసం మీ payment!"
+
+msgid "The CWS Enterprise Team"
+msgstr " CWS ఎంటర్‌ప్రైజ్ Team"
+
+msgid "The CWS Sales Team"
+msgstr " CWS Sales Team"
+
+msgid "The CWS Success Team"
+msgstr " CWS Success Team"
+
+msgid "The main point of contact for this supplier."
+msgstr " main point యొక్క contact కోసం ఈ supplier."
+
+msgid "There are currently no active batches for this product."
+msgstr "There ఉన్నాయి currently కాదు active batches కోసం ఈ product."
+
+msgid "There are currently no demo requests. When a user submits the form, it will appear here."
+msgstr "There ఉన్నాయి currently కాదు demo requests. ఎప్పుడు a user submits  form, ఇది వస్తుంది appear ఇక్కడ."
+
+msgid "There are currently no enterprise inquiries. When a user submits the form, it will appear here."
+msgstr "There ఉన్నాయి currently కాదు enterprise inquiries. ఎప్పుడు a user submits  form, ఇది వస్తుంది appear ఇక్కడ."
+
+msgid "There are currently no registered companies in the database."
+msgstr "There ఉన్నాయి currently కాదు registered companies లో  database."
+
+msgid "There are currently no registered companies in the database. When you add a company, it will appear here."
+msgstr "There ఉన్నాయి currently కాదు registered companies లో  database. ఎప్పుడు మీరు add a company, ఇది వస్తుంది appear ఇక్కడ."
+
+msgid "This action cannot be undone."
+msgstr "ఈ action cannot be undone."
+
+msgid "This invite link is no longer valid. It may have already been used or has been revoked by your administrator."
+msgstr "ఈ invite link ఉంది కాదు longer valid. ఇది may have already been used లేదా has been revoked ద్వారా మీ administrator."
+
+msgid "This is an automated message from CWS Inventory System."
+msgstr "ఈ ఉంది an automated message నుండి CWS ఇన్‌వెంటరీ System."
+
+msgid "This is an automated notice regarding your active CWS Inventory subscription plan."
+msgstr "ఈ ఉంది an automated notice regarding మీ active CWS ఇన్‌వెంటరీ subscription plan."
+
+msgid "This is an automated receipt from CWS Inventory System."
+msgstr "ఈ ఉంది an automated receipt నుండి CWS ఇన్‌వెంటరీ System."
+
+msgid "This ticket is closed — comments are disabled."
+msgstr "ఈ ticket ఉంది closed — comments ఉన్నాయి disabled."
+
+msgid "This ticket is closed. No further comments can be added."
+msgstr "ఈ ticket ఉంది closed. కాదు further comments చేయవచ్చు be added."
+
+msgid "This ticket was closed by the company on"
+msgstr "ఈ ticket was closed ద్వారా  company పై"
+
+msgid "This ticket was closed by you on"
+msgstr "ఈ ticket was closed ద్వారా మీరు పై"
+
+msgid "Ticket"
+msgstr "టికెట్"
+
+msgid "Ticket Details"
+msgstr "Ticket వివరాలు"
+
+msgid "Ticket ID"
+msgstr "టికెట్ ID"
+
+msgid "Ticket Info"
+msgstr "టికెట్ సమాచారం"
+
+msgid "Ticket Workflow"
+msgstr "టికెట్ వర్క్‌ఫ్లో"
+
+msgid "Ticket will be raised at:"
+msgstr "Ticket వస్తుంది be raised వద్ద:"
+
+msgid "Tickets you have raised with the support team."
+msgstr "టికెట్లు మీరు have raised తో  support team."
+
+msgid "Time Slot"
+msgstr "సమయ స్లాట్"
+
+msgid "Timestamp"
+msgstr "టైమ్‌స్టాంప్"
+
+msgid "Title"
+msgstr "శీర్షిక"
+
+msgid "To Date"
+msgstr "కి తేదీ"
+
+msgid "To ensure uninterrupted access to your dashboard, products, and sales orders, please upgrade your plan before the trial ends."
+msgstr "కి ensure uninterrupted access కి మీ dashboard, products, మరియు sales orders, please upgrade మీ plan ముందు  trial ends."
+
+msgid "To ensure your account is secure and ready to go, please verify your email address by clicking the button below:"
+msgstr "కి ensure మీ account ఉంది secure మరియు ready కి go, please verify మీ email address ద్వారా clicking  button దిగువ:"
+
+msgid "Total"
+msgstr "మొత్తం"
+
+msgid "Total Companies"
+msgstr "మొత్తం Companies"
+
+msgid "Total Inquiries"
+msgstr "మొత్తం విచారణలు"
+
+msgid "Total Items"
+msgstr "మొత్తం Items"
+
+msgid "Total On-Hand"
+msgstr "మొత్తం On-Hand"
+
+msgid "Total Quantity"
+msgstr "మొత్తం పరిమాణం"
+
+msgid "Total Requests"
+msgstr "మొత్తం అభ్యర్థనలు"
+
+msgid "Total Staff"
+msgstr "మొత్తం సిబ్బంది"
+
+msgid "Total Vehicles"
+msgstr "మొత్తం Vehicles"
+
+msgid "Track Stock"
+msgstr "ట్రాక్ స్టాక్"
+
+msgid "Track all e-vehicle delivery assignments"
+msgstr "ట్రాక్ అన్ని e-vehicle delivery assignments"
+
+msgid "Track battery charging history for all e-vehicles"
+msgstr "ట్రాక్ battery charging history కోసం అన్ని e-vehicles"
+
+msgid "Track dead stock, slow moving inventory and aging analysis."
+msgstr "ట్రాక్ dead stock, slow moving inventory మరియు aging analysis."
+
+msgid "Track new employee onboarding progress"
+msgstr "ట్రాక్ కొత్త employee onboarding progress"
+
+msgid "Track product velocity and inventory turnover rates"
+msgstr "ట్రాక్ product velocity మరియు inventory turnover rates"
+
+msgid "Track staff training progress and completion"
+msgstr "ట్రాక్ staff training progress మరియు completion"
+
+msgid "Track your onboarding progress and complete your checklist."
+msgstr "ట్రాక్ మీ onboarding progress మరియు complete మీ checklist."
+
+msgid "Tracking Timeline"
+msgstr "ట్రాకింగ్ టైమ్‌లైన్"
+
+msgid "Training"
+msgstr "శిక్షణ"
+
+msgid "Training & Support"
+msgstr "శిక్షణ & మద్దతు"
+
+msgid "Training & Support Dashboard"
+msgstr "శిక్షణ & మద్దతు డాష్‌బోర్డ్"
+
+msgid "Training &amp; Support"
+msgstr "శిక్షణ &amp; మద్దతు"
+
+msgid "Training Activity"
+msgstr "శిక్షణ Activity"
+
+msgid "Training Material"
+msgstr "శిక్షణ Material"
+
+msgid "Training Materials"
+msgstr "శిక్షణ మెటీరియల్స్"
+
+msgid "Training Records"
+msgstr "శిక్షణ Records"
+
+msgid "Training tasks"
+msgstr "శిక్షణ tasks"
+
+msgid "Transaction Date"
+msgstr "Transaction తేదీ"
+
+msgid "Transaction ID"
+msgstr "లావాదేవీ ID"
+
+msgid "Transaction Records"
+msgstr "లావాదేవీ రికార్డులు"
+
+msgid "Transform The Way You Manage"
+msgstr "Transform  Way మీరు నిర్వహించండి"
+
+msgid "Transform the way you manage inventory with real-time insights and automated workflows."
+msgstr "Transform  way మీరు manage inventory తో real-time insights మరియు automated workflows."
+
+msgid "Transport Management"
+msgstr "Transport నిర్వహణ"
+
+msgid "Trial"
+msgstr "ట్రయల్"
+
+msgid "Trust this workstation"
+msgstr "Trust ఈ workstation"
+
+msgid "Trusted by 500+ businesses across multiple industries."
+msgstr "Trusted ద్వారా 500+ businesses across multiple industries."
+
+msgid "Turnover Days"
+msgstr "టర్నోవర్ రోజులు"
+
+msgid "Tutorials"
+msgstr "ట్యుటోరియల్స్"
+
+msgid "Type"
+msgstr "రకం"
+
+msgid "Type below image text"
+msgstr "రకం దిగువ image text"
+
+msgid "Type your message to the support team..."
+msgstr "రకం మీ message కి  support team..."
+
+msgid "Type:"
+msgstr "రకం:"
+
+msgid "URL / Link"
+msgstr "URL / లింక్"
+
+msgid "Undo"
+msgstr "అన్‌డూ"
+
+msgid "Unit Price"
+msgstr "Unit ధర"
+
+msgid "Units (kWh)"
+msgstr "యూనిట్లు (kWh)"
+
+msgid "Unlimited SKUs"
+msgstr "అపరిమిత SKUలు"
+
+msgid "Unlock Calendar"
+msgstr "క్యాలెండర్ అన్‌లాక్ చేయండి"
+
+msgid "Up to 500 SKUs"
+msgstr "పైకి కి 500 SKUs"
+
+msgid "Upcoming Maintenance"
+msgstr "Upcoming నిర్వహణ"
+
+msgid "Update Delivery Status"
+msgstr "నవీకరించండి డెలివరీ స్థితి"
+
+msgid "Update Material"
+msgstr "నవీకరించండి Material"
+
+msgid "Update Product Details"
+msgstr "నవీకరించండి ఉత్పత్తి వివరాలు"
+
+msgid "Update Record"
+msgstr "నవీకరించండి Record"
+
+msgid "Update Status"
+msgstr "నవీకరించండి స్థితి"
+
+msgid "Update Ticket Status"
+msgstr "నవీకరించండి Ticket స్థితి"
+
+msgid "Update Vendor"
+msgstr "నవీకరించండి వెండర్"
+
+msgid "Update unit economics and check real-time stock availability."
+msgstr "నవీకరించండి unit economics మరియు check real-time stock availability."
+
+msgid "Upgrade My Plan Now"
+msgstr "Upgrade నా ప్లాన్ ఇప్పుడు"
+
+msgid "Upgrade Now"
+msgstr "Upgrade ఇప్పుడు"
+
+msgid "Upgrade Plan"
+msgstr "Upgrade ప్లాన్"
+
+msgid "Upload File"
+msgstr "అప్‌లోడ్ చేయండి File"
+
+msgid "Use Simplified View"
+msgstr "Use Simplified చూడండి"
+
+msgid "Use reports and alerts to make better decisions."
+msgstr "Use reports మరియు alerts కి make better decisions."
+
+msgid "User & Role Management"
+msgstr "User & Role నిర్వహణ"
+
+msgid "User Roles"
+msgstr "యూజర్ పాత్రలు"
+
+msgid "Username"
+msgstr "వినియోగదారు పేరు"
+
+msgid "Users"
+msgstr "యూజర్లు"
+
+msgid "Users:"
+msgstr "యూజర్లు:"
+
+msgid "Vehicle"
+msgstr "వాహనం"
+
+msgid "Vehicle &amp; Driver Assignment"
+msgstr "వాహనం &amp; డ్‌రైవర్ Assignment"
+
+msgid "Vehicle / Driver"
+msgstr "వాహనం / డ్‌రైవర్"
+
+msgid "Vehicle ID"
+msgstr "వాహనం ID"
+
+msgid "Vehicle Identity"
+msgstr "వాహనం Identity"
+
+msgid "Vehicle Maintenance"
+msgstr "వాహనం నిర్వహణ"
+
+msgid "Vehicle Type"
+msgstr "వాహనం రకం"
+
+msgid "Velocity Status"
+msgstr "Velocity స్థితి"
+
+msgid "Velocity-Based Strategy"
+msgstr "వేగం-ఆధారిత వ్యూహం"
+
+msgid "Vendor"
+msgstr "వెండర్"
+
+msgid "Vendor / Service Centre"
+msgstr "వెండర్ / Service Centre"
+
+msgid "Vendor Details"
+msgstr "వెండర్ వివరాలు"
+
+msgid "Vendor Identity"
+msgstr "వెండర్ Identity"
+
+msgid "Vendor Limit Reached"
+msgstr "వెండర్ Limit Reached"
+
+msgid "Vendors:"
+msgstr "వెండర్లు:"
+
+msgid "Verify Email & Get Started"
+msgstr "Verify ఇమెయిల్ & Get Started"
+
+msgid "Verify Email | CWS Inventory"
+msgstr "Verify ఇమెయిల్ | CWS ఇన్‌వెంటరీ"
+
+msgid "View Batch"
+msgstr "చూడండి Batch"
+
+msgid "View Details"
+msgstr "చూడండి వివరాలు"
+
+msgid "View Full"
+msgstr "చూడండి పూర్తి"
+
+msgid "View all"
+msgstr "చూడండి అన్ని"
+
+msgid "View your entire notification history"
+msgstr "చూడండి మీ entire notification history"
+
+msgid "Warehouses"
+msgstr "గోదాములు"
+
+msgid "Warm regards"
+msgstr "హృదయపూర్వక శుభాకాంక్షలు"
+
+msgid "Warnings"
+msgstr "హెచ్‌చరికలు"
+
+msgid "Way"
+msgstr "మార్గం"
+
+msgid "We couldn't process your payment successfully."
+msgstr "We couldn't process మీ payment successfully."
+
+msgid "We have successfully received your payment and your subscription has been renewed. Thank you for continuing to choose CWS Inventory!"
+msgstr "We have successfully received మీ payment మరియు మీ subscription has been renewed. Thank మీరు కోసం continuing కి choose CWS ఇన్‌వెంటరీ!"
+
+msgid "We hope you are enjoying your free trial of CWS Inventory! This is a quick reminder that your 7-day free trial will expire in exactly"
+msgstr "We hope మీరు ఉన్నాయి enjoying మీ free trial యొక్క CWS ఇన్‌వెంటరీ! ఈ ఉంది a quick reminder ఆ మీ 7-day free trial వస్తుంది expire లో exactly"
+
+msgid "We're here to support you at every step. If you have any questions, simply reply to this email."
+msgstr "We're ఇక్కడ కి support మీరు వద్ద ప్రతి step. ఒకవేళ మీరు have ఏదైనా questions, simply reply కి ఈ email."
+
+msgid "We've sent a verification link to"
+msgstr "We've sent a verification link కి"
+
+msgid "Weight"
+msgstr "బరువు"
+
+msgid "Weight (kg)"
+msgstr "బరువు (kg)"
+
+msgid "Welcome to CWS Inventory"
+msgstr "Welcome కి CWS ఇన్‌వెంటరీ"
+
+msgid "Welcome to CWS Inventory!"
+msgstr "Welcome కి CWS ఇన్‌వెంటరీ!"
+
+msgid "Welcome,"
+msgstr "స్వాగతం,"
+
+msgid "What's next?"
+msgstr "తదుపరి ఏమిటి?"
+
+msgid "Work Email"
+msgstr "Work ఇమెయిల్"
+
+msgid "Workflows"
+msgstr "వర్క్‌ఫ్లోలు"
+
+msgid "Write a response or ask for more details..."
+msgstr "Write a response లేదా ask కోసం మరిన్ని details..."
+
+msgid "Yes, Log me out"
+msgstr "అవును, Log me బయట"
+
+msgid "You"
+msgstr "మీరు"
+
+msgid "You (Admin)"
+msgstr "మీరు (అడ్మిన్)"
+
+msgid "You are receiving this because you submitted a demo request at CWS Inventory."
+msgstr "మీరు ఉన్నాయి receiving ఈ because మీరు submitted a demo request వద్ద CWS ఇన్‌వెంటరీ."
+
+msgid "You can add your products once you reach the dashboard."
+msgstr "మీరు చేయవచ్చు add మీ products ఒకసారి మీరు reach  dashboard."
+
+msgid "You can attach PDFs, images, or documents (multiple files allowed)."
+msgstr "మీరు చేయవచ్చు attach PDFs, images, లేదా documents (multiple files allowed)."
+
+msgid "You received this email because you signed up for a trial account at CWS Inventory."
+msgstr "మీరు received ఈ email because మీరు signed పైకి కోసం a trial account వద్ద CWS ఇన్‌వెంటరీ."
+
+msgid "You received this email because you submitted a contact request on our website."
+msgstr "మీరు received ఈ email because మీరు submitted a contact request పై మా website."
+
+msgid "You — Mark as Resolved"
+msgstr "మీరు — Mark as పరిష్కరించబడింది"
+
+msgid "You — Review & comment"
+msgstr "మీరు — సమీక్ష & comment"
+
+msgid "You — Ticket Closed"
+msgstr "మీరు — Ticket మూసివేయబడింది"
+
+msgid "You — Ticket Submitted"
+msgstr "మీరు — Ticket Submitted"
+
+msgid "You're all caught up! There are no notifications to display."
+msgstr "You're అన్ని caught పైకి! There ఉన్నాయి కాదు notifications కి display."
+
+msgid "You've already provided your business name during signup. Add your address or GST details if you'd like (Optional)."
+msgstr "You've already provided మీ business name during signup. జోడించండి మీ address లేదా GST details ఒకవేళ you'd like (Optional)."
+
+msgid "Your"
+msgstr "మీ"
+
+msgid "Your Details"
+msgstr "మీ వివరాలు"
+
+msgid "Your Free Trial is Expiring"
+msgstr "మీ Free ట్రయల్ ఉంది Expiring"
+
+msgid "Your Inventory —"
+msgstr "మీ ఇన్‌వెంటరీ —"
+
+msgid "Your Progress"
+msgstr "మీ ప్రగతి"
+
+msgid "Your browser does not support the video tag."
+msgstr "మీ browser does కాదు support  video tag."
+
+msgid "Your company admin hasn't set up an onboarding plan for you yet."
+msgstr "మీ company admin hasn't set పైకి an onboarding plan కోసం మీరు ఇంకా."
+
+msgid "Your company admin will assign training to you."
+msgstr "మీ company admin వస్తుంది assign training కి మీరు."
+
+msgid "Your inventory is empty or matches no filters."
+msgstr "మీ inventory ఉంది empty లేదా matches కాదు filters."
+
+msgid "Your subscription expired today. Your account has been temporarily restricted."
+msgstr "మీ subscription expired ఈ రోజు. మీ account has been temporarily restricted."
+
+msgid "Your subscription is expiring in"
+msgstr "మీ subscription ఉంది expiring లో"
+
+msgid "Your workspace is fully active and ready to go."
+msgstr "మీ workspace ఉంది fully active మరియు ready కి go."
+
+msgid "browse"
+msgstr "బ్రౌజ్ చేయండి"
+
+msgid "close the ticket."
+msgstr "close  ticket."
+
+msgid "companies"
+msgstr "కంపెనీలు"
+
+msgid "complete"
+msgstr "పూర్తి"
+
+msgid "days"
+msgstr "రోజులు"
+
+msgid "e.g. 10:00 AM – 12:00 PM"
+msgstr "ఉదా. 10:00 AM – 12:00 PM"
+
+msgid "e.g. 154"
+msgstr "ఉదా. 154"
+
+msgid "e.g. 21.3"
+msgstr "ఉదా. 21.3"
+
+msgid "e.g. 85.5"
+msgstr "ఉదా. 85.5"
+
+msgid "e.g. 9876543210"
+msgstr "ఉదా. 9876543210"
+
+msgid "e.g. Delivery Route Optimization Guide"
+msgstr "e.g. డెలివరీ Route Optimization Guide"
+
+msgid "e.g. EV Care Pune"
+msgstr "ఉదా. EV Care Pune"
+
+msgid "e.g. EV-001"
+msgstr "ఉదా. EV-001"
+
+msgid "e.g. Electronics x2, Medicines – fragile"
+msgstr "ఉదా. Electronics x2, Medicines – పలుచనివి"
+
+msgid "e.g. John Smith"
+msgstr "ఉదా. John Smith"
+
+msgid "e.g. MH20 2023 0012345"
+msgstr "ఉదా. MH20 2023 0012345"
+
+msgid "e.g. MH20AB1234"
+msgstr "ఉదా. MH20AB1234"
+
+msgid "e.g. MH28BP88514 or MH2020230012345"
+msgstr "e.g. MH28BP88514 లేదా MH2020230012345"
+
+msgid "e.g. Near Railway Station"
+msgstr "e.g. సమీపంలో Railway Station"
+
+msgid "e.g. Rahul Sharma"
+msgstr "ఉదా. Rahul Sharma"
+
+msgid "e.g. Ramesh Kumar"
+msgstr "ఉదా. Ramesh Kumar"
+
+msgid "e.g. Tata Ace EV"
+msgstr "ఉదా. Tata Ace EV"
+
+msgid "e.g. Tata Motors"
+msgstr "ఉదా. Tata Motors"
+
+msgid "e.g. john@example.com"
+msgstr "ఉదా. john@example.com"
+
+msgid "inquiries"
+msgstr "విచారణలు"
+
+msgid "km left"
+msgstr "కి.మీ మిగిలి ఉంది"
+
+msgid "leave blank for warehouse default"
+msgstr "leave blank కోసం warehouse default"
+
+msgid "logistics, safety, delivery (comma-separated)"
+msgstr "లాజిస్టిక్స్, భద్రత, డెలివరీ (కామా-వేరు చేయబడిన)"
+
+msgid "message"
+msgstr "సందేశం"
+
+msgid "mo"
+msgstr "నెల"
+
+msgid "of"
+msgstr "యొక్క"
+
+msgid "on"
+msgstr "పై"
+
+msgid "optional"
+msgstr "ఐచ్ఛికం"
+
+msgid "rahul@company.com"
+msgstr "rahul@company.com"
+
+msgid "requests"
+msgstr "అభ్యర్థనలు"
+
+msgid "tasks total"
+msgstr "మొత్తం పనులు"
+
+msgid "with CWS Inventory. We're thrilled to have you on board and can't wait to see how our platform transforms your business operations."
+msgstr "తో CWS ఇన్‌వెంటరీ. We're thrilled కి have మీరు పై board మరియు can't wait కి see ఎలా మా platform transforms మీ business operations."
+
+msgid "you"
+msgstr "మీరు"

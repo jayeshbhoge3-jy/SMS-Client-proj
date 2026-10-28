@@ -1,0 +1,158 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "E-Vehicles" %}{% endblock %}
+{% block nav_vehicles %}active-nav{% endblock %}
+{% block page_title %}{% trans "E-Vehicle Fleet" %}{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "E-Vehicle Fleet" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Manage electric vehicles for delivery operations" %}</p>
+    </div>
+    {% if is_owner %}
+    <a href="{% url 'vehicle_add' %}"
+       class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm shadow-indigo-200">
+        <i data-lucide="plus" class="w-4 h-4"></i> {% trans "Add Vehicle" %}
+    </a>
+    {% endif %}
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-6">
+    <form method="get" class="flex flex-wrap gap-3">
+        <input name="q" value="{{ q }}" placeholder="{% trans 'Search vehicle ID, reg. no, model…' %}"
+               class="flex-1 min-w-[200px] border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+        <select name="status" class="border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+            <option value="">{% trans "All Statuses" %}</option>
+            {% for val, label in status_choices %}
+            <option value="{{ val }}" {% if status_filter == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <select name="type" class="border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+            <option value="">{% trans "All Types" %}</option>
+            {% for val, label in type_choices %}
+            <option value="{{ val }}" {% if type_filter == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">{% trans "Filter" %}</button>
+        <a href="{% url 'vehicle_list' %}"
+           class="border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">{% trans "Clear" %}</a>
+    </form>
+</div>
+
+<!-- Vehicle Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+    {% for vehicle in vehicles %}
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+
+        <!-- Card Header -->
+        <div class="flex items-center justify-between p-5 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+                    <i data-lucide="{% if vehicle.vehicle_type == 'TWO_WHEELER' %}bike{% elif vehicle.vehicle_type == 'CARGO_VAN' or vehicle.vehicle_type == 'MINI_TRUCK' %}truck{% else %}car{% endif %}"
+                       class="w-5 h-5 text-indigo-600"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-slate-800 text-sm">{{ vehicle.vehicle_id }}</p>
+                    <p class="text-xs text-slate-400">{{ vehicle.registration_number }}</p>
+                </div>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                {% if vehicle.status == 'AVAILABLE' %}bg-green-100 text-green-700
+                {% elif vehicle.status == 'IN_USE' %}bg-blue-100 text-blue-700
+                {% elif vehicle.status == 'CHARGING' %}bg-amber-100 text-amber-700
+                {% elif vehicle.status == 'MAINTENANCE' %}bg-red-100 text-red-700
+                {% else %}bg-slate-100 text-slate-600{% endif %}">
+                {{ vehicle.get_status_display }}
+            </span>
+        </div>
+
+        <!-- Details -->
+        <div class="p-5 space-y-3">
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Model" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.model_name }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Type" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.get_vehicle_type_display }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Manufacturer" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.manufacturer }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Driver" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.assigned_driver.name|default:"Unassigned" }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Range / charge" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.range_per_charge_km }} km</span>
+            </div>
+
+            <!-- Battery Bar -->
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-slate-500 flex items-center gap-1">
+                        <i data-lucide="battery" class="w-3 h-3"></i> {% trans "Battery" %}
+                    </span>
+                    <span class="font-semibold text-sm
+                        {% if vehicle.current_battery_percent < 20 %}text-red-600
+                        {% elif vehicle.current_battery_percent < 50 %}text-amber-600
+                        {% else %}text-green-600{% endif %}">
+                        {{ vehicle.current_battery_percent }}%&nbsp;≈&nbsp;{{ vehicle.estimated_remaining_km }} {% trans "km left" %}
+                    </span>
+                </div>
+                <div class="battery-bar">
+                    <div class="battery-fill {% if vehicle.current_battery_percent < 20 %}bg-red-500{% elif vehicle.current_battery_percent < 50 %}bg-amber-400{% else %}bg-green-500{% endif %}"
+                         style="width: {{ vehicle.current_battery_percent }}%"></div>
+                </div>
+                {% if vehicle.is_low_battery %}
+                <p class="text-xs text-red-600 mt-1 flex items-center gap-1">
+                    <i data-lucide="alert-triangle" class="w-3 h-3"></i> {% trans "Low battery – needs charging" %}
+                </p>
+                {% endif %}
+            </div>
+
+            {% if vehicle.insurance_expiry %}
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-500">{% trans "Insurance Expiry" %}</span>
+                <span class="font-medium text-slate-800">{{ vehicle.insurance_expiry }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Actions -->
+        {% if is_owner %}
+        <div class="flex border-t border-slate-100">
+            <a href="{% url 'vehicle_edit' vehicle.pk %}"
+               class="flex-1 flex items-center justify-center gap-2 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors font-medium">
+                <i data-lucide="pencil" class="w-4 h-4"></i> {% trans "Edit" %}
+            </a>
+            <form method="post" action="{% url 'vehicle_delete' vehicle.pk %}" class="flex-1"
+                  onsubmit="return confirm('{% trans "Delete" %} {{ vehicle.vehicle_id }}? {% trans "This action cannot be undone." %}')">
+                {% csrf_token %}
+                <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors font-medium">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> {% trans "Delete" %}
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <div class="col-span-3 py-16 text-center text-slate-400">
+        <i data-lucide="zap-off" class="w-12 h-12 mx-auto mb-3 opacity-30"></i>
+        <p class="font-medium">{% trans "No e-vehicles found." %}</p>
+        {% if is_owner %}
+        <a href="{% url 'vehicle_add' %}" class="mt-3 inline-block text-sm text-indigo-600 font-medium hover:underline">{% trans "Add your first vehicle →" %}</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

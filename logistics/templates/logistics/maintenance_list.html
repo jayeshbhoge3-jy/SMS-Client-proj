@@ -1,0 +1,231 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Maintenance" %}{% endblock %}
+{% block nav_maintenance %}active-nav{% endblock %}
+{% block page_title %}{% trans "Vehicle Maintenance" %}{% endblock %}
+
+{% block content %}
+
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Vehicle Maintenance" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Schedule and track maintenance for your e-vehicle fleet" %}</p>
+    </div>
+    {% if is_owner %}
+    <button onclick="document.getElementById('addModal').classList.remove('hidden')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm shadow-indigo-200">
+        <i data-lucide="plus" class="w-4 h-4"></i> {% trans "Schedule Maintenance" %}
+    </button>
+    {% endif %}
+</div>
+
+<!-- Maintenance Table -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Vehicle" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Type" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:table-cell">{% trans "Vendor" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Scheduled" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">{% trans "Cost" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Status" %}</th>
+                    <th class="px-5 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for log in logs %}
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-5 py-3">
+                        <p class="font-semibold text-slate-800">{{ log.vehicle.vehicle_id }}</p>
+                        <p class="text-xs text-slate-400">{{ log.vehicle.model_name }}</p>
+                    </td>
+                    <td class="px-5 py-3 text-slate-700">{{ log.get_maintenance_type_display }}</td>
+                    <td class="px-5 py-3 hidden sm:table-cell text-slate-600">{{ log.vendor_name|default:"—" }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ log.scheduled_date }}</td>
+                    <td class="px-5 py-3 hidden md:table-cell text-slate-700">₹{{ log.cost }}</td>
+                    <td class="px-5 py-3">
+                        <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                            {% if log.status == 'COMPLETED' %}bg-emerald-100 text-emerald-700
+                            {% elif log.status == 'IN_PROGRESS' %}bg-blue-100 text-blue-700
+                            {% elif log.status == 'SCHEDULED' %}bg-amber-100 text-amber-700
+                            {% else %}bg-slate-100 text-slate-600{% endif %}">
+                            {{ log.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="px-5 py-3">
+                        {% if log.status != 'COMPLETED' and log.status != 'CANCELLED' %}
+                        {% if is_owner %}
+                        <form method="post" action="{% url 'maintenance_update' log.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="status"
+                                   value="{% if log.status == 'SCHEDULED' %}IN_PROGRESS{% else %}COMPLETED{% endif %}">
+                            <button type="submit"
+                                    class="text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors
+                                    {% if log.status == 'SCHEDULED' %}border-blue-200 text-blue-700 hover:bg-blue-50
+                                    {% else %}border-emerald-200 text-emerald-700 hover:bg-emerald-50{% endif %}">
+                                {% if log.status == 'SCHEDULED' %}{% trans "Start" %}{% else %}{% trans "Complete" %}{% endif %}
+                            </button>
+                        </form>
+                        {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="px-5 py-16 text-center text-slate-400">
+                        <i data-lucide="wrench" class="w-10 h-10 mx-auto mb-3 opacity-30"></i>
+                        <p>{% trans "No maintenance records yet." %}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Maintenance Modal -->
+{% if is_owner %}
+<div id="addModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 modal-backdrop p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto modal-box">
+        <div class="flex items-center justify-between p-5 border-b border-slate-100 sticky top-0 bg-white z-10">
+            <h3 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+                <i data-lucide="wrench" class="w-4 h-4 text-indigo-600"></i> {% trans "Schedule Maintenance" %}
+            </h3>
+            <button onclick="closeMaintModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                <i data-lucide="x" class="w-4 h-4 text-slate-400"></i>
+            </button>
+        </div>
+        <form method="post" action="{% url 'maintenance_add' %}" id="maintForm" novalidate class="p-5 space-y-4">
+            {% csrf_token %}
+
+            <!-- Vehicle -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Vehicle" %} <span class="text-red-500">*</span></label>
+                <select id="maint_vehicle" name="vehicle" required
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    <option value="">{% trans "-- Select --" %}</option>
+                    {% for v in vehicles %}
+                    <option value="{{ v.pk }}">{{ v.vehicle_id }} – {{ v.model_name }}</option>
+                    {% endfor %}
+                </select>
+                <p class="error-msg" id="err_maint_vehicle">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span>{% trans "Please select a vehicle." %}</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Type -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Type" %} <span class="text-red-500">*</span></label>
+                    <select id="maint_type" name="maintenance_type" required
+                            class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                        <option value="">{% trans "-- Select --" %}</option>
+                        {% for val, label in type_choices %}
+                        <option value="{{ val }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="error-msg" id="err_maint_type">
+                        <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                        <span>{% trans "Select maintenance type." %}</span>
+                    </p>
+                </div>
+
+                <!-- Status -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Status" %}</label>
+                    <select name="status"
+                            class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                        {% for val, label in status_choices %}
+                        <option value="{{ val }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Scheduled Date -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Scheduled Date" %} <span class="text-red-500">*</span></label>
+                    <input type="date" id="maint_date" name="scheduled_date" required
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                    <p class="error-msg" id="err_maint_date">
+                        <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                        <span>{% trans "Scheduled date is required." %}</span>
+                    </p>
+                </div>
+
+                <!-- Cost -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Cost" %}</label>
+                    <input type="number" step="0.01" name="cost" value="0" min="0"
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                </div>
+            </div>
+
+            <!-- Vendor -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Vendor / Service Centre" %}</label>
+                <input type="text" name="vendor_name" placeholder="{% trans 'e.g. EV Care Pune' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Description" %}</label>
+                <textarea name="description" rows="2"
+                          class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none"
+                          placeholder="{% trans 'Details of the maintenance work to be done…' %}"></textarea>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-end gap-3 pt-1">
+                <button type="button" onclick="closeMaintModal()"
+                        class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">{% trans "Cancel" %}</button>
+                <button type="submit"
+                        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors">{% trans "Schedule" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function closeMaintModal() {
+    document.getElementById('addModal').classList.add('hidden');
+}
+document.getElementById('addModal')?.addEventListener('click', function(e) {
+    if (e.target === this) closeMaintModal();
+});
+
+const maintForm = document.getElementById('maintForm');
+if (maintForm) {
+    maintForm.addEventListener('submit', function(e) {
+        let valid = true;
+
+        const veh = document.getElementById('maint_vehicle');
+        const vehErr = document.getElementById('err_maint_vehicle');
+        if (!veh.value) {
+            veh.classList.add('field-error'); vehErr.classList.add('show'); valid = false;
+        } else { veh.classList.remove('field-error'); vehErr.classList.remove('show'); }
+
+        const typ = document.getElementById('maint_type');
+        const typErr = document.getElementById('err_maint_type');
+        if (!typ.value) {
+            typ.classList.add('field-error'); typErr.classList.add('show'); valid = false;
+        } else { typ.classList.remove('field-error'); typErr.classList.remove('show'); }
+
+        const dt = document.getElementById('maint_date');
+        const dtErr = document.getElementById('err_maint_date');
+        if (!dt.value) {
+            dt.classList.add('field-error'); dtErr.classList.add('show'); valid = false;
+        } else { dt.classList.remove('field-error'); dtErr.classList.remove('show'); }
+
+        if (!valid) { e.preventDefault(); lucide.createIcons(); }
+    });
+}
+</script>
+{% endblock %}

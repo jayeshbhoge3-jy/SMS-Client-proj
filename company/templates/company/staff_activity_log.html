@@ -1,0 +1,99 @@
+{% extends 'company/base.html' %}
+{% block title %}Staff Activity Log | {{ company.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">Staff Activity Log</h1>
+    <p class="text-slate-500 text-sm mt-1">Audit log of all staff actions on inventory modules.</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <form method="get" class="flex flex-wrap gap-4 items-end">
+        <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Staff Member</label>
+            <select name="staff_id" class="px-3 py-2 border rounded-lg text-sm w-48">
+                <option value="">All Staff</option>
+                {% for s in staff_members %}
+                <option value="{{ s.id }}" {% if request.GET.staff_id == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Module</label>
+            <select name="module" class="px-3 py-2 border rounded-lg text-sm w-48">
+                <option value="">All Modules</option>
+                {% for val, label in modules %}
+                <option value="{{ val }}" {% if request.GET.module == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Action</label>
+            <select name="action_type" class="px-3 py-2 border rounded-lg text-sm w-48">
+                <option value="">All Actions</option>
+                {% for val, label in action_types %}
+                <option value="{{ val }}" {% if request.GET.action_type == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Filter</button>
+            <a href="{% url 'owner_staff_activity' %}" class="ml-2 text-indigo-600 text-sm hover:underline">Clear</a>
+        </div>
+    </form>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-left text-sm whitespace-nowrap">
+        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500">
+            <tr>
+                <th class="px-6 py-3 font-medium">Date/Time</th>
+                <th class="px-6 py-3 font-medium">Staff</th>
+                <th class="px-6 py-3 font-medium">Action</th>
+                <th class="px-6 py-3 font-medium">Module</th>
+                <th class="px-6 py-3 font-medium">Object</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200">
+            {% for log in page_obj %}
+            <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 text-slate-500">{{ log.timestamp|date:"M d, Y H:i:s" }}</td>
+                <td class="px-6 py-4 text-slate-800 font-medium">{{ log.staff.name }}</td>
+                <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                        {% if log.action_type == 'CREATE' %}bg-green-100 text-green-800
+                        {% elif log.action_type == 'EDIT' %}bg-blue-100 text-blue-800
+                        {% elif log.action_type == 'DELETE_REQUEST' %}bg-yellow-100 text-yellow-800
+                        {% elif log.action_type == 'DELETE' %}bg-red-100 text-red-800
+                        {% else %}bg-slate-100 text-slate-800{% endif %}">
+                        {{ log.get_action_type_display }}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-slate-500">{{ log.get_module_display }}</td>
+                <td class="px-6 py-4 text-slate-500">{{ log.object_repr }} (ID: {{ log.object_id|default:"-" }})</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="px-6 py-8 text-center text-slate-500">
+                    No activity logs found matching the criteria.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if page_obj.has_other_pages %}
+    <div class="px-6 py-4 border-t border-slate-200 flex justify-between items-center">
+        <span class="text-sm text-slate-500">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        <div class="space-x-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.staff_id %}&staff_id={{ request.GET.staff_id }}{% endif %}{% if request.GET.module %}&module={{ request.GET.module }}{% endif %}{% if request.GET.action_type %}&action_type={{ request.GET.action_type }}{% endif %}" class="px-3 py-1 border rounded text-sm text-slate-600 hover:bg-slate-50">Previous</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.staff_id %}&staff_id={{ request.GET.staff_id }}{% endif %}{% if request.GET.module %}&module={{ request.GET.module }}{% endif %}{% if request.GET.action_type %}&action_type={{ request.GET.action_type }}{% endif %}" class="px-3 py-1 border rounded text-sm text-slate-600 hover:bg-slate-50">Next</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

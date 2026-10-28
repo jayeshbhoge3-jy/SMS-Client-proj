@@ -1,0 +1,115 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Categories" %}{% endblock %}
+
+{% block breadcrumb %}
+<i data-lucide="chevron-right" class="w-4 h-4"></i>
+<span class="font-semibold text-slate-800">{% trans "Categories" %}</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-8">
+    
+    <!-- Title Section -->
+    <div>
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">{% trans "Inventory Categories" %}</h2>
+        <p class="text-slate-500 text-sm">{% trans "Organize your products by grouping them into meaningful categories." %}</p>
+    </div>
+
+    <!-- Add Category Form Card -->
+    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <h3 class="transition-colors mb-4">{% trans "Quick Add Category" %} <span class="text-red-500">*</span></h3>                        
+        <form method="post" action="{% url 'staff_category_create' %}" class="flex flex-col gap-2" id="category_form">
+            {% csrf_token %}
+            <div class="flex flex-col sm:flex-row gap-3 items-center">
+                <div class="relative flex-1 w-full group">
+                    <i data-lucide="tag" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors"></i>
+                    <input type="text" name="name" id="category_name" placeholder="{% trans 'Enter new category name...' %}" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all" maxlength="50" required>
+                </div>
+                <button type="submit" class="shrink-0 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    {% trans "Add Category" %}
+                </button>
+            </div>
+            <p id="category_name_error" class="text-red-600 text-sm hidden"></p>
+        </form>
+    </div>
+
+    <!-- Categories Table Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+            <h3 class="font-bold text-slate-800">{% trans "Existing Categories" %}</h3>
+            <span class="self-start sm:self-auto bg-indigo-100 text-indigo-700 text-[10px] px-2 py-1 rounded-full font-black uppercase tracking-wider">
+                {{ page_obj.paginator.count|default:categories.count }} {% trans "Total" %}
+            </span>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-slate-50/50 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
+                    <tr>
+                        <th class="px-8 py-4">{% trans "Category Name" %}</th>
+                        <th class="px-8 py-4 text-right">{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for c in categories %}
+                    <tr class="hover:bg-slate-50/80 transition-colors group">
+                        <td class="px-8 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400 font-bold group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                                    {{ c.name|slice:":1"|upper }}
+                                </div>
+                                <span class="font-semibold text-slate-700">{{ c.name }}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-4 text-right">
+                            <div class="flex items-center justify-end gap-3">
+                                <a href="{% url 'staff_category_edit' c.id %}" class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all" title="Edit Category">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </a>
+                                <form method="post" action="{% url 'staff_category_delete_request' c.id %}" class="inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="reason" value="Staff request from list view">
+                                    <button type="submit" onclick="return confirm('Request deletion for this category?')" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" title="Delete">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="px-8 py-16 text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                    <i data-lucide="tags" class="w-8 h-8 text-slate-300"></i>
+                                </div>
+                                <h3 class="text-slate-900 font-bold text-sm">{% trans "No categories found" %}</h3>
+                                <p class="text-slate-500 text-xs mt-1">{% trans "Start by adding your first group above." %}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- PAGINATION START -->
+        {% if page_obj.has_other_pages %}
+        <div class="flex justify-between items-center px-6 py-4 border-t bg-slate-50 text-sm text-slate-500">
+            <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+            <div class="flex items-center gap-2">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 border rounded hover:bg-slate-100">‹</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 border rounded hover:bg-slate-100">›</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

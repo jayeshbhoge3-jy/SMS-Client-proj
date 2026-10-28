@@ -1,0 +1,124 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Delivery Orders" %}{% endblock %}
+{% block nav_deliveries %}active-nav{% endblock %}
+{% block page_title %}{% trans "Delivery Orders" %}{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Delivery Orders" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Track all e-vehicle delivery assignments" %}</p>
+    </div>
+    {% if is_owner %}
+    <a href="{% url 'delivery_add' %}"
+       class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm shadow-indigo-200">
+        <i data-lucide="plus" class="w-4 h-4"></i> {% trans "New Delivery" %}
+    </a>
+    {% endif %}
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-6">
+    <form method="get" class="flex flex-wrap gap-3">
+        <input name="q" value="{{ q }}" placeholder="{% trans 'Order no, recipient, phone…' %}"
+               class="flex-1 min-w-[200px] border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+        <select name="status" class="border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+            <option value="">{% trans "All Statuses" %}</option>
+            {% for val, label in status_choices %}
+            <option value="{{ val }}" {% if status_filter == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <select name="priority" class="border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none">
+            <option value="">{% trans "All Priorities" %}</option>
+            {% for val, label in priority_choices %}
+            <option value="{{ val }}" {% if priority_filter == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">{% trans "Filter" %}</button>
+        <a href="{% url 'delivery_list' %}"
+           class="border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">{% trans "Clear" %}</a>
+    </form>
+</div>
+
+<!-- Deliveries Table -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Order" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Recipient" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">{% trans "Vehicle / Driver" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:table-cell">{% trans "Scheduled" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Priority" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Status" %}</th>
+                    <th class="px-5 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for order in deliveries %}
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-5 py-3">
+                        <p class="font-semibold text-slate-800">{{ order.order_number }}</p>
+                        <p class="text-xs text-slate-400 truncate max-w-[140px]">{{ order.package_description }}</p>
+                    </td>
+                    <td class="px-5 py-3">
+                        <p class="font-medium text-slate-800">{{ order.recipient_name }}</p>
+                        <p class="text-xs text-slate-400">{{ order.recipient_phone }}</p>
+                    </td>
+                    <td class="px-5 py-3 hidden md:table-cell">
+                        <p class="font-medium text-slate-700">{{ order.assigned_vehicle.vehicle_id|default:"—" }}</p>
+                        <p class="text-xs text-slate-400">{{ order.assigned_driver.name|default:"Unassigned" }}</p>
+                    </td>
+                    <td class="px-5 py-3 hidden sm:table-cell text-slate-600">{{ order.scheduled_date }}</td>
+                    <td class="px-5 py-3">
+                        <span class="text-xs px-2 py-1 rounded-full font-medium
+                            {% if order.priority == 'URGENT' %}bg-red-100 text-red-700
+                            {% elif order.priority == 'HIGH' %}bg-orange-100 text-orange-700
+                            {% elif order.priority == 'NORMAL' %}bg-blue-100 text-blue-700
+                            {% else %}bg-slate-100 text-slate-600{% endif %}">
+                            {{ order.get_priority_display }}
+                        </span>
+                    </td>
+                    <td class="px-5 py-3">
+                        <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                            {% if order.status == 'DELIVERED' %}bg-emerald-100 text-emerald-700
+                            {% elif order.status == 'IN_TRANSIT' %}bg-blue-100 text-blue-700
+                            {% elif order.status == 'PENDING' %}bg-orange-100 text-orange-700
+                            {% elif order.status == 'ASSIGNED' %}bg-indigo-100 text-indigo-700
+                            {% elif order.status == 'FAILED' %}bg-red-100 text-red-700
+                            {% elif order.status == 'RETURNED' %}bg-purple-100 text-purple-700
+                            {% elif order.status == 'CANCELLED' %}bg-slate-100 text-slate-500
+                            {% else %}bg-slate-100 text-slate-600{% endif %}">
+                            {{ order.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="px-5 py-3">
+                        <a href="{% url 'delivery_detail' order.pk %}"
+                           class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-indigo-50 text-indigo-600 transition-colors"
+                           title="{% trans 'View Details' %}">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="px-5 py-16 text-center text-slate-400">
+                        <i data-lucide="package-x" class="w-12 h-12 mx-auto mb-3 opacity-30"></i>
+                        <p class="font-medium">{% trans "No delivery orders found." %}</p>
+                        {% if is_owner %}
+                        <a href="{% url 'delivery_add' %}" class="mt-2 inline-block text-sm text-indigo-600 font-medium hover:underline">{% trans "Create first delivery →" %}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

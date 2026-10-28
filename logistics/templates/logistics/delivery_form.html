@@ -1,0 +1,366 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{{ action }} {% trans "Delivery" %}{% endblock %}
+{% block nav_deliveries %}active-nav{% endblock %}
+{% block page_title %}{{ action }} {% trans "Delivery Order" %}{% endblock %}
+
+{% block content %}
+
+<div class="mb-6 flex items-center gap-3">
+    <a href="{% url 'delivery_list' %}" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500 transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </a>
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{{ action }} {% trans "Delivery Order" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Fill in recipient and delivery details below." %}</p>
+    </div>
+</div>
+
+<form method="post" id="deliveryForm" novalidate class="w-full space-y-5">
+    {% csrf_token %}
+
+    <!-- ══ SECTION: Recipient ══ -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i data-lucide="user" class="w-4 h-4 text-indigo-500"></i> {% trans "Recipient Information" %}
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Recipient Name -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Recipient Name" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="recipient_name" name="recipient_name"
+                       value="{{ order.recipient_name|default:'' }}" placeholder="{% trans 'Full name' %}"
+                       pattern="[A-Za-z\s]+" title="{% trans 'Only alphabetic characters and spaces are allowed.' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_recipient_name">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Phone -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Phone" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="tel" id="recipient_phone" name="recipient_phone"
+                       value="{{ order.recipient_phone|default:'' }}" placeholder="{% trans '10-digit mobile' %}"
+                       maxlength="10"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+                <p class="error-msg" id="err_recipient_phone">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Email" %} <span class="text-slate-400 text-xs">({% trans "optional" %})</span></label>
+                <input type="email" id="recipient_email" name="recipient_email"
+                       value="{{ order.recipient_email|default:'' }}" placeholder="{% trans 'optional' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_recipient_email">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- City -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "City" %}</label>
+                <input type="text" name="city"
+                       value="{{ order.city|default:'' }}" placeholder="{% trans 'City' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+
+            <!-- Delivery Address (full row) -->
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Delivery Address" %} <span class="text-red-500">*</span>
+                </label>
+                <textarea id="delivery_address" name="delivery_address" rows="2"
+                          placeholder="{% trans 'Full delivery address including landmark' %}"
+                          class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ order.delivery_address|default:'' }}</textarea>
+                <p class="error-msg" id="err_delivery_address">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Pickup Address -->
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Pickup Address" %} <span class="text-slate-400 text-xs">({% trans "leave blank for warehouse default" %})</span></label>
+                <textarea name="pickup_address" rows="2"
+                          placeholder="{% trans 'Leave blank to use company warehouse as pickup point' %}"
+                          class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ order.pickup_address|default:'' }}</textarea>
+            </div>
+
+            <!-- Pincode -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Pincode" %}</label>
+                <input type="text" id="pincode" name="pincode"
+                       value="{{ order.pincode|default:'' }}" placeholder="{% trans '6-digit pincode' %}"
+                       maxlength="6"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all"
+                       oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+                <p class="error-msg" id="err_pincode">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SECTION: Package & Schedule ══ -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i data-lucide="package" class="w-4 h-4 text-indigo-500"></i> {% trans "Package &amp; Schedule" %}
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Package Description (full row) -->
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Package Description" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="package_description" name="package_description"
+                       value="{{ order.package_description|default:'' }}"
+                       placeholder="{% trans 'e.g. Electronics x2, Medicines – fragile' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_package_description">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Weight -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Weight (kg)" %}</label>
+                <input type="number" id="weight_kg" name="weight_kg" step="0.01" min="0"
+                       value="{{ order.weight_kg|default:'0' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_weight_kg">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Estimated Distance -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Est. Distance (km)" %}</label>
+                <input type="number" name="estimated_distance_km" step="0.1" min="0"
+                       value="{{ order.estimated_distance_km|default:'0' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+
+            <!-- Priority -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Priority" %}</label>
+                <select name="priority"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    {% for val, label in priority_choices %}
+                    <option value="{{ val }}" {% if order.priority == val %}selected{% elif not order and val == 'NORMAL' %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Scheduled Date -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">
+                    {% trans "Scheduled Date" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="date" id="scheduled_date" name="scheduled_date"
+                       value="{{ order.scheduled_date|default:'' }}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_scheduled_date">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i><span></span>
+                </p>
+            </div>
+
+            <!-- Time Slot (full row) -->
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Time Slot" %} <span class="text-slate-400 text-xs">({% trans "optional" %})</span></label>
+                <input type="text" name="scheduled_time_slot"
+                       value="{{ order.scheduled_time_slot|default:'' }}"
+                       placeholder="{% trans 'e.g. 10:00 AM – 12:00 PM' %}"
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SECTION: Vehicle & Driver Assignment ══ -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i data-lucide="truck" class="w-4 h-4 text-indigo-500"></i> {% trans "Vehicle &amp; Driver Assignment" %}
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Assign Vehicle -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Assign Vehicle" %}</label>
+                <select name="assigned_vehicle"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    <option value="">{% trans "-- Assign Later --" %}</option>
+                    {% for v in vehicles %}
+                    <option value="{{ v.pk }}" {% if order.assigned_vehicle_id == v.pk %}selected{% endif %}>
+                        {{ v.vehicle_id }} – {{ v.model_name }} ({{ v.current_battery_percent }}% 🔋)
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if not vehicles %}
+                <p class="text-xs text-amber-600 mt-1 flex items-center gap-1">
+                    <i data-lucide="alert-triangle" class="w-3 h-3"></i>
+                    {% trans "No available vehicles. Add or free up a vehicle first." %}
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Assign Driver -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Assign Driver" %}</label>
+                <select name="assigned_driver"
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    <option value="">{% trans "-- Assign Later --" %}</option>
+                    {% for driver in drivers %}
+                    <option value="{{ driver.pk }}" {% if order.assigned_driver_id == driver.pk %}selected{% endif %}>{{ driver.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SECTION: Delivery Notes ══ -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2 pb-2 border-b border-slate-100 mb-4">
+            <i data-lucide="clipboard" class="w-4 h-4 text-indigo-500"></i> {% trans "Delivery Notes" %}
+        </h3>
+        <textarea name="delivery_notes" rows="3"
+                  placeholder="{% trans 'Special instructions, landmark, access notes, call before delivery…' %}"
+                  class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none">{{ order.delivery_notes|default:'' }}</textarea>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end gap-3 pb-6">
+        <a href="{% url 'delivery_list' %}"
+           class="px-5 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">{% trans "Cancel" %}</a>
+        <button type="submit"
+                class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors flex items-center gap-2 shadow-sm shadow-indigo-200">
+            <i data-lucide="save" class="w-4 h-4"></i> {{ action }} {% trans "Order" %}
+        </button>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* ════════════════════════════════════════════════
+   DELIVERY FORM — CLIENT-SIDE VALIDATION
+════════════════════════════════════════════════ */
+
+function showError(fieldId, msg) {
+    const input = document.getElementById(fieldId);
+    const errEl = document.getElementById('err_' + fieldId);
+    if (!input || !errEl) return;
+    input.classList.add('field-error');
+    errEl.querySelector('span').textContent = msg;
+    errEl.classList.add('show');
+    lucide.createIcons();
+}
+function clearError(fieldId) {
+    const input = document.getElementById(fieldId);
+    const errEl = document.getElementById('err_' + fieldId);
+    if (!input || !errEl) return;
+    input.classList.remove('field-error');
+    errEl.classList.remove('show');
+}
+function attachBlur(id, fn) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('blur', () => fn(el.value));
+}
+
+// ── Individual validators ──
+function validateRecipientName(val) {
+    clearError('recipient_name');
+    if (!val.trim()) { showError('recipient_name', '{% trans "Recipient name is required." %}'); return false; }
+    if (/[^a-zA-Z\s]/.test(val)) { showError('recipient_name', '{% trans "Only alphabetic characters and spaces are allowed." %}'); return false; }
+    return true;
+}
+function validatePhone(val) {
+    clearError('recipient_phone');
+    if (!val.trim()) { showError('recipient_phone', 'Phone number is required.'); return false; }
+    if (!/^[6-9]\d{9}$/.test(val.trim())) {
+        showError('recipient_phone', 'Enter a valid 10-digit Indian mobile number (starts with 6–9).');
+        return false;
+    }
+    return true;
+}
+function validateEmail(val) {
+    clearError('recipient_email');
+    if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        showError('recipient_email', 'Enter a valid email address.');
+        return false;
+    }
+    return true;
+}
+function validateDeliveryAddress(val) {
+    clearError('delivery_address');
+    if (!val.trim()) { showError('delivery_address', 'Delivery address is required.'); return false; }
+    return true;
+}
+function validatePackageDescription(val) {
+    clearError('package_description');
+    if (!val.trim()) { showError('package_description', 'Package description is required.'); return false; }
+    return true;
+}
+function validateScheduledDate(val) {
+    clearError('scheduled_date');
+    if (!val) { showError('scheduled_date', 'Scheduled date is required.'); return false; }
+    const today = new Date().toISOString().slice(0, 10);
+    if (val < today) { showError('scheduled_date', 'Scheduled date cannot be in the past.'); return false; }
+    return true;
+}
+function validateWeight(val) {
+    clearError('weight_kg');
+    if (val !== '' && (isNaN(val) || parseFloat(val) < 0)) {
+        showError('weight_kg', 'Weight must be 0 or greater.');
+        return false;
+    }
+    return true;
+}
+function validatePincode(val) {
+    clearError('pincode');
+    if (val && !/^\d{6}$/.test(val)) {
+        showError('pincode', 'Pincode must be exactly 6 digits.');
+        return false;
+    }
+    return true;
+}
+
+// ── Attach blur listeners ──
+attachBlur('recipient_name',      validateRecipientName);
+attachBlur('recipient_phone',     validatePhone);
+attachBlur('recipient_email',     validateEmail);
+attachBlur('delivery_address',    validateDeliveryAddress);
+attachBlur('package_description', validatePackageDescription);
+attachBlur('scheduled_date',      validateScheduledDate);
+attachBlur('weight_kg',           validateWeight);
+attachBlur('pincode',             validatePincode);
+
+// ── Submit: run all validators ──
+document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+    const checks = [
+        validateRecipientName(document.getElementById('recipient_name').value),
+        validatePhone(document.getElementById('recipient_phone').value),
+        validateEmail(document.getElementById('recipient_email').value),
+        validateDeliveryAddress(document.getElementById('delivery_address').value),
+        validatePackageDescription(document.getElementById('package_description').value),
+        validateScheduledDate(document.getElementById('scheduled_date').value),
+        validateWeight(document.getElementById('weight_kg').value),
+        validatePincode(document.getElementById('pincode').value),
+    ];
+    if (checks.includes(false)) {
+        e.preventDefault();
+        const firstErr = document.querySelector('.field-error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+});
+</script>
+{% endblock %}

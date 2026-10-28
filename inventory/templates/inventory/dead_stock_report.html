@@ -1,0 +1,701 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{{ company.name }} | Dead Stock Management</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .active-nav {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        /* --- Packing Loader Animation Styles --- */
+        .box-loader {
+            width: 80px;
+            height: 80px;
+            background: #4f46e5;
+            position: relative;
+            animation: box-bounce 1s infinite ease-in-out;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .box-loader::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #3730a3;
+            transform: translateY(-50%);
+        }
+
+        .box-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #3730a3;
+            transform: translateX(-50%);
+        }
+
+        @keyframes box-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-35px) rotate(8deg);
+            }
+        }
+        .mobile-closed {
+    transform: translateX(-100%);
+}
+
+.mobile-open {
+    transform: translateX(0);
+}
+    </style>
+</head>
+
+<body class="bg-slate-50">
+ <!-- LOGOUT CONFIRMATION MODAL -->
+    <div id="logout-modal" class="fixed inset-0 z-[90] bg-slate-900/40 backdrop-blur-md flex items-center justify-center hidden">
+        <div class="bg-white rounded-[2rem] p-10 max-w-sm w-full mx-4 shadow-2xl transform transition-all scale-95 opacity-0 duration-300 border border-slate-100" id="modal-content">
+            <div class="w-20 h-20 bg-rose-50 text-rose-600 rounded-3xl flex items-center justify-center mb-8 mx-auto">
+                <i data-lucide="log-out" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-slate-900 text-center">{% trans "Ready to go?" %}</h3>
+            <p class="text-slate-500 mt-4 mb-10 text-center leading-relaxed">Confirm to sign out of your portal. We'll make sure your session is closed securely.</p>
+            <div class="flex flex-col gap-3">
+                <form id="logout-form" action="{% url 'company_logout' %}" method="POST" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full px-6 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98]">
+                        {% trans "Yes, Log me out" %}
+                    </button>
+                </form>
+                <button onclick="closeLogoutModal()" class="w-full px-6 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-200 transition-all">
+                    {% trans "Stay here" %}
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Mobile Overlay Backdrop -->
+<div id="sidebar-overlay"
+     class="fixed inset-0 bg-black/40 z-40 hidden md:hidden">
+</div>
+
+<div class="flex h-screen overflow-hidden">
+
+   <!-- Sidebar -->
+<aside id="sidebar"
+       class="fixed md:static top-0 left-0 h-screen w-64
+       bg-white border-r border-slate-200
+       flex flex-col
+       transition-all duration-300
+       -translate-x-full md:translate-x-0
+       z-50">
+        <div class="p-6 flex items-center gap-3 border-b border-slate-100 shrink-0">
+            <div class="bg-indigo-600 p-2 rounded-lg text-white shrink-0">
+                <i data-lucide="building-2" class="w-6 h-6"></i>
+            </div>
+            <div class="overflow-hidden sidebar-text">
+                <h1 class="font-bold text-lg truncate">{{ company.name }}</h1>
+                <p>{% trans "Enterprise" %}</p>
+            </div>
+        </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar w-full">
+        <a href="{% url 'company_dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_dashboard' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors group text-left">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Dashboard" %}</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Business Ops" %}</p>
+        </div>
+
+        <a href="{% url 'product_list' %}"
+           class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg {% if request.resolver_match.url_name in 'product_list add_product edit_product product_stock_breakdown inventory_history' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} transition-colors"
+           data-title="My Inventory">
+            <i data-lucide="package-search" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "My Inventory" %}</span>
+        </a>
+
+        <a href="{% url 'category_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'category_list edit_category' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg" data-title="Categories">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Categories" %}</span>
+        </a>
+
+        <a href="/inventory/batches/" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'batch_stock_list adjust_batch_stock' or request.path == '/inventory/batches/' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="boxes" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Batch Stock" %}</span>
+        </a>
+
+        <a href="{% url 'sales_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'sales_orders add_sales_order sales_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Sales Orders" %}</span>
+        </a>
+
+        <!-- PURCHASES -->
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                {% trans "Purchases" %}
+            </p>
+        </div>
+
+        <a href="{% url 'vendor_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'vendor_list add_vendor edit_vendor' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Vendors" %}</span>
+        </a>
+
+        <a href="{% url 'purchase_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'purchase_orders add_purchase_order purchase_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Purchase Orders" %}</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                {% trans "Customers" %}
+            </p>
+        </div>
+
+        <a href="{% url 'customer_list' %}"
+           class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'customer_list customer_add customer_edit' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+            <i data-lucide="users" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Customers" %}</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Inventory Analytics" %}</p>
+        </div>
+        
+        <!-- ABC Inventory Classification -->
+        <a href="{% url 'abc_inventory_classification' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'abc_inventory_classification' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="layers" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "ABC Classification" %}</span>
+        </a>
+
+        <!-- Stock Movement -->
+        <a href="{% url 'stock_movement_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_movement_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Stock Movement" %}</span>
+        </a>
+
+        <!-- Dead Stock -->
+        <a href="{% url 'dead_stock_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'dead_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Dead Stock" %}</span>
+        </a>
+
+        <!-- Fast / Slow Products -->
+        <a href="{% url 'fast_slow_products_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'fast_slow_products_report fast_slow_products_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="activity" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Fast / Slow Products" %}</span>
+        </a>
+
+        <a href="{% url 'stock_aging_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_aging_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="calendar" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Stock Aging" %}</span>
+        </a>
+
+        <a href="{% url 'reorder_suggestions' %}"
+           class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reorder_suggestions' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Reorder Suggestions" %}</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Report Analyst" %}</p>
+        </div>
+        
+        <a href="{% url 'reports' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reports' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="file-bar-chart" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "All Reports" %}</span>
+        </a>
+        
+        <a href="{% url 'near_expiry_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'near_expiry_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="alert-circle" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Near Expiry" %}</span>
+        </a>
+        
+        <a href="{% url 'expired_stock_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'expired_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Expired Stock" %}</span>
+        </a>
+        
+        <a href="{% url 'supplier_performance' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'supplier_performance' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="trending-up" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Supplier Performance" %}</span>
+        </a>
+        
+        <a href="{% url 'profit_margin_report' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'profit_margin_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="dollar-sign" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Profit Margin" %}</span>
+        </a>
+        
+        <a href="{% url 'purchase_stock_report_view' %}" 
+           class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'purchase_stock_report_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+            <i data-lucide="inbox" class="w-5 h-5 sidebar-icon"></i>
+            <span class="sidebar-text">{% trans "Purchase Stock" %}</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Logistics" %}</p>
+                </div>
+                <a href="{% url 'logistics_dashboard' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'logistics_dashboard' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="truck" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Logistics" %}</span>
+                </a>
+                
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Training &amp; Support" %}</p>
+                </div>
+                <a href="{% url 'training:dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.namespace == 'training' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Training &amp; Support" %}</span>
+                </a>
+                
+        <div class="pt-4 pb-2 px-4 sidebar-text">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Administration" %}</p>
+        </div>
+        <a href="{% url 'company_settings' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_settings' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Settings" %}</span>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <div class="p-4 border-t border-slate-100 shrink-0">
+        <button onclick="openLogoutModal()"
+            class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-rose-600 hover:bg-rose-50 rounded-lg">
+            <i data-lucide="log-out" class="w-5 h-5"></i>
+            <span class="sidebar-text">{% trans "Logout" %}</span>
+        </button>
+    </div>
+</aside>
+
+    <!-- MAIN CONTENT -->
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-slate-200
+               flex items-center justify-between
+               px-4 md:px-8 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="toggle-sidebar" class="p-2 hover:bg-slate-100 rounded-lg text-slate-600">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+
+                    <nav class="flex text-sm text-slate-500 gap-2 items-center">
+                        <a href="{% url 'company_dashboard' %}" class="hover:text-indigo-600 transition-colors">{% trans "Dashboard" %}</a>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+                        <span class="font-semibold text-slate-800">{% trans "Dead Stock" %}</span>
+                    </nav>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs font-bold leading-tight truncate max-w-[120px]">{{ company.name|truncatechars:12 }}</p>
+                            <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-wide">{% trans "Company Owner" %}</p>
+                        </div>
+                        <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">
+                            {{ company.name|slice:":1"|upper }}
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
+
+                <div class="max-w-7xl mx-auto space-y-6">
+
+                    <!-- HEADER -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h2>{% trans "Dead Stock Management" %}</h2>
+                            <p class="text-slate-500 text-sm">{% trans "Track dead stock, slow moving inventory and aging analysis." %}</p>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <a href="{% url 'export_dead_stock_excel' %}"
+                               class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-md hover:bg-emerald-700 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Export Excel
+                            </a>
+
+                            <a href="{% url 'export_dead_stock_pdf' %}"
+                               class="inline-flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-rose-700 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Export PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SUMMARY CARDS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="bg-rose-50 text-rose-600 p-2 rounded-lg"><i data-lucide="alert-circle" class="w-5 h-5"></i></div>
+                            <div>
+                                <p>{% trans "Dead Stock Items" %}</p>
+                                <p class="text-lg font-bold">{{ dead_stock_count }}</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="bg-amber-50 text-amber-600 p-2 rounded-lg"><i data-lucide="clock" class="w-5 h-5"></i></div>
+                            <div>
+                                <p>{% trans "Slow Moving" %}</p>
+                                <p class="text-lg font-bold">{{ slow_moving_count }}</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="bg-indigo-50 text-indigo-600 p-2 rounded-lg"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+                            <div>
+                                <p>{% trans "Products Analysed" %}</p>
+                                <p class="text-lg font-bold">{{ report.paginator.count }}</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="bg-emerald-50 text-emerald-600 p-2 rounded-lg"><i data-lucide="percent" class="w-5 h-5"></i></div>
+                            <div>
+                                <p>{% trans "Discount Suggested" %}</p>
+                                <p class="text-lg font-bold">{{ dead_stock_count }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REPORT TABLE -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                        
+                        <div class="px-6 py-4 border-b border-slate-200">
+                            <form method="GET" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+                                <div class="relative flex-1 w-full max-w-full">
+                                    <select name="category" class="w-full max-w-full h-[44px] bg-white border border-slate-300 rounded-lg text-sm px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 overflow-hidden text-ellipsis whitespace-nowrap">
+                                        <option value="">All Categories</option>
+                                        {% for category in categories %}
+                                        <option value="{{ category.id }}" {% if category.id == selected_category %}selected{% endif %}>{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="relative flex-1 w-full max-w-full">
+                                    <select name="product" class="w-full max-w-full h-[44px] bg-white border border-slate-300 rounded-lg text-sm px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 overflow-hidden text-ellipsis whitespace-nowrap">
+                                        <option value="">All Products</option>
+                                        {% for product in products %}
+                                        <option value="{{ product.id }}" {% if product.id == selected_product %}selected{% endif %}>{{ product.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="flex w-full sm:w-auto items-center gap-2">
+                                    <button type="submit"
+                                        class="flex-1 sm:flex-none h-[44px] px-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium whitespace-nowrap transition inline-flex items-center justify-center gap-2">
+                                        <i data-lucide="filter" class="w-4 h-4"></i> {% trans "Filter" %}
+                                    </button>
+                                </div>
+                                <div class="flex w-full sm:w-auto items-center gap-2">
+                                    <a href="{% url 'dead_stock_report' %}"
+                                    class="flex-1 sm:flex-none h-[44px] px-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium transition inline-flex items-center justify-center gap-2">
+                                        <i data-lucide="refresh-cw" class="w-4 h-4"></i> {% trans "Reset" %}
+                                    </a>
+                                </div>
+                                
+                            </form>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full w-full text-sm text-left text-slate-700">
+                                <thead class="bg-slate-100 text-xs font-semibold uppercase text-slate-500 border-b">
+                                    <tr>
+                                        <th class="px-4 md:px-8 py-4 whitespace-nowrap">{% trans "Product" %}</th>
+                                        <th>{% trans "Aging Days" %}</th>
+                                        <th class="px-8 py-4 whitespace-nowrap text-center">{% trans "Status" %}</th>
+                                        <th class="px-8 py-4 whitespace-nowrap text-right">{% trans "Discount" %}</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="divide-y divide-slate-100">
+                                    {% for item in report %}
+                                    <tr class="hover:bg-slate-50/80 transition-colors group">
+                                        <td class="px-4 md:px-8 py-4 font-semibold text-slate-800">
+                                            {{ item.product.name }}
+                                        </td>
+                                        <td class="px-8 py-4 font-medium">
+                                            {{ item.aging_days }} Days
+                                        </td>
+                                        <td class="px-8 py-4 text-center">
+                                            {% if item.status == "Dead Stock" %}
+                                            <span class="px-3 py-1 bg-rose-100 text-rose-700 text-[10px] font-black uppercase rounded-full">
+                                                Dead Stock
+                                            </span>
+                                            {% elif item.status == "Slow Moving" %}
+                                            <span class="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-black uppercase rounded-full">
+                                                Slow Moving
+                                            </span>
+                                            {% else %}
+                                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase rounded-full">
+                                                Active
+                                            </span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-8 py-4 text-right">
+                                            <span class="font-bold text-slate-900">{{ item.discount }}%</span>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="px-8 py-20 text-center">
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                                    <i data-lucide="package-search" class="w-8 h-8 text-slate-300"></i>
+                                                </div>
+                                                <h3>{% trans "No Dead Stock Found" %}</h3>
+                                                <p>{% trans "All inventory items are active." %}</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- PAGINATION -->
+                        {% if report.has_other_pages %}
+                        <div class="flex items-center justify-between px-6 py-4 bg-slate-50 border-t">
+                            <div class="flex flex-col">
+                                <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest">
+                                    Page {{ report.number }} of {{ report.paginator.num_pages }}
+                                </p>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <!-- PREVIOUS -->
+                                <a href="?page={% if report.has_previous %}{{ report.previous_page_number }}{% else %}1{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.product %}&product={{ request.GET.product }}{% endif %}"
+                                   class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 bg-white
+                                   {% if not report.has_previous %}opacity-40 pointer-events-none{% endif %}">
+                                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                </a>
+
+                                <!-- PAGE NUMBER -->
+                                <div class="px-3 py-1 text-sm font-semibold text-slate-600">
+                                    {{ report.number }} / {{ report.paginator.num_pages }}
+                                </div>
+
+                                <!-- NEXT -->
+                                <a href="?page={% if report.has_next %}{{ report.next_page_number }}{% else %}{{ report.paginator.num_pages }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.product %}&product={{ request.GET.product }}{% endif %}"
+                                   class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 bg-white
+                                   {% if not report.has_next %}opacity-40 pointer-events-none{% endif %}">
+                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script>
+lucide.createIcons();
+</script>
+<script>
+function openLogoutModal() {
+
+    const modal = document.getElementById("logout-modal");
+    const content = document.getElementById("modal-content");
+
+    modal.classList.remove("hidden");
+
+    setTimeout(() => {
+        content.classList.remove("scale-95", "opacity-0");
+        content.classList.add("scale-100", "opacity-100");
+    }, 10);
+}
+
+function closeLogoutModal() {
+
+    const modal = document.getElementById("logout-modal");
+    const content = document.getElementById("modal-content");
+
+    content.classList.remove("scale-100", "opacity-100");
+    content.classList.add("scale-95", "opacity-0");
+
+    setTimeout(() => {
+        modal.classList.add("hidden");
+    }, 300);
+}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ---------------- Sidebar Logic ---------------- */
+
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (sidebar && toggleBtn && overlay) {
+
+        // 26-2-26 - Updated sidebar toggle logic to handle both desktop collapse and mobile slide behavior
+        toggleBtn.addEventListener('click', () => {
+
+            if (window.innerWidth >= 768) {
+                // Desktop collapse
+                sidebar.classList.toggle('w-64');
+                sidebar.classList.toggle('w-20');
+
+                document.querySelectorAll('.sidebar-text')
+                    .forEach(el => el.classList.toggle('hidden'));
+
+            } else {
+                // Mobile slide
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                }
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+
+        // Close when clicking outside
+        overlay.addEventListener('click', function () {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+
+        // Ensure sidebar visible on desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 640) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+    }
+
+    /* ---------------- Lucide Icons ---------------- */
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+</script>
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+{% block nav_dashboard %}active-nav{% endblock %}
+{% block page_title %}{% trans "Logistics &amp; E-Vehicle Dashboard" %}{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Logistics Dashboard" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Monitor your e-vehicle fleet and delivery operations" %}</p>
+    </div>
+    {% if is_owner %}
+    <div class="flex gap-2 flex-wrap">
+        <a href="{% url 'delivery_add' %}"
+           class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm shadow-indigo-200">
+            <i data-lucide="plus" class="w-4 h-4"></i> {% trans "New Delivery" %}
+        </a>
+        <a href="{% url 'vehicle_add' %}"
+           class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+            <i data-lucide="zap" class="w-4 h-4"></i> {% trans "Add Vehicle" %}
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ═══════ KPI STATS ═══════ -->
+<div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-4 mb-8">
+
+    <!-- Total Vehicles -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center mb-3">
+            <i data-lucide="zap" class="w-4 h-4 text-indigo-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-slate-800">{{ total_vehicles }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Total Vehicles" %}</p>
+    </div>
+
+    <!-- Available -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center mb-3">
+            <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-green-700">{{ available_vehicles }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Available" %}</p>
+    </div>
+
+    <!-- In Use -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center mb-3">
+            <i data-lucide="truck" class="w-4 h-4 text-blue-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-blue-700">{{ in_use_vehicles }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "In Use" %}</p>
+    </div>
+
+    <!-- Low Battery -->
+    <div class="bg-white rounded-2xl p-4 border shadow-sm {% if low_battery_vehicles > 0 %}border-amber-200 bg-amber-50{% else %}border-slate-200{% endif %}">
+        <div class="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center mb-3">
+            <i data-lucide="battery-low" class="w-4 h-4 text-amber-600"></i>
+        </div>
+        <p class="text-2xl font-bold {% if low_battery_vehicles > 0 %}text-amber-700{% else %}text-slate-800{% endif %}">{{ low_battery_vehicles }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Low Battery" %}</p>
+    </div>
+
+    <!-- Pending -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center mb-3">
+            <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-orange-700">{{ pending_deliveries }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Pending Orders" %}</p>
+    </div>
+
+    <!-- In Transit -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center mb-3">
+            <i data-lucide="navigation" class="w-4 h-4 text-indigo-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-indigo-700">{{ in_transit_deliveries }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "In Transit" %}</p>
+    </div>
+
+    <!-- Delivered Today -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center mb-3">
+            <i data-lucide="package-check" class="w-4 h-4 text-emerald-600"></i>
+        </div>
+        <p class="text-2xl font-bold text-emerald-700">{{ delivered_today }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Delivered Today" %}</p>
+    </div>
+
+    <!-- Failed -->
+    <div class="bg-white rounded-2xl p-4 border shadow-sm {% if failed_deliveries > 0 %}border-red-200 bg-red-50{% else %}border-slate-200{% endif %}">
+        <div class="w-9 h-9 rounded-xl bg-red-50 flex items-center justify-center mb-3">
+            <i data-lucide="x-circle" class="w-4 h-4 text-red-600"></i>
+        </div>
+        <p class="text-2xl font-bold {% if failed_deliveries > 0 %}text-red-700{% else %}text-slate-800{% endif %}">{{ failed_deliveries }}</p>
+        <p class="text-xs text-slate-500 mt-1 font-medium">{% trans "Failed" %}</p>
+    </div>
+</div>
+
+<!-- ═══════ MAIN GRID ═══════ -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+
+    <!-- Fleet Status -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between p-5 border-b border-slate-100">
+            <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+                <i data-lucide="zap" class="w-4 h-4 text-indigo-600"></i> {% trans "Fleet Status" %}
+            </h2>
+            <a href="{% url 'vehicle_list' %}" class="text-xs text-indigo-600 font-medium hover:underline">{% trans "View All" %}</a>
+        </div>
+        <div class="p-5 space-y-3">
+            {% for vehicle in vehicles %}
+            <div class="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+                        <i data-lucide="{% if vehicle.vehicle_type == 'TWO_WHEELER' %}bike{% elif vehicle.vehicle_type == 'CARGO_VAN' or vehicle.vehicle_type == 'MINI_TRUCK' %}truck{% else %}car{% endif %}"
+                           class="w-4 h-4 text-indigo-600"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-sm font-semibold text-slate-800 truncate">{{ vehicle.vehicle_id }}</p>
+                        <p class="text-xs text-slate-400 truncate">{{ vehicle.model_name }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="w-20 hidden sm:block">
+                        <div class="battery-bar">
+                            <div class="battery-fill {% if vehicle.current_battery_percent < 20 %}bg-red-500{% elif vehicle.current_battery_percent < 50 %}bg-amber-400{% else %}bg-green-500{% endif %}"
+                                 style="width: {{ vehicle.current_battery_percent }}%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5 text-right">{{ vehicle.current_battery_percent }}%</p>
+                    </div>
+                    <span class="text-xs px-2 py-1 rounded-full font-medium
+                        {% if vehicle.status == 'AVAILABLE' %}bg-green-100 text-green-700
+                        {% elif vehicle.status == 'IN_USE' %}bg-blue-100 text-blue-700
+                        {% elif vehicle.status == 'CHARGING' %}bg-amber-100 text-amber-700
+                        {% elif vehicle.status == 'MAINTENANCE' %}bg-red-100 text-red-700
+                        {% else %}bg-slate-100 text-slate-600{% endif %}">
+                        {{ vehicle.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-8 text-slate-400">
+                <i data-lucide="zap-off" class="w-8 h-8 mx-auto mb-2 opacity-30"></i>
+                <p class="text-sm">{% trans "No vehicles added yet." %}</p>
+                {% if is_owner %}
+                <a href="{% url 'vehicle_add' %}" class="mt-2 inline-block text-xs text-indigo-600 font-medium hover:underline">{% trans "Add first vehicle →" %}</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Recent Deliveries -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between p-5 border-b border-slate-100">
+            <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+                <i data-lucide="package" class="w-4 h-4 text-indigo-600"></i> {% trans "Recent Deliveries" %}
+            </h2>
+            <a href="{% url 'delivery_list' %}" class="text-xs text-indigo-600 font-medium hover:underline">{% trans "View All" %}</a>
+        </div>
+        <div class="p-5 space-y-3">
+            {% for order in recent_deliveries %}
+            <a href="{% url 'delivery_detail' order.pk %}"
+               class="flex items-center justify-between py-2 border-b border-slate-50 last:border-0 hover:bg-slate-50 rounded-lg px-2 -mx-2 transition-colors">
+                <div class="min-w-0">
+                    <p class="text-sm font-semibold text-slate-800">{{ order.order_number }}</p>
+                    <p class="text-xs text-slate-400 truncate">{{ order.recipient_name }} · {{ order.scheduled_date }}</p>
+                </div>
+                <span class="ml-2 text-xs px-2 py-1 rounded-full font-medium shrink-0
+                    {% if order.status == 'DELIVERED' %}bg-emerald-100 text-emerald-700
+                    {% elif order.status == 'IN_TRANSIT' %}bg-blue-100 text-blue-700
+                    {% elif order.status == 'PENDING' %}bg-orange-100 text-orange-700
+                    {% elif order.status == 'ASSIGNED' %}bg-indigo-100 text-indigo-700
+                    {% elif order.status == 'FAILED' %}bg-red-100 text-red-700
+                    {% else %}bg-slate-100 text-slate-500{% endif %}">
+                    {{ order.get_status_display }}
+                </span>
+            </a>
+            {% empty %}
+            <div class="text-center py-8 text-slate-400">
+                <i data-lucide="package-x" class="w-8 h-8 mx-auto mb-2 opacity-30"></i>
+                <p class="text-sm">{% trans "No deliveries yet." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Maintenance -->
+{% if upcoming_maintenance %}
+<div class="bg-white rounded-2xl border border-amber-200 shadow-sm">
+    <div class="p-5 border-b border-amber-100 flex items-center gap-2">
+        <i data-lucide="wrench" class="w-4 h-4 text-amber-600"></i>
+        <h2 class="text-base font-semibold text-slate-800">{% trans "Upcoming Maintenance" %}</h2>
+    </div>
+    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+        {% for m in upcoming_maintenance %}
+        <div class="flex items-center gap-3 bg-amber-50 rounded-xl p-3 border border-amber-100">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center shrink-0">
+                <i data-lucide="wrench" class="w-4 h-4 text-amber-600"></i>
+            </div>
+            <div class="min-w-0">
+                <p class="text-sm font-semibold text-slate-800 truncate">{{ m.vehicle.vehicle_id }} — {{ m.get_maintenance_type_display }}</p>
+                <p class="text-xs text-slate-500">{{ m.scheduled_date }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

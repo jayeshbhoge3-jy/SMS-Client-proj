@@ -1,0 +1,289 @@
+{% extends "training/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Add Staff" %}{% endblock %}
+
+{% block nav_staff %}active-nav{% endblock %}
+
+{% block extra_head %}
+<style>
+    .input-default {
+        border-color: #e2e8f0;
+    }
+    .input-error {
+        border-color: #ef4444 !important;
+        background-color: #fef2f2 !important;
+        box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+    }
+    .input-success {
+        border-color: #22c55e !important;
+        background-color: #f0fdf4 !important;
+    }
+    .error-msg {
+        color: #dc2626;
+        font-size: 0.75rem;
+        margin-top: 0.3rem;
+        font-weight: 500;
+        display: none;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    .error-msg.visible {
+        display: flex;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<nav class="flex items-center text-sm font-medium text-slate-500 gap-2 mb-6">
+    <a href="{% url 'training:dashboard' %}" class="hover:text-indigo-600 transition-colors">{% trans "Dashboard" %}</a>
+    <span class="text-slate-300">›</span>
+    <a href="{% url 'staff_list' %}" class="hover:text-indigo-600 transition-colors">{% trans "Team Members" %}</a>
+    <span class="text-slate-300">›</span>
+    <span class="text-slate-800 font-semibold">{% trans "Add Staff" %}</span>
+</nav>
+
+<div class="max-w-xl mx-auto space-y-6">
+
+    <!-- Title + Back -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-2xl font-bold text-slate-800">{% trans "Add New Staff" %}</h3>
+            <p class="text-sm text-slate-500 mt-1">{% trans "Register a new staff member. Login credentials will be emailed automatically." %}</p>
+        </div>
+        <a href="{% url 'staff_list' %}"
+           class="text-sm font-semibold text-slate-500 hover:text-indigo-600 flex items-center gap-1">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            {% trans "Back" %}
+        </a>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm">
+        <form method="POST" id="staffForm" novalidate>
+            {% csrf_token %}
+
+            <div class="p-6 space-y-5">
+
+                <!-- Staff Name -->
+                <div>
+                    <label for="staff_name" class="block text-[11px] font-black uppercase tracking-widest text-slate-800 mb-2">
+                        {% trans "Staff Name" %} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text"
+                           id="staff_name"
+                           name="staff_name"
+                           autocomplete="off"
+                           placeholder="{% trans 'e.g. John Smith' %}"
+                           value="{{ request.POST.staff_name|default:'' }}"
+                           class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all input-default">
+                    <p class="error-msg" id="name_error">
+                        <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                        <span id="name_error_text"></span>
+                    </p>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="staff_email" class="block text-[11px] font-black uppercase tracking-widest text-slate-800 mb-2">
+                        {% trans "Email" %} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email"
+                           id="staff_email"
+                           name="email"
+                           autocomplete="off"
+                           placeholder="{% trans 'e.g. john@example.com' %}"
+                           value="{{ request.POST.email|default:'' }}"
+                           class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all input-default">
+                    <p class="error-msg" id="email_error">
+                        <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                        <span id="email_error_text"></span>
+                    </p>
+                </div>
+
+                <!-- Password info note -->
+                <div class="flex items-start gap-3 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3">
+                    <i data-lucide="lock-keyhole" class="w-4 h-4 text-indigo-500 mt-0.5 flex-shrink-0"></i>
+                    <p class="text-xs text-indigo-700 font-medium leading-relaxed">
+                        {% trans "A secure password will be <strong>auto-generated</strong> and sent to the staff member's email along with their username." %}
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
+                <a href="{% url 'staff_list' %}"
+                   class="px-6 py-2 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors">
+                    {% trans "Cancel" %}
+                </a>
+                <button type="submit" id="submitBtn"
+                        class="px-8 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                    {% trans "Save Staff" %}
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const nameInput  = document.getElementById('staff_name');
+    const emailInput = document.getElementById('staff_email');
+    const form       = document.getElementById('staffForm');
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    function showError(input, errorEl, errorTextEl, message) {
+        input.classList.remove('input-default', 'input-success', 'focus:ring-indigo-500');
+        input.classList.add('input-error');
+        errorTextEl.textContent = message;
+        errorEl.classList.add('visible');
+        lucide.createIcons(); // re-render icon inside error msg
+    }
+
+    function clearError(input, errorEl) {
+        input.classList.remove('input-error', 'input-default');
+        input.classList.add('input-success', 'focus:ring-indigo-500');
+        errorEl.classList.remove('visible');
+    }
+
+    function resetField(input, errorEl) {
+        input.classList.remove('input-error', 'input-success');
+        input.classList.add('input-default');
+        errorEl.classList.remove('visible');
+    }
+
+    // ── Name Validation ───────────────────────────────────────────────────────
+
+    function validateName() {
+        const raw   = nameInput.value;
+        const value = raw.trim();
+        const errorEl     = document.getElementById('name_error');
+        const errorTextEl = document.getElementById('name_error_text');
+
+        if (!value) {
+            showError(nameInput, errorEl, errorTextEl, 'Staff name is required.');
+            return false;
+        }
+        if (raw !== raw.trimStart()) {
+            showError(nameInput, errorEl, errorTextEl, 'Name cannot start with a space.');
+            return false;
+        }
+        if (value.length < 2) {
+            showError(nameInput, errorEl, errorTextEl, 'Name must be at least 2 characters.');
+            return false;
+        }
+        if (value.length > 50) {
+            showError(nameInput, errorEl, errorTextEl, 'Name cannot exceed 50 characters.');
+            return false;
+        }
+        if (!/^[A-Za-z\s]+$/.test(value)) {
+            showError(nameInput, errorEl, errorTextEl, 'Name can only contain letters and spaces.');
+            return false;
+        }
+        if (/\s{2,}/.test(value)) {
+            showError(nameInput, errorEl, errorTextEl, 'Name cannot have consecutive spaces.');
+            return false;
+        }
+
+        clearError(nameInput, errorEl);
+        return true;
+    }
+
+    // ── Email Validation ──────────────────────────────────────────────────────
+
+    function validateEmail() {
+        const raw   = emailInput.value;
+        const value = raw.trim();
+        const errorEl     = document.getElementById('email_error');
+        const errorTextEl = document.getElementById('email_error_text');
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!value) {
+            showError(emailInput, errorEl, errorTextEl, 'Email address is required.');
+            return false;
+        }
+        if (/\s/.test(raw)) {
+            showError(emailInput, errorEl, errorTextEl, 'Email cannot contain spaces.');
+            return false;
+        }
+        if (value.length > 100) {
+            showError(emailInput, errorEl, errorTextEl, 'Email cannot exceed 100 characters.');
+            return false;
+        }
+        if (!emailPattern.test(value)) {
+            showError(emailInput, errorEl, errorTextEl, 'Please enter a valid email address.');
+            return false;
+        }
+
+        clearError(emailInput, errorEl);
+        return true;
+    }
+
+    // ── Real-time Listeners ───────────────────────────────────────────────────
+
+    // Block numbers/symbols from name field as user types
+    nameInput.addEventListener('keydown', function (e) {
+        const allowed = /^[A-Za-z\s]$/;
+        if (e.key.length === 1 && !allowed.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    nameInput.addEventListener('input', function () {
+        // Strip any pasted invalid chars
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        if (this.value.trim().length > 0) {
+            validateName();
+        } else {
+            resetField(nameInput, document.getElementById('name_error'));
+        }
+    });
+
+    // Block spaces from email field
+    emailInput.addEventListener('keydown', function (e) {
+        if (e.key === ' ') e.preventDefault();
+    });
+
+    emailInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\s/g, '');
+        if (this.value.trim().length > 0) {
+            validateEmail();
+        } else {
+            resetField(emailInput, document.getElementById('email_error'));
+        }
+    });
+
+    // Validate on blur (when user leaves the field)
+    nameInput.addEventListener('blur', validateName);
+    emailInput.addEventListener('blur', validateEmail);
+
+    // ── Form Submit ───────────────────────────────────────────────────────────
+
+    form.addEventListener('submit', function (e) {
+        const nameOk  = validateName();
+        const emailOk = validateEmail();
+
+        if (!nameOk || !emailOk) {
+            e.preventDefault();
+            // Scroll to the first error
+            const firstError = document.querySelector('.input-error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+        }
+    });
+
+});
+</script>
+{% endblock %}

@@ -1,0 +1,341 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% load currency_tags %}
+
+{% block title %}{% if is_edit %}{% trans "Edit Product" %}{% else %}{% trans "Add Product" %}{% endif %}{% endblock %}
+
+{% block breadcrumb %}
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<a href="{% url 'staff_product_list' %}" class="hover:text-indigo-600">{% trans "Inventory" %}</a>
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<span class="font-semibold text-slate-800 truncate">{% if is_edit %}{% trans "Edit Product" %}{% else %}{% trans "Add Product" %}{% endif %}</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+    
+    <!-- Page Header Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">{% if is_edit %}{% trans "Edit Product" %}{% else %}{% trans "Add New Product" %}{% endif %}</h2>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">{% if is_edit %}{% trans "Update existing product details." %}{% else %}{% trans "Register a new item into your company's global inventory." %}{% endif %}</p>
+        </div>
+        <div class="w-full sm:w-auto flex justify-end">
+            <a href="{% url 'staff_product_list' %}" class="flex items-center gap-1 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">{% trans "Back to List" %}</span>
+                <span class="sm:hidden">{% trans "Back" %}</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Data Entry Form -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <form method="post" id="productForm" novalidate>
+            {% csrf_token %}
+            <div class="p-5 sm:p-8 space-y-8">
+                
+                <!-- Section 1: Basic Info -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base">{% trans "Basic Information" %}</h3>
+                        <p class="text-[10px] sm:text-xs text-slate-500 mt-1">{% trans "Provide the core identifying details for this product." %}</p>
+                    </div>
+                    <div class="md:col-span-2 space-y-5">
+                        <!-- Product Name -->
+                        <div>
+                            <label class="block text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Product Name" %} <span class="text-red-500">*</span></label>
+                            <input type="text" name="name" maxlength="50" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all border-slate-200"
+                                placeholder="{% trans 'e.g. Premium Wireless Headphones' %}" value="{{ form.name.value|default:'' }}">
+                        </div>
+                        
+                        <!-- Manufacturer -->
+                        <div>
+                            <label class="block text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Product Company" %} <span class="text-red-500">*</span></label>
+                            <input type="text" name="product_company" maxlength="100" 
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all"
+                                placeholder="{% trans 'Manufacturer/Brand Name' %}" value="{{ form.product_company.value|default:'' }}">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- SKU -->
+                            <div>
+                                <label class="block text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "SKU Code" %} <span class="text-red-500">*</span></label>
+                                <input type="text" name="sku" maxlength="20" minlength="1" pattern="[A-Za-z0-9\-_]+"
+                                    class="form-input w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all border-slate-200"
+                                    value="{{ form.sku.value|default:'' }}">
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label class="block text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Category" %} <span class="text-red-500">*</span></label>
+                                <div class="relative" id="categoryContainer">
+                                    <input type="hidden" name="category" id="categoryInput" value="{{ form.category.value|default:'' }}">
+                                    <button type="button" id="categoryBtn" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-left focus:ring-2 focus:ring-indigo-500 transition-all overflow-hidden">
+                                        <span id="categorySelected" class="truncate block max-w-[85%] {% if form.category.value %}text-slate-800{% else %}text-slate-500{% endif %}">
+                                            {% if form.category.value %}
+                                                {% for c in categories %}
+                                                    {% if form.category.value|stringformat:"s" == c.id|stringformat:"s" %}
+                                                        {{ c.name }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {% trans "Select Category" %}
+                                            {% endif %}
+                                        </span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                                    </button>
+                                    <div id="categoryMenu" class="absolute z-20 mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-xl hidden max-h-56 overflow-y-auto custom-scrollbar">
+                                        {% for c in categories %}
+                                            <div class="px-4 py-2.5 text-sm cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 transition" data-value="{{ c.id }}">
+                                                {{ c.name }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-slate-100">
+
+                <!-- Section 2: Pricing & Stock -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base">{% trans "Pricing & Inventory" %}</h3>
+                        <p class="text-[10px] sm:text-xs text-slate-500 mt-1">{% trans "Set your cost, selling price and initial stock quantities." %}</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Purchase Price -->
+                            <div class="flex flex-col">
+                                <label class="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Purchase Price" %} <span class="text-red-500">*</span></label>
+                                <div class="relative h-11">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">{{ currency_symbol|default:"$" }}</span>
+                                    <input type="number" step="0.01" min="0.01" max="99999999" name="purchase_price" required oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8);"
+                                        class="w-full h-full pl-7 pr-4 rounded-xl bg-slate-50 outline-none border border-slate-200 transition focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="0.00" value="{{ form.purchase_price.value|default:'' }}">
+                                </div>
+                            </div>
+
+                            <!-- Selling Price -->
+                            <div class="flex flex-col">
+                                <label class="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Selling Price" %} <span class="text-red-500">*</span></label>
+                                <div class="relative h-11">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">{{ currency_symbol|default:"$" }}</span>
+                                    <input type="number" step="0.01" min="0.01" max="99999999" name="selling_price" required oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8);"
+                                        class="w-full h-full pl-7 pr-4 rounded-xl bg-slate-50 outline-none border border-slate-200 transition focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="0.00" value="{{ form.selling_price.value|default:'' }}">
+                                </div>
+                            </div>
+
+                            <!-- Initial Stock Quantity -->
+                            <div class="flex flex-col sm:col-span-2 lg:col-span-1">
+                                <label class="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-2">{% trans "Initial Qty" %}</label>
+                                <input type="number" name="stock_quantity" readonly tabindex="-1"
+                                    class="w-full h-11 px-4 rounded-xl bg-slate-100 text-slate-500 cursor-not-allowed outline-none border border-slate-200 transition"
+                                    value="{{ form.stock_quantity.value|default:0 }}">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-slate-100">
+
+                <!-- Section 3: Expiry Tracking -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base">{% trans "Tracking & Expiry" %}</h3>
+                        <p class="text-[10px] sm:text-xs text-slate-500 mt-1">{% trans "Enable for pharmaceutical or perishable goods tracking." %}</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="flex items-center cursor-pointer group p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-indigo-200 transition-all">
+                            <input type="checkbox" name="is_expiry_tracked" id="expiryToggle" class="h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" {% if form.is_expiry_tracked.value %}checked{% endif %}>
+                            <div class="ml-4 text-sm">
+                                <span class="font-bold text-slate-700 group-hover:text-indigo-600 transition-colors block">{% trans "Track Expiry Dates" %}</span>
+                                <span class="text-slate-500 text-[10px] sm:text-xs">{% trans "You must provide an expiry date if this is enabled" %}</span>
+                            </div>
+                        </label>
+                        
+                        <div id="expiryDateField" class="mt-4 {% if not form.is_expiry_tracked.value %}hidden{% endif %}">
+                            <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">{% trans "Expiry Date" %} <span class="text-red-500">*</span></label>
+                            <input type="date" name="default_expiry_date" id="expiryDateInput" value="{{ form.default_expiry_date.value|date:'Y-m-d'|default:'' }}"
+                                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all">
+                            <p id="expiryError" class="error-text hidden">{% trans "Expiry date required when tracking enabled" %}</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Form Footer Actions -->
+            <div class="p-5 sm:p-6 bg-slate-50 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-center justify-end gap-3">
+                <a href="{% url 'staff_product_list' %}" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-100 transition-all text-center">{% trans "Discard" %}</a>
+                <button type="submit" id="submitBtn" class="w-full sm:w-auto px-10 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="save" class="w-4 h-4"></i>{% trans "Save Product" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Validation Logic from Original
+    const expiryToggle = document.getElementById('expiryToggle');
+    const expiryField = document.getElementById('expiryDateField');
+    const expiryDateInput = document.getElementById('expiryDateInput');
+    const expiryError = document.getElementById('expiryError');
+
+    expiryToggle.addEventListener('change', function() {
+        if (this.checked) {
+            expiryField.classList.remove('hidden');
+            expiryDateInput.required = true;
+        } else {
+            expiryField.classList.add('hidden');
+            expiryDateInput.required = false;
+            expiryDateInput.value = '';
+            expiryDateInput.classList.remove('border-red-500');
+            expiryError.classList.add('hidden');
+        }
+    });
+
+    const categoryBtn = document.getElementById('categoryBtn');
+    const categoryMenu = document.getElementById('categoryMenu');
+    const categorySelected = document.getElementById('categorySelected');
+    const categoryInput = document.getElementById('categoryInput');
+
+    categoryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryMenu.classList.toggle('hidden');
+    });
+
+    categoryMenu.querySelectorAll('[data-value]').forEach(option => {
+        option.addEventListener('click', () => {
+            categorySelected.textContent = option.textContent.trim();
+            categorySelected.classList.remove('text-slate-500');
+            categorySelected.classList.add('text-slate-800');
+            categoryInput.value = option.dataset.value;
+            categoryMenu.classList.add('hidden');
+            categoryBtn.classList.remove('border-red-500');
+            const existingError = categoryBtn.parentElement.querySelector('.error-text');
+            if (existingError) existingError.remove();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!categoryBtn.contains(e.target) && !categoryMenu.contains(e.target)) {
+            categoryMenu.classList.add('hidden');
+        }
+    });
+
+    function showFieldError(fieldName, message) {
+        if (fieldName === 'category') {
+            categoryBtn.classList.add('border-red-500');
+            const error = document.createElement('p');
+            error.className = 'error-text text-red-600 text-xs mt-1 font-semibold';
+            error.textContent = message;
+            categoryBtn.parentElement.appendChild(error);
+            return;
+        }
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+            field.classList.add('border-red-500');
+            if (fieldName === 'default_expiry_date') {
+                const err = document.getElementById('expiryError');
+                err.textContent = message;
+                err.classList.remove('hidden');
+            } else {
+                const error = document.createElement('p');
+                error.className = 'error-text text-red-600 text-xs mt-1 font-semibold';
+                error.textContent = message;
+                field.parentNode.appendChild(error);
+            }
+        }
+    }
+
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+        document.querySelectorAll('.border-red-500').forEach(el => el.classList.remove('border-red-500'));
+        document.querySelectorAll('.error-text').forEach(el => {
+            if (el.id !== 'expiryError') el.remove();
+            else el.classList.add('hidden');
+        });
+
+        let valid = true;
+
+        const name = this.name.value.trim();
+        if (!name) { showFieldError('name', 'Product name is required'); valid = false; }
+        else if (name.length > 50) { showFieldError('name', 'Name must be under 50 characters'); valid = false; }
+
+        const productCompany = this.product_company.value.trim();
+        if (!productCompany) { showFieldError('product_company', 'Manufacturer name is required'); valid = false; }
+
+        const skuVal = this.sku.value.trim();
+        const skuValidPattern = /^[A-Za-z0-9\-_]{1,20}$/;
+        if (!skuVal) { showFieldError('sku', 'SKU code is required'); valid = false; }
+        else if (!skuValidPattern.test(skuVal)) { showFieldError('sku', 'SKU must be 1–20 characters: letters, numbers, hyphen, or underscore only'); valid = false; }
+
+        if (!categoryInput.value) { showFieldError('category', 'Please select a product category'); valid = false; }
+
+        const purchaseStr = this.purchase_price.value.trim();
+        const sellingStr = this.selling_price.value.trim();
+        const purchase = parseFloat(purchaseStr);
+        const selling = parseFloat(sellingStr);
+        const MAX_PRICE = 99999999;
+
+        if (!purchaseStr) { showFieldError('purchase_price', 'Purchase price is required'); valid = false; }
+        else if (isNaN(purchase) || purchase <= 0) { showFieldError('purchase_price', 'Invalid purchase price'); valid = false; }
+        else if (purchase > MAX_PRICE) { showFieldError('purchase_price', 'Price too large'); valid = false; }
+
+        if (!sellingStr) { showFieldError('selling_price', 'Selling price is required'); valid = false; }
+        else if (isNaN(selling) || selling <= 0) { showFieldError('selling_price', 'Invalid selling price'); valid = false; }
+        else if (selling > MAX_PRICE) { showFieldError('selling_price', 'Price too large'); valid = false; }
+
+        if (!isNaN(selling) && !isNaN(purchase) && selling <= purchase) {
+            showFieldError('selling_price', 'Price must be higher than cost');
+            valid = false;
+        }
+
+        if (this.is_expiry_tracked.checked) {
+            const expiryValue = this.default_expiry_date.value;
+            const today = new Date().toISOString().split('T')[0];
+            if (!expiryValue) { showFieldError('default_expiry_date', 'Expiry date is required'); valid = false; }
+            else if (expiryValue < today) { showFieldError('default_expiry_date', 'Date cannot be in the past'); valid = false; }
+        }
+
+        if (!valid) {
+            e.preventDefault();
+            const firstError = document.querySelector('.border-red-500');
+            if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    });
+
+    const nameCompanyPattern = /^[A-Za-z0-9 ]*$/;
+    const skuPattern = /^[A-Za-z0-9\-_]*$/;
+    function restrictInput(fieldName, pattern) {
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        if (!field) return;
+        field.addEventListener("input", function () {
+            const original = this.value;
+            if (!pattern.test(original)) {
+                this.value = original.replace(new RegExp(`[^${pattern.source.slice(2, -3)}]`, "g"), "");
+            }
+        });
+    }
+
+    restrictInput("name", nameCompanyPattern);
+    restrictInput("product_company", nameCompanyPattern);
+    restrictInput("sku", skuPattern);
+
+    document.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", function () {
+            this.classList.remove("border-red-500");
+            const error = this.parentNode.querySelector(".error-text");
+            if (error && error.id !== "expiryError") error.remove();
+            else if (error && error.id === "expiryError") error.classList.add("hidden");
+        });
+    });
+</script>
+{% endblock %}

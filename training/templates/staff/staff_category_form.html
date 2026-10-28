@@ -1,0 +1,142 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {{ company.name }} | {% trans "Edit Category" %}
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    
+    /* Validation Styles */
+    .field-error {
+        border-color: #ef4444 !important;
+        background-color: #fef2f2 !important;
+    }
+    .error-text {
+        color: #dc2626;
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block breadcrumb %}
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<a href="{% url 'staff_category_list' %}" class="hover:text-indigo-600 transition-colors">
+    {% trans "Categories" %}
+</a>
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<span class="font-semibold text-slate-800 truncate max-w-[120px] sm:max-w-none">
+    {% trans "Edit Category" %}
+</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    
+    <!-- Title Section -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">{% trans "Edit Category" %}</h2>
+            <p class="text-slate-500 text-sm">Update the name for <span class="text-indigo-600 font-bold">{{ category.name }}</span>.</p>
+        </div>
+        <a href="{% url 'staff_category_list' %}" class="text-sm font-semibold text-slate-500 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Categories" %}
+        </a>
+    </div>
+
+    <!-- Edit Form Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+            <h3>{% trans "Category Details" %}</h3>
+        </div>
+        
+        <form method="post" class="p-8 space-y-6">
+            {% csrf_token %}
+            
+            <div>
+                <label>{% trans "Category Name" %}</label>
+                <div class="relative group" id="category-input-wrapper">
+                    <i data-lucide="tag" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors"></i>
+                    <input type="text" name="name" id="category-name" value="{{ category.name }}" maxlength="100"
+                           class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white focus:outline-none transition-all font-medium" 
+                           required>
+                </div>
+                <p>{% trans "Pick a descriptive name that helps in grouping similar products." %}</p>
+            </div>
+
+            <hr class="border-slate-100">
+
+            <div class="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-3 sm:gap-4">
+                
+                <!-- Cancel -->
+                <a href="{% url 'staff_category_list' %}"
+                   class="px-6 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-100 transition-all w-full sm:w-auto text-center">
+                    {% trans "Cancel" %}
+                </a>
+
+                <!-- Update -->
+                <button type="submit" id="update-btn"
+                    class="px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    {% trans "Update Category" %}
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Informational Note -->
+    <div class="p-4 rounded-xl bg-amber-50 border border-amber-100 flex gap-3 items-start">
+        <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600 shrink-0"></i>
+        <p class="text-xs text-amber-800 leading-relaxed">
+            <strong>Note:</strong> Changing the category name will automatically update the label for all products currently assigned to it.
+        </p>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nameInput = document.getElementById('category-name');
+        const updateBtn = document.getElementById('update-btn');
+        const wrapper = document.getElementById('category-input-wrapper');
+
+        if (nameInput && updateBtn) {
+            nameInput.addEventListener('input', function() {
+                // Clear existing error message and styling
+                this.classList.remove('field-error');
+                const oldError = wrapper.parentNode.querySelector('.error-text');
+                if (oldError) {
+                    oldError.remove();
+                }
+
+                // Enable button by default
+                updateBtn.disabled = false;
+                updateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                // Check if length is 100 or more
+                if (this.value.length >= 100) {
+                    this.classList.add('field-error');
+
+                    const errorMsg = document.createElement('p');
+                    errorMsg.className = 'error-text';
+                    errorMsg.textContent = 'Maximum 100 characters allowed.';
+                    wrapper.parentNode.appendChild(errorMsg);
+
+                    // Disable button to prevent submission
+                    updateBtn.disabled = true;
+                    updateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

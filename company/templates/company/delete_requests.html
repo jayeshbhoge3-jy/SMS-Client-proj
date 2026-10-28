@@ -1,0 +1,70 @@
+{% extends 'company/base.html' %}
+{% block title %}Delete Requests | {{ company.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">Staff Delete Requests</h1>
+    <p class="text-slate-500 text-sm mt-1">Review and approve or reject deletion requests from staff members.</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-left text-sm whitespace-nowrap">
+        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500">
+            <tr>
+                <th class="px-6 py-3 font-medium">Date</th>
+                <th class="px-6 py-3 font-medium">Staff</th>
+                <th class="px-6 py-3 font-medium">Module</th>
+                <th class="px-6 py-3 font-medium">Item</th>
+                <th class="px-6 py-3 font-medium">Reason</th>
+                <th class="px-6 py-3 font-medium text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200">
+            {% for req in requests %}
+            <tr class="hover:bg-slate-50">
+                <td class="px-6 py-4 text-slate-500">{{ req.created_at|date:"M d, Y H:i" }}</td>
+                <td class="px-6 py-4 text-slate-800 font-medium">{{ req.requested_by.name }}</td>
+                <td class="px-6 py-4 text-slate-500">{{ req.get_module_display }}</td>
+                <td class="px-6 py-4 text-slate-500">{{ req.object_repr }}</td>
+                <td class="px-6 py-4 text-slate-500 truncate max-w-xs" title="{{ req.reason }}">{{ req.reason|default:"-" }}</td>
+                <td class="px-6 py-4 text-right space-x-2">
+                    <form method="post" action="{% url 'owner_approve_delete' req.pk %}" class="inline-block" onsubmit="return confirm('Are you sure you want to approve this request? This will permanently delete the item.');">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-700">Approve</button>
+                    </form>
+                    <button type="button" onclick="document.getElementById('reject-modal-{{ req.pk }}').classList.remove('hidden')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-700">Reject</button>
+                </td>
+            </tr>
+            
+            <!-- Reject Modal -->
+            <div id="reject-modal-{{ req.pk }}" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-slate-800">Reject Request</h3>
+                        <button onclick="document.getElementById('reject-modal-{{ req.pk }}').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">&times;</button>
+                    </div>
+                    <form method="post" action="{% url 'owner_reject_delete' req.pk %}">
+                        {% csrf_token %}
+                        <div class="px-6 py-4">
+                            <p class="text-sm text-slate-600 mb-3">Please provide a reason for rejecting the deletion of <strong>{{ req.object_repr }}</strong>.</p>
+                            <textarea name="rejection_note" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm" rows="3" placeholder="Rejection reason (optional)"></textarea>
+                        </div>
+                        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-end space-x-3">
+                            <button type="button" onclick="document.getElementById('reject-modal-{{ req.pk }}').classList.add('hidden')" class="px-4 py-2 text-slate-600 border border-slate-300 rounded-lg text-sm hover:bg-slate-100">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700">Confirm Rejection</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            {% empty %}
+            <tr>
+                <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+                    No pending delete requests.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

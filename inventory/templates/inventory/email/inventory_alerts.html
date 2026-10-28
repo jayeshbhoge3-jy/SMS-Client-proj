@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px 0; color: #1f2937; }
+        .wrapper { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); }
+        .header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); padding: 40px 30px; text-align: center; }
+        .header img { max-height: 40px; margin-bottom: 20px; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; }
+        .header p { color: #e0e7ff; margin-top: 10px; font-size: 15px; }
+        
+        .content { padding: 40px 30px; }
+        .content h2 { color: #111827; font-size: 20px; margin-top: 0; margin-bottom: 24px; }
+        .intro-text { color: #4b5563; font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
+
+        .alert-section { margin-bottom: 32px; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb; }
+        .alert-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; display: inline-block; }
+        
+        /* Theme Colors */
+        .theme-expired { background-color: #fef2f2; border-color: #fecaca; }
+        .theme-expired .alert-title { color: #b91c1c; }
+        .theme-expired .item-qty { color: #b91c1c; background-color: #fee2e2; border-color: #fca5a5; }
+
+        .theme-low { background-color: #fff7ed; border-color: #fed7aa; }
+        .theme-low .alert-title { color: #c2410c; }
+        .theme-low .item-qty { color: #c2410c; background-color: #ffedd5; border-color: #fdba74; }
+
+        .theme-expiry { background-color: #fefce8; border-color: #fef08a; }
+        .theme-expiry .alert-title { color: #a16207; }
+        .theme-expiry .item-qty { color: #a16207; background-color: #fef9c3; border-color: #fde047; }
+
+        .item-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        .item-row td { background-color: #ffffff; padding: 16px; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+        .item-row td:first-child { border-left: 1px solid #e5e7eb; border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+        .item-row td:last-child { border-right: 1px solid #e5e7eb; border-top-right-radius: 8px; border-bottom-right-radius: 8px; text-align: right; }
+        
+        .item-info h4 { margin: 0; color: #1f2937; font-size: 15px; font-weight: 600; }
+        .item-info p { margin: 4px 0 0 0; color: #6b7280; font-size: 13px; }
+        .item-qty { display: inline-block; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 13px; border: 1px solid; white-space: nowrap; }
+
+        .btn-container { text-align: center; margin-top: 40px; }
+        .btn { display: inline-block; background-color: #4f46e5; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2); }
+        .btn:hover { background-color: #4338ca; }
+
+        .footer { background-color: #f9fafb; padding: 24px; text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; }
+        .footer p { margin: 0 0 8px 0; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <img src="cid:logo" alt="CWS Inventory Logo" />
+            <h1>Automated Inventory Alerts</h1>
+            <p>{{ company_name }} Workspace</p>
+        </div>
+        
+        <div class="content">
+            <h2>Action Required: Inventory Updates</h2>
+            <p class="intro-text">
+                Hello {{ company_name }} Team,<br><br>
+                Here is your automated inventory summary. The following items require your attention to ensure smooth business operations.
+            </p>
+
+            <!-- EXPIRED ITEMS -->
+            {% if expired_items %}
+            <div class="alert-section theme-expired">
+                <div class="alert-title">
+                    <span style="font-size: 18px; margin-right: 8px;">❌</span> Expired Stock Alerts
+                </div>
+                <table class="item-table" cellpadding="0" cellspacing="0" border="0">
+                    {% for batch in expired_items %}
+                    <tr class="item-row">
+                        <td class="item-info" width="70%" valign="middle">
+                            <h4>{{ batch.product.name }}</h4>
+                            <p>Batch: {{ batch.batch_number }} | Expired: {{ batch.expiry_date|date:"d M Y" }}</p>
+                        </td>
+                        <td width="30%" valign="middle">
+                            <span class="item-qty">{{ batch.quantity }} units</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            <!-- LOW STOCK ITEMS -->
+            {% if low_stock_items %}
+            <div class="alert-section theme-low">
+                <div class="alert-title">
+                    <span style="font-size: 18px; margin-right: 8px;">⚠️</span> Low Stock Alerts
+                </div>
+                <table class="item-table" cellpadding="0" cellspacing="0" border="0">
+                    {% for item in low_stock_items %}
+                    <tr class="item-row">
+                        <td class="item-info" width="70%" valign="middle">
+                            <h4>{{ item.product.name }}</h4>
+                            <p>SKU: {{ item.product.sku|default:"N/A" }}</p>
+                        </td>
+                        <td width="30%" valign="middle">
+                            <span class="item-qty">{{ item.product.stock_quantity }} units left</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            <!-- NEAR EXPIRY ITEMS -->
+            {% if near_expiry_items %}
+            <div class="alert-section theme-expiry">
+                <div class="alert-title">
+                    <span style="font-size: 18px; margin-right: 8px;">⏳</span> Near Expiry Alerts (Next 30 Days)
+                </div>
+                <table class="item-table" cellpadding="0" cellspacing="0" border="0">
+                    {% for batch in near_expiry_items %}
+                    <tr class="item-row">
+                        <td class="item-info" width="70%" valign="middle">
+                            <h4>{{ batch.product.name }}</h4>
+                            <p>Batch: {{ batch.batch_number }} | Exp: {{ batch.expiry_date|date:"d M Y" }}</p>
+                        </td>
+                        <td width="30%" valign="middle">
+                            <span class="item-qty">{{ batch.quantity }} units</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            <div class="btn-container">
+                <a href="{{ site_url }}/company/dashboard/" class="btn" style="color: #ffffff !important; display: inline-block; background-color: #4f46e5; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; text-align: center;">View Workspace Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This is an automated message from CWS Inventory System.</p>
+            <p>&copy; 2026 CWS Inventory. All rights reserved.</p>
+        </div>
+    </div>
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+</html>

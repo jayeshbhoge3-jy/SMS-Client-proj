@@ -1,0 +1,1116 @@
+{% load i18n %}
+{% load currency_tags %}
+{% load humanize %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.name }} | Owner Dashboard</title>
+    <link rel="icon" type="image/png" href="{% static 'accounts/images/Tab Logo.png' %}">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        /* Hide scrollbar for the slider but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .active-nav { background-color: #4f46e5; color: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+
+        /* Card styling for the Summary Grid */
+        .card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #64748b;
+        }
+        .card b {
+            font-size: 1.5rem;
+            display: block;
+            margin-top: 0.25rem;
+            color: #1e293b;
+        }
+
+        /* --- Packing Loader Animation Styles --- */
+        .box-loader {
+            width: 80px;
+            height: 80px;
+            background: #4f46e5;
+            position: relative;
+            animation: box-bounce 1s infinite ease-in-out;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+        .box-loader::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #3730a3;
+            transform: translateY(-50%);
+        }
+        .box-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #3730a3;
+            transform: translateX(-50%);
+        }
+        @keyframes box-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-35px) rotate(8deg); }
+        }
+        .conveyor-belt {
+            width: 140px;
+            height: 6px;
+            background: #e2e8f0;
+            margin-top: 15px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .conveyor-belt::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            background: #4f46e5;
+            animation: conveyor-move 0.8s infinite linear;
+        }
+        @keyframes conveyor-move {
+            from { left: -50px; }
+            to { left: 140px; }
+        }
+    
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-icon {
+    width: 16px;  
+    height: 16px;  
+}
+
+.sidebar .sidebar-icon {
+    width: 20px;   
+    height: 20px;  
+}
+
+.sidebar.collapsed .nav-item {
+    justify-content: center;
+}
+
+
+        /* --- Inventory Flow Animation Styles --- */
+        @keyframes boxFlow {
+            0% { transform: translateX(-20px) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(60px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes beltMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(10px); }
+        }
+
+        .animate-box-flow {
+            animation: boxFlow 3s linear infinite;
+        }
+
+        .animate-box-flow-delayed {
+            animation: boxFlow 3s linear infinite;
+            animation-delay: 1.5s;
+        }
+
+        .conveyor-pattern {
+            background-image: repeating-linear-gradient(
+                90deg,
+                #e2e8f0 0px,
+                #e2e8f0 2px,
+                transparent 2px,
+                transparent 10px
+            );
+            animation: beltMove 0.5s linear infinite;
+        }
+/* Sidebar Tooltip (Professional) */
+.sidebar.collapsed .nav-item {
+    position: relative;
+}
+
+.sidebar.collapsed .nav-item .sidebar-tooltip {
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    background: #111827;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.sidebar.collapsed .nav-item:hover .sidebar-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Tooltip Arrow */
+.sidebar-tooltip::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #111827 transparent transparent;
+}
+/* Sidebar Hover Highlight */
+.nav-item {
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: #f1f5f9; /* light gray */
+    color: #111827;
+}
+.sidebar.collapsed .nav-item:hover {
+    background-color: #f1f5f9;
+    border-radius: 8px;
+}
+.nav-item:hover {
+    background-color: #eef2ff;
+    color: #4f46e5;
+}
+/* Default collapsed sidebar */
+.sidebar {
+    width: 70px;
+    transition: width 0.3s ease;
+}
+
+/* Hide menu text when collapsed */
+.sidebar .sidebar-text {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+/* Expand sidebar on hover */
+.sidebar:hover {
+    width: 240px;
+}
+
+/* Show menu text on hover */
+.sidebar:hover .sidebar-text {
+    opacity: 1;
+    visibility: visible;
+}
+
+   
+    
+
+@media (max-width:768px){
+
+    .dashboard-title{
+
+        display:flex;
+
+        flex-direction:column;
+
+        line-height:1.2;
+
+    }
+
+}
+
+</style>
+</head>
+
+{% if messages %}
+<div id="welcome-msg"
+     class="fixed top-20 left-1/2 -translate-x-1/2 z-50
+            transition-opacity duration-500">
+
+    {% for message in messages %}
+    <div class="bg-emerald-100 text-emerald-800 border border-emerald-200
+                px-6 py-3 rounded-xl text-center font-semibold shadow-lg">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+</div>
+
+<script>
+setTimeout(() => {
+    const msg = document.getElementById("welcome-msg");
+    if (msg) {
+        msg.style.opacity = "0";
+        setTimeout(() => msg.remove(), 500);
+    }
+}, 4000);
+</script>
+{% endif %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const profileBtn =
+        document.getElementById("profileBtn");
+
+    const dropdown =
+        document.getElementById("profileDropdown");
+
+    if (profileBtn) {
+
+        profileBtn.addEventListener("click", function (e) {
+
+            e.stopPropagation();
+
+            dropdown.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", function () {
+
+            dropdown.classList.add("hidden");
+        });
+    }
+});
+</script>
+
+<body class="bg-slate-50 text-slate-900 overflow-hidden">
+
+    <!-- PACKING LOADER OVERLAY -->
+    <div id="logout-loader" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center hidden">
+        <div class="box-loader"></div>
+        <div class="conveyor-belt"></div>
+        <h3 class="mt-10 text-2xl font-bold text-slate-800 tracking-tight">{% trans "Packing your workspace..." %}</h3>
+        <p class="text-slate-400 font-medium mt-2">{% trans "Saving progress and signing out safely." %}</p>
+    </div>
+
+    <!-- LOGOUT CONFIRMATION MODAL -->
+    <div id="logout-modal" class="fixed inset-0 z-[90] bg-slate-900/40 backdrop-blur-md flex items-center justify-center hidden">
+        <div class="bg-white rounded-[2rem] p-10 max-w-sm w-full mx-4 shadow-2xl transform transition-all scale-95 opacity-0 duration-300 border border-slate-100" id="modal-content">
+            <div class="w-20 h-20 bg-rose-50 text-rose-600 rounded-3xl flex items-center justify-center mb-8 mx-auto">
+                <i data-lucide="log-out" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-slate-900 text-center">{% trans "Ready to go?" %}</h3>
+            <p class="text-slate-500 mt-4 mb-10 text-center leading-relaxed">Confirm to sign out of your portal. We'll make sure your session is closed securely.</p>
+            <div class="flex flex-col gap-3">
+                <form id="logout-form" action="{% url 'company_logout' %}" method="POST" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full px-6 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98]">
+                        Yes, Log me out
+                    </button>
+                </form>
+                <button onclick="closeLogoutModal()" class="w-full px-6 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-200 transition-all">
+                    Stay here
+                </button>
+            </div>
+        </div>
+    </div>
+
+   <div id="sidebar-overlay"
+     class="fixed inset-0 bg-black bg-opacity-40 hidden z-40 xl:hidden"></div>
+     <!-- 27-3-26 -->
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+         <!-- 27-3-26 -->
+<aside id="sidebar"
+       class="fixed xl:static top-0 left-0 h-full w-64 bg-white border-r border-slate-200 flex flex-col
+              transform -translate-x-full xl:translate-x-0
+              transition-all duration-300 ease-in-out z-50">
+            <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+                {% if company.logo %}
+                <img src="{{ company.logo.url }}" class="w-10 h-10 rounded-lg object-cover shrink-0 ring-2 ring-indigo-100">
+                {% else %}
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                </div>
+                {% endif %}
+                <div class="overflow-hidden sidebar-text">
+                    <h1 class="font-bold text-lg leading-none truncate">{{ company.name }}</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-widest">{% trans "Enterprise" %}</p>
+                </div>
+            </div>
+
+                        <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar w-full">
+                <a href="{% url 'company_dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_dashboard' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors group text-left">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Dashboard" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Business Ops" %}</p>
+                </div>
+
+                <a href="{% url 'product_list' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg {% if request.resolver_match.url_name in 'product_list add_product edit_product product_stock_breakdown inventory_history' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} transition-colors"
+                   data-title="My Inventory">
+                    <i data-lucide="package-search" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "My Inventory" %}</span>
+                </a>
+
+                <a href="{% url 'category_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'category_list edit_category' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg" data-title="Categories">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Categories" %}</span>
+                </a>
+
+                <a href="/inventory/batches/" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'batch_stock_list adjust_batch_stock' or request.path == '/inventory/batches/' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="boxes" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Batch Stock" %}</span>
+                </a>
+
+                <a href="{% url 'sales_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'sales_orders add_sales_order sales_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Sales Orders" %}</span>
+                </a>
+
+
+                <!-- PURCHASES -->
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {% trans "Purchases" %}
+                    </p>
+                </div>
+
+                <a href="{% url 'vendor_list' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'vendor_list add_vendor edit_vendor' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="truck" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Vendors" %}</span>
+                </a>
+
+                <a href="{% url 'purchase_orders' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'purchase_orders add_purchase_order purchase_order_detail' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Purchase Orders" %}</span>
+                </a>
+
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {% trans "Customers" %}
+                    </p>
+                </div>
+
+                <a href="{% url 'customer_list' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'customer_list customer_add customer_edit' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Customers" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Inventory Analytics" %}</p>
+                </div>
+                
+                <!-- ABC Inventory Classification -->
+                <a href="{% url 'abc_inventory_classification' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'abc_inventory_classification' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="layers" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "ABC Classification" %}</span>
+                </a>
+
+                <!-- Stock Movement -->
+                <a href="{% url 'stock_movement_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_movement_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Stock Movement" %}</span>
+                </a>
+
+
+                <a href="{% url 'dead_stock_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'dead_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Dead Stock" %}</span>
+                </a>
+
+                <!-- Fast / Slow Products -->
+                <a href="{% url 'fast_slow_products_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name in 'fast_slow_products_report fast_slow_products_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="activity" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Fast / Slow Products" %}</span>
+                </a>
+
+                <a href="{% url 'stock_aging_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'stock_aging_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="calendar" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Stock Aging" %}</span>
+                </a>
+
+                <a href="{% url 'reorder_suggestions' %}"
+                   class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reorder_suggestions' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Reorder Suggestions" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Report Analyst" %}</p>
+                </div>
+                
+                <a href="{% url 'reports' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'reports' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="file-bar-chart" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "All Reports" %}</span>
+                </a>
+                
+                <a href="{% url 'near_expiry_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'near_expiry_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="alert-circle" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Near Expiry" %}</span>
+                </a>
+                
+                <a href="{% url 'expired_stock_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'expired_stock_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trash-2" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Expired Stock" %}</span>
+                </a>
+                
+                <a href="{% url 'supplier_performance' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'supplier_performance' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="trending-up" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Supplier Performance" %}</span>
+                </a>
+                
+                <a href="{% url 'profit_margin_report' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'profit_margin_report' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="dollar-sign" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Profit Margin" %}</span>
+                </a>
+                
+                <a href="{% url 'purchase_stock_report_view' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'purchase_stock_report_view' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="inbox" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Purchase Stock" %}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Logistics" %}</p>
+                </div>
+                <a href="{% url 'logistics_dashboard' %}" 
+                   class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'logistics_dashboard' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg">
+                    <i data-lucide="truck" class="w-5 h-5 sidebar-icon"></i>
+                    <span class="sidebar-text">{% trans "Logistics" %}</span>
+                </a>
+                
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Training & Support" %}</p>
+                </div>
+                <a href="{% url 'training:dashboard' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.namespace == 'training' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Training & Support" %}</span>
+                </a>
+
+                
+                
+                <div class="pt-4 pb-2 px-4 sidebar-text">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{% trans "Administration" %}</p>
+                </div>
+                <a href="{% url 'company_settings' %}" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-medium {% if request.resolver_match.url_name == 'company_settings' %}active-nav{% else %}text-slate-600 hover:bg-slate-100{% endif %} rounded-lg transition-colors">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span class="sidebar-text">{% trans "Settings" %}</span>
+                </a>
+            </nav>
+
+            <!-- Bottom User Profile (Mobile Style) -->
+            <div class="p-4 border-t border-slate-100">
+                <button onclick="openLogoutModal()" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-rose-600 hover:bg-rose-50 rounded-lg transition-colors group">
+                    <i data-lucide="log-out" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                    <span class="sidebar-text">{% trans "Logout" %}</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+       <main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 shrink-0 overflow-visible">
+    <div class="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+        <button id="toggle-sidebar" type="button"
+            class="relative z-50 p-2 hover:bg-slate-100 rounded-lg text-slate-600 shrink-0">                       
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <div class="flex items-center gap-2 min-w-0">
+            <span class="truncate max-w-[180px] md:max-w-[200px] font-bold">
+                {{ company.name }}
+            </span>
+            <span class="font-bold whitespace-nowrap">
+                company dashboard
+            </span>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-3 sm:gap-5 shrink-0">
+        <!-- Notification Bell -->
+        <div class="relative group">
+            <a href="{% url 'inventory_alerts' %}" class="relative flex items-center">
+                <i data-lucide="bell" class="w-6 h-6 text-slate-600"></i>
+
+                {% if unread_alerts_count > 0 %}
+                <span class="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 bg-rose-500 rounded-full ring-2 ring-white"></span>
+                {% endif %}
+            </a>
+
+            <!-- Tooltip -->
+            <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2
+                    opacity-0 group-hover:opacity-100
+                    transition-all duration-200
+                    bg-indigo-600 text-white
+                    text-[11px] font-semibold
+                    px-3 py-1.5 rounded-lg
+                    shadow-lg shadow-indigo-200
+                    whitespace-nowrap
+                    z-50">
+                Inventory Alerts
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-6 w-px bg-slate-200"></div>
+
+        <!-- User Info -->
+        <div class="flex items-center gap-3">
+            <div class="text-right hidden sm:block leading-tight">
+                <p class="text-xs font-bold text-slate-800">
+                    {{ company.name | truncatechars:12 }}
+                </p>
+                <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-wide">
+                    Company Owner
+                </p>
+            </div>
+        
+            <!-- Avatar -->
+    <div class="relative">
+                <button id="profileBtn"
+                    class="flex items-center gap-2 sm:gap-3">
+                    <div
+                        class="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm cursor-pointer">
+                        {{ company.name |slice:":1"|upper }}
+                    </div>
+                </button>
+
+                <div id="profileDropdown"
+                    class="hidden absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-lg z-50">
+
+                    <a href="{% url 'company_settings' %}"
+                        class="flex items-center px-4 py-3 text-sm text-slate-700 hover:bg-slate-100">
+
+                        <i data-lucide="user-cog" class="w-4 h-4 mr-2"></i>
+                        Profile 
+                    </a>
+                </div>
+        </div>
+    </div>
+
+</header>
+            <div class="p-4 sm:p-8 flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ---------------- Sidebar Logic ---------------- */
+
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (sidebar && toggleBtn && overlay) {
+
+        toggleBtn.addEventListener('click', () => {
+
+    if (window.innerWidth >= 1280) {
+        // Desktop behavior
+        sidebar.classList.toggle('w-64');
+        sidebar.classList.toggle('w-20');
+
+        document.querySelectorAll('.sidebar-text')
+            .forEach(el => el.classList.toggle('hidden'));
+
+    } else {
+        // Mobile behavior
+        const isOpening = sidebar.classList.contains('-translate-x-full');
+
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+
+        //  KEY FIX: hide button when sidebar opens
+        if (isOpening) {
+            toggleBtn.classList.add('hidden');
+        } else {
+            toggleBtn.classList.remove('hidden');
+        }
+    }
+});
+
+overlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+
+    //  bring hamburger back
+    toggleBtn.classList.remove('hidden');
+});
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 1280) {
+                overlay.classList.add('hidden'); 
+            } else {
+                sidebar.classList.add('-translate-x-full'); 
+            }
+        });
+
+        // Auto close when clicking menu (mobile/tablet)
+        document.querySelectorAll('#sidebar a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1280) {
+                    sidebar.classList.add('-translate-x-full');
+                    if (overlay) overlay.classList.add('hidden');
+                    if (toggleBtn) toggleBtn.classList.remove('hidden');
+                }
+            });
+        });
+    }
+
+    /* ---------------- Lucide Icons ---------------- */
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+
+    /* ---------------- Logout Modal Logic ---------------- */
+
+    const logoutModal = document.getElementById('logout-modal');
+    const modalContent = document.getElementById('modal-content');
+    const logoutLoader = document.getElementById('logout-loader');
+    const logoutForm = document.getElementById('logout-form');
+
+    window.openLogoutModal = function () {
+        logoutModal.classList.remove('hidden');
+        setTimeout(() => {
+            modalContent.classList.remove('scale-95', 'opacity-0');
+        }, 10);
+    };
+
+    window.closeLogoutModal = function () {
+        modalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            logoutModal.classList.add('hidden');
+        }, 300);
+    };
+
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            closeLogoutModal();
+            setTimeout(() => {
+                logoutLoader.classList.remove('hidden');
+                setTimeout(() => {
+                    logoutForm.submit();
+                }, 1600);
+            }, 300);
+        });
+    }
+
+});
+
+/* ---------------- Messages Auto Hide ---------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const msgBox = document.getElementById("page-messages");
+
+    if (!msgBox) return;
+
+    setTimeout(() => {
+        msgBox.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+        msgBox.style.opacity = "0";
+        msgBox.style.transform = "translateY(-10px)";
+
+        setTimeout(() => msgBox.remove(), 400);
+    }, 2000);
+});
+</script>
+
+
+
+
+
+   <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dataValues = {
+        products: Number("{{ total_products|default:'0' }}"),
+        pending: Number("{{ pending_shipments|default:'0' }}"),
+        low: Number("{{ low_stock_products|default:'0' }}"),
+        expired: Number("{{ expired_batches|default:'0' }}"),
+        near: Number("{{ near_expiry_batches|default:'0' }}")
+    };
+
+    const total = Object.values(dataValues).reduce((a,b)=>a+b,0);
+    const totalStock = dataValues.products;
+
+    const ctx = document.getElementById("taskDonutChart");
+
+    Chart.register(ChartDataLabels);
+
+    const centerTextPlugin = {
+        id: 'centerText',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
+            ctx.restore();
+
+            const isMobile = window.innerWidth < 640;
+
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            ctx.font = isMobile ? "12px Inter" : "14px Inter";
+            ctx.fillStyle = "#6b7280";
+            ctx.fillText("Total Stock", width / 2, height / 2 - (isMobile ? 10 : 15));
+
+            ctx.font = isMobile ? "bold 20px Inter" : "bold 26px Inter";
+            ctx.fillStyle = "#111827";
+            ctx.fillText(totalStock, width / 2, height / 2 + (isMobile ? 10 : 15));
+
+            ctx.save();
+        }
+    };
+
+    new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: [
+                "My Products",
+                "Pending Shipments",
+                "Low Stock",
+                "Expired",
+                "Near Expiry"
+            ],
+            datasets: [{
+                data: Object.values(dataValues),
+                backgroundColor: [
+                    "#2563eb",
+                    "#f59e0b",
+                    "#ef4444",
+                    "#7c3aed",
+                    "#f97316"
+                ],
+                borderWidth: 3,
+                borderColor: "#ffffff"
+            }]
+        },
+        options: {
+            cutout: "60%",
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 12,
+                        font: {
+                            size: window.innerWidth < 640 ? 10 : 12
+                        }
+                    }
+                },
+                datalabels: {
+                    color: "#fff",
+                    font: {
+                        weight: "bold",
+                        size: 12
+                    },
+                    formatter: (value) => {
+                        if(total === 0) return "0";
+                        return value;
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels, centerTextPlugin]
+    });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const salesData = JSON.parse('{{ sales_trend|escapejs }}');
+
+    const labels = salesData.map(item => item.day);
+    const totals = salesData.map(item => item.total);
+
+    const ctx = document.getElementById("salesTrendChart").getContext("2d");
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+    gradient.addColorStop(0, "rgba(79, 70, 229, 0.25)");
+    gradient.addColorStop(1, "rgba(79, 70, 229, 0.02)");
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: totals,
+                tension: 0.45,
+                fill: true,
+                backgroundColor: gradient,
+                borderColor: "#4f46e5",
+                borderWidth: 3,
+                pointBackgroundColor: "#4f46e5",
+                pointBorderColor: "#ffffff",
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: false,   
+                    grid: {
+                        color: "rgba(100, 116, 139, 0.08)"
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return "{{ currency_symbol }}" + value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+
+<script>
+
+// Stats Slider Functionality 20-1-26
+    function slideStats(direction) {
+        const slider = document.getElementById("stats-slider");
+        const scrollAmount = 450; // one card width
+        slider.scrollBy({
+            left: direction * scrollAmount,
+            behavior: "smooth"
+        });
+    }
+    // Stats Slider Functionality 20-1-26
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dataValues = {
+        products: Number("{{ total_products|default:'0' }}"),
+        pending: Number("{{ pending_shipments|default:'0' }}"),
+        low: Number("{{ low_stock_products|default:'0' }}"),
+        expired: Number("{{ expired_batches|default:'0' }}"),
+        near: Number("{{ near_expiry_batches|default:'0' }}")
+    };
+
+    const total = Object.values(dataValues).reduce((a,b)=>a+b,0);
+    const totalStock = dataValues.products;
+
+    const ctx = document.getElementById("taskDonutChart");
+
+    Chart.register(ChartDataLabels);
+
+    const centerTextPlugin = {
+        id: 'centerText',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
+            ctx.restore();
+
+            const isMobile = window.innerWidth < 640;
+
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            ctx.font = isMobile ? "12px Inter" : "14px Inter";
+            ctx.fillStyle = "#6b7280";
+            ctx.fillText("Total Stock", width / 2, height / 2 - (isMobile ? 10 : 15));
+
+            ctx.font = isMobile ? "bold 20px Inter" : "bold 26px Inter";
+            ctx.fillStyle = "#111827";
+            ctx.fillText(totalStock, width / 2, height / 2 + (isMobile ? 10 : 15));
+
+            ctx.save();
+        }
+    };
+
+    new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: [
+                "My Products",
+                "Pending Shipments",
+                "Low Stock",
+                "Expired",
+                "Near Expiry"
+            ],
+            datasets: [{
+                data: Object.values(dataValues),
+                backgroundColor: [
+                    "#2563eb",
+                    "#f59e0b",
+                    "#ef4444",
+                    "#7c3aed",
+                    "#f97316"
+                ],
+                borderWidth: 3,
+                borderColor: "#ffffff"
+            }]
+        },
+        options: {
+            cutout: "60%",
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 12,
+                        font: {
+                            size: window.innerWidth < 640 ? 10 : 12
+                        }
+                    }
+                },
+                datalabels: {
+                    color: "#fff",
+                    font: {
+                        weight: "bold",
+                        size: 12
+                    },
+                    formatter: (value) => {
+                        if(total === 0) return "0";
+                        return value;
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels, centerTextPlugin]
+    });
+
+});
+</script>
+
+
+<script>
+        let timeout;
+
+        function resetTimer() {
+             // Clear the old timer
+            if (timeout) clearTimeout(timeout);
+
+            // Start a fresh 10-minute countdown (600,000 ms)
+            timeout = setTimeout(() => {
+                window.location.href = '/company/logout/'; // Your logout/home URL
+            }, 600000); 
+        }
+
+        // List of events that prove the user is active
+        const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+
+        // Add listeners to the document
+        events.forEach(name => {
+            document.addEventListener(name, resetTimer, true);
+        });
+
+        // Initialize the timer immediately on page load
+        resetTimer();
+    </script>
+    
+
+
+
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+</html>

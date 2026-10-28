@@ -1,0 +1,213 @@
+{% extends 'logistics/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Charging Logs" %}{% endblock %}
+{% block nav_charging %}active-nav{% endblock %}
+{% block page_title %}{% trans "EV Charging Logs" %}{% endblock %}
+
+{% block content %}
+
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Charging Logs" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Track battery charging history for all e-vehicles" %}</p>
+    </div>
+    {% if is_owner %}
+    <button onclick="document.getElementById('chargeModal').classList.remove('hidden')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm shadow-indigo-200">
+        <i data-lucide="battery-charging" class="w-4 h-4"></i> {% trans "Log Charging" %}
+    </button>
+    {% endif %}
+</div>
+
+<!-- Table -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Vehicle" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Before → After" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:table-cell">{% trans "Units (kWh)" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:table-cell">{% trans "Cost" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Charged At" %}</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">{% trans "By" %}</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for log in logs %}
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-5 py-3">
+                        <p class="font-semibold text-slate-800">{{ log.vehicle.vehicle_id }}</p>
+                        <p class="text-xs text-slate-400">{{ log.vehicle.model_name }}</p>
+                    </td>
+                    <td class="px-5 py-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs px-2 py-0.5 rounded-full {% if log.battery_before < 20 %}bg-red-100 text-red-700{% else %}bg-amber-100 text-amber-700{% endif %}">{{ log.battery_before }}%</span>
+                            <i data-lucide="arrow-right" class="w-3 h-3 text-slate-400"></i>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700">{{ log.battery_after }}%</span>
+                        </div>
+                    </td>
+                    <td class="px-5 py-3 hidden sm:table-cell text-slate-700">{{ log.units_consumed_kwh }}</td>
+                    <td class="px-5 py-3 hidden sm:table-cell text-slate-700">₹{{ log.charging_cost }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ log.charged_at|date:"d M Y, H:i" }}</td>
+                    <td class="px-5 py-3 hidden md:table-cell text-slate-600">{{ log.charged_by.name|default:"—" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="px-5 py-16 text-center text-slate-400">
+                        <i data-lucide="battery-charging" class="w-10 h-10 mx-auto mb-3 opacity-30"></i>
+                        <p>{% trans "No charging records yet." %}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Log Charging Modal -->
+{% if is_owner %}
+<div id="chargeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 modal-backdrop p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg modal-box">
+        <div class="flex items-center justify-between p-5 border-b border-slate-100">
+            <h3 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+                <i data-lucide="battery-charging" class="w-4 h-4 text-indigo-600"></i> {% trans "Log Charging Session" %}
+            </h3>
+            <button onclick="closeChargeModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                <i data-lucide="x" class="w-4 h-4 text-slate-400"></i>
+            </button>
+        </div>
+        <form method="post" action="{% url 'charging_log_add' %}" id="chargeForm" novalidate class="p-5 space-y-4">
+            {% csrf_token %}
+            <!-- Vehicle -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Vehicle" %} <span class="text-red-500">*</span></label>
+                <select id="charge_vehicle" name="vehicle" required
+                        class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none appearance-none bg-white">
+                    <option value="">{% trans "-- Select Vehicle --" %}</option>
+                    {% for v in vehicles %}
+                    <option value="{{ v.pk }}">{{ v.vehicle_id }} – {{ v.model_name }} ({{ v.current_battery_percent }}%)</option>
+                    {% endfor %}
+                </select>
+                <p class="error-msg" id="err_charge_vehicle">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span>{% trans "Please select a vehicle." %}</span>
+                </p>
+            </div>
+            <!-- Before & After -->
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Battery Before (%)" %} <span class="text-red-500">*</span></label>
+                    <input type="number" id="battery_before" name="battery_before"
+                           min="0" max="100" required
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                    <p class="error-msg" id="err_battery_before">
+                        <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                        <span>{% trans "Enter a value between 0-100." %}</span>
+                    </p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Battery After (%)" %} <span class="text-red-500">*</span></label>
+                    <input type="number" id="battery_after" name="battery_after"
+                           min="0" max="100" required
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                    <p class="error-msg" id="err_battery_after">
+                        <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                        <span>{% trans "Battery After must be greater than Battery Before." %}</span>
+                    </p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Units (kWh)" %}</label>
+                    <input type="number" step="0.01" name="units_consumed_kwh" value="0"
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Cost" %}</label>
+                    <input type="number" step="0.01" name="charging_cost" value="0"
+                           class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                </div>
+            </div>
+            <!-- Charged At -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Charged At" %} <span class="text-red-500">*</span></label>
+                <input type="datetime-local" id="charged_at" name="charged_at" required
+                       class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all">
+                <p class="error-msg" id="err_charged_at">
+                    <i data-lucide="alert-circle" class="w-3 h-3 shrink-0"></i>
+                    <span>{% trans "Charging date and time is required." %}</span>
+                </p>
+            </div>
+            <!-- Notes -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">{% trans "Notes" %}</label>
+                <textarea name="notes" rows="2"
+                          class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus-indigo focus:outline-none transition-all resize-none"
+                          placeholder="{% trans 'Optional notes about this charging session…' %}"></textarea>
+            </div>
+            <!-- Actions -->
+            <div class="flex justify-end gap-3 pt-1">
+                <button type="button" onclick="closeChargeModal()"
+                        class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">{% trans "Cancel" %}</button>
+                <button type="submit"
+                        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors">{% trans "Save Log" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function closeChargeModal() {
+    document.getElementById('chargeModal').classList.add('hidden');
+}
+// Close on backdrop click
+const chargeModal = document.getElementById('chargeModal');
+if (chargeModal) {
+    chargeModal.addEventListener('click', function(e) {
+        if (e.target === this) closeChargeModal();
+    });
+}
+
+const chargeForm = document.getElementById('chargeForm');
+if (chargeForm) {
+    chargeForm.addEventListener('submit', function(e) {
+        let valid = true;
+
+        // Vehicle
+        const veh = document.getElementById('charge_vehicle');
+        const vehErr = document.getElementById('err_charge_vehicle');
+        if (!veh.value) {
+            veh.classList.add('field-error'); vehErr.classList.add('show'); valid = false;
+        } else { veh.classList.remove('field-error'); vehErr.classList.remove('show'); }
+
+        // Battery before (0-100)
+        const bBefore = document.getElementById('battery_before');
+        const bBeforeErr = document.getElementById('err_battery_before');
+        const bBeforeVal = parseInt(bBefore.value);
+        if (isNaN(bBeforeVal) || bBeforeVal < 0 || bBeforeVal > 100) {
+            bBefore.classList.add('field-error'); bBeforeErr.classList.add('show'); valid = false;
+        } else { bBefore.classList.remove('field-error'); bBeforeErr.classList.remove('show'); }
+
+        // Battery after > battery before
+        const bAfter = document.getElementById('battery_after');
+        const bAfterErr = document.getElementById('err_battery_after');
+        const bAfterVal = parseInt(bAfter.value);
+        if (isNaN(bAfterVal) || bAfterVal < 0 || bAfterVal > 100 || bAfterVal <= bBeforeVal) {
+            bAfter.classList.add('field-error'); bAfterErr.classList.add('show'); valid = false;
+        } else { bAfter.classList.remove('field-error'); bAfterErr.classList.remove('show'); }
+
+        // Charged at
+        const ca = document.getElementById('charged_at');
+        const caErr = document.getElementById('err_charged_at');
+        if (!ca.value) {
+            ca.classList.add('field-error'); caErr.classList.add('show'); valid = false;
+        } else { ca.classList.remove('field-error'); caErr.classList.remove('show'); }
+
+        if (!valid) { e.preventDefault(); lucide.createIcons(); }
+    });
+}
+</script>
+{% endblock %}

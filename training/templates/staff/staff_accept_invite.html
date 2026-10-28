@@ -1,0 +1,180 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Set Your Password" %} | {% trans "Staff Portal" %}</title>
+    <link rel="icon" type="image/png" href="{% static 'accounts/images/Tab Logo.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.97);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        .strength-bar { height: 4px; border-radius: 2px; transition: width 0.3s ease, background-color 0.3s ease; }
+    </style>
+</head>
+<body class="flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md">
+        <!-- Branding -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl mb-4 shadow-xl">
+                <i class="fas fa-key text-indigo-600 text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white">{% trans "Welcome," %} {{ staff.name }}!</h1>
+            <p class="text-indigo-200 mt-2">{% trans "Set a password to activate your staff account" %}</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 md:p-10 space-y-4">
+
+            {% if messages %}
+            <div class="space-y-2">
+                {% for message in messages %}
+                <div class="p-3 rounded-xl text-sm flex items-center gap-3 border
+                    {% if message.tags == 'error' %}bg-red-50 text-red-700 border-red-100
+                    {% else %}bg-green-50 text-green-700 border-green-100{% endif %}">
+                    <i class="fas {% if message.tags == 'error' %}fa-circle-xmark text-red-500{% else %}fa-circle-check text-green-500{% endif %}"></i>
+                    <span class="font-medium">{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Staff info -->
+            <div class="bg-indigo-50 rounded-xl p-4 flex items-center gap-3 border border-indigo-100">
+                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    {{ staff.name|first|upper }}
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-slate-800">{{ staff.name }}</p>
+                    <p class="text-xs text-slate-500">{{ staff.email }} &bull; {{ staff.company.name }}</p>
+                </div>
+            </div>
+
+            <form method="post" class="space-y-5" onsubmit="return validateForm()">
+                {% csrf_token %}
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">{% trans "Create Password" %}</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" name="password" id="password" minlength="8" required
+                               oninput="checkStrength(this.value)"
+                               class="block w-full pl-11 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl
+                                      text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                               placeholder="{% trans 'Minimum 8 characters' %}">
+                        <button type="button" onclick="toggleField('password','icon1')"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600">
+                            <i class="far fa-eye" id="icon1"></i>
+                        </button>
+                    </div>
+                    <!-- Strength bar -->
+                    <div class="bg-gray-200 rounded-full h-1 mt-1">
+                        <div id="strengthBar" class="strength-bar bg-gray-300 w-0"></div>
+                    </div>
+                    <p id="strengthLabel" class="text-xs text-gray-400"></p>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">{% trans "Confirm Password" %}</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" name="confirm_password" id="confirm_password" required
+                               oninput="checkMatch()"
+                               class="block w-full pl-11 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl
+                                      text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                               placeholder="{% trans 'Re-enter password' %}">
+                        <button type="button" onclick="toggleField('confirm_password','icon2')"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600">
+                            <i class="far fa-eye" id="icon2"></i>
+                        </button>
+                    </div>
+                    <p id="matchError" class="text-xs text-red-500 hidden">{% trans "Passwords do not match." %}</p>
+                </div>
+
+                <button type="submit"
+                        class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg
+                               hover:bg-indigo-700 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                    {% trans "Activate Account" %} <i class="fas fa-check ml-1"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleField(id, iconId) {
+            const input = document.getElementById(id);
+            const icon  = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function checkStrength(val) {
+            const bar   = document.getElementById('strengthBar');
+            const label = document.getElementById('strengthLabel');
+            let score = 0;
+            if (val.length >= 8)  score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const levels = [
+                { w: '25%', color: 'bg-red-500',    text: 'Weak',      textColor: 'text-red-500' },
+                { w: '50%', color: 'bg-orange-400',  text: 'Fair',      textColor: 'text-orange-500' },
+                { w: '75%', color: 'bg-yellow-400',  text: 'Good',      textColor: 'text-yellow-600' },
+                { w: '100%',color: 'bg-green-500',   text: 'Strong',    textColor: 'text-green-600' },
+            ];
+            const l = levels[Math.max(0, score - 1)];
+            bar.style.width = val ? l.w : '0%';
+            bar.className = `strength-bar ${l.color}`;
+            label.textContent = val ? l.text : '';
+            label.className = `text-xs ${l.textColor}`;
+        }
+
+        function checkMatch() {
+            const p = document.getElementById('password').value;
+            const c = document.getElementById('confirm_password').value;
+            const err = document.getElementById('matchError');
+            if (c && p !== c) {
+                err.classList.remove('hidden');
+            } else {
+                err.classList.add('hidden');
+            }
+        }
+
+        function validateForm() {
+            const p = document.getElementById('password').value;
+            const c = document.getElementById('confirm_password').value;
+            if (p.length < 8) {
+                alert('Password must be at least 8 characters.');
+                return false;
+            }
+            if (p !== c) {
+                document.getElementById('matchError').classList.remove('hidden');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

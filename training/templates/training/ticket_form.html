@@ -1,0 +1,135 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "New Support Ticket" %}{% endblock %}
+{% block nav_tickets %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <a href="{% url 'training:ticket_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1 mb-3">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to Tickets" %}
+        </a>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "New Support Ticket" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Describe your issue and our team will get back to you." %}</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 max-w-2xl overflow-hidden">
+
+    <!-- Live timestamp -->
+    <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-5 flex items-center gap-2 text-sm text-slate-600">
+        <i data-lucide="clock" class="w-4 h-4 text-indigo-500"></i>
+        <span>{% trans "Ticket will be raised at:" %} <strong id="live-timestamp" class="text-slate-800"></strong></span>
+    </div>
+
+    <style>
+        input, select, textarea { box-sizing: border-box; }
+    </style>
+    <form method="post">
+        {% csrf_token %}
+        <div class="space-y-4">
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                    {% trans "Title" %} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="title" required
+                       class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                       placeholder="{% trans 'Brief summary of the issue' %}">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                    {% trans "Description" %} <span class="text-red-500">*</span>
+                </label>
+                <textarea name="description" required rows="5"
+                          class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                          placeholder="{% trans 'Describe the issue in detail — what happened, steps to reproduce, any error messages...' %}"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Category" %}</label>
+                <input type="hidden" name="category" id="category-input" value="{{ category_choices.0.0 }}">
+                <div class="relative" id="category-dropdown">
+                    <!-- trigger button -->
+                    <button type="button" onclick="toggleDropdown()"
+                            class="w-full flex items-center justify-between border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-left">
+                        <span id="category-label">{% if category_choices %}{{ category_choices.0.1 }}{% endif %}</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 shrink-0 transition-transform" id="category-chevron"></i>
+                    </button>
+                    <!-- options panel — opens downward inside the card -->
+                    <div id="category-options"
+                         class="hidden absolute z-10 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+                        {% for val, label in category_choices %}
+                        <button type="button"
+                                onclick="selectCategory('{{ val }}', '{{ label }}')"
+                                class="w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors category-option"
+                                data-value="{{ val }}">
+                            {{ label }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Info note -->
+        <div class="mt-5 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 flex items-start gap-2 text-sm text-blue-700">
+            <i data-lucide="info" class="w-4 h-4 mt-0.5 shrink-0"></i>
+            <span>{% trans "After submitting, our admin team will review and respond. You can add comments at any time. Once resolved," %} <strong>{% trans "you" %}</strong> {% trans "close the ticket." %}</span>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+            <button type="submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% trans "Submit Ticket" %}
+            </button>
+            <a href="{% url 'training:ticket_list' %}"
+               class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                {% trans "Cancel" %}
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+function toggleDropdown() {
+    const options = document.getElementById('category-options');
+    const chevron = document.getElementById('category-chevron');
+    const isHidden = options.classList.contains('hidden');
+    options.classList.toggle('hidden');
+    chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
+}
+
+function selectCategory(val, label) {
+    document.getElementById('category-input').value = val;
+    document.getElementById('category-label').textContent = label;
+    document.getElementById('category-options').classList.add('hidden');
+    document.getElementById('category-chevron').style.transform = '';
+    document.querySelectorAll('.category-option').forEach(btn => {
+        btn.classList.toggle('bg-indigo-50', btn.dataset.value === val);
+        btn.classList.toggle('text-indigo-700', btn.dataset.value === val);
+        btn.classList.toggle('font-medium', btn.dataset.value === val);
+    });
+}
+
+// close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!document.getElementById('category-dropdown').contains(e.target)) {
+        document.getElementById('category-options').classList.add('hidden');
+        document.getElementById('category-chevron').style.transform = '';
+    }
+});
+
+function updateTimestamp() {
+    const now = new Date();
+    document.getElementById('live-timestamp').textContent = now.toLocaleString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+    });
+}
+updateTimestamp();
+setInterval(updateTimestamp, 1000);
+</script>
+{% endblock %}

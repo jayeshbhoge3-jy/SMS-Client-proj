@@ -1,0 +1,277 @@
+{% extends 'accounts/admin_base.html' %}
+{% load i18n %}
+{% block nav_tickets %}bg-indigo-50 text-indigo-600{% endblock %}
+{% block title %}{{ ticket.ticket_id }} — {% trans "Admin" %}{% endblock %}
+{% block page_title %}{{ ticket.ticket_id }} — {{ ticket.title }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <a href="{% url 'training:admin_ticket_list' %}" class="text-sm text-indigo-600 hover:underline flex items-center gap-1 mb-3">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to All Tickets" %}
+    </a>
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">{{ ticket.ticket_id }}</span>
+                <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                    {% if ticket.priority == 'CRITICAL' %}bg-red-100 text-red-700
+                    {% elif ticket.priority == 'HIGH' %}bg-orange-100 text-orange-700
+                    {% elif ticket.priority == 'MEDIUM' %}bg-amber-100 text-amber-700
+                    {% else %}bg-slate-100 text-slate-600{% endif %}">
+                    {{ ticket.get_priority_display }}
+                </span>
+                <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                    {% if ticket.status == 'OPEN' %}bg-blue-100 text-blue-700
+                    {% elif ticket.status == 'IN_PROGRESS' %}bg-purple-100 text-purple-700
+                    {% elif ticket.status == 'RESOLVED' %}bg-green-100 text-green-700
+                    {% elif ticket.status == 'CLOSED' %}bg-slate-100 text-slate-500
+                    {% endif %}">
+                    {{ ticket.get_status_display }}
+                </span>
+                <span class="text-xs text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full font-medium">
+                    {{ ticket.company.name }}
+                </span>
+            </div>
+            <h1 class="text-2xl font-bold text-slate-800">{{ ticket.title }}</h1>
+        </div>
+    </div>
+</div>
+
+{% if ticket.status == 'CLOSED' %}
+<div class="mb-6 bg-slate-100 border border-slate-200 rounded-2xl px-5 py-4 flex items-center gap-3">
+    <i data-lucide="lock" class="w-5 h-5 text-slate-400 shrink-0"></i>
+    <p class="text-sm text-slate-600">
+        {% trans "This ticket was closed by the company on" %} <strong>{{ ticket.closed_at|date:"M d, Y" }}</strong>.
+    </p>
+</div>
+{% endif %}
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Left: Description + Admin action panel + Comments -->
+    <div class="lg:col-span-2 space-y-6">
+
+        <!-- Description -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-4 h-4 text-indigo-500"></i> {% trans "Description" %}
+            </h2>
+            <p class="text-sm text-slate-700 leading-relaxed whitespace-pre-line">{{ ticket.description }}</p>
+        </div>
+
+        <!-- Admin action: Update status / add resolution notes -->
+        {% if ticket.status != 'CLOSED' %}
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <i data-lucide="settings-2" class="w-4 h-4 text-indigo-500"></i> {% trans "Update Ticket Status" %}
+            </h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_status">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Status" %}</label>
+                        <div class="flex flex-wrap gap-2">
+                            {% for val, label in status_choices %}
+                            <label class="cursor-pointer">
+                                <input type="radio" name="status" value="{{ val }}"
+                                       {% if ticket.status == val %}checked{% endif %} class="sr-only peer">
+                                <span class="inline-flex items-center px-4 py-2 rounded-xl border text-sm font-medium transition-colors
+                                    peer-checked:border-indigo-600 peer-checked:bg-indigo-50 peer-checked:text-indigo-700
+                                    border-slate-200 text-slate-600 hover:bg-slate-50">
+                                    {% if val == 'OPEN' %}<i data-lucide="circle" class="w-3.5 h-3.5 mr-1.5"></i>
+                                    {% elif val == 'IN_PROGRESS' %}<i data-lucide="loader" class="w-3.5 h-3.5 mr-1.5"></i>
+                                    {% elif val == 'RESOLVED' %}<i data-lucide="check-circle" class="w-3.5 h-3.5 mr-1.5"></i>
+                                    {% endif %}
+                                    {{ label }}
+                                </span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">{% trans "Note: Only you (admin) can mark as Resolved. The company will then close it." %}</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Priority" %}</label>
+                        <div class="flex flex-wrap gap-2">
+                            {% for val, label in priority_choices %}
+                            <label class="cursor-pointer">
+                                <input type="radio" name="priority" value="{{ val }}"
+                                       {% if ticket.priority == val %}checked{% endif %} class="sr-only peer">
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-medium transition-colors
+                                    peer-checked:border-indigo-600 peer-checked:bg-indigo-50 peer-checked:text-indigo-700
+                                    border-slate-200 text-slate-600 hover:bg-slate-50">
+                                    {% if val == 'CRITICAL' %}<span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
+                                    {% elif val == 'HIGH' %}<span class="w-2 h-2 rounded-full bg-orange-400 shrink-0"></span>
+                                    {% elif val == 'MEDIUM' %}<span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+                                    {% else %}<span class="w-2 h-2 rounded-full bg-slate-300 shrink-0"></span>{% endif %}
+                                    {{ label }}
+                                </span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Resolution Notes" %}</label>
+                        <textarea name="resolution_notes" rows="4"
+                                  class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                                  placeholder="{% trans 'Required when marking as Resolved — describe what was fixed...' %}">{{ ticket.resolution_notes|default:'' }}</textarea>
+                    </div>
+                </div>
+                <div class="mt-4 flex gap-3">
+                    <button type="submit"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors">
+                        {% trans "Save Changes" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        <!-- Comment thread -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <i data-lucide="message-circle" class="w-4 h-4 text-indigo-500"></i>
+                {% trans "Comments" %}
+                <span class="ml-auto text-xs text-slate-400 font-normal">{{ comments.count }} {% trans "message" %}{{ comments.count|pluralize }}</span>
+            </h2>
+
+            {% if comments %}
+            <div class="space-y-4 mb-6">
+                {% for comment in comments %}
+                <div class="flex gap-3 {% if comment.author_type == 'ADMIN' %}flex-row-reverse{% endif %}">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                        {% if comment.author_type == 'ADMIN' %}bg-indigo-600 text-white{% else %}bg-slate-200 text-slate-600{% endif %}">
+                        {% if comment.author_type == 'ADMIN' %}A{% else %}C{% endif %}
+                    </div>
+                    <div class="max-w-[80%]">
+                        <div class="rounded-2xl px-4 py-3 text-sm leading-relaxed
+                            {% if comment.author_type == 'ADMIN' %}bg-indigo-50 border border-indigo-100 text-slate-800
+                            {% else %}bg-slate-50 border border-slate-200 text-slate-700{% endif %}">
+                            {{ comment.body }}
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1 {% if comment.author_type == 'ADMIN' %}text-right{% endif %}">
+                            <span class="font-medium {% if comment.author_type == 'ADMIN' %}text-indigo-600{% else %}text-slate-500{% endif %}">
+                                {% if comment.author_type == 'ADMIN' %}{% trans "You (Admin)" %}{% else %}{{ ticket.company.name }}{% endif %}
+                            </span>
+                            · {{ comment.created_at|date:"M d, Y H:i" }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-8 mb-4">
+                <i data-lucide="message-circle" class="w-8 h-8 text-slate-200 mx-auto mb-2"></i>
+                <p class="text-slate-400 text-sm">{% trans "No comments yet." %}</p>
+            </div>
+            {% endif %}
+
+            <!-- Add comment -->
+            <form method="post" class="border-t border-slate-100 pt-4">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="comment">
+                <label class="block text-sm font-medium text-slate-700 mb-2">{% trans "Reply to Company" %}</label>
+                <textarea name="body" rows="3" required
+                          class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                          placeholder="{% trans 'Write a response or ask for more details...' %}"></textarea>
+                <div class="mt-3 flex justify-end">
+                    <button type="submit"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl font-medium text-sm transition-colors flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i> {% trans "Send Reply" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Right: Sidebar -->
+    <div class="space-y-4">
+
+        <!-- Ticket info -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4 text-indigo-500"></i> {% trans "Ticket Info" %}
+            </h3>
+            <div class="space-y-3">
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Company" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ ticket.company.name }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Raised By" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">
+                        {{ ticket.raised_by_user.get_full_name|default:ticket.raised_by_user.username|default:"—" }}
+                    </p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Category" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ ticket.get_category_display }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Created" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ ticket.created_at|date:"M d, Y H:i" }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Last Updated" %}</p>
+                    <p class="text-sm text-slate-700 font-medium mt-0.5">{{ ticket.updated_at|date:"M d, Y H:i" }}</p>
+                </div>
+                {% if ticket.resolved_at %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Resolved At" %}</p>
+                    <p class="text-sm text-green-700 font-medium mt-0.5">{{ ticket.resolved_at|date:"M d, Y H:i" }}</p>
+                </div>
+                {% endif %}
+                {% if ticket.closed_at %}
+                <div>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">{% trans "Closed By Company" %}</p>
+                    <p class="text-sm text-slate-500 font-medium mt-0.5">{{ ticket.closed_at|date:"M d, Y H:i" }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Workflow guide -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <i data-lucide="git-branch" class="w-4 h-4 text-indigo-500"></i> {% trans "Ticket Workflow" %}
+            </h3>
+            <ol class="space-y-3">
+                <li class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                        {% if ticket.status in 'IN_PROGRESS,RESOLVED,CLOSED' %}bg-green-500 text-white{% else %}bg-blue-600 text-white{% endif %}">
+                        {% if ticket.status in 'IN_PROGRESS,RESOLVED,CLOSED' %}✓{% else %}1{% endif %}
+                    </span>
+                    <span class="text-sm {% if ticket.status == 'OPEN' %}font-semibold text-blue-700{% else %}text-slate-500{% endif %}">{% trans "Company — Submits ticket" %}</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                        {% if ticket.status in 'RESOLVED,CLOSED' %}bg-green-500 text-white
+                        {% elif ticket.status == 'IN_PROGRESS' %}bg-purple-600 text-white
+                        {% else %}bg-slate-200 text-slate-500{% endif %}">
+                        {% if ticket.status in 'RESOLVED,CLOSED' %}✓{% else %}2{% endif %}
+                    </span>
+                    <span class="text-sm {% if ticket.status == 'IN_PROGRESS' %}font-semibold text-purple-700{% else %}text-slate-500{% endif %}">{% trans "You — Review & comment" %}</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                        {% if ticket.status == 'CLOSED' %}bg-green-500 text-white
+                        {% elif ticket.status == 'RESOLVED' %}bg-green-600 text-white
+                        {% else %}bg-slate-200 text-slate-500{% endif %}">
+                        {% if ticket.status == 'CLOSED' %}✓{% else %}3{% endif %}
+                    </span>
+                    <span class="text-sm {% if ticket.status == 'RESOLVED' %}font-semibold text-green-700{% else %}text-slate-500{% endif %}">{% trans "You — Mark as Resolved" %}</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                        {% if ticket.status == 'CLOSED' %}bg-slate-600 text-white{% else %}bg-slate-200 text-slate-500{% endif %}">
+                        4
+                    </span>
+                    <span class="text-sm {% if ticket.status == 'CLOSED' %}font-semibold text-slate-700{% else %}text-slate-500{% endif %}">{% trans "Company — Closes ticket" %}</span>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

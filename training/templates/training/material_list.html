@@ -1,0 +1,90 @@
+{% extends 'training/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Training Materials" %}{% endblock %}
+{% block nav_materials %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "Training Materials" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Manage your library of training content" %}</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <a href="{% url 'training:material_create' %}" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition-colors">
+            <i data-lucide="plus" class="w-4 h-4"></i> {% trans "Add Material" %}
+        </a>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-6">
+    <form method="get" class="flex flex-wrap gap-3">
+        <input type="text" name="q" value="{{ q }}" placeholder="{% trans 'Search materials...' %}" class="flex-1 min-w-[180px] border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+        <select name="type" class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="">{% trans "All Types" %}</option>
+            {% for val, label in type_choices %}
+            <option value="{{ val }}" {% if mtype == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{% trans "Filter" %}</button>
+        <a href="{% url 'training:material_list' %}" class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors">{% trans "Clear" %}</a>
+    </form>
+</div>
+
+<!-- Material Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for material in materials %}
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-5">
+        <div class="flex items-start justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center
+                {% if material.material_type == 'VIDEO' %}bg-red-50 text-red-600
+                {% elif material.material_type == 'DOCUMENT' %}bg-blue-50 text-blue-600
+                {% elif material.material_type == 'PRESENTATION' %}bg-orange-50 text-orange-600
+                {% elif material.material_type == 'QUIZ' %}bg-purple-50 text-purple-600
+                {% else %}bg-slate-50 text-slate-600{% endif %}">
+                {% if material.material_type == 'VIDEO' %}<i data-lucide="play-circle" class="w-5 h-5"></i>
+                {% elif material.material_type == 'DOCUMENT' %}<i data-lucide="file-text" class="w-5 h-5"></i>
+                {% elif material.material_type == 'PRESENTATION' %}<i data-lucide="presentation" class="w-5 h-5"></i>
+                {% elif material.material_type == 'QUIZ' %}<i data-lucide="help-circle" class="w-5 h-5"></i>
+                {% else %}<i data-lucide="book" class="w-5 h-5"></i>{% endif %}
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-indigo-50 text-indigo-700">{{ material.get_material_type_display }}</span>
+        </div>
+        <h3 class="font-semibold text-slate-800 mb-1">{{ material.title }}</h3>
+        {% if material.description %}
+        <p class="text-xs text-slate-500 mb-3 line-clamp-2">{{ material.description }}</p>
+        {% endif %}
+        {% if material.tag_list %}
+        <div class="flex flex-wrap gap-1 mb-3">
+            {% for tag in material.tag_list %}
+            <span class="text-xs px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">
+                {{ tag }}
+            </span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-xs text-slate-400">{{ material.created_at|date:"M d, Y" }}</span>
+            <div class="flex gap-2">
+                {% if material.file_url %}
+                <a href="{{ material.file_url }}" target="_blank" class="text-xs text-blue-600 hover:underline flex items-center gap-1">
+                    <i data-lucide="external-link" class="w-3 h-3"></i> {% trans "View" %}
+                </a>
+                {% endif %}
+                <a href="{% url 'training:material_edit' material.pk %}" class="text-xs text-indigo-600 hover:underline">{% trans "Edit" %}</a>
+                <a href="{% url 'training:material_delete' material.pk %}" onclick="return confirm('{% trans "Remove this material?" %}')" class="text-xs text-red-500 hover:underline">{% trans "Remove" %}</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-3 bg-white rounded-2xl border border-slate-200 p-12 text-center">
+        <i data-lucide="book-open" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+        <p class="text-slate-500 font-medium">{% trans "No training materials yet" %}</p>
+        <a href="{% url 'training:material_create' %}" class="inline-flex items-center gap-2 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+            <i data-lucide="plus" class="w-4 h-4"></i> {% trans "Add First Material" %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

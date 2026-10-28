@@ -1,0 +1,111 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "My Training" %}{% endblock %}
+{% block nav_training %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{% trans "My Training" %}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "All training assigned to you." %}</p>
+    </div>
+</div>
+
+<!-- Filter -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-6">
+    <form method="get" class="flex flex-wrap gap-3 items-center">
+        <select name="status"
+                class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="">{% trans "All Statuses" %}</option>
+            {% for val, label in status_choices %}
+            <option value="{{ val }}" {% if status_filter == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+            {% trans "Filter" %}
+        </button>
+        {% if status_filter %}
+        <a href="{% url 'staff_my_training' %}"
+           class="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium">
+            {% trans "Clear" %}
+        </a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- Records -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    {% if records %}
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-slate-100 bg-slate-50">
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Material" %}</th>
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:table-cell">{% trans "Type" %}</th>
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">{% trans "Due Date" %}</th>
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Status" %}</th>
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden lg:table-cell">{% trans "Score" %}</th>
+                <th class="text-left px-5 py-3.5 text-xs font-semibold text-slate-500 uppercase tracking-wide">{% trans "Action" %}</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+            {% for record in records %}
+            <tr class="hover:bg-slate-50 transition-colors">
+
+                <td class="px-5 py-4">
+                    <p class="text-sm font-medium text-slate-800">
+                        {{ record.material.title }}
+                    </p>
+                    {% if record.material.description %}
+                    <p class="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{{ record.material.description|truncatechars:60 }}</p>
+                    {% endif %}
+                </td>
+
+                <td class="px-5 py-4 hidden sm:table-cell">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                        {{ record.material.get_material_type_display }}
+                    </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-slate-500 hidden md:table-cell">
+                    {% if record.due_date %}
+                        {% if record.due_date < today and record.status != 'COMPLETED' %}
+                        <span class="text-red-600 font-medium">{{ record.due_date|date:"M d, Y" }} ({% trans "Overdue" %})</span>
+                        {% else %}
+                        {{ record.due_date|date:"M d, Y" }}
+                        {% endif %}
+                    {% else %}—{% endif %}
+                </td>
+                <td class="px-5 py-4">
+                    <span class="px-2.5 py-1 rounded-full text-xs font-semibold
+                        {% if record.status == 'COMPLETED' %}bg-green-100 text-green-700
+                        {% elif record.status == 'IN_PROGRESS' %}bg-blue-100 text-blue-700
+                        {% elif record.status == 'FAILED' %}bg-red-100 text-red-700
+                        {% else %}bg-amber-100 text-amber-700{% endif %}">
+                        {{ record.get_status_display }}
+                    </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-slate-500 hidden lg:table-cell">
+                    {% if record.score %}{{ record.score }}{% else %}—{% endif %}
+                </td>
+                <td class="px-5 py-4">
+                    <a href="{% url 'staff_material_detail' record.pk %}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white text-xs font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                        <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                        {% trans "View" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="text-center py-16">
+        <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="book-open" class="w-6 h-6 text-slate-400"></i>
+        </div>
+        <p class="text-slate-500 font-medium">{% trans "No training records found." %}</p>
+        <p class="text-slate-400 text-sm mt-1">{% trans "Your company admin will assign training to you." %}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

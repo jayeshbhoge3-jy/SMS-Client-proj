@@ -1,0 +1,132 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "My Onboarding" %}{% endblock %}
+{% block nav_onboarding %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">{% trans "My Onboarding" %}</h1>
+    <p class="text-slate-500 text-sm mt-1">{% trans "Track your onboarding progress and complete your checklist." %}</p>
+</div>
+
+{% if onboarding %}
+
+<!-- Progress card -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+        <div>
+            <p class="text-sm font-medium text-slate-500">{% trans "Onboarding Status" %}</p>
+            <span class="mt-1 inline-flex px-3 py-1 rounded-full text-sm font-semibold
+                {% if onboarding.status == 'COMPLETED' %}bg-green-100 text-green-700
+                {% elif onboarding.status == 'IN_PROGRESS' %}bg-blue-100 text-blue-700
+                {% else %}bg-slate-100 text-slate-600{% endif %}">
+                {{ onboarding.get_status_display }}
+            </span>
+        </div>
+        <div class="text-right">
+            <p class="text-3xl font-bold text-indigo-600">{{ onboarding.completion_percentage }}%</p>
+            <p class="text-xs text-slate-400">{% trans "complete" %}</p>
+        </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="w-full bg-slate-100 rounded-full h-3 mb-4">
+        <div class="h-3 bg-indigo-500 rounded-full transition-all duration-500"
+             style="width:{{ onboarding.completion_percentage }}%"></div>
+    </div>
+
+    <!-- Meta info -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
+        <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">{% trans "Join Date" %}</p>
+            <p class="text-slate-700 font-medium mt-0.5">{{ onboarding.join_date|date:"M d, Y" }}</p>
+        </div>
+        {% if onboarding.target_completion_date %}
+        <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">{% trans "Target Date" %}</p>
+            <p class="text-slate-700 font-medium mt-0.5">{{ onboarding.target_completion_date|date:"M d, Y" }}</p>
+        </div>
+        {% endif %}
+        {% if onboarding.mentor %}
+        <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">{% trans "Mentor" %}</p>
+            <p class="text-slate-700 font-medium mt-0.5">{{ onboarding.mentor.name }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Checklist -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+    <h2 class="font-semibold text-slate-700 mb-4">{% trans "Checklist Items" %}</h2>
+
+    {% if onboarding.checklist_items.exists %}
+    <ul class="space-y-3">
+        {% for item in onboarding.checklist_items.all %}
+        <li class="flex items-center justify-between gap-4 p-3 rounded-xl border
+            {% if item.is_completed %}border-green-100 bg-green-50{% else %}border-slate-100 hover:bg-slate-50{% endif %}
+            transition-colors">
+
+            <div class="flex items-center gap-3 min-w-0">
+                <!-- Visual checkbox -->
+                <div class="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center
+                    {% if item.is_completed %}bg-green-500{% else %}border-2 border-slate-300{% endif %}">
+                    {% if item.is_completed %}
+                    <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    {% endif %}
+                </div>
+                <div class="min-w-0">
+                    <p class="text-sm font-medium {% if item.is_completed %}text-slate-400 line-through{% else %}text-slate-700{% endif %}">
+                        {{ item.task }}
+                    </p>
+                    {% if item.is_completed and item.completed_at %}
+                    <p class="text-xs text-green-600 mt-0.5">
+                        {% trans "Completed" %} {{ item.completed_at|date:"M d, Y" }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Toggle button -->
+            <form method="post" action="{% url 'staff_toggle_checklist' item.pk %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="flex-shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors
+                        {% if item.is_completed %}
+                            bg-slate-100 text-slate-500 hover:bg-red-50 hover:text-red-600
+                        {% else %}
+                            bg-indigo-50 text-indigo-600 hover:bg-indigo-100
+                        {% endif %}">
+                    {% if item.is_completed %}{% trans "Undo" %}{% else %}{% trans "Mark Done" %}{% endif %}
+                </button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-sm text-slate-400 text-center py-8">{% trans "No checklist items have been added yet." %}</p>
+    {% endif %}
+</div>
+
+{% if onboarding.notes %}
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mt-6">
+    <h2 class="font-semibold text-slate-700 mb-2">{% trans "Notes from your manager" %}</h2>
+    <p class="text-sm text-slate-600 whitespace-pre-line">{{ onboarding.notes }}</p>
+</div>
+{% endif %}
+
+{% else %}
+
+<!-- No onboarding -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-12 text-center">
+    <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="clipboard-list" class="w-7 h-7 text-slate-400"></i>
+    </div>
+    <h2 class="text-lg font-semibold text-slate-700 mb-1">{% trans "No Onboarding Assigned" %}</h2>
+    <p class="text-slate-400 text-sm">{% trans "Your company admin hasn't set up an onboarding plan for you yet." %}</p>
+</div>
+
+{% endif %}
+{% endblock %}

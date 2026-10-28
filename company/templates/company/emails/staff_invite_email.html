@@ -1,0 +1,134 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Invited to the Staff Portal</title>
+  <style>
+    body { margin: 0; padding: 0; background: #f3f4f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .wrapper { width: 100%; padding: 40px 0; background: #f3f4f6; }
+    .main { max-width: 600px; background: #ffffff; margin: 0 auto; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+    .header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); padding: 40px 30px; text-align: center; }
+    .header p { color: #e0e7ff; margin-top: 10px; font-size: 15px; margin-bottom: 0; }
+    .content { padding: 40px 30px; }
+    .content h2 { color: #111827; margin-top: 0; font-size: 24px; }
+    .content p { color: #4b5563; font-size: 15px; line-height: 1.7; }
+    .invite-btn {
+      display: inline-block; margin: 20px 0;
+      padding: 16px 36px; background: #4f46e5; color: #ffffff !important;
+      text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 16px;
+    }
+    .info-box {
+      background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 12px;
+      padding: 20px 24px; margin: 25px 0; color: #3730a3; font-size: 14px; line-height: 1.7;
+    }
+    .warning {
+      background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px;
+      border-radius: 8px; margin-top: 25px; color: #92400e; font-size: 14px; line-height: 1.6;
+    }
+    .footer { background: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb; }
+    .footer p { color: #6b7280; font-size: 13px; line-height: 1.5; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="main">
+
+      <div class="header">
+        <img src="cid:logo" alt="Logo" style="height:48px; width:auto; margin-bottom:10px;" />
+        <p>Staff Portal Invitation — {{ company_name }}</p>
+      </div>
+
+      <div class="content">
+        <h2>You're invited! 🎉</h2>
+        <p>Hi <strong>{{ staff_name }}</strong>,</p>
+        <p>
+          <strong>{{ company_name }}</strong> has invited you to join their Staff Portal.
+          Click the button below to set up your password and activate your account.
+        </p>
+
+        <div style="text-align: center;">
+          <a href="{{ invite_url }}" class="invite-btn">Set Up My Account →</a>
+        </div>
+
+        <div class="info-box">
+          <strong>What happens next?</strong><br>
+          Click the button above, choose a secure password, and you'll be logged in immediately.
+          Your invite link is valid for one-time use only.
+        </div>
+
+        <div class="warning">
+          <strong>Didn't expect this?</strong> If you didn't request access to {{ company_name }}'s portal,
+          please ignore this email or contact your company admin.
+        </div>
+
+        <p style="margin-top: 30px;">
+          Best Regards,<br />
+          <strong>{{ company_name }} Team</strong>
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>© 2026 CWS Inventory. All rights reserved.</p>
+        <p style="margin-top: 8px;">This is an automated email — please do not reply.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+<!-- BEGIN STARTER RESTRICTIONS -->
+{% if company.plan_type == 'STARTER' %}
+    <style>
+        @media screen {
+            .starter-watermark-global {
+                display: none !important;
+            }
+        }
+        @media print {
+            .starter-watermark-global {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                font-size: 48px !important;
+                color: rgba(100, 116, 139, 0.15) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                white-space: nowrap !important;
+                font-weight: bold !important;
+                text-transform: uppercase !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <div class="starter-watermark-global">
+        Powered by CWS Inventory
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const exportLinks = document.querySelectorAll('a[href*="export"], a[id*="exportPdfBtn"]');
+            exportLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Restricted Feature',
+                        text: 'Upgrade to Business plan to use this feature.',
+                        confirmButtonColor: '#4f46e5'
+                    });
+                });
+            });
+        });
+    </script>
+{% endif %}
+<!-- END STARTER RESTRICTIONS -->
+
+</body>
+</html>

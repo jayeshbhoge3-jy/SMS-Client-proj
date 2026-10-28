@@ -1,0 +1,161 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% block title %}{{ material.title }}{% endblock %}
+{% block nav_training %}active-nav{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center gap-3">
+    <a href="{% url 'staff_my_training' %}"
+       class="text-slate-400 hover:text-indigo-600 transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </a>
+    <div>
+        <h1 class="text-2xl font-bold text-slate-800">{{ material.title }}</h1>
+        <p class="text-slate-500 text-sm mt-1">{% trans "Training Material" %}</p>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Main Content -->
+    <div class="lg:col-span-2 space-y-5">
+
+        <!-- Description -->
+        {% if material.description %}
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">{% trans "Description" %}</h2>
+            <p class="text-slate-700 leading-relaxed">{{ material.description }}</p>
+        </div>
+        {% endif %}
+
+        <!-- File / Content -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">{% trans "Material Content" %}</h2>
+
+            {% if material.file_upload %}
+                {% with ext=material.file_upload.name|lower %}
+
+                {# ── PDF inline viewer ── #}
+                {% if ".pdf" in ext %}
+                <div class="rounded-xl overflow-hidden border border-slate-200">
+                    <iframe src="{{ material.file_upload.url }}"
+                            class="w-full" style="height:600px;" title="{{ material.title }}"></iframe>
+                </div>
+                <a href="{{ material.file_upload.url }}" target="_blank"
+                   class="inline-flex items-center gap-2 mt-3 text-sm text-indigo-600 hover:underline">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> {% trans "Open in new tab" %}
+                </a>
+
+                {# ── Images ── #}
+                {% elif ".png" in ext or ".jpg" in ext or ".jpeg" in ext or ".gif" in ext or ".webp" in ext %}
+                <img src="{{ material.file_upload.url }}" alt="{{ material.title }}"
+                     class="max-w-full rounded-xl border border-slate-200">
+                <a href="{{ material.file_upload.url }}" target="_blank"
+                   class="inline-flex items-center gap-2 mt-3 text-sm text-indigo-600 hover:underline">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> {% trans "Open full size" %}
+                </a>
+
+                {# ── Video ── #}
+                {% elif ".mp4" in ext or ".webm" in ext or ".ogg" in ext %}
+                <video controls class="w-full rounded-xl border border-slate-200">
+                    <source src="{{ material.file_upload.url }}">
+                    {% trans "Your browser does not support the video tag." %}
+                </video>
+
+                {# ── Other downloadable file ── #}
+                {% else %}
+                <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="file-text" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-slate-800 truncate">{{ material.file_upload.name|cut:"training/materials/" }}</p>
+                        <p class="text-xs text-slate-400 mt-0.5">{% trans "Click below to open or download" %}</p>
+                    </div>
+                    <a href="{{ material.file_upload.url }}" target="_blank"
+                       class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex-shrink-0">
+                        <i data-lucide="download" class="w-4 h-4"></i> {% trans "Open / Download" %}
+                    </a>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+            {% elif material.file_url %}
+                <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="link" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-slate-800 truncate">{% trans "External Resource" %}</p>
+                        <p class="text-xs text-slate-400 mt-0.5 truncate">{{ material.file_url }}</p>
+                    </div>
+                    <a href="{{ material.file_url }}" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex-shrink-0">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> {% trans "Open Link" %}
+                    </a>
+                </div>
+
+            {% else %}
+                <div class="text-center py-10 text-slate-400">
+                    <i data-lucide="file-x" class="w-10 h-10 mx-auto mb-2 opacity-50"></i>
+                    <p class="text-sm font-medium">{% trans "No file or link has been attached to this material yet." %}</p>
+                    <p class="text-xs mt-1">{% trans "Contact your company admin for more information." %}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Sidebar: record info -->
+    <div class="space-y-5">
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">{% trans "Your Progress" %}</h2>
+            <dl class="space-y-3 text-sm">
+                <div class="flex justify-between">
+                    <dt class="text-slate-500">{% trans "Status" %}</dt>
+                    <dd>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold
+                            {% if record.status == 'COMPLETED' %}bg-green-100 text-green-700
+                            {% elif record.status == 'IN_PROGRESS' %}bg-blue-100 text-blue-700
+                            {% elif record.status == 'FAILED' %}bg-red-100 text-red-700
+                            {% else %}bg-amber-100 text-amber-700{% endif %}">
+                            {{ record.get_status_display }}
+                        </span>
+                    </dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-slate-500">{% trans "Due Date" %}</dt>
+                    <dd class="font-medium text-slate-700">
+                        {% if record.due_date %}
+                            {% if record.due_date < today and record.status != 'COMPLETED' %}
+                                <span class="text-red-600">{{ record.due_date|date:"M d, Y" }} ({% trans "Overdue" %})</span>
+                            {% else %}
+                                {{ record.due_date|date:"M d, Y" }}
+                            {% endif %}
+                        {% else %}—{% endif %}
+                    </dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-slate-500">{% trans "Score" %}</dt>
+                    <dd class="font-medium text-slate-700">{% if record.score %}{{ record.score }}{% else %}—{% endif %}</dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-slate-500">{% trans "Type" %}</dt>
+                    <dd class="font-medium text-slate-700">{{ material.get_material_type_display }}</dd>
+                </div>
+                {% if material.tags %}
+                <div class="flex justify-between">
+                    <dt class="text-slate-500">{% trans "Tags" %}</dt>
+                    <dd class="font-medium text-slate-700">{{ material.tags }}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+
+        <a href="{% url 'staff_my_training' %}"
+           class="flex items-center justify-center gap-2 w-full border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> {% trans "Back to My Training" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,271 @@
+{% extends 'staff/staff_base.html' %}
+{% load i18n %}
+{% load currency_tags %}
+
+{% block title %}{% trans "Purchase Orders" %}{% endblock %}
+
+{% block breadcrumb %}
+<i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+<span class="font-semibold text-slate-800">{% trans "Purchase Orders" %}</span>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- Title Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">{% trans "Purchase Orders" %}</h2>
+            <p class="text-slate-500 text-sm">{% trans "Manage procurements, track incoming stock, and handle vendor billing." %}</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="{% url 'staff_po_create' %}" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                {% trans "New Purchase" %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Procurement Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div class="bg-indigo-50 text-indigo-600 p-2 rounded-lg"><i data-lucide="clipboard-list" class="w-5 h-5"></i></div>
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{% trans "TOTAL POS" %}</p>
+                <p class="text-lg font-bold">{{ pos.paginator.count|default:pos.count }}</p>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div class="bg-amber-50 text-amber-600 p-2 rounded-lg"><i data-lucide="truck" class="w-5 h-5"></i></div>
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{% trans "IN TRANSIT" %}</p>
+                <p class="text-lg font-bold">{{ in_transit_count|default:"0" }}</p>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div class="bg-emerald-50 text-emerald-600 p-2 rounded-lg"><i data-lucide="box" class="w-5 h-5"></i></div>
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{% trans "Received" %}</p>
+                <p class="text-lg font-bold">{{ received_count|default:"0" }}</p>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div class="bg-rose-50 text-rose-600 p-2 rounded-lg"><i data-lucide="credit-card" class="w-5 h-5"></i></div>
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{% trans "TOTAL SPENT" %}</p>
+                <p id="total-spent" class="text-lg font-bold text-rose-600">{{ total_spent|default:0|currency:currency_code }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FILTER BAR SECTION -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- TOP ROW -->
+        <div class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                <input type="text" id="po-search" placeholder="{% trans 'Search PO or vendor...' %}" class="w-full pl-10 pr-4 h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+            </div>
+            <div class="flex gap-3 w-full sm:w-auto">
+                <button onclick="filterOrders()" class="flex-1 sm:flex-none px-6 h-[44px] bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 transition-all">{% trans "Search" %}</button>
+                <button id="clear-filters" class="flex-1 sm:flex-none px-6 h-[44px] bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 transition-all">{% trans "Reset" %}</button>
+            </div>
+        </div>
+        <!--  ROW 2 -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Status -->
+            <div class="relative w-full">
+                <input type="hidden" id="status-filter" value="ALL">
+                <button type="button" id="statusBtn" class="w-full h-[44px] px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm flex justify-between items-center">
+                    <span id="statusLabel" class="truncate text-slate-500">{% trans "All Status" %}</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+                <div id="statusMenu" class="hidden absolute top-full mt-1 z-50 left-0 right-0 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                    <div data-value="ALL" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">{% trans "All Status" %}</div>
+                    <div data-value="PARTIAL" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">Partial</div>
+                    <div data-value="ORDERED" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">Ordered</div>
+                    <div data-value="DRAFT" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">Draft</div>
+                    <div data-value="RECEIVED" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">{% trans "Received" %}</div>
+                    <div data-value="COMPLETED" class="px-4 py-2 hover:bg-indigo-50 cursor-pointer">Completed</div>
+                </div>
+            </div>
+            <!-- Min Amount -->
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">{{ currency_symbol|default:"$" }}</span>
+                <input type="number" id="min-amount" step="0.01" min="0" placeholder="{% trans 'Min Amount' %}" class="w-full h-[44px] pl-8 pr-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <!-- Max Amount -->
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">{{ currency_symbol|default:"$" }}</span>
+                <input type="number" id="max-amount" step="0.01" min="0" placeholder="{% trans 'Max Amount' %}" class="w-full h-[44px] pl-8 pr-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+    </div>
+
+    <!-- PO Table Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto custom-scrollbar w-full">
+            <table class="min-w-[1100px] w-full table-auto text-left">
+                <!-- TABLE HEADERS -->
+                <thead class="bg-slate-50 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
+                    <tr>
+                        <th class="px-4 sm:px-8 py-4">{% trans "PO Number" %}</th>
+                        <th class="px-4 sm:px-8 py-4">{% trans "Vendor / Supplier" %}</th>
+                        <th class="px-4 sm:px-8 py-4 text-center">{% trans "Status" %}</th>
+                        <th class="px-4 sm:px-8 py-4">{% trans "Total Amount" %}</th>
+                        <th class="px-4 sm:px-8 py-4 text-center">{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100" id="po-table-body">
+                    {% for o in pos %}
+                    <tr class="hover:bg-slate-50/80 transition-colors group po-row" data-po="{{ o.order_number|upper }}" data-vendor="{{ o.vendor.company_name|default:o.vendor.display_name|upper }}" data-status="{{ o.status|upper }}">
+                        <td class="px-4 sm:px-8 py-3 sm:py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold text-slate-800 text-sm tracking-tight">{{ o.order_number }}</span>
+                                    <span class="text-[10px] text-slate-400 font-medium">{% trans "Internal Procurement" %}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 sm:px-8 py-3 sm:py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500">{{ o.vendor.display_name|slice:":1"|upper }}</div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-700 leading-tight">{{ o.vendor.company_name|default:o.vendor.display_name }}</span>
+                                    <span class="text-[10px] text-slate-400 font-medium">{{ o.vendor.display_name }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 sm:px-8 py-3 sm:py-4 text-center">
+                            {% if o.status == 'DRAFT' %}<span style="background:#e2e8f0; color:#374151;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">DRAFT</span>
+                            {% elif o.status == 'PENDING' %}<span style="background:#fef9c3; color:#92400e;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">PENDING</span>
+                            {% elif o.status == 'ORDERED' %}<span style="background:#dbeafe; color:#1e40af;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">ORDERED</span>
+                            {% elif o.status == 'RECEIVED' %}<span style="background:#d1fae5; color:#065f46;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">RECEIVED</span>
+                            {% elif o.status == 'COMPLETED' %}<span style="background:#ede9fe; color:#5b21b6;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">COMPLETED</span>
+                            {% else %}<span style="background:#f1f5f9; color:#475569;" class="px-3 py-1 text-[10px] font-black uppercase rounded-full">{{ o.status }}</span>{% endif %}
+                        </td>
+                        <td class="px-4 sm:px-8 py-3 sm:py-4">
+                            <span class="font-bold text-slate-900 po-amount">{{ o.total_amount|currency:currency_code }}</span>
+                        </td>
+                        <td class="px-4 sm:px-8 py-3 sm:py-4 text-center">
+                            <div class="flex justify-center items-center gap-6">
+                                {% if o.status == "DRAFT" %}
+                                <a href="{% url 'staff_po_edit' o.id %}" class="inline-flex items-center justify-center gap-2 px-5 py-2 min-w-[110px] bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold hover:bg-indigo-600 hover:text-white transition-all">
+                                    <i data-lucide="edit" class="w-4 h-4"></i> Edit
+                                </a>
+                                {% else %}
+                                <a href="{% url 'staff_po_edit' o.id %}" class="inline-flex items-center justify-center gap-2 px-5 py-2 min-w-[110px] bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold hover:bg-indigo-600 hover:text-white transition-all">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> {% trans "Details" %}
+                                </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr id="empty-row">
+                        <td colspan="5" class="px-8 py-20 text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4"><i data-lucide="shopping-cart" class="w-8 h-8 text-slate-300"></i></div>
+                                <h3 class="text-slate-900 font-bold">No purchase orders found</h3>
+                                <p class="text-slate-500 text-sm mt-1">Start by ordering stock from your registered vendors.</p>
+                                <a href="{% url 'staff_po_create' %}" class="mt-6 text-indigo-600 font-bold text-sm hover:underline flex items-center gap-2">Create PO →</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr id="no-results-row" class="hidden">
+                        <td colspan="5" class="px-8 py-20 text-center text-slate-400">
+                            <div class="flex flex-col items-center">
+                                <i data-lucide="search-x" class="w-10 h-10 mb-4 opacity-20"></i>
+                                <p>{% trans "No orders match your current filters." %}</p>
+                                <button onclick="document.getElementById('clear-filters').click()" class="mt-2 text-indigo-600 hover:underline text-sm font-semibold">{% trans "Clear all filters" %}</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Filter JS logic (adapted from original)
+const statusBtn = document.getElementById('statusBtn');
+const statusMenu = document.getElementById('statusMenu');
+const statusLabel = document.getElementById('statusLabel');
+const statusFilterInput = document.getElementById('status-filter');
+
+if(statusBtn && statusMenu) {
+    statusBtn.addEventListener('click', () => { statusMenu.classList.toggle('hidden'); });
+    statusMenu.querySelectorAll('div[data-value]').forEach(opt => {
+        opt.addEventListener('click', () => {
+            statusLabel.innerText = opt.innerText;
+            statusFilterInput.value = opt.dataset.value;
+            statusMenu.classList.add('hidden');
+        });
+    });
+    document.addEventListener('click', (e) => {
+        if(!statusBtn.contains(e.target) && !statusMenu.contains(e.target)) statusMenu.classList.add('hidden');
+    });
+}
+
+const clearFiltersBtn = document.getElementById('clear-filters');
+if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', () => {
+        document.getElementById('po-search').value = "";
+        document.getElementById('min-amount').value = "";
+        document.getElementById('max-amount').value = "";
+        statusLabel.innerText = "All Status";
+        statusFilterInput.value = "ALL";
+        filterOrders();
+    });
+}
+
+function filterOrders() {
+    const search = document.getElementById('po-search')?.value.toUpperCase() || "";
+    const minStr = document.getElementById('min-amount')?.value;
+    const maxStr = document.getElementById('max-amount')?.value;
+    const status = statusFilterInput?.value || "ALL";
+    const minAmt = minStr ? parseFloat(minStr) : 0;
+    const maxAmt = maxStr ? parseFloat(maxStr) : Infinity;
+
+    const rows = document.querySelectorAll('.po-row');
+    let hasVisible = false;
+
+    rows.forEach(row => {
+        const po = row.dataset.po || "";
+        const vendor = row.dataset.vendor || "";
+        const rowStatus = row.dataset.status || "";
+        const amtText = row.querySelector('.po-amount')?.innerText.replace(/[^0-9.-]+/g, "") || "0";
+        const amt = parseFloat(amtText);
+
+        const matchSearch = (po.includes(search) || vendor.includes(search));
+        const matchStatus = (status === "ALL" || rowStatus === status);
+        const matchAmount = (amt >= minAmt && amt <= maxAmt);
+
+        if(matchSearch && matchStatus && matchAmount) {
+            row.style.display = "";
+            hasVisible = true;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    const noResults = document.getElementById('no-results-row');
+    const emptyRow = document.getElementById('empty-row');
+    
+    if (noResults) {
+        if (!hasVisible && (!emptyRow || emptyRow.style.display === "none")) {
+            noResults.classList.remove('hidden');
+        } else {
+            noResults.classList.add('hidden');
+        }
+    }
+}
+</script>
+{% endblock %}
